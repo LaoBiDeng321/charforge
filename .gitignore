@@ -13,7 +13,8 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-# 本地 agent 工作区配置（不入库）
+# 本地 agent 工作区配置与私有文档（不入库）
 .trae/
+DEPLOY.local.md
 
 # 注意：web/js/data.js 虽为生成物，但部署无构建步骤，必须随仓库提交

@@ -10,7 +10,7 @@
 [![维护者](https://img.shields.io/badge/维护者-LaoBiDeng321-f5f5f0?style=flat-square&labelColor=161713)](https://github.com/LaoBiDeng321)
 [![构建器](https://img.shields.io/badge/构建器-2-8ce99a?style=flat-square&labelColor=161713)](#-两个构建器)
 [![角色](https://img.shields.io/badge/角色-5-f59e0b?style=flat-square&labelColor=161713)](#-角色一览)
-[![在线预览](https://img.shields.io/badge/在线预览-GitHub_Pages-00b7d4?style=flat-square&labelColor=161713)](https://laobideng321.github.io/charforge/)
+[![在线预览](https://img.shields.io/badge/在线预览-Netlify-00b7d4?style=flat-square&labelColor=161713)](https://lbd-charforge.netlify.app/)
 
 </div>
 
@@ -119,7 +119,7 @@ python build_data.py
 ## 自部署展示站
 
 > [!IMPORTANT]
-> 本仓库 Pages 已启用：**Settings → Pages → Branch 选 `main` + `/(root)`**。根目录的 [index.html](index.html) 是重定向入口，会自动跳转进 `web/index.html`，无需任何构建工作流。
+> 展示站已部署：**[lbd-charforge.netlify.app](https://lbd-charforge.netlify.app/)**。Netlify 以仓库根为发布目录时，根目录的 [index.html](index.html) 是重定向入口，会自动跳转进 `web/index.html`；也可将发布目录设为 `web`，直接以根路径访问网站本体。
 
 Fork 后想用自己的域名或独立部署？整个 `web/` 目录是纯静态站点（无框架、无依赖、无服务端），扔进任何静态托管（Vercel / Netlify / 对象存储）都能跑。
 
@@ -163,6 +163,6 @@ Fork 后想用自己的域名或独立部署？整个 `web/` 目录是纯静态�
 
 **CHAR//FORGE** — 搜索溯源 · 查证裁定 · 10 文件交付
 
-[![在线预览](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88-charforge-00b7d4?style=flat-square&labelColor=161713)](https://laobideng321.github.io/charforge/)
+[![在线预览](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88-charforge-00b7d4?style=flat-square&labelColor=161713)](https://lbd-charforge.netlify.app/)
 
 </div>

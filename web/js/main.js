@@ -121,15 +121,19 @@ function renderFileTables(data) {
         const entry = data.skills.find((s) => s.slug === slug);
         if (!entry) return;
 
-        list.innerHTML = entry.files.map((file) => (
-            '<li class="file-row">' +
-                '<span class="file-name">' + file.name + '</span>' +
-                '<span class="file-role">' + window.I18N.t(roleKey(file.name)) + '</span>' +
-                '<button type="button" class="file-dl" data-file-dl="' + slug + '/' + file.name + '" title="' + window.I18N.t('dl.file') + '" aria-label="' + file.name + '">' +
-                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
-                '</button>' +
-            '</li>'
-        )).join('');
+        list.innerHTML = entry.files.map((file) => {
+            // 显示层只用文件名：下载保存的也是单个文件，不展示目录前缀
+            const base = file.name.split('/').pop();
+            return (
+                '<li class="file-row">' +
+                    '<span class="file-name">' + base + '</span>' +
+                    '<span class="file-role">' + window.I18N.t(roleKey(file.name)) + '</span>' +
+                    '<button type="button" class="file-dl" data-file-dl="' + slug + '/' + file.name + '" title="' + window.I18N.t('dl.file') + '" aria-label="' + base + '">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
+                    '</button>' +
+                '</li>'
+            );
+        }).join('');
     });
 }
 

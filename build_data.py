@@ -103,7 +103,8 @@ def collect_files(rel_dir):
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, base).replace("\\", "/")
             try:
-                with open(full, "r", encoding="utf-8") as f:
+                # utf-8-sig：读取时剥离源文件 BOM，避免 BOM 混入 data.js
+                with open(full, "r", encoding="utf-8-sig") as f:
                     content = f.read()
             except UnicodeDecodeError:
                 continue  # 非文本资源（图片等）不内联，仅跳过

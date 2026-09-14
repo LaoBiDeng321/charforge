@@ -42,12 +42,14 @@
         card.dataset.slug = char.slug;
 
         var filesHtml = char.files.map(function (file) {
+            // 显示层只用文件名：下载保存的也是单个文件，不展示目录前缀
+            var base = file.name.split('/').pop();
             return (
                 '<li class="char-file">' +
-                    '<button type="button" class="file-dl" data-file-dl="' + char.slug + '/' + file.name + '" aria-label="' + file.name + '" title="' + t('dl.file') + '">' +
+                    '<button type="button" class="file-dl" data-file-dl="' + char.slug + '/' + file.name + '" aria-label="' + base + '" title="' + t('dl.file') + '">' +
                         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
                     '</button>' +
-                    '<span class="file-name">' + file.name + '</span>' +
+                    '<span class="file-name">' + base + '</span>' +
                     '<span class="file-size">' + formatSize(file.content) + '</span>' +
                 '</li>'
             );

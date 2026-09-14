@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- CHAR//FORGE 品牌图标：墨底 + 信号黄双斜杠（对应品牌名中的 //） -->
+  <rect width="64" height="64" fill="#101110"/>
+  <path d="M11 47 L25 17 h9 L20 47 Z" fill="#fff500"/>
+  <path d="M29 47 L43 17 h9 L38 47 Z" fill="#fff500"/>
+</svg>

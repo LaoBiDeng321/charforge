@@ -29,7 +29,7 @@ web/
 │   ├── carousel.css      # 角色卡与索引面板
 │   ├── loader.css        # 启动遮罩
 │   └── responsive.css    # 断点：≤1024px（双栏堆叠）/ ≤768px（移动端）
-└── image/                # 引用图标：声明页三图标（其余图标均为内联 SVG，无 favicon）
+└── image/                # 站点图标：favicon.svg（品牌 // 图标，两个入口页均引用）+ 声明页三图标（其余图标均为内联 SVG）
 ```
 
 ## 数据流水线（内容更新入口）
@@ -46,7 +46,7 @@ python build_data.py
 
 ## 交互机制要点（后续维护需知）
 
-- **下载**：全部委托 `main.js` 的全局点击代理。`data-download-file="<slug>/<file>"` 单文件直下；`data-download-zip="<slug>"` 由 download.js 客户端打包
+- **下载**：全部委托 `main.js` 的全局点击代理。`data-file-dl="<slug>/<file>"` 单文件直下（面板"仅下载 SKILL.md"按钮与文件行小按钮共用）；`data-download-zip="<slug>"` 由 download.js 客户端打包
 - **索引面板**：角色库标题行的「全部角色」按钮打开，覆盖轮播区；检索为跨语言 includes 匹配（slug/角色名/来源/标签），点击条目 `goTo(index)` 直达卡片；打开即暂停自动播放，Esc 或关闭后恢复
 - **对齐**：构建器双栏用 CSS Subgrid 共享「头部 / 按钮行 / 正文」三条行轨道（`@supports` 渐进增强，不支持时回退 flex 堆叠）；≤1024px 单列时显式还原 flex
 - **全屏滚动**：分区内部可滚动区域必须带 `data-scrollable` 属性，否则滚轮/触摸会被分区导航拦截

@@ -1,0 +1,19 @@
+# Python（build_data.py 运行产物缓存）
+__pycache__/
+*.py[cod]
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 本地 agent 工作区配置（不入库）
+.trae/
+
+# 注意：web/js/data.js 虽为生成物，但部署无构建步骤，必须随仓库提交

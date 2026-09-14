@@ -1,0 +1,275 @@
+/* ============================================
+   Responsive - 断点覆盖
+   原则：
+   1. ≤1024px：双栏布局塌为单栏
+   2. ≤768px：顶栏精简、轮播单卡主导、字号收缩
+   3. grid 一律固定列数，禁用 auto-fit
+   ============================================ */
+
+/* ------------------------------------------
+   ≤1024px：平板
+   ------------------------------------------ */
+@media (max-width: 1024px) {
+
+    .skills-duo {
+        grid-template-columns: 1fr;
+        /* 单列堆叠：关闭双栏行轨道，面板恢复纵向流式布局 */
+        grid-template-rows: none;
+    }
+
+    /* 覆盖 Subgrid 对齐模式，恢复 flex 堆叠 */
+    .skill-panel {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+        grid-row: auto;
+    }
+
+    .hero-stats {
+        gap: var(--space-2xl);
+    }
+
+    .declaration-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-md);
+    }
+
+    .footer-info {
+        grid-template-columns: repeat(3, auto);
+    }
+}
+
+/* ------------------------------------------
+   ≤768px：移动端
+   ------------------------------------------ */
+@media (max-width: 768px) {
+
+    /* 顶栏精简：仅品牌 + 语言切换（防止导航拥挤） */
+    .topbar {
+        padding: 0 var(--space-md);
+    }
+
+    .topbar .tb-link {
+        display: none;
+    }
+
+    .brand-sub {
+        display: none;
+    }
+
+    .topbar-lang {
+        padding-left: var(--space-md);
+        margin-left: 0;
+    }
+
+    /* 右侧导航指示器隐藏，触屏依赖滑动 */
+    .fp-nav {
+        display: none;
+    }
+
+    /* 双栏构建器：面板内部流程/文件改单列堆叠 */
+    .skill-panel {
+        padding: var(--space-md);
+        gap: var(--space-md);
+    }
+
+    .skill-panel-body {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    /* 全局内容边距收紧 */
+    .fp-content {
+        padding: var(--space-lg) var(--space-md);
+        /* 顶栏 56px 避让 */
+        padding-top: 72px;
+    }
+
+    .corner-ticks::before {
+        top: 64px;
+    }
+
+    /* Hero */
+    .hero-content {
+        padding-left: 0;
+    }
+
+    .hero-title {
+        font-size: clamp(2.6rem, 15vw, 4rem);
+    }
+
+    .hero-description {
+        margin-bottom: var(--space-lg);
+    }
+
+    .hero-stats {
+        gap: var(--space-xl);
+        margin-bottom: var(--space-lg);
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 10px;
+    }
+
+    .hero-cta .btn {
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--font-size-sm);
+    }
+
+    .hero-vertical,
+    .hero-readout {
+        display: none;
+    }
+
+    /* Section 标题 */
+    .section-header {
+        margin-bottom: var(--space-lg);
+    }
+
+    .section-index {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.35rem;
+    }
+
+    /* Skill 区 */
+    .skill-desc {
+        font-size: var(--font-size-sm);
+    }
+
+    .skill-actions {
+        gap: var(--space-sm);
+    }
+
+    .skill-actions .btn {
+        flex: 1;
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--font-size-sm);
+    }
+
+    .flow-note {
+        font-size: var(--font-size-xs);
+    }
+
+    /* 轮播：当前卡主导，邻卡基本退出视野 */
+    .char-stage {
+        height: 560px;
+    }
+
+    .char-card {
+        width: 92vw;
+        padding: var(--space-md) var(--space-md);
+    }
+
+    .char-card.is-near {
+        --tx: calc(var(--dir) * 88%);
+        --o: 0.15;
+        --b: 3px;
+    }
+
+    .char-card.is-far {
+        --tx: calc(var(--dir) * 96%);
+        --o: 0;
+    }
+
+    .char-name {
+        font-size: 1.4rem;
+    }
+
+    .char-files {
+        grid-template-columns: 1fr;
+        max-height: 208px;
+    }
+
+    .char-controls {
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+    }
+
+    .char-dot {
+        width: 24px;
+    }
+
+    .char-dot::before {
+        width: 14px;
+    }
+
+    .char-dot.active::before {
+        width: 24px;
+    }
+
+    /* Q&A */
+    .qa-item summary {
+        padding: var(--space-md);
+        gap: var(--space-sm);
+    }
+
+    .qa-question {
+        font-size: var(--font-size-sm);
+    }
+
+    .qa-answer {
+        padding: 0 var(--space-md) var(--space-md) var(--space-md);
+    }
+
+    /* 声明卡：单列 */
+    .declaration-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Footer */
+    #footer .fp-content {
+        padding-top: 72px;
+    }
+
+    .footer-hero {
+        padding-top: var(--space-md);
+    }
+
+    .footer-title {
+        font-size: 1.8rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .footer-info {
+        grid-template-columns: repeat(2, auto);
+        gap: var(--space-md) var(--space-lg);
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+}
+
+/* ------------------------------------------
+   超窄屏 ≤380px
+   ------------------------------------------ */
+@media (max-width: 380px) {
+
+    .hero-stats {
+        gap: var(--space-lg);
+    }
+
+    .char-controls {
+        flex-wrap: wrap;
+        row-gap: var(--space-xs);
+    }
+
+    .char-dots {
+        order: 5;
+        width: 100%;
+        justify-content: center;
+    }
+}

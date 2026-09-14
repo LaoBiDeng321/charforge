@@ -1,0 +1,595 @@
+/* ============================================
+   Components - ENDFIELD Edition
+   区块内部组件：顶栏 / Skill 展示 / 文件清单 / Q&A / 声明卡
+   （轮播组件见 carousel.css）
+   ============================================ */
+
+/* ------------------------------------------
+   固定顶栏：56px + 高斯模糊
+   ------------------------------------------ */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    z-index: var(--z-fixed);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-xl);
+    background: rgba(16, 17, 16, 0.78);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    border-bottom: 1px solid var(--color-border);
+    /* 开屏入场：默认隐藏，loader:done 后淡入 */
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.topbar.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.topbar-brand {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    white-space: nowrap;
+}
+
+.brand-mark {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-black);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+}
+
+.brand-mark .accent {
+    color: var(--color-accent);
+}
+
+.brand-sub {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.topbar-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.tb-link {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.08em;
+    padding: var(--space-xs) 0;
+    border-bottom: 2px solid transparent;
+    transition: color var(--transition-base), border-color var(--transition-base);
+    white-space: nowrap;
+}
+
+.tb-link:hover {
+    color: var(--color-text-primary);
+}
+
+.tb-link.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+/* 语言切换：CN | EN 等权按钮 */
+.topbar-lang {
+    display: flex;
+    align-items: center;
+    border-left: 1px solid var(--color-border);
+    padding-left: var(--space-lg);
+    margin-left: var(--space-xs);
+}
+
+.lang-btn {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    padding: var(--space-xs) var(--space-sm);
+    transition: color var(--transition-base);
+}
+
+.lang-btn:hover {
+    color: var(--color-text-primary);
+}
+
+.lang-btn.active {
+    color: var(--color-accent);
+}
+
+/* ------------------------------------------
+   按钮内 SVG 图标
+   ------------------------------------------ */
+.btn-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* ------------------------------------------
+   Skill 展示区：双栏构建器面板
+   （.skills-duo / .skill-panel 见下方）
+   ------------------------------------------ */
+
+/* 名称铭牌：信号色徽章 + 等宽大字 */
+.skill-nameplate {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+}
+
+/* 双栏构建器面板：左官方（青）/ 右原创（绿） */
+.skills-duo {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+    align-items: stretch;
+}
+
+.skill-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    min-width: 0;
+    padding: var(--space-lg);
+    background: var(--color-bg-card);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    border: 1px solid var(--color-border);
+    position: relative;
+}
+
+/* 三条共享行轨道：头部行取两栏最大高度 → 按钮行等高对齐 → 正文行同一起始线；
+   不支持 Subgrid 时退化为普通 flex 堆叠 */
+@supports (grid-template-rows: subgrid) {
+    .skills-duo {
+        grid-template-rows: auto auto 1fr;
+    }
+
+    .skill-panel {
+        grid-row: span 3;
+        display: grid;
+        grid-template-rows: subgrid;
+    }
+}
+
+/* 面板顶部信号色窄条：左青右绿，替代整块色带保持工业感 */
+.skill-panel::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    height: 3px;
+}
+
+.skill-panel.is-official::before { background: var(--color-signal-cyan); }
+.skill-panel.is-oc::before { background: var(--color-signal-green); }
+
+.skill-panel-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.skill-kicker {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.18em;
+    color: var(--color-text-muted);
+}
+
+/* 面板内文案收紧：保证 100vh 内完整呈现 */
+.skill-panel .skill-desc {
+    margin-bottom: 0;
+    font-size: var(--font-size-sm);
+    max-width: none;
+}
+
+.skill-panel .flow-step {
+    padding: var(--space-sm) 0;
+}
+
+.skill-panel-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-lg);
+    align-items: start;
+}
+
+.skill-badge {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.16em;
+    padding: 4px 10px;
+    background: var(--color-accent);
+    color: #101110;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.skill-panel.is-oc .skill-badge {
+    background: var(--color-signal-green);
+}
+
+.skill-name {
+    font-family: var(--font-family-mono);
+    font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: 0.02em;
+    word-break: break-all;
+}
+
+.skill-desc {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-lg);
+    max-width: 560px;
+}
+
+.skill-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+/* 三阶段流程：步骤刻线 */
+.skill-subtitle {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+}
+
+.skill-panel .skill-subtitle {
+    position: relative;
+    padding-left: 18px;
+}
+
+.skill-panel .skill-subtitle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+}
+
+.flow-steps {
+    display: flex;
+    flex-direction: column;
+}
+
+.flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px dashed var(--color-border);
+}
+
+.flow-step:last-child {
+    border-bottom: none;
+}
+
+.flow-index {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-border-strong);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+.flow-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.flow-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: 0.04em;
+}
+
+.flow-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-normal);
+}
+
+/* ------------------------------------------
+   文件清单：虚线行 + mono 文件名 + 行内下载
+   ------------------------------------------ */
+.skill-files {
+    background: var(--color-bg-card);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    border: 1px solid var(--color-border);
+    padding: var(--space-lg);
+    position: relative;
+}
+
+/* 角标 L 形刻线 */
+.skill-files::before,
+.skill-files::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    transition: all var(--transition-base);
+    pointer-events: none;
+}
+
+.skill-files::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--color-accent);
+    border-left: 2px solid var(--color-accent);
+}
+
+.skill-files::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--color-accent);
+    border-right: 2px solid var(--color-accent);
+}
+
+.skill-panel.is-official .skill-files::before,
+.skill-panel.is-official .skill-files::after {
+    border-color: var(--color-signal-cyan);
+}
+
+.skill-panel.is-oc .skill-files::before,
+.skill-panel.is-oc .skill-files::after {
+    border-color: var(--color-signal-green);
+}
+
+.file-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px dashed var(--color-border);
+    transition: padding-left var(--transition-fast);
+}
+
+.file-row:hover {
+    padding-left: var(--space-xs);
+}
+
+.file-row:last-child {
+    border-bottom: none;
+}
+
+.file-name {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+.file-role {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-left: auto;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-dl {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    border: 1px solid transparent;
+    flex-shrink: 0;
+    transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.file-dl:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.file-dl svg {
+    width: 13px;
+    height: 13px;
+}
+
+.file-note {
+    font-family: var(--font-family-mono);
+    font-size: 10px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.12em;
+    margin-top: var(--space-md);
+    text-transform: uppercase;
+}
+
+/* ------------------------------------------
+   Q&A：details 折叠行
+   ------------------------------------------ */
+.qa-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    /* 9 条问答可能超出矮视口：内部滚动，滚动条与角色卡清单同款 */
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+    overscroll-behavior: contain;
+}
+
+.qa-item {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    transition: border-color var(--transition-base);
+}
+
+.qa-item[open] {
+    border-color: var(--color-border-strong);
+}
+
+.qa-item summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.qa-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.qa-q {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-signal-orange);
+    letter-spacing: 0.12em;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.qa-question {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: 0.02em;
+}
+
+.qa-marker {
+    margin-left: auto;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform var(--transition-base), color var(--transition-base);
+}
+
+.qa-item[open] .qa-marker {
+    transform: rotate(45deg);
+    color: var(--color-accent);
+}
+
+.qa-answer {
+    padding: 0 var(--space-lg) var(--space-lg) calc(var(--space-lg) + 34px);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ------------------------------------------
+   声明卡：三列直角卡 + 角标
+   ------------------------------------------ */
+.declaration-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    width: 100%;
+    margin-bottom: var(--space-2xl);
+}
+
+.declaration-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    padding: var(--space-lg);
+    position: relative;
+    transition: border-color var(--transition-base);
+}
+
+.declaration-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 14px;
+    height: 14px;
+    border-top: 2px solid var(--color-accent);
+    border-left: 2px solid var(--color-accent);
+    pointer-events: none;
+}
+
+.declaration-card:hover {
+    border-color: var(--color-border-strong);
+}
+
+.declaration-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: var(--space-md);
+}
+
+.declaration-icon img {
+    width: 100%;
+    height: 100%;
+    /* 染成信号色：用途绿 / 版权青 / 免责橙 */
+    filter: brightness(0) saturate(100%) invert(80%) sepia(31%) saturate(635%) hue-rotate(103deg) brightness(102%) contrast(85%);
+}
+
+.declaration-card:nth-child(2) .declaration-icon img {
+    filter: brightness(0) saturate(100%) invert(71%) sepia(89%) saturate(2371%) hue-rotate(160deg) brightness(104%) contrast(104%);
+}
+
+.declaration-card:nth-child(3) .declaration-icon img {
+    filter: brightness(0) saturate(100%) invert(66%) sepia(67%) saturate(1352%) hue-rotate(338deg) brightness(104%) contrast(101%);
+}
+
+.declaration-card h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.06em;
+}
+
+.declaration-card p {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+}

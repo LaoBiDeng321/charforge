@@ -1,0 +1,359 @@
+/* ============================================
+   CHAR//FORGE - Design System
+   设计系统：终末地官网「工业编辑风」设计令牌
+   核心规则：
+   1. 纸与墨是主体，强调色是信号（强调色只落在按钮/悬停/焦点上）
+   2. 全直角，拒绝圆角（技术文档 / 工程图纸观感）
+   3. 数字等宽（tnum），跳动时不产生横向抖动
+   ============================================ */
+
+/* ------------------------------------------
+   CSS 变量定义（暗色工业主题，唯一主题）
+   ------------------------------------------ */
+:root {
+    /* 中性色 - 墨底（近黑，留一点绿倾向，避免死黑） */
+    --color-bg-primary: #101110;
+    --color-bg-secondary: #181a18;
+    --color-bg-tertiary: #1e201d;
+    --color-bg-overlay: #1c1e1c;
+    --color-bg-card: rgba(24, 26, 24, 0.82);
+
+    /* 中性色 - 纸色文字 */
+    --color-text-primary: #f5f5f0;
+    --color-text-secondary: #898d89;
+    --color-text-muted: #5a5d59;
+
+    /* 强调色 - 信号黄（终末地官网谷地黄，全局主信号） */
+    --color-accent: #fff500;
+    --color-accent-rgb: 255, 245, 0;
+    --color-accent-deep: #e8e000;
+    --color-accent-subtle: rgba(255, 245, 0, 0.08);
+
+    /* 信号色系（终末地官网信号色板：分区/卡片辅助信号，黄仍是主信号） */
+    --color-signal-pink: #df52ac;
+    --color-signal-blue: #5a7efd;
+    --color-signal-red: #fa294b;
+    --color-signal-green: #7addb5;
+    --color-signal-orange: #ff8c42;
+    --color-signal-cyan: #00e5ff;
+    --color-signal-purple: #b287f8;
+    --color-signal-steel: #8e959e;
+
+    /* 边线 */
+    --color-border: #343633;
+    --color-border-strong: #4a4d49;
+    --color-border-hover: rgba(255, 245, 0, 0.55);
+
+    /* 语义状态色（对齐信号色板：警示橙 / 信息青） */
+    --color-warning: var(--color-signal-orange);
+    --color-warning-bg: rgba(255, 140, 66, 0.1);
+    --color-info: var(--color-signal-cyan);
+    --color-info-bg: rgba(0, 229, 255, 0.06);
+    --color-success: var(--color-signal-green);
+    --color-error: #ff6b61;
+
+    /* 间距系统 */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --space-4xl: 6rem;
+    --space-5xl: 8rem;
+
+    /* 字体系统 */
+    --font-family-base: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    --font-family-mono: "Cascadia Code", "SF Mono", Consolas, "Roboto Mono", "Courier New", monospace;
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    --font-size-4xl: 2.5rem;
+    --font-size-5xl: 3.5rem;
+    --font-size-6xl: 5rem;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.8;
+
+    /* 直角化：圆角令牌统一为 0（保留令牌名以兼容旧引用） */
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --radius-xl: 0px;
+    --radius-full: 9999px;
+
+    /* 阴影系统（工业风：极轻，避免霓虹感） */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.7);
+    --shadow-glow: none;
+
+    /* 模糊效果（仅用于顶栏 / 遮罩的高斯模糊） */
+    --blur-sm: 6px;
+    --blur-md: 12px;
+    --blur-lg: 20px;
+
+    /* 过渡动画 */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 400ms ease;
+    --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Z-index 层级 */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal: 400;
+    --z-tooltip: 500;
+    --z-loader: 1000;
+
+    /* 容器宽度 */
+    --container-sm: 640px;
+    --container-md: 768px;
+    --container-lg: 1024px;
+    --container-xl: 1200px;
+    --container-2xl: 1400px;
+}
+
+/* ------------------------------------------
+   基础重置
+   ------------------------------------------ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* 横向溢出兜底 */
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    overflow-x: hidden;
+    /* 数字等宽：表格 / 百分比 / 版本号不抖动 */
+    font-variant-numeric: tabular-nums;
+}
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+kbd {
+    font-family: var(--font-family-mono);
+}
+
+/* ------------------------------------------
+   工具类
+   ------------------------------------------ */
+
+/* 容器 */
+.container {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.container-sm { max-width: var(--container-sm); }
+.container-md { max-width: var(--container-md); }
+.container-lg { max-width: var(--container-lg); }
+.container-xl { max-width: var(--container-xl); }
+.container-2xl { max-width: var(--container-2xl); }
+
+/* 玻璃态效果（顶栏 / 浮层专用，保持克制） */
+.glass {
+    background: rgba(16, 17, 16, 0.72);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--color-border);
+}
+
+/* 卡片基础（直角 + 细线） */
+.card {
+    background: var(--color-bg-card);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    border: 1px solid var(--color-border);
+    padding: var(--space-xl);
+    transition: transform var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-border-strong);
+}
+
+/* 按钮：工业直角，切角信号 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: #101110;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+.btn-primary:hover {
+    background: var(--color-accent-deep);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-strong);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+}
+
+.btn-ghost:hover {
+    color: var(--color-text-primary);
+    background: var(--color-accent-subtle);
+}
+
+/* 等宽标签（技术注记） */
+.mono-tag {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+/* 文本工具 */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-accent { color: var(--color-accent); }
+
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+.text-4xl { font-size: var(--font-size-4xl); }
+
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* 隐藏 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ------------------------------------------
+   关键帧动画
+   ------------------------------------------ */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+.animate-fadeIn { animation: fadeIn var(--transition-slow) forwards; }
+.animate-fadeInUp { animation: fadeInUp var(--transition-slow) forwards; }
+.animate-blink { animation: blink 1.6s steps(1) infinite; }
+
+/* 初始隐藏（用于入场动画，由 JS 控制 is-visible） */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+        transform 0.55s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

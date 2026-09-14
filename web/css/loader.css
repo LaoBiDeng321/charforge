@@ -1,0 +1,284 @@
+/* ============================================
+   Loader - 启动加载动画
+   序幕（对应终末地官网开场）：
+   1. 最左侧竖向加载条自上而下 0 → 100
+   2. 遮罩自最左侧滑向最右侧（黄色前缘线扫过屏幕）
+   3. 停顿片刻后，主体页面元素渐显
+   ============================================ */
+
+/* ------------------------------------------
+   加载遮罩层
+   ------------------------------------------ */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-loader);
+    pointer-events: all;
+}
+
+/* 滑动面板：加载阶段铺满视口，完成后整体右滑离场 */
+.loader-panel {
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg-primary);
+    will-change: transform;
+    /* 左缘信号线：滑动离场时作为黄色前缘扫过全屏 */
+    border-left: 3px solid var(--color-accent);
+}
+
+/* 滑出状态：由 JS 在 100% 后添加 */
+.loader.is-wiping .loader-panel {
+    transform: translateX(102%);
+    transition: transform 780ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* 加载完成后的渐隐收尾（滑出停顿后执行） */
+.loader.is-leaving {
+    opacity: 0;
+    transition: opacity 320ms ease;
+}
+
+/* ------------------------------------------
+   最左侧竖向加载条：自上而下 0 → 100
+   ------------------------------------------ */
+.loader-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    background: var(--color-bg-tertiary);
+    overflow: hidden;
+}
+
+/* 填充条：transform-origin 在顶部，scaleY 由 JS 驱动 */
+.loader-bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-accent);
+    transform: scaleY(0);
+    transform-origin: top center;
+    will-change: transform;
+}
+
+/* 条右缘的细刻度线 */
+.loader-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -2px;
+    width: 1px;
+    height: 100%;
+    background: rgba(var(--color-accent-rgb), 0.25);
+}
+
+/* ------------------------------------------
+   加载界面 HUD（等宽字 / 技术注记风）
+   ------------------------------------------ */
+.loader-ui {
+    position: absolute;
+    inset: 0;
+    padding: var(--space-xl) var(--space-xl) var(--space-xl) 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-family-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.loader-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.loader-brand {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.loader-brand .brand-dash {
+    color: var(--color-accent);
+}
+
+.loader-rec {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+}
+
+/* [REC] 红点：录制指示 */
+.loader-rec::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-error);
+    animation: blink 1.2s steps(1) infinite;
+}
+
+/* 中部：Loading… 大字填充，避免开屏中部大面积空白 */
+.loader-mid {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.loader-word {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-lg);
+}
+
+/* 无衬线大字 + background-clip 渐变扫光：
+   高光带从文字左侧进入、右侧离开，linear 循环 */
+.loader-word-text {
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-black);
+    font-size: clamp(2.75rem, 9vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    background-image: linear-gradient(
+        90deg,
+        var(--color-border-strong) 0%,
+        var(--color-border-strong) 40%,
+        var(--color-accent-deep) 47%,
+        var(--color-accent) 50%,
+        var(--color-accent-deep) 53%,
+        var(--color-border-strong) 60%,
+        var(--color-border-strong) 100%
+    );
+    background-size: 300% 100%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: loaderSweep 1.8s linear infinite;
+}
+
+/* 扫光轨迹：background-position 100% → 0%，高光带自左向右穿过文字 */
+@keyframes loaderSweep {
+    from { background-position: 100% 0; }
+    to { background-position: 0% 0; }
+}
+
+/* 扫光字尾部的等宽进度注记 */
+.loader-word::after {
+    content: 'LOADING RESOURCE INDEX';
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    animation: none;
+}
+
+/* 底部：百分比 + 状态行 */
+.loader-foot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 640px;
+    width: 100%;
+}
+
+.loader-count {
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+}
+
+.loader-count .loader-pct {
+    font-size: 0.4em;
+    color: var(--color-accent);
+    margin-left: 0.15em;
+}
+
+/* 状态行：左侧状态文本，右侧版本号 */
+.loader-status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-sm);
+}
+
+.loader-status {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.14em;
+}
+
+.loader-status .status-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 12px;
+    background: var(--color-accent);
+    vertical-align: -1px;
+    margin-left: 4px;
+    animation: blink 1s steps(1) infinite;
+}
+
+.loader-ver {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+/* 底部进度细线（与左条同步，作为辅助读数） */
+.loader-track {
+    position: relative;
+    height: 2px;
+    width: 100%;
+    background: var(--color-bg-tertiary);
+    overflow: hidden;
+}
+
+.loader-track-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+}
+
+/* ------------------------------------------
+   加载期间锁定页面交互
+   body.is-loading 时由 JS 屏蔽滚动输入
+   ------------------------------------------ */
+body.is-loading {
+    overflow: hidden;
+}
+
+/* ------------------------------------------
+   减少动态效果偏好：直接淡出，不做扫场
+   ------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    .loader.is-wiping .loader-panel {
+        transform: none;
+        transition: none;
+    }
+
+    .loader.is-leaving {
+        transition-duration: 120ms;
+    }
+
+    .loader-rec::before,
+    .loader-status .status-cursor {
+        animation: none;
+    }
+}

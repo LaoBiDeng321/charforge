@@ -29,7 +29,7 @@ web/
 │   ├── carousel.css      # 角色卡与索引面板
 │   ├── loader.css        # 启动遮罩
 │   └── responsive.css    # 断点：≤1024px（双栏堆叠）/ ≤768px（移动端）
-└── image/                # 位图/引用图标：favicon.png + 声明页三图标（其余图标均为内联 SVG）
+└── image/                # 引用图标：声明页三图标（其余图标均为内联 SVG，无 favicon）
 ```
 
 ## 数据流水线（内容更新入口）

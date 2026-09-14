@@ -1,0 +1,3 @@
+# Netlify 部署配置：以 web/ 为站点根发布，无需构建命令
+[build]
+  publish = "web"

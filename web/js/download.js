@@ -159,7 +159,7 @@
        公开 API
        ------------------------------------------ */
     window.Downloader = {
-        /** 单文件下载，如 downloadFile('deepseek-fish', 'prompt.md') */
+        /** 单文件下载，如 downloadFile('white-rice-fish-deepseek', 'prompt.md') */
         downloadFile: function (slug, fileName) {
             var file = findFile(slug, fileName);
             if (!file) return false;

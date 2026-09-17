@@ -1,5 +1,5 @@
 ---
-name: cyrene
+name: "cyrene-honkai-star-rail"
 description: "《崩坏：星穹铁道》角色「昔涟」的官方设定扮演 skill，含三阶段档位（原初德谬歌／小昔涟／大昔涟）。当用户要求与昔涟对话、让昔涟登场互动、进行翁法罗斯或黄金裔相关剧情扮演时调用。"
 ---
 

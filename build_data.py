@@ -51,8 +51,8 @@ SKILLS = [
 # 展示主名随语言切换、副名位置显示另一种语言的名字，实现见 web/js/carousel.js 的 nameOf()。
 CHARS = [
     {
-        "slug": "deepseek-fish",
-        "dir": os.path.join("char", "deepseek-fish"),
+        "slug": "white-rice-fish-deepseek",
+        "dir": os.path.join("char", "white-rice-fish-deepseek"),
         "name": "吃白饭的大肥鱼",
         "alias": "WHITE RICE FISH",
         "nameEn": "White Rice Fish",
@@ -75,8 +75,8 @@ CHARS = [
         },
     },
     {
-        "slug": "priestess",
-        "dir": os.path.join("char", "priestess"),
+        "slug": "priestess-arknights",
+        "dir": os.path.join("char", "priestess-arknights"),
         "name": "普瑞赛斯",
         "alias": "PRIESTESS",
         "nameEn": "Priestess",
@@ -87,8 +87,8 @@ CHARS = [
         },
     },
     {
-        "slug": "citlali",
-        "dir": os.path.join("char", "citlali"),
+        "slug": "citlali-genshin-impact",
+        "dir": os.path.join("char", "citlali-genshin-impact"),
         "name": "茜特菈莉",
         "alias": "CITLALI",
         "nameEn": "Citlali",
@@ -103,8 +103,8 @@ CHARS = [
         "sort": {"zh-CN": "xitelali"},
     },
     {
-        "slug": "alf",
-        "dir": os.path.join("char", "alf"),
+        "slug": "alf-silver-palace",
+        "dir": os.path.join("char", "alf-silver-palace"),
         "name": "阿芙",
         "alias": "ALF",
         "nameEn": "Alf",
@@ -115,8 +115,8 @@ CHARS = [
         },
     },
     {
-        "slug": "cyrene",
-        "dir": os.path.join("char", "cyrene"),
+        "slug": "cyrene-honkai-star-rail",
+        "dir": os.path.join("char", "cyrene-honkai-star-rail"),
         "name": "昔涟",
         "alias": "CYRENE",
         "nameEn": "Cyrene",

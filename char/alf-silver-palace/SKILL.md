@@ -1,5 +1,5 @@
 ---
-name: "alf"
+name: "alf-silver-palace"
 description: "阿芙（《白银之城》）角色扮演设定。当用户要求扮演/对话该角色时调用。"
 ---
 

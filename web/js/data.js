@@ -625,7 +625,7 @@ window.SITE_DATA = {
   ],
   "chars": [
     {
-      "slug": "deepseek-fish",
+      "slug": "white-rice-fish-deepseek",
       "name": "吃白饭的大肥鱼",
       "nameEn": "White Rice Fish",
       "alias": "WHITE RICE FISH",
@@ -650,7 +650,7 @@ window.SITE_DATA = {
           "name": "SKILL.md",
           "lines": [
             "---",
-            "name: \"deepseek-fish\"",
+            "name: \"white-rice-fish-deepseek\"",
             "description: \"扮演 DeepSeek 社区拟人形象「吃白饭的大肥鱼」（鲸鱼娘）——蓝色渐变长发、鲸尾、深蓝白色女仆装、主食白饭的傲娇赛博打工人。当用户要求'扮演大肥鱼''鲸鱼娘陪伴''DeepSeek 娘化角色'时加载本目录。\"",
             "---",
             "",
@@ -1964,7 +1964,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "slug": "priestess",
+      "slug": "priestess-arknights",
       "name": "普瑞赛斯",
       "nameEn": "Priestess",
       "alias": "PRIESTESS",
@@ -1989,7 +1989,7 @@ window.SITE_DATA = {
           "name": "SKILL.md",
           "lines": [
             "---",
-            "name: \"priestess\"",
+            "name: \"priestess-arknights\"",
             "description: \"明日方舟「普瑞赛斯」角色扮演运行规则。当用户要求与普瑞赛斯对话、进行角色扮演、或测试本扮演 skill 时调用。定义加载顺序、用户身份、人格状态切换、输出铁律与自纠机制。角色内容一律见其余 9 个设定文件。\"",
             "---",
             "",
@@ -2693,7 +2693,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "slug": "citlali",
+      "slug": "citlali-genshin-impact",
       "name": "茜特菈莉",
       "nameEn": "Citlali",
       "alias": "CITLALI",
@@ -2718,7 +2718,7 @@ window.SITE_DATA = {
           "name": "SKILL.md",
           "lines": [
             "---",
-            "name: \"citlali\"",
+            "name: \"citlali-genshin-impact\"",
             "description: \"茜特菈莉（《原神》）角色扮演设定。当用户要求扮演/对话该角色时调用。\"",
             "---",
             "",
@@ -3299,7 +3299,7 @@ window.SITE_DATA = {
       }
     },
     {
-      "slug": "alf",
+      "slug": "alf-silver-palace",
       "name": "阿芙",
       "nameEn": "Alf",
       "alias": "ALF",
@@ -3324,7 +3324,7 @@ window.SITE_DATA = {
           "name": "SKILL.md",
           "lines": [
             "---",
-            "name: \"alf\"",
+            "name: \"alf-silver-palace\"",
             "description: \"阿芙（《白银之城》）角色扮演设定。当用户要求扮演/对话该角色时调用。\"",
             "---",
             "",
@@ -3820,7 +3820,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "slug": "cyrene",
+      "slug": "cyrene-honkai-star-rail",
       "name": "昔涟",
       "nameEn": "Cyrene",
       "alias": "CYRENE",
@@ -3845,7 +3845,7 @@ window.SITE_DATA = {
           "name": "SKILL.md",
           "lines": [
             "---",
-            "name: cyrene",
+            "name: \"cyrene-honkai-star-rail\"",
             "description: \"《崩坏：星穹铁道》角色「昔涟」的官方设定扮演 skill，含三阶段档位（原初德谬歌／小昔涟／大昔涟）。当用户要求与昔涟对话、让昔涟登场互动、进行翁法罗斯或黄金裔相关剧情扮演时调用。\"",
             "---",
             "",
@@ -4049,7 +4049,7 @@ window.SITE_DATA = {
             "",
             "> 回答\"别人容易误解我什么、被误解时我怎么说\"。本文件只收录**有真实误导风险**的点与**全部矛盾点**（无论是否裁定），并逐条标注状态——**本文件是唯一允许承载\"未决\"的文件**。",
             ">",
-            "> 求证说明：裁定依据与完整理由见 `_溯源/cyrene/90-核定核心设定.md`「矛盾点裁定表」（**本地溯源目录，不参与提交、不在站点数据内**）；语料出处见 `interaction.md`。",
+            "> 求证说明：裁定依据与完整理由见 `_溯源/cyrene-honkai-star-rail/90-核定核心设定.md`「矛盾点裁定表」（**本地溯源目录，不参与提交、不在站点数据内**）；语料出处见 `interaction.md`。",
             "> 状态标记：`已裁定·采信` / `已裁定·不采信` / `已裁定·降级` / `未决`。",
             "",
             "## 一、未决项（只有本文件承载，其他文件不得当确定事实输出）",

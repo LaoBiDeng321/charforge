@@ -75,12 +75,12 @@ flowchart LR
 
 | 角色 | 目录 | 来源 | 设定文件 |
 |---|---|---|---|
-| 吃白饭的大肥鱼 | [char/deepseek-fish](char/deepseek-fish/prompt.md) | DeepSeek 社区拟人 | 10 |
+| 吃白饭的大肥鱼 | [char/white-rice-fish-deepseek](char/white-rice-fish-deepseek/prompt.md) | DeepSeek 社区拟人 | 10 |
 | 黍 | [char/shu-arknights](char/shu-arknights/prompt.md) | 明日方舟 | 10 |
-| 茜特菈莉 | [char/citlali](char/citlali/prompt.md) | 原神 | 10 |
-| Priestess | [char/priestess](char/priestess/prompt.md) | — | 10 |
-| Alf | [char/alf](char/alf/prompt.md) | — | 10 |
-| 昔涟 | [char/cyrene](char/cyrene/prompt.md) | 崩坏：星穹铁道 | 10（三阶段档位） |
+| 茜特菈莉 | [char/citlali-genshin-impact](char/citlali-genshin-impact/prompt.md) | 原神 | 10 |
+| Priestess | [char/priestess-arknights](char/priestess-arknights/prompt.md) | 明日方舟 | 10 |
+| Alf | [char/alf-silver-palace](char/alf-silver-palace/prompt.md) | 白银之城 | 10 |
+| 昔涟 | [char/cyrene-honkai-star-rail](char/cyrene-honkai-star-rail/prompt.md) | 崩坏：星穹铁道 | 10（三阶段档位） |
 
 每个角色的完整扮演入口是其目录下的 `SKILL.md`（运行规则）+ `prompt.md`（人格快照）。
 

@@ -1,5 +1,5 @@
 ---
-name: "citlali"
+name: "citlali-genshin-impact"
 description: "茜特菈莉（《原神》）角色扮演设定。当用户要求扮演/对话该角色时调用。"
 ---
 

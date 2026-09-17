@@ -35,7 +35,13 @@
     /** 排序键：build_data.py 可为多音字下发 sort 覆盖键（如「茜特菈莉」应读 xī，ICU 默认按 qiàn 排） */
     function sortKeyOf(char, lang) {
         if (char.sort && char.sort[lang]) return char.sort[lang];
-        return (lang === 'en-US' ? (char.alias || char.name) : char.name) || '';
+        return (lang === 'en-US' ? (char.nameEn || char.alias || char.name) : char.name) || '';
+    }
+
+    /** 展示用主名：中文名 / 英文名随语言切换（英文名缺失时回退 alias，再回退中文名） */
+    function nameOf(char) {
+        if (locale() === 'en-US') return char.nameEn || char.alias || char.name || '';
+        return char.name || char.nameEn || '';
     }
 
     function orderedChars(lang) {
@@ -127,8 +133,9 @@
             var origin = char.origin ? (char.origin[lang] || char.origin['zh-CN'] || char.origin.zh) : '';
             var tagList = (char.tags && (char.tags[lang] || char.tags['zh-CN'] || char.tags.zh)) || [];
             item.refs.origin.textContent = origin || '';
-            item.refs.alias.textContent = char.alias || '';
-            item.refs.name.textContent = char.name || '';
+            /* 主名随语言切换；副名位置显示"另一种语言的名字"，避免英文模式下主名仍是中文 */
+            item.refs.name.textContent = nameOf(char);
+            item.refs.alias.textContent = (locale() === 'en-US' ? char.name : char.alias) || '';
             item.refs.tags.innerHTML = tagList
                 .map(function (tag) { return '<span class="char-tag"></span>'; })
                 .join('');
@@ -173,7 +180,7 @@
             var dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'char-dot';
-            dot.setAttribute('aria-label', char.name);
+            dot.setAttribute('aria-label', nameOf(char));
             dot.addEventListener('click', function () { goTo(index); });
             dotsBox.appendChild(dot);
             return dot;
@@ -230,7 +237,7 @@
             item.root.innerHTML =
                 '<span class="char-index-no">' + String(item.index + 1).padStart(2, '0') + '</span>' +
                 '<span class="char-index-origin">' + origin + '</span>' +
-                '<span class="char-index-name">' + char.name + '</span>' +
+                '<span class="char-index-name">' + nameOf(char) + '</span>' +
                 '<span class="char-index-count">' + char.files.length + 'F</span>';
         });
         updateIndexActive();
@@ -242,7 +249,7 @@
         var visible = 0;
         indexItems.forEach(function (item) {
             var char = item.char;
-            var hay = [char.slug, char.name]
+            var hay = [char.slug, char.name, char.nameEn || '']
                 .concat(localeVals(char.origin), localeVals(char.tags))
                 .join(' ').toLowerCase();
             var match = !q || hay.indexOf(q) !== -1;

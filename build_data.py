@@ -47,12 +47,15 @@ SKILLS = [
     },
 ]
 
+# 角色名分两个字段：name（中文名，检索与缺省回退用）/ nameEn（英文名，英文模式的展示主名）。
+# 展示主名随语言切换、副名位置显示另一种语言的名字，实现见 web/js/carousel.js 的 nameOf()。
 CHARS = [
     {
         "slug": "deepseek-fish",
         "dir": os.path.join("char", "deepseek-fish"),
         "name": "吃白饭的大肥鱼",
         "alias": "WHITE RICE FISH",
+        "nameEn": "White Rice Fish",
         "origin": {"zh-CN": "DeepSeek 社区拟人", "en-US": "DeepSeek Community"},
         "tags": {
             "zh-CN": ["吃白饭的大肥鱼", "DeepSeek 社区拟人", "深度求索"],
@@ -64,6 +67,7 @@ CHARS = [
         "dir": os.path.join("char", "shu-arknights"),
         "name": "黍",
         "alias": "SHU",
+        "nameEn": "Shu",
         "origin": {"zh-CN": "《明日方舟》官方设定", "en-US": "Arknights Official"},
         "tags": {
             "zh-CN": ["黍", "明日方舟", "鹰角网络"],
@@ -75,6 +79,7 @@ CHARS = [
         "dir": os.path.join("char", "priestess"),
         "name": "普瑞赛斯",
         "alias": "PRIESTESS",
+        "nameEn": "Priestess",
         "origin": {"zh-CN": "《明日方舟》官方设定", "en-US": "Arknights Official"},
         "tags": {
             "zh-CN": ["普瑞赛斯", "明日方舟", "鹰角网络"],
@@ -86,6 +91,7 @@ CHARS = [
         "dir": os.path.join("char", "citlali"),
         "name": "茜特菈莉",
         "alias": "CITLALI",
+        "nameEn": "Citlali",
         "origin": {"zh-CN": "《原神》官方设定", "en-US": "Genshin Impact Official"},
         "tags": {
             "zh-CN": ["茜特菈莉", "原神", "米哈游"],
@@ -101,6 +107,7 @@ CHARS = [
         "dir": os.path.join("char", "alf"),
         "name": "阿芙",
         "alias": "ALF",
+        "nameEn": "Alf",
         "origin": {"zh-CN": "《白银之城》官方物料", "en-US": "Silver Palace Official"},
         "tags": {
             "zh-CN": ["阿芙", "白银之城", "乐元素"],
@@ -112,6 +119,7 @@ CHARS = [
         "dir": os.path.join("char", "cyrene"),
         "name": "昔涟",
         "alias": "CYRENE",
+        "nameEn": "Cyrene",
         "origin": {"zh-CN": "《崩坏：星穹铁道》官方设定", "en-US": "Honkai: Star Rail Official"},
         "tags": {
             "zh-CN": ["昔涟", "崩坏：星穹铁道", "米哈游"],
@@ -155,6 +163,7 @@ def build():
         entry = {
             "slug": meta["slug"],
             "name": meta["name"],
+            "nameEn": meta["nameEn"],
             "alias": meta["alias"],
             "origin": meta["origin"],
             "tags": meta["tags"],

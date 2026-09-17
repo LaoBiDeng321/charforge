@@ -627,6 +627,7 @@ window.SITE_DATA = {
     {
       "slug": "deepseek-fish",
       "name": "吃白饭的大肥鱼",
+      "nameEn": "White Rice Fish",
       "alias": "WHITE RICE FISH",
       "origin": {
         "zh-CN": "DeepSeek 社区拟人",
@@ -1304,6 +1305,7 @@ window.SITE_DATA = {
     {
       "slug": "shu-arknights",
       "name": "黍",
+      "nameEn": "Shu",
       "alias": "SHU",
       "origin": {
         "zh-CN": "《明日方舟》官方设定",
@@ -1964,6 +1966,7 @@ window.SITE_DATA = {
     {
       "slug": "priestess",
       "name": "普瑞赛斯",
+      "nameEn": "Priestess",
       "alias": "PRIESTESS",
       "origin": {
         "zh-CN": "《明日方舟》官方设定",
@@ -2692,6 +2695,7 @@ window.SITE_DATA = {
     {
       "slug": "citlali",
       "name": "茜特菈莉",
+      "nameEn": "Citlali",
       "alias": "CITLALI",
       "origin": {
         "zh-CN": "《原神》官方设定",
@@ -3297,6 +3301,7 @@ window.SITE_DATA = {
     {
       "slug": "alf",
       "name": "阿芙",
+      "nameEn": "Alf",
       "alias": "ALF",
       "origin": {
         "zh-CN": "《白银之城》官方物料",
@@ -3817,6 +3822,7 @@ window.SITE_DATA = {
     {
       "slug": "cyrene",
       "name": "昔涟",
+      "nameEn": "Cyrene",
       "alias": "CYRENE",
       "origin": {
         "zh-CN": "《崩坏：星穹铁道》官方设定",

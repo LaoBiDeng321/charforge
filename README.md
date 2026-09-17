@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-fbbf24?style=flat-square&labelColor=161713)](LICENSE)
 [![维护者](https://img.shields.io/badge/维护者-LaoBiDeng321-f5f5f0?style=flat-square&labelColor=161713)](https://github.com/LaoBiDeng321)
 [![构建器](https://img.shields.io/badge/构建器-2-8ce99a?style=flat-square&labelColor=161713)](#-两个构建器)
-[![角色](https://img.shields.io/badge/角色-5-f59e0b?style=flat-square&labelColor=161713)](#-角色一览)
+[![角色](https://img.shields.io/badge/角色-6-f59e0b?style=flat-square&labelColor=161713)](#-角色一览)
 [![在线预览](https://img.shields.io/badge/在线预览-Netlify-00b7d4?style=flat-square&labelColor=161713)](https://lbd-charforge.netlify.app/)
 
 </div>
@@ -80,6 +80,7 @@ flowchart LR
 | 茜特菈莉 | [char/citlali](char/citlali/prompt.md) | 原神 | 10 |
 | Priestess | [char/priestess](char/priestess/prompt.md) | — | 10 |
 | Alf | [char/alf](char/alf/prompt.md) | — | 10 |
+| 昔涟 | [char/cyrene](char/cyrene/prompt.md) | 崩坏：星穹铁道 | 10（三阶段档位） |
 
 每个角色的完整扮演入口是其目录下的 `SKILL.md`（运行规则）+ `prompt.md`（人格快照）。
 

@@ -73,15 +73,11 @@
 
     function t(key) { return window.I18N ? window.I18N.t(key) : key; }
 
-    /* 取正文：统一走 download.js 暴露的 fileText（它负责兼容 data.js 的 lines[] 与旧 content 两种形态） */
-    function textOf(file) {
-        if (window.fileText) return window.fileText(file);
-        return (file && file.content) || '';
-    }
-
-    function formatSize(text) {
-        var kb = text.length / 1024;
-        return (kb >= 100 ? Math.round(kb) : kb.toFixed(1)) + ' KB';
+    /* 文件大小由 index.json 直接提供，不再从内联正文计算 */
+    function formatSize(bytes) {
+        var n = Number(bytes) || 0;
+        if (n >= 1024 * 1024) return (n / 1024 / 1024).toFixed(1) + ' MB';
+        return (n / 1024).toFixed(1) + ' KB';
     }
 
     function buildCard(char, index) {
@@ -99,22 +95,34 @@
                         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
                     '</button>' +
                     '<span class="file-name">' + base + '</span>' +
-                    '<span class="file-size">' + formatSize(textOf(file)) + '</span>' +
+                    '<span class="file-size">' + formatSize(file.size) + '</span>' +
                 '</li>'
             );
         }).join('');
 
+        var thumbHtml = char.thumbnail
+            ? '<div class="char-thumb"><img src="' + char.thumbnail + '" alt="' + nameOf(char) + '" loading="lazy"></div>'
+            : '<div class="char-thumb char-thumb-empty" aria-hidden="true"><span>NO IMG</span></div>';
+
         card.innerHTML =
-            '<div class="char-card-head">' +
-                '<span class="char-no">C.' + String(index + 1).padStart(2, '0') + '</span>' +
-                '<span class="char-origin"></span>' +
+            '<div class="char-card-top">' +
+                thumbHtml +
+                '<div class="char-card-top-main">' +
+                    '<div class="char-card-head">' +
+                        '<span class="char-no">C.' + String(index + 1).padStart(2, '0') + '</span>' +
+                    '</div>' +
+                    '<span class="char-origin"></span>' +
+                    '<h3 class="char-name"></h3>' +
+                    '<span class="char-alias"></span>' +
+                    '<div class="char-tags"></div>' +
+                '</div>' +
             '</div>' +
-            '<h3 class="char-name"></h3>' +
-            '<span class="char-alias"></span>' +
-            '<div class="char-tags"></div>' +
             '<ul class="char-files" data-scrollable>' + filesHtml + '</ul>' +
             '<div class="char-card-foot">' +
                 '<span class="char-count">' + char.files.length + ' FILES</span>' +
+                '<button type="button" class="btn btn-secondary" data-copy-prompt="' + char.slug + '">' +
+                    '<span></span>' +
+                '</button>' +
                 '<button type="button" class="btn btn-primary" data-download-zip="' + char.slug + '">' +
                     '<svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
                     '<span></span>' +
@@ -144,6 +152,8 @@
                 tagEls[i].textContent = tag;
             });
             item.refs.dlText.textContent = t('dl.zip');
+            if (item.refs.copyText) item.refs.copyText.textContent = t('install.copy');
+            if (item.refs.thumbImg) item.refs.thumbImg.alt = nameOf(char);
         });
         renderIndexTexts();
     }
@@ -167,7 +177,9 @@
                     name: card.querySelector('.char-name'),
                     alias: card.querySelector('.char-alias'),
                     tags: card.querySelector('.char-tags'),
-                    dlText: card.querySelector('[data-download-zip] span')
+                    dlText: card.querySelector('[data-download-zip] span'),
+                    copyText: card.querySelector('[data-copy-prompt] span'),
+                    thumbImg: card.querySelector('.char-thumb img')
                 }
             };
         });

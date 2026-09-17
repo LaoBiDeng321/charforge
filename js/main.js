@@ -7,23 +7,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初始化文案（先于一切 UI 渲染）
     initI18n();
 
-    // 数据驱动渲染：统计 / 文件清单 / Q&A
-    renderDynamic();
-
-    // 初始化角色轮播
-    if (window.CharCarousel) window.CharCarousel.init();
-
-    // 初始化全屏滚动
+    // 初始化全屏滚动、事件代理、加载动画
     initFullPage();
-
-    // 绑定下载与跳转按钮
     bindActions();
-
-    // 加载动画完成后，触发首屏渐显
     initRevealAfterLoader();
 
     // 语言切换后重渲染动态组件
     document.addEventListener('i18n:applied', renderDynamic);
+
+    // 站点数据改为 HTTP 下 fetch('index.json')，不再依赖内联 data.js
+    const dataReady = window.SiteData ? window.SiteData.load() : Promise.resolve(null);
+    dataReady
+        .then(() => {
+            renderDynamic();
+            if (window.CharCarousel) window.CharCarousel.init();
+        })
+        .catch((err) => {
+            console.error('站点数据加载失败：', err);
+            window.SITE_DATA = { skills: [], chars: [] };
+            renderDynamic();
+            if (window.CharCarousel) window.CharCarousel.init();
+        });
 });
 
 /**
@@ -88,9 +92,13 @@ function renderSocials() {
 function renderStats(data) {
     const skillCount = data.skills.length;
     const charCount = data.chars.length;
+    // 「设定文件」不计 assets/ 下的图片与说明，避免把立绘也算进去
+    const countSettingFiles = (entry) => entry.files.filter(
+        (file) => !file.name.startsWith('assets/')
+    ).length;
     const fileCount =
-        data.skills.reduce((sum, s) => sum + s.files.length, 0) +
-        data.chars.reduce((sum, c) => sum + c.files.length, 0);
+        data.skills.reduce((sum, s) => sum + countSettingFiles(s), 0) +
+        data.chars.reduce((sum, c) => sum + countSettingFiles(c), 0);
 
     const pad2 = (n) => String(n).padStart(2, '0');
     const set = (id, text) => {
@@ -202,6 +210,28 @@ function initFullPage() {
  */
 function bindActions() {
     document.addEventListener('click', (e) => {
+        // 复制至 Agent 安装
+        const copyBtn = e.target.closest('[data-copy-prompt]');
+        if (copyBtn && window.AgentInstaller) {
+            const span = copyBtn.querySelector('span');
+            window.AgentInstaller.copyPrompt(copyBtn.dataset.copyPrompt).then((ok) => {
+                const text = window.I18N
+                    ? window.I18N.t(ok ? 'install.copied' : 'install.copyFailed')
+                    : (ok ? '已复制' : '复制失败');
+                if (span) {
+                    const original = span.textContent;
+                    span.textContent = text;
+                    setTimeout(() => {
+                        span.textContent = window.I18N ? window.I18N.t('install.copy') : original;
+                    }, 1600);
+                } else {
+                    copyBtn.classList.toggle('is-copied', !!ok);
+                    setTimeout(() => copyBtn.classList.remove('is-copied'), 1600);
+                }
+            });
+            return;
+        }
+
         // 整包 ZIP
         const zipBtn = e.target.closest('[data-download-zip]');
         if (zipBtn && window.Downloader) {
@@ -221,9 +251,10 @@ function bindActions() {
             return;
         }
 
-        // 区块跳转（Hero CTA 等）
+        // 区块跳转（顶栏 / Hero CTA 等）：阻止默认锚点跳转，统一走 FullPage
         const gotoBtn = e.target.closest('[data-goto]');
         if (gotoBtn && window.fullpage) {
+            e.preventDefault();
             window.fullpage.goToSection(parseInt(gotoBtn.dataset.goto, 10));
         }
     });

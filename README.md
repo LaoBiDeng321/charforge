@@ -28,7 +28,7 @@
 |---|---|---|
 | 构建器 | `skills/` | 装入支持 Skill 的 agent，按三阶段为任意角色生成 10 份扮演设定文件 |
 | 角色 | `char/` | 用构建器产出并核定的成品角色卡，可直接用于 AI 扮演 |
-| 展示站 | `web/` | 终末地风格宣传页，GitHub Pages 即本仓库主页 |
+| 展示/下载 | 仓库根 | 站点入口为根目录 `index.html`；构建器与角色资源直接位于 `skills/`、`char/`，无需在 `web/` 再复制一份 |
 
 > [!NOTE]
 > 产出的一律是**官方人设**（正剧 / 设定集 / 公式书 / 官网公告），阶段一主动排除二创来源；单源孤证不入核定设定，矛盾点全部落盘到角色的 `conflicts.md`。
@@ -88,6 +88,9 @@ flowchart LR
 
 每个角色的完整扮演入口是其目录下的 `SKILL.md`（运行规则）+ `prompt.md`（人格快照）。
 
+> [!NOTE]
+> 角色卡缩略图放在 `thumbnails/<slug>/cover.*`（推荐方形图）；`build_data.py` 会自动写入 `index.json` 的 `thumbnail` 字段，前端角色卡左侧显示。
+
 ## 快速开始
 
 ```bash
@@ -95,20 +98,26 @@ flowchart LR
 git clone https://github.com/LaoBiDeng321/charforge.git
 cd charforge
 
-# 本地预览展示站（无需任何构建 / 依赖安装）
-python -m http.server 8765 --directory web
+# 本地预览展示站（无需依赖安装；站点已扁平化到仓库根）
+python -m http.server 8765
 # 浏览器访问 http://localhost:8765
 ```
 
 <details>
-<summary><strong>更新网站内容（新增角色 / 修改 skill 后）</strong></summary>
+<summary><strong>更新网站内容与分发包（新增角色 / 修改 skill / 改图片后）</strong></summary>
 
 ```bash
-# 在仓库根目录运行，扫描 skills/ 与 char/ 重新生成网站数据
+# 在仓库根目录运行
 python build_data.py
 ```
 
-脚本只依赖 Python 标准库，无第三方包。生成的 `web/js/data.js` 包含全部文件全文，网站的角色轮播、索引检索、下载功能自动同步，无需改任何页面代码。
+脚本只依赖 Python 标准库，无第三方包。它会生成：
+
+- `index.json`：站点与 Agent 共用的资源索引（元数据、文件清单、sha256、下载地址、角色缩略图）；
+- `downloads/skills/<slug>.zip`、`downloads/char/<slug>.zip`：包含 Markdown 与 `assets/` 图片的静态 ZIP；
+- `thumbnails/<slug>/` 下的方形图会被写入 `index.json` 的 `thumbnail` 字段。
+
+前端运行时 `fetch('index.json')`，不再使用内联 `data.js`。`downloads/` 是构建产物，已在 `.gitignore` 中排除；Netlify 构建会自动生成，本地预览前请先执行一次脚本。
 
 </details>
 
@@ -116,20 +125,22 @@ python build_data.py
 <summary><strong>把构建器装进你的 agent</strong></summary>
 
 1. 将 `skills/<构建器>/` 整个目录复制到你的 agent 的技能目录（不同宿主的路径约定不同，如 Claude Code 为 `.claude/skills/`、Trae 为 `.trae/skills/`）
-2. 或直接把构建器的 SKILL.md 内容粘贴进对话
-3. 发起请求，例如："为《明日方舟》的黍构建角色扮演设定"
+2. 或直接下载 `downloads/skills/<构建器>.zip`，解压到技能目录（完整包见 `downloads/`，由 `build_data.py` 生成）
+3. 或在网页构建器 / 角色卡上点「复制至agent安装」，把提示词粘贴给 Agent，让它按 `index.json` 自动下载安装
+4. 或直接把构建器的 SKILL.md 内容粘贴进对话
+5. 发起请求，例如："为《明日方舟》的黍构建角色扮演设定"
 
 </details>
 
 ## 自部署展示站
 
 > [!IMPORTANT]
-> 展示站已部署：**[lbd-charforge.netlify.app](https://lbd-charforge.netlify.app/)**。Netlify 以仓库根为发布目录时，根目录的 [index.html](index.html) 是重定向入口，会自动跳转进 `web/index.html`；也可将发布目录设为 `web`，直接以根路径访问网站本体。
+> 展示站已部署：**[lbd-charforge.netlify.app](https://lbd-charforge.netlify.app/)**。站点已扁平化到仓库根，Netlify 发布根为 `.`，根目录的 [index.html](index.html) 就是站点入口；`skills/`、`char/` 下的文件与 `downloads/` 下的 ZIP 都可以通过站点直接访问。
 
-Fork 后想用自己的域名或独立部署？整个 `web/` 目录是纯静态站点（无框架、无依赖、无服务端），扔进任何静态托管（Vercel / Netlify / 对象存储）都能跑。
+Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点（无框架、无服务端），扔进任何静态托管（Vercel / Netlify / 对象存储）都能跑。Netlify 会在构建时执行 `python3 build_data.py` 生成 `index.json` 与 `downloads/`。
 
 > [!WARNING]
-> `web/js/data.js` 是生成物，但**必须随仓库提交**——Pages 部署没有构建步骤，访客访问时不会有人替你运行 `build_data.py`。
+> `index.json` 与 `downloads/*.zip` 都由 `build_data.py` 生成。Netlify 会自动构建；如果使用 GitHub Pages 这类无构建步骤的主机，请在提交前本地执行 `python build_data.py`，至少提交 `index.json` 与需要的 ZIP，或改用 GitHub Actions 构建。
 
 ## FAQ
 

@@ -19,7 +19,12 @@ DEPLOY.local.md
 # 其他本地私有文档（存续记录 / 待办 / 调研），统一 *.local.md 不入库
 *.local.md
 
-# 注意：web/js/data.js 虽为生成物，但部署无构建步骤，必须随仓库提交
+# 构建产物：index.json 需要提交（Pages 无构建时可作为数据源）；
+# downloads/*.zip 由 Netlify build 或本地 `python build_data.py` 生成，不入库。
+downloads/
+
+# 本地图片优化镜像（未接入构建，避免误提交）
+web-assets.local/
 
 # 本地溯源目录（保留一份素材缓存供溯源，不参与提交）
 _溯源/

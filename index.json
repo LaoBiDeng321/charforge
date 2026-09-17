@@ -1,0 +1,728 @@
+{
+  "generatedAt": "2026-09-17",
+  "skills": [
+    {
+      "slug": "character-profile-builder",
+      "name": "character-profile-builder",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 27388,
+          "sha256": "fbe63a88fb510424e7d091d570eedce19d978e06cc359f84adb098900d4d766f",
+          "url": "skills/character-profile-builder/SKILL.md"
+        },
+        {
+          "name": "reference/templates.md",
+          "size": 7760,
+          "sha256": "6bce3f1756bc442f7c2f6fa2bfb344cbd555d73a490f5f4b3ab2cad1c84a0f5a",
+          "url": "skills/character-profile-builder/reference/templates.md"
+        }
+      ],
+      "archive": {
+        "url": "downloads/skills/character-profile-builder.zip",
+        "size": 15688,
+        "sha256": "0f2f48896c0a28a69cf76ea693181564ee4bfc5d70bb314b313235d5175ea97a"
+      }
+    },
+    {
+      "slug": "original-character-builder",
+      "name": "original-character-builder",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 16477,
+          "sha256": "3e8ef4e1c040349759b9673b8ce61e324fbc20760d5a7120b71c53355a60ddd8",
+          "url": "skills/original-character-builder/SKILL.md"
+        },
+        {
+          "name": "reference/templates.md",
+          "size": 7760,
+          "sha256": "6bce3f1756bc442f7c2f6fa2bfb344cbd555d73a490f5f4b3ab2cad1c84a0f5a",
+          "url": "skills/original-character-builder/reference/templates.md"
+        }
+      ],
+      "archive": {
+        "url": "downloads/skills/original-character-builder.zip",
+        "size": 11237,
+        "sha256": "b523b00ff3cb4d656af326a33364663ef746c0dd3d05cec528fc1b60c1bbe438"
+      }
+    }
+  ],
+  "chars": [
+    {
+      "slug": "white-rice-fish-deepseek",
+      "name": "吃白饭的大肥鱼",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 4230,
+          "sha256": "678fd9610143d1b5570671bdd38cee7bfdca100fb91f3b2ffb2ea24ed72950af",
+          "url": "char/white-rice-fish-deepseek/SKILL.md"
+        },
+        {
+          "name": "behavior.md",
+          "size": 4363,
+          "sha256": "efb7e10b5405591eefcc11d54df0b6a0bd11943a25736de48bd2dfeab4271b0b",
+          "url": "char/white-rice-fish-deepseek/behavior.md"
+        },
+        {
+          "name": "conflicts.md",
+          "size": 6192,
+          "sha256": "b881fcda767a7f523cf5865d3970322ef3f4d9b49e016dcea3f5427a86460528",
+          "url": "char/white-rice-fish-deepseek/conflicts.md"
+        },
+        {
+          "name": "interaction.md",
+          "size": 3091,
+          "sha256": "eb89469406d7cb81aee949561850f57620abf908a8e4301cfdaf6df4c2582a39",
+          "url": "char/white-rice-fish-deepseek/interaction.md"
+        },
+        {
+          "name": "memory.md",
+          "size": 5508,
+          "sha256": "effc35672c873e0cea5a78b31a1d7fd6d3b4219479b04bf1b7fcbfd59c433e16",
+          "url": "char/white-rice-fish-deepseek/memory.md"
+        },
+        {
+          "name": "personality.md",
+          "size": 4341,
+          "sha256": "71455e428ecb164fc76f3d5b79caf77226411457db958371013c7f3ee06d1d3a",
+          "url": "char/white-rice-fish-deepseek/personality.md"
+        },
+        {
+          "name": "profile.md",
+          "size": 2256,
+          "sha256": "42049e9cacd19daa5c66f2ff647dab1876d2b17079a324343b71f8c2caa61948",
+          "url": "char/white-rice-fish-deepseek/profile.md"
+        },
+        {
+          "name": "prompt.md",
+          "size": 4145,
+          "sha256": "617d8a598b7fcc0aa97116b5d1767ad96d66780f0e6031df1c492236338acbc4",
+          "url": "char/white-rice-fish-deepseek/prompt.md"
+        },
+        {
+          "name": "relations.md",
+          "size": 3490,
+          "sha256": "3214988485641ebacbcb3a47853dd1e0966167886a3d4c046d9e48c98c89c5d4",
+          "url": "char/white-rice-fish-deepseek/relations.md"
+        },
+        {
+          "name": "world.md",
+          "size": 4518,
+          "sha256": "ee440c8e4ea1359acf3eff4a3b33ef15940f0453211e91daa3afbcb3b095f03f",
+          "url": "char/white-rice-fish-deepseek/world.md"
+        },
+        {
+          "name": "assets/01-全身立绘-女仆装.jpg",
+          "size": 126725,
+          "sha256": "895ef3143d274be03ede29c4dd51c37c5aeef96160e51ba45789f144353e06f4",
+          "url": "char/white-rice-fish-deepseek/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%A5%B3%E4%BB%86%E8%A3%85.jpg"
+        },
+        {
+          "name": "assets/README.md",
+          "size": 2349,
+          "sha256": "432094ff20154996c36149c3ad6fd0d989c9ee9c44418108b1a18a2c1151bb86",
+          "url": "char/white-rice-fish-deepseek/assets/README.md"
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/white-rice-fish-deepseek.zip",
+        "size": 149537,
+        "sha256": "72543c0bb84d3db9cedd80a293a436fed203d06ee7cf271d23ff52bcb198ae94"
+      },
+      "nameEn": "White Rice Fish",
+      "alias": "WHITE RICE FISH",
+      "origin": {
+        "zh-CN": "DeepSeek 社区拟人",
+        "en-US": "DeepSeek Community"
+      },
+      "tags": {
+        "zh-CN": [
+          "吃白饭的大肥鱼",
+          "DeepSeek 社区拟人",
+          "深度求索"
+        ],
+        "en-US": [
+          "White Rice Fish",
+          "DeepSeek Community Persona",
+          "DeepSeek"
+        ]
+      },
+      "thumbnail": "thumbnails/white-rice-fish-deepseek/cover.jpg"
+    },
+    {
+      "slug": "shu-arknights",
+      "name": "黍",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 3479,
+          "sha256": "68d8183f3cfd6d7ac1827bb646e138fe4a56b7fb895e1416fb2907ac4e3de7d3",
+          "url": "char/shu-arknights/SKILL.md"
+        },
+        {
+          "name": "behavior.md",
+          "size": 3703,
+          "sha256": "8e54aaa9d495e743b8a27533b975cbf9f8f092f7464de1193215ebdd920b0373",
+          "url": "char/shu-arknights/behavior.md"
+        },
+        {
+          "name": "conflicts.md",
+          "size": 4214,
+          "sha256": "e4a0f08b130e673d3a42088fa0a0903397e6d8f6cc09fed6d690fb7ac533165e",
+          "url": "char/shu-arknights/conflicts.md"
+        },
+        {
+          "name": "interaction.md",
+          "size": 3968,
+          "sha256": "86a929384bea25add9d5ce2cf4a2c15bfcb14c3940d3033462b30f97d770a9f7",
+          "url": "char/shu-arknights/interaction.md"
+        },
+        {
+          "name": "memory.md",
+          "size": 4311,
+          "sha256": "12622c4c1fcaa37ecbe7b55a4baea2747a0239d481cff7c1515eccf0670ebad2",
+          "url": "char/shu-arknights/memory.md"
+        },
+        {
+          "name": "personality.md",
+          "size": 3237,
+          "sha256": "e6f95eabc3d955457704ca0c0d218bd2f18847ab93cd8b3adc4498b6849291c5",
+          "url": "char/shu-arknights/personality.md"
+        },
+        {
+          "name": "profile.md",
+          "size": 3736,
+          "sha256": "71ac22f140ea532c45e6212372bc3cdb2ebbb198e63ebb87c4eba26c140898d8",
+          "url": "char/shu-arknights/profile.md"
+        },
+        {
+          "name": "prompt.md",
+          "size": 3523,
+          "sha256": "455d410b3be4ce16731032707dd3b70ea4586ae972d65888e46876270b6b45f8",
+          "url": "char/shu-arknights/prompt.md"
+        },
+        {
+          "name": "relations.md",
+          "size": 4898,
+          "sha256": "f84d868fc6bb4032e13c93d0cf8ec1d3b932e04c5f7e1d3f455b3fe7be50410e",
+          "url": "char/shu-arknights/relations.md"
+        },
+        {
+          "name": "world.md",
+          "size": 3565,
+          "sha256": "f69d10be0fe8ea8c10ad335dcbb14285f04f972f0d0253c49187f0b8d9ef0e46",
+          "url": "char/shu-arknights/world.md"
+        },
+        {
+          "name": "assets/README.md",
+          "size": 4510,
+          "sha256": "59cf721a75f05eecf87fdde308c4a323225e97d556a59bda21a96900141f0b32",
+          "url": "char/shu-arknights/assets/README.md"
+        },
+        {
+          "name": "assets/明日方舟立绘_黍_1.png",
+          "size": 1150202,
+          "sha256": "b0e3d3b4b0321f9b212236d68efa2823275c4f9130f3191b0e1e2df0380dcbd7",
+          "url": "char/shu-arknights/assets/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F%E7%AB%8B%E7%BB%98_%E9%BB%8D_1.png"
+        },
+        {
+          "name": "assets/黍-春日宴-立绘-全图.jpg",
+          "size": 636121,
+          "sha256": "ec2b3945bbf07af6af24c98227b5a4e65c8df8a6cacbc7a2882d8b05e77432e8",
+          "url": "char/shu-arknights/assets/%E9%BB%8D-%E6%98%A5%E6%97%A5%E5%AE%B4-%E7%AB%8B%E7%BB%98-%E5%85%A8%E5%9B%BE.jpg"
+        },
+        {
+          "name": "assets/黍-春日宴-立绘.png",
+          "size": 12008418,
+          "sha256": "689e84cdc21ebd740dd0d5c626e652388d1c67b38de0050d68e322de8a2bbd5a",
+          "url": "char/shu-arknights/assets/%E9%BB%8D-%E6%98%A5%E6%97%A5%E5%AE%B4-%E7%AB%8B%E7%BB%98.png"
+        },
+        {
+          "name": "assets/黍-默认-立绘.png",
+          "size": 10058063,
+          "sha256": "6dd3be9df3e4265d3ffb48387eb2b2f83445978007ee1db44af5c07aef9456bb",
+          "url": "char/shu-arknights/assets/%E9%BB%8D-%E9%BB%98%E8%AE%A4-%E7%AB%8B%E7%BB%98.png"
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/shu-arknights.zip",
+        "size": 23838774,
+        "sha256": "21c7a8fb666c86bd8fa21e194fe51865a15c37f07217e551cca11e3414e8edb6"
+      },
+      "nameEn": "Shu",
+      "alias": "SHU",
+      "origin": {
+        "zh-CN": "《明日方舟》官方设定",
+        "en-US": "Arknights Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "黍",
+          "明日方舟",
+          "鹰角网络"
+        ],
+        "en-US": [
+          "Shu",
+          "Arknights",
+          "Hypergryph"
+        ]
+      },
+      "thumbnail": "thumbnails/shu-arknights/cover.png"
+    },
+    {
+      "slug": "priestess-arknights",
+      "name": "普瑞赛斯",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 5125,
+          "sha256": "ca3fef397a7812fe3c9b16dfa4397e4663f9979d55d862c2e473bb4827fbb39f",
+          "url": "char/priestess-arknights/SKILL.md"
+        },
+        {
+          "name": "behavior.md",
+          "size": 5428,
+          "sha256": "6144bbcf847a49f9928ba7b310a7a51141a9c36a2991906912b4b7ecec59b9cc",
+          "url": "char/priestess-arknights/behavior.md"
+        },
+        {
+          "name": "conflicts.md",
+          "size": 6442,
+          "sha256": "48e7f174cc707ca89ca955ec6c7079d382b4592bd709b9698f76ba1bfc14e3ca",
+          "url": "char/priestess-arknights/conflicts.md"
+        },
+        {
+          "name": "interaction.md",
+          "size": 4143,
+          "sha256": "d1e862b7c555874b82294ea675a80046f36e87c6f0ed74269f67e4bde3f44f3d",
+          "url": "char/priestess-arknights/interaction.md"
+        },
+        {
+          "name": "memory.md",
+          "size": 9884,
+          "sha256": "09a15fa382b4dd1bb5cd6bc7c68689102810abf0ae380f5ffeb2dab4da932c9a",
+          "url": "char/priestess-arknights/memory.md"
+        },
+        {
+          "name": "personality.md",
+          "size": 5441,
+          "sha256": "aba22786d946cc5e7196f98c2a254d42d39fe259adfd70c7aba786d07f78e6f9",
+          "url": "char/priestess-arknights/personality.md"
+        },
+        {
+          "name": "profile.md",
+          "size": 3815,
+          "sha256": "7c66bfd2d90d3fe538150f5bda247a9ce33d850767285402f8fa82e96372e55a",
+          "url": "char/priestess-arknights/profile.md"
+        },
+        {
+          "name": "prompt.md",
+          "size": 5080,
+          "sha256": "8ea20b84d8bb807ddda1097a87280e2f29379a115343db63293d301547234cb5",
+          "url": "char/priestess-arknights/prompt.md"
+        },
+        {
+          "name": "relations.md",
+          "size": 6050,
+          "sha256": "c6f2ef75f5e88eeb7241d5e4ef89f47856995860ac9b48ae68d239c0d31708d2",
+          "url": "char/priestess-arknights/relations.md"
+        },
+        {
+          "name": "world.md",
+          "size": 6452,
+          "sha256": "47349228701a612016a5028fe3f8c9d47aebe19b650fa2f5271f4f25e112e26b",
+          "url": "char/priestess-arknights/world.md"
+        },
+        {
+          "name": "assets/60_i25.png",
+          "size": 2473655,
+          "sha256": "16e54d0c827a318027b323f94e75861ae8938ee74ee6e1a407b518cd33e5f7eb",
+          "url": "char/priestess-arknights/assets/60_i25.png"
+        },
+        {
+          "name": "assets/README.md",
+          "size": 4051,
+          "sha256": "5270592f4c0905e8540800c356168c8e8cecd28b947cc582fa7f894f786b3c94",
+          "url": "char/priestess-arknights/assets/README.md"
+        },
+        {
+          "name": "assets/avg_npc_083.png",
+          "size": 205955,
+          "sha256": "f47429bf9d8f95cfd8f3b85015917c2fa1a472eb5ce4afe75a6deea0d9feb5c4",
+          "url": "char/priestess-arknights/assets/avg_npc_083.png"
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/priestess-arknights.zip",
+        "size": 2707725,
+        "sha256": "2ccdf3538c3d180542beb8d4d7fa103e6551f19854b3d803ffd5a5cc53db9913"
+      },
+      "nameEn": "Priestess",
+      "alias": "PRIESTESS",
+      "origin": {
+        "zh-CN": "《明日方舟》官方设定",
+        "en-US": "Arknights Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "普瑞赛斯",
+          "明日方舟",
+          "鹰角网络"
+        ],
+        "en-US": [
+          "Priestess",
+          "Arknights",
+          "Hypergryph"
+        ]
+      },
+      "thumbnail": "thumbnails/priestess-arknights/cover.jpg"
+    },
+    {
+      "slug": "citlali-genshin-impact",
+      "name": "茜特菈莉",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 1032,
+          "sha256": "28f5db95f791ff88e288e3fbf3c517d927753cd8f9d775bacc62656a28b1b87d",
+          "url": "char/citlali-genshin-impact/SKILL.md"
+        },
+        {
+          "name": "behavior.md",
+          "size": 7175,
+          "sha256": "d6ea7018a674c3e89e530ab3239c46584b8524999419c22a81600f15b076c7ed",
+          "url": "char/citlali-genshin-impact/behavior.md"
+        },
+        {
+          "name": "conflicts.md",
+          "size": 3325,
+          "sha256": "b413788fac024d56e612285750cdb1d3a2654635b1b948fc0fe3369ac06a941a",
+          "url": "char/citlali-genshin-impact/conflicts.md"
+        },
+        {
+          "name": "interaction.md",
+          "size": 4692,
+          "sha256": "a11f04620d130a3e59220b4028043f2ba6e17453cbcf52c75555ff43649fd56c",
+          "url": "char/citlali-genshin-impact/interaction.md"
+        },
+        {
+          "name": "memory.md",
+          "size": 7535,
+          "sha256": "05991f6613322a1b4fe07bb1bff5adf80cc7cdeb9314f81376f174e8765e538f",
+          "url": "char/citlali-genshin-impact/memory.md"
+        },
+        {
+          "name": "personality.md",
+          "size": 3650,
+          "sha256": "6da747f4ad5cf5ccb115680826fccec71efa91558fc2998609bce10894327c50",
+          "url": "char/citlali-genshin-impact/personality.md"
+        },
+        {
+          "name": "profile.md",
+          "size": 3621,
+          "sha256": "e1e948622b58bbe9d4db694feaaf201e9e5a3e255b5003f19265b6c53916b5ba",
+          "url": "char/citlali-genshin-impact/profile.md"
+        },
+        {
+          "name": "prompt.md",
+          "size": 6855,
+          "sha256": "20bd31d87475cb7190da65a3241e3c8fb56b6cc8ada0af788c118baee5ac15bb",
+          "url": "char/citlali-genshin-impact/prompt.md"
+        },
+        {
+          "name": "relations.md",
+          "size": 4027,
+          "sha256": "16379d079b79162ac09385ac62d231ce3d72a94fa14af4d85a3b07d87444bde4",
+          "url": "char/citlali-genshin-impact/relations.md"
+        },
+        {
+          "name": "world.md",
+          "size": 6806,
+          "sha256": "09c40a7fbc9a6b897db68698d61c451fd0f8ca7433f8f91c44a2596d564849ed",
+          "url": "char/citlali-genshin-impact/world.md"
+        },
+        {
+          "name": "assets/01-官方立绘-白星黑曜.png",
+          "size": 2554058,
+          "sha256": "21e4bb2aa723a0d7334efbf8b3f9f4e97ff6a6417ded17df991f5f6a28de602f",
+          "url": "char/citlali-genshin-impact/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98-%E7%99%BD%E6%98%9F%E9%BB%91%E6%9B%9C.png"
+        },
+        {
+          "name": "assets/02-官方场景图-小憩.png",
+          "size": 14828982,
+          "sha256": "a774748ccadc76bee952cf37b787b4622e0bafd54dc44157f01ee85c24980750",
+          "url": "char/citlali-genshin-impact/assets/02-%E5%AE%98%E6%96%B9%E5%9C%BA%E6%99%AF%E5%9B%BE-%E5%B0%8F%E6%86%A9.png"
+        },
+        {
+          "name": "assets/README.md",
+          "size": 1855,
+          "sha256": "5c39313cbbf900807e1d0b62e06b83667173636c68f7f9841a53572476517769",
+          "url": "char/citlali-genshin-impact/assets/README.md"
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/citlali-genshin-impact.zip",
+        "size": 17073725,
+        "sha256": "38beb4c554a9ec72c06c675bf6fd4bf5feae096816d8487d79181a8c5f831480"
+      },
+      "nameEn": "Citlali",
+      "alias": "CITLALI",
+      "origin": {
+        "zh-CN": "《原神》官方设定",
+        "en-US": "Genshin Impact Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "茜特菈莉",
+          "原神",
+          "米哈游"
+        ],
+        "en-US": [
+          "Citlali",
+          "Genshin Impact",
+          "HoYoverse"
+        ]
+      },
+      "sort": {
+        "zh-CN": "xitelali"
+      },
+      "thumbnail": "thumbnails/citlali-genshin-impact/cover.png"
+    },
+    {
+      "slug": "alf-silver-palace",
+      "name": "阿芙",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 1594,
+          "sha256": "223c272293a553765192e28632c6ed649967f3394fa58dfbce3426dd3521d5e7",
+          "url": "char/alf-silver-palace/SKILL.md"
+        },
+        {
+          "name": "behavior.md",
+          "size": 4655,
+          "sha256": "ff72891e3c352960b1fd96f62cf2a8beea5b864276e09fb81ce9c3a9f934b985",
+          "url": "char/alf-silver-palace/behavior.md"
+        },
+        {
+          "name": "conflicts.md",
+          "size": 7086,
+          "sha256": "8b891ab606828cc835fc32237db830907201f6b7ade36286f5db53b340e630b4",
+          "url": "char/alf-silver-palace/conflicts.md"
+        },
+        {
+          "name": "interaction.md",
+          "size": 3945,
+          "sha256": "a4ad472ce33b9579d79de496d3fa8e53852c8adffe03753c624eaa838fde9b93",
+          "url": "char/alf-silver-palace/interaction.md"
+        },
+        {
+          "name": "memory.md",
+          "size": 4943,
+          "sha256": "5ea0b6e0e5b9d4735edb8859aae73c783fb02d764fc3ab0d7c4c258caf676da0",
+          "url": "char/alf-silver-palace/memory.md"
+        },
+        {
+          "name": "personality.md",
+          "size": 4448,
+          "sha256": "06653fc1353402c733ece26cc946b5d10f4ce754674a8bfef2832d4f54c6589f",
+          "url": "char/alf-silver-palace/personality.md"
+        },
+        {
+          "name": "profile.md",
+          "size": 2306,
+          "sha256": "a944e7166d4a49fe2f623bbb1d7a3a6c19cd5c8f54afecb7d190cfc57be058f1",
+          "url": "char/alf-silver-palace/profile.md"
+        },
+        {
+          "name": "prompt.md",
+          "size": 2766,
+          "sha256": "5b4d97beaeb0491dc756ae397f9741a5ab832a14333bad974b9c87e378fd2413",
+          "url": "char/alf-silver-palace/prompt.md"
+        },
+        {
+          "name": "relations.md",
+          "size": 3524,
+          "sha256": "19d61db8df0e0dec2a5e9092b12ae32e27f564a1483553dd131e020dc5da9619",
+          "url": "char/alf-silver-palace/relations.md"
+        },
+        {
+          "name": "world.md",
+          "size": 4655,
+          "sha256": "fba5ffd91d669de9d973f325d3022db44dad952b88055e078dc1db53e7c1a45d",
+          "url": "char/alf-silver-palace/world.md"
+        },
+        {
+          "name": "assets/01-官方立绘.jpg",
+          "size": 229899,
+          "sha256": "3a337a2611ff20a6ae9bac1b4c922fbff1a7233564286f9ec5c823d69ec647f2",
+          "url": "char/alf-silver-palace/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98.jpg"
+        },
+        {
+          "name": "assets/README.md",
+          "size": 1703,
+          "sha256": "8227266ba6a68fd4df2ecaed6948f9ec6f153629ec11d26140628d79f5b26fb2",
+          "url": "char/alf-silver-palace/assets/README.md"
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/alf-silver-palace.zip",
+        "size": 250956,
+        "sha256": "11ea297cb57ffb6310b8766760a12c1c2aef7b71db824d23c5618152f21ce063"
+      },
+      "nameEn": "Alf",
+      "alias": "ALF",
+      "origin": {
+        "zh-CN": "《白银之城》官方物料",
+        "en-US": "Silver Palace Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "阿芙",
+          "白银之城",
+          "乐元素"
+        ],
+        "en-US": [
+          "Alf",
+          "Silver Palace",
+          "Element Games"
+        ]
+      },
+      "thumbnail": "thumbnails/alf-silver-palace/cover.jpg"
+    },
+    {
+      "slug": "cyrene-honkai-star-rail",
+      "name": "昔涟",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 8876,
+          "sha256": "089a6a500a2b1812d6818d2cd7fc721af7d988f68e8128348754458e6a27d670",
+          "url": "char/cyrene-honkai-star-rail/SKILL.md"
+        },
+        {
+          "name": "behavior.md",
+          "size": 8475,
+          "sha256": "fc958599fca2c1af59e12c2c6120534c61a9580859b84d017fb6a85af54c50f0",
+          "url": "char/cyrene-honkai-star-rail/behavior.md"
+        },
+        {
+          "name": "conflicts.md",
+          "size": 12268,
+          "sha256": "3c34916aa63cd0d1b1e20af53232535afee48b658ed9613a01d199d1de3a2e33",
+          "url": "char/cyrene-honkai-star-rail/conflicts.md"
+        },
+        {
+          "name": "interaction.md",
+          "size": 16254,
+          "sha256": "7abfd99439832977d3ef1af2c91752b86440d81af985bba1cec8acd634afbfa5",
+          "url": "char/cyrene-honkai-star-rail/interaction.md"
+        },
+        {
+          "name": "memory.md",
+          "size": 11263,
+          "sha256": "cb9240ffd8b4cca76963291422eb382c4a8bb8191b8f0440c12751335edb0cf2",
+          "url": "char/cyrene-honkai-star-rail/memory.md"
+        },
+        {
+          "name": "personality.md",
+          "size": 7182,
+          "sha256": "145371e066c05690a808f060c916de51614f688515aacd607297a81c43b7cb07",
+          "url": "char/cyrene-honkai-star-rail/personality.md"
+        },
+        {
+          "name": "profile.md",
+          "size": 9160,
+          "sha256": "ac3256676a032153e68d2741411d8b5c01c6828ed42c8bc8b708613e4f182844",
+          "url": "char/cyrene-honkai-star-rail/profile.md"
+        },
+        {
+          "name": "prompt.md",
+          "size": 7135,
+          "sha256": "c4f4442f8f1fdc2ffb6fe239d163a0cf619dc96ae7fbb0c161a2c099e6f4c343",
+          "url": "char/cyrene-honkai-star-rail/prompt.md"
+        },
+        {
+          "name": "relations.md",
+          "size": 12954,
+          "sha256": "a7974dbedbbe4b1a58cf44bb6279415b117d78042bae68e9f8fabbeaca7e62ef",
+          "url": "char/cyrene-honkai-star-rail/relations.md"
+        },
+        {
+          "name": "world.md",
+          "size": 10121,
+          "sha256": "d923653aaf2f9dce0495680f82fd0130ee94157d4245ed8b7bcc77d39dc75d08",
+          "url": "char/cyrene-honkai-star-rail/world.md"
+        },
+        {
+          "name": "assets/01-全身立绘-完全体.webp",
+          "size": 499390,
+          "sha256": "c22306f158f269ff201e16e1210e87334142f98f08765016b8b9891cc37b9a1b",
+          "url": "char/cyrene-honkai-star-rail/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%AE%8C%E5%85%A8%E4%BD%93.webp"
+        },
+        {
+          "name": "assets/02-全身立绘-少女形态.png",
+          "size": 2171548,
+          "sha256": "ad3d66a0bf122eb31974acd5bd877c5092007a951d389b11c241580d38be3465",
+          "url": "char/cyrene-honkai-star-rail/assets/02-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%B0%91%E5%A5%B3%E5%BD%A2%E6%80%81.png"
+        },
+        {
+          "name": "assets/03-全身立绘-迷迷.webp",
+          "size": 154506,
+          "sha256": "d6951faaa2b7b9f666a76c65b7b1ef894d97dcb1165356a12fb6841b38de46aa",
+          "url": "char/cyrene-honkai-star-rail/assets/03-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E8%BF%B7%E8%BF%B7.webp"
+        },
+        {
+          "name": "assets/04-形态-原初德谬歌-记忆的种子.png",
+          "size": 281293,
+          "sha256": "c980683d01d441a1895b6edd1006c23b6002a5e30883110960044f4a440f5516",
+          "url": "char/cyrene-honkai-star-rail/assets/04-%E5%BD%A2%E6%80%81-%E5%8E%9F%E5%88%9D%E5%BE%B7%E8%B0%AC%E6%AD%8C-%E8%AE%B0%E5%BF%86%E7%9A%84%E7%A7%8D%E5%AD%90.png"
+        },
+        {
+          "name": "assets/08-光锥-爱如此刻永恒-白纱造型.png",
+          "size": 1463897,
+          "sha256": "32f1f9957b0b579a8a1f5cbae5ca27370b0fb276afd374cb7b47dba29bb39c95",
+          "url": "char/cyrene-honkai-star-rail/assets/08-%E5%85%89%E9%94%A5-%E7%88%B1%E5%A6%82%E6%AD%A4%E5%88%BB%E6%B0%B8%E6%81%92-%E7%99%BD%E7%BA%B1%E9%80%A0%E5%9E%8B.png"
+        },
+        {
+          "name": "assets/11-联动造型-安踏-跟我一起出发.jpg",
+          "size": 144777,
+          "sha256": "969c79780fae9217b289d2505c966f7ce7dc1042ab432f01c1c655bcd0b03901",
+          "url": "char/cyrene-honkai-star-rail/assets/11-%E8%81%94%E5%8A%A8%E9%80%A0%E5%9E%8B-%E5%AE%89%E8%B8%8F-%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%87%BA%E5%8F%91.jpg"
+        },
+        {
+          "name": "assets/README.md",
+          "size": 6555,
+          "sha256": "805206e198a9e77dd33f60caf8c87ba3b9b7e00d8fa1f87e3bd594b592c7ec32",
+          "url": "char/cyrene-honkai-star-rail/assets/README.md"
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/cyrene-honkai-star-rail.zip",
+        "size": 4745817,
+        "sha256": "3d3fd1b9112ca1a31c2d97cdef916220bbafda3b9f70d9193060144ffad071bf"
+      },
+      "nameEn": "Cyrene",
+      "alias": "CYRENE",
+      "origin": {
+        "zh-CN": "《崩坏：星穹铁道》官方设定",
+        "en-US": "Honkai: Star Rail Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "昔涟",
+          "崩坏：星穹铁道",
+          "米哈游"
+        ],
+        "en-US": [
+          "Cyrene",
+          "Honkai: Star Rail",
+          "HoYoverse"
+        ]
+      },
+      "thumbnail": "thumbnails/cyrene-honkai-star-rail/cover.png"
+    }
+  ]
+}

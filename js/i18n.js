@@ -39,6 +39,10 @@
             'dl.skillmd': '仅下载 SKILL.md',
             'dl.file': '下载此文件',
 
+            'install.copy': '复制至agent安装',
+            'install.copied': '已复制',
+            'install.copyFailed': '复制失败',
+
             'skill.flow': '运行流程 // PIPELINE',
             'skill.files': '交付文件 // DELIVERABLES',
             'skill.fileNote': '行尾图标可下载单文件 · 分阶段闸门推进',
@@ -154,6 +158,10 @@
             'dl.zip': 'Download ZIP',
             'dl.skillmd': 'SKILL.md only',
             'dl.file': 'Download this file',
+
+            'install.copy': 'Copy to Agent Install',
+            'install.copied': 'Copied',
+            'install.copyFailed': 'Copy failed',
 
             'skill.flow': 'PIPELINE',
             'skill.files': 'DELIVERABLES',

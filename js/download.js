@@ -1,10 +1,10 @@
 /**
  * Downloader - 资源下载工具
- * 数据来源：window.SITE_DATA（由 build_data.py 生成）
+ * 数据来源：window.SITE_DATA（由 build_data.py 生成的 index.json）
  * 能力：
- *   1. 单文件下载（text/markdown Blob）
- *   2. 整包 ZIP 下载（store 无压缩格式，纯 JS 实现，无外部依赖，
- *      file:// 本地打开同样可用）
+ *   1. 单文件下载：直接指向 root 下的静态文件 URL
+ *   2. 整包 ZIP 下载：优先使用构建期生成的静态 ZIP（含图片）；
+ *      若该 ZIP 尚未生成/部署，则在浏览器内抓取全部文件并现场打包（同样含图片）
  */
 
 (function () {
@@ -128,31 +128,61 @@
         return null;
     }
 
-    /* ------------------------------------------
-       Blob 保存触发
-       ------------------------------------------ */
-    /* UTF-8 BOM：Windows 下部分编辑器（记事本旧版等）对无 BOM 文本
-       默认按 GBK 解码导致中文乱码，写入 BOM 可强制识别为 UTF-8 */
-    var UTF8_BOM = '\uFEFF';
-
-    /* 正文还原：data.js 里正文按行数组存储（lines），此处拼回全文。
-       兼容旧格式（content 字符串），避免用旧脚本重新生成的数据打不开。 */
-    function fileText(file) {
-        if (file && Array.isArray(file.lines)) return file.lines.join('\n');
-        return (file && file.content) || '';
+    function absoluteUrl(relOrAbs) {
+        try {
+            return new URL(relOrAbs, location.href).href;
+        } catch (e) {
+            return relOrAbs;
+        }
     }
-    /* 暴露给 carousel.js（文件体积显示也需取正文）——本文件在 index.html 中先于 carousel.js 加载。
-       正文取用一律走这里，禁止各模块自行假设 data.js 的存储形态。 */
-    window.fileText = fileText;
-    function saveBlob(blob, filename) {
-        var url = URL.createObjectURL(blob);
+
+    function saveUrl(url, filename) {
         var a = document.createElement('a');
         a.href = url;
         a.download = filename;
+        a.rel = 'noopener';
         document.body.appendChild(a);
         a.click();
         a.remove();
+    }
+
+    function saveBlob(blob, filename) {
+        var url = URL.createObjectURL(blob);
+        saveUrl(url, filename);
         setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }
+
+    var UTF8_BOM = new Uint8Array([0xEF, 0xBB, 0xBF]);
+
+    function withUtf8Bom(u8) {
+        var out = new Uint8Array(UTF8_BOM.length + u8.length);
+        out.set(UTF8_BOM, 0);
+        out.set(u8, UTF8_BOM.length);
+        return out;
+    }
+
+    /** 下载静态文件。浏览器内现场打包 ZIP，包含 .md 与 assets 图片。 */
+    function buildClientZip(entry) {
+        var requests = entry.files.map(function (file) {
+            return fetch(absoluteUrl(file.url), { cache: 'no-store' })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('Failed to fetch ' + file.url + ': ' + res.status);
+                    return res.arrayBuffer();
+                })
+                .then(function (buf) {
+                    var data = new Uint8Array(buf);
+                    if (file.name.toLowerCase().endsWith('.md')) data = withUtf8Bom(data);
+                    return { name: entry.slug + '/' + file.name, data: data };
+                });
+        });
+
+        return Promise.all(requests).then(function (entries) {
+            saveBlob(buildZip(entries), entry.slug + '.zip');
+            return true;
+        }).catch(function (err) {
+            console.error('ZIP 现场打包失败：', err);
+            return false;
+        });
     }
 
     /* ------------------------------------------
@@ -163,23 +193,32 @@
         downloadFile: function (slug, fileName) {
             var file = findFile(slug, fileName);
             if (!file) return false;
-            saveBlob(
-                new Blob([UTF8_BOM + fileText(file)], { type: 'text/markdown;charset=utf-8' }),
-                fileName.split('/').pop()
-            );
+            saveUrl(absoluteUrl(file.url), fileName.split('/').pop());
             return true;
         },
 
-        /** 整包 ZIP 下载，目录结构 <slug>/<文件相对路径> */
+        /**
+         * 整包 ZIP 下载。
+         * 优先使用构建期生成的静态 ZIP（含图片）；不存在时在浏览器内现场打包。
+         */
         downloadZip: function (slug) {
             var entry = findEntry(slug);
-            if (!entry || entry.files.length === 0) return false;
-            var encoder = new TextEncoder();
-            var entries = entry.files.map(function (file) {
-                return { name: entry.slug + '/' + file.name, data: encoder.encode(UTF8_BOM + fileText(file)) };
-            });
-            saveBlob(buildZip(entries), entry.slug + '.zip');
-            return true;
+            if (!entry || !entry.files || entry.files.length === 0) return false;
+
+            var archiveUrl = entry.archive && entry.archive.url;
+            if (!archiveUrl) return buildClientZip(entry);
+
+            return fetch(absoluteUrl(archiveUrl), { method: 'HEAD', cache: 'no-store' })
+                .then(function (res) {
+                    if (res.ok) {
+                        saveUrl(absoluteUrl(archiveUrl), entry.slug + '.zip');
+                        return true;
+                    }
+                    return buildClientZip(entry);
+                })
+                .catch(function () {
+                    return buildClientZip(entry);
+                });
         }
     };
 })();

@@ -20,9 +20,22 @@
         pauseAfterWipe: 460 // 滑场后的停顿，随后渐显主体
     };
 
-    /** 就绪等待：模拟进度跑完且 window 资源加载完成后才允许满值 */
+    /** 就绪等待：模拟进度跑完、window 资源加载完成且 index.json 就绪后才允许满值 */
     var windowLoaded = document.readyState === 'complete';
+    var dataLoaded = !(window.SiteData && typeof window.SiteData.load === 'function');
     window.addEventListener('load', function () { windowLoaded = true; });
+
+    if (window.SiteData && typeof window.SiteData.load === 'function') {
+        window.SiteData.load().then(function () {
+            dataLoaded = true;
+        }, function () {
+            dataLoaded = true; // 数据失败时也放行，由 main.js 渲染空状态
+        });
+    }
+
+    function resourcesReady() {
+        return windowLoaded && dataLoaded;
+    }
 
     /**
      * 缓动：easeInOutSine，前段缓入后段缓出
@@ -92,12 +105,12 @@
             var t = Math.min(elapsed / TIMING.fill, 1);
 
             /* 模拟进度上限 99，等待真实资源就绪后才放行到 100 */
-            var cap = windowLoaded ? 99.5 : 99;
+            var cap = resourcesReady() ? 99.5 : 99;
             var progress = Math.min(easeInOutSine(t) * 100, cap);
 
             render(progress);
 
-            if (t < 1 || !windowLoaded) {
+            if (t < 1 || !resourcesReady()) {
                 requestAnimationFrame(frame);
             } else {
                 /* 收尾：99 → 100 */

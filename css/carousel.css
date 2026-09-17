@@ -123,8 +123,57 @@
 .char-card-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: var(--space-md);
+}
+
+/* 顶部：左侧方形缩略图，右侧序号/来源/名字（文字右对齐） */
+.char-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+}
+
+.char-card-top-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: var(--space-xs);
+}
+
+.char-card-top-main > * {
+    max-width: 100%;
+}
+
+.char-thumb {
+    width: clamp(64px, 9vw, 84px);
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    align-self: center;
+    overflow: hidden;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-bg-secondary);
+}
+
+.char-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.char-thumb-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: dashed;
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
 }
 
 .char-no {
@@ -141,6 +190,7 @@
     color: var(--color-text-muted);
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -166,6 +216,7 @@
 /* 核心标签：等宽描边小标签 */
 .char-tags {
     display: flex;
+    justify-content: flex-end;
     gap: var(--space-sm);
     flex-wrap: wrap;
     margin-top: var(--space-xs);
@@ -233,6 +284,7 @@
     border-top: 1px solid var(--color-border);
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: var(--space-md);
 }
 
@@ -246,7 +298,7 @@
 }
 
 .char-card-foot .btn {
-    flex: 1;
+    flex: 1 1 120px;
 }
 
 /* ------------------------------------------

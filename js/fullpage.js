@@ -11,6 +11,7 @@ class FullPage {
         
         this.currentIndex = 0;
         this.isScrolling = false;
+        this.pendingIndex = null;
         this.touchStartY = 0;
         this.touchEndY = 0;
         
@@ -34,8 +35,16 @@ class FullPage {
         this.setupStyles();
         this.bindEvents();
         
-        // 初始化到第一个section
-        this.goToSection(0, false);
+        // 有 #anchor 时从对应分区启动，否则从第一屏开始
+        const initialAnchor = (location.hash || '').replace(/^#/, '');
+        let initialIndex = 0;
+        this.sections.forEach((section, i) => {
+            if (section.dataset.anchor === initialAnchor) initialIndex = i;
+        });
+        this.goToSection(initialIndex, false);
+
+        // 避免浏览器在初始化时把页面滚到锚点位置
+        window.scrollTo(0, 0);
         
         // 触发初始化完成事件
         this.emit('init');
@@ -212,8 +221,17 @@ class FullPage {
     }
     
     goToSection(index, animate = true) {
-        if (this.isScrolling || index < 0 || index >= this.sections.length) return;
+        if (index < 0 || index >= this.sections.length) return;
+
+        // 动画进行中再次点击：记录最后一次目标，当前动画结束后再补跳，
+        // 避免点击被直接吞掉、或默认锚点跳转把页面卡在半路。
+        if (this.isScrolling) {
+            this.pendingIndex = index;
+            return;
+        }
+
         if (index === this.currentIndex && animate) return;
+        this.pendingIndex = null;
         
         this.isScrolling = true;
         const previousIndex = this.currentIndex;
@@ -246,9 +264,14 @@ class FullPage {
             previousSection: this.sections[previousIndex]
         });
         
-        // 重置滚动状态
+        // 重置滚动状态；若动画期间又点了别的区块，补执行最后那个目标
         setTimeout(() => {
             this.isScrolling = false;
+            if (this.pendingIndex !== null) {
+                const next = this.pendingIndex;
+                this.pendingIndex = null;
+                if (next !== this.currentIndex) this.goToSection(next);
+            }
         }, this.options.scrollDelay);
         
         // 更新URL锚点

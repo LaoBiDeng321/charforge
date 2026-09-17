@@ -1,3 +1,5 @@
-# Netlify 部署配置：以 web/ 为站点根发布，无需构建命令
+# Netlify 部署配置：站点已提升到仓库根目录，发布根 = "."
+# 构建时由 build_data.py 生成 index.json 与 downloads/*.zip（含图片）。
 [build]
-  publish = "web"
+  command = "python3 build_data.py"
+  publish = "."

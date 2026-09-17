@@ -3176,7 +3176,10 @@ window.SITE_DATA = {
             ""
           ]
         }
-      ]
+      ],
+      "sort": {
+        "zh-CN": "xitelali"
+      }
     },
     {
       "slug": "alf",

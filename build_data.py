@@ -13,7 +13,10 @@ build_data.py —— 资源分享站数据构建脚本
      这样每段/每行都是独立的一行，diff 只落在真正改动的那几行。
      站点侧消费方必须用 lines.join("\\n") 还原全文（见 web/js/download.js 的 fileText()）；
   3) 仅对 "</script" 做防御性转义，避免日后被内联进 HTML 时截断脚本（JS 中 \\/ 等价于 /，取值不变）；
-  4) 固定以 LF（\n）写出，保证 Windows / Linux 上重新生成得到同一份字节。
+  4) 固定以 LF（\n）写出，保证 Windows / Linux 上重新生成得到同一份字节；
+  5) 角色展示顺序不在构建期固定：由前端按当前语言实时排序（中文拼音 / 英文首字母，见
+     web/js/carousel.js 的 orderedChars）。CHARS 里的 "sort" 为可选的读音覆盖键，
+     用于多音字（引擎默认读音与实际不符时）钉死排序位置。
 """
 
 import json
@@ -88,6 +91,10 @@ CHARS = [
             "zh-CN": ["茜特菈莉", "原神", "米哈游"],
             "en-US": ["Citlali", "Genshin Impact", "HoYoverse"],
         },
+        # 排序覆盖键（可选）：展示顺序由 carousel.js 用 Intl.Collator 计算——
+        # 中文按拼音、英文按首字母；多音字引擎可能读错，用本字段钉死正确读音。
+        # 「茜特菈莉」应读 xī，而引擎默认按 qiàn 排（会错排到「黍」之前），故此处覆盖。
+        "sort": {"zh-CN": "xitelali"},
     },
     {
         "slug": "alf",
@@ -145,14 +152,18 @@ def build():
 
     chars_out = []
     for meta in CHARS:
-        chars_out.append({
+        entry = {
             "slug": meta["slug"],
             "name": meta["name"],
             "alias": meta["alias"],
             "origin": meta["origin"],
             "tags": meta["tags"],
             "files": collect_files(meta["dir"]),
-        })
+        }
+        # 仅在有排序覆盖键时下发（展示顺序本身由前端按语言计算，见文件头「输出约定」）
+        if meta.get("sort"):
+            entry["sort"] = meta["sort"]
+        chars_out.append(entry)
 
     data = {
         "generatedAt": date.today().isoformat(),

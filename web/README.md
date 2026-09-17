@@ -49,6 +49,9 @@ python build_data.py
 
 - **下载**：全部委托 `main.js` 的全局点击代理。`data-file-dl="<slug>/<file>"` 单文件直下（面板"仅下载 SKILL.md"按钮与文件行小按钮共用）；`data-download-zip="<slug>"` 由 download.js 客户端打包
 - **索引面板**：角色库标题行的「全部角色」按钮打开，覆盖轮播区；检索为跨语言 includes 匹配（slug/角色名/来源/标签），点击条目 `goTo(index)` 直达卡片；打开即暂停自动播放，Esc 或关闭后恢复
+- **展示顺序（排序）**：由 `carousel.js` 在渲染期按当前语言计算——中文用 `Intl.Collator('zh-Hans-u-co-pinyin')` 按**拼音**排，英文用 `Intl.Collator('en')` 按 `alias` 的**首字母**排。卡片 / 圆点 / 索引面板**共用同一个有序数组** `chars`，因为索引面板按下标 `goTo(index)` 跳转，三处顺序必须一致。切换语言时按 slug 记住当前卡再重建，避免跳卡
+  - **多音字**：引擎可能读错（如「茜特菈莉」实际读 xī，`Intl` 默认按 qiàn 排）。用 `build_data.py` 的 `CHARS[].sort` 覆盖键钉死读音，前端优先使用该键
+  - 排序只在**前端**进行，`data.js` 内的 `chars` 顺序沿用 `CHARS` 表的书写顺序，不代表页面展示顺序
 - **对齐**：构建器双栏用 CSS Subgrid 共享「头部 / 按钮行 / 正文」三条行轨道（`@supports` 渐进增强，不支持时回退 flex 堆叠）；≤1024px 单列时显式还原 flex
 - **全屏滚动**：分区内部可滚动区域必须带 `data-scrollable` 属性，否则滚轮/触摸会被分区导航拦截
 - **file:// 兼容**：script 标签不带 `?v=` 查询参数（该协议下会解析失败）；部署到 HTTP 后如遇缓存可自行加版本参数

@@ -15,7 +15,44 @@
     var COMPACT_DOTS = 12;       // 超过此数量刻度转为密排样式
     var locale = function () { return (window.I18N && window.I18N.getLang()) || 'zh-CN'; };
 
+    /* ---------- 展示排序：中文按拼音、英文按首字母 ---------- */
+    /* 排序在渲染期计算：cards / dots / indexItems 共用同一个有序数组，
+       索引面板的 goTo(index) 按下标跳转，三处顺序必须一致，故集中在此。 */
+    var collators = {};
+    function collatorFor(lang) {
+        if (lang in collators) return collators[lang];
+        var c = null;
+        try {
+            /* zh-Hans-u-co-pinyin：显式指定拼音排序，不依赖各引擎对 zh 的默认 collation */
+            c = (lang === 'en-US')
+                ? new Intl.Collator('en', { sensitivity: 'base', numeric: true })
+                : new Intl.Collator('zh-Hans-u-co-pinyin', { sensitivity: 'base' });
+        } catch (e) { c = null; }
+        collators[lang] = c;
+        return c;
+    }
+
+    /** 排序键：build_data.py 可为多音字下发 sort 覆盖键（如「茜特菈莉」应读 xī，ICU 默认按 qiàn 排） */
+    function sortKeyOf(char, lang) {
+        if (char.sort && char.sort[lang]) return char.sort[lang];
+        return (lang === 'en-US' ? (char.alias || char.name) : char.name) || '';
+    }
+
+    function orderedChars(lang) {
+        var list = (((window.SITE_DATA || {}).chars) || []).slice();
+        var coll = collatorFor(lang);
+        list.sort(function (a, b) {
+            var ka = sortKeyOf(a, lang);
+            var kb = sortKeyOf(b, lang);
+            var r = coll ? coll.compare(ka, kb) : (ka < kb ? -1 : (ka > kb ? 1 : 0));
+            /* 同键时用 slug 兜底，保证顺序稳定可复现 */
+            return r || (a.slug < b.slug ? -1 : (a.slug > b.slug ? 1 : 0));
+        });
+        return list;
+    }
+
     var stage = null;
+    var chars = [];              // 当前语言下的展示顺序（cards / dots / indexItems 共用）
     var cards = [];              // { root, slug, refs }
     var dots = [];
     var indexItems = [];         // 索引面板条目 { root, char }
@@ -83,9 +120,8 @@
 
     /** 仅更新随语言变化的文案（origin / tags / 下载按钮文字） */
     function applyLocale() {
-        var data = window.SITE_DATA || { chars: [] };
         cards.forEach(function (item, index) {
-            var char = data.chars[index];
+            var char = chars[index];
             if (!char) return;
             var lang = locale();
             var origin = char.origin ? (char.origin[lang] || char.origin['zh-CN'] || char.origin.zh) : '';
@@ -109,8 +145,11 @@
         var data = window.SITE_DATA || { chars: [] };
         if (!stage || data.chars.length === 0) return;
 
+        /* 按当前语言排序（中文拼音 / 英文首字母），三处渲染共用 chars */
+        chars = orderedChars(locale());
+
         stage.innerHTML = '';
-        cards = data.chars.map(function (char, index) {
+        cards = chars.map(function (char, index) {
             var card = buildCard(char, index);
             stage.appendChild(card);
             return {
@@ -130,7 +169,7 @@
         /* 刻度指示器 */
         var dotsBox = document.getElementById('charDots');
         dotsBox.innerHTML = '';
-        dots = data.chars.map(function (char, index) {
+        dots = chars.map(function (char, index) {
             var dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'char-dot';
@@ -146,7 +185,7 @@
         var dotsBox = document.getElementById('charDots');
         dotsBox.classList.toggle('is-dense', total > COMPACT_DOTS);
 
-        buildIndexGrid(data);
+        buildIndexGrid();
 
         applyLocale();
         classify(true);
@@ -161,11 +200,11 @@
         return Object.keys(val).map(function (k) { return String(val[k]); });
     }
 
-    function buildIndexGrid(data) {
+    function buildIndexGrid() {
         var grid = document.getElementById('charIndexGrid');
         if (!grid) return;
         grid.innerHTML = '';
-        indexItems = data.chars.map(function (char, index) {
+        indexItems = chars.map(function (char, index) {
             var btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'char-index-item';
@@ -382,8 +421,16 @@
             else stopTimer();
         });
 
-        /* 语言切换：仅刷新文案 */
-        document.addEventListener('i18n:applied', applyLocale);
+        /* 语言切换：排序键随语言变化（中文拼音 / 英文首字母），需重建以更新顺序；
+           用 slug 记住当前卡，重建后回到同一张，避免切换语言时"跳卡" */
+        document.addEventListener('i18n:applied', function () {
+            var prevSlug = cards[current] ? cards[current].slug : null;
+            render();
+            if (prevSlug) {
+                chars.forEach(function (char, i) { if (char.slug === prevSlug) current = i; });
+            }
+            classify(true);
+        });
     }
 
     function indexOfSection(anchor) {

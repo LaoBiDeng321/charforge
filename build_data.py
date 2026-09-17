@@ -12,7 +12,8 @@ build_data.py —— 资源分享站数据构建脚本
   2) 每个文件的正文以「行数组」输出，键名 lines，一行一个元素；全文 = lines.join("\\n")。
      这样每段/每行都是独立的一行，diff 只落在真正改动的那几行。
      站点侧消费方必须用 lines.join("\\n") 还原全文（见 web/js/download.js 的 fileText()）；
-  3) 仅对 "</script" 做防御性转义，避免日后被内联进 HTML 时截断脚本（JS 中 \\/ 等价于 /，取值不变）。
+  3) 仅对 "</script" 做防御性转义，避免日后被内联进 HTML 时截断脚本（JS 中 \\/ 等价于 /，取值不变）；
+  4) 固定以 LF（\n）写出，保证 Windows / Linux 上重新生成得到同一份字节。
 """
 
 import json
@@ -173,7 +174,9 @@ def build():
     )
     js = header + "window.SITE_DATA = " + payload + ";\n"
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
+    # newline="\n"：固定以 LF 写出。否则 Windows 文本模式会把 \n 转成 CRLF，
+    # 导致"本地生成物"与"仓库/线上版本"字节不同（内容一致却 cmp 不等，易被误判为部署异常）。
+    with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(js)
 
     print("data.js generated ->", os.path.relpath(OUT, ROOT))

@@ -134,6 +134,13 @@
     /* UTF-8 BOM：Windows 下部分编辑器（记事本旧版等）对无 BOM 文本
        默认按 GBK 解码导致中文乱码，写入 BOM 可强制识别为 UTF-8 */
     var UTF8_BOM = '\uFEFF';
+
+    /* 正文还原：data.js 里正文按行数组存储（lines），此处拼回全文。
+       兼容旧格式（content 字符串），避免用旧脚本重新生成的数据打不开。 */
+    function fileText(file) {
+        if (file && Array.isArray(file.lines)) return file.lines.join('\n');
+        return (file && file.content) || '';
+    }
     function saveBlob(blob, filename) {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
@@ -154,7 +161,7 @@
             var file = findFile(slug, fileName);
             if (!file) return false;
             saveBlob(
-                new Blob([UTF8_BOM + file.content], { type: 'text/markdown;charset=utf-8' }),
+                new Blob([UTF8_BOM + fileText(file)], { type: 'text/markdown;charset=utf-8' }),
                 fileName.split('/').pop()
             );
             return true;
@@ -166,7 +173,7 @@
             if (!entry || entry.files.length === 0) return false;
             var encoder = new TextEncoder();
             var entries = entry.files.map(function (file) {
-                return { name: entry.slug + '/' + file.name, data: encoder.encode(UTF8_BOM + file.content) };
+                return { name: entry.slug + '/' + file.name, data: encoder.encode(UTF8_BOM + fileText(file)) };
             });
             saveBlob(buildZip(entries), entry.slug + '.zip');
             return true;

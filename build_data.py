@@ -6,6 +6,13 @@ build_data.py —— 资源分享站数据构建脚本
 
 用法：python build_data.py
 输出：web/js/data.js （window.SITE_DATA）
+
+输出约定（可读性优先，便于人工审阅与 git diff）：
+  1) 采用 2 空格缩进的 pretty JSON，不再单行压缩——此前任何一处改动都会造成整文件 diff；
+  2) 每个文件的正文以「行数组」输出，键名 lines，一行一个元素；全文 = lines.join("\\n")。
+     这样每段/每行都是独立的一行，diff 只落在真正改动的那几行。
+     站点侧消费方必须用 lines.join("\\n") 还原全文（见 web/js/download.js 的 fileText()）；
+  3) 仅对 "</script" 做防御性转义，避免日后被内联进 HTML 时截断脚本（JS 中 \\/ 等价于 /，取值不变）。
 """
 
 import json
@@ -15,8 +22,10 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "web", "js", "data.js")
 
-# 递归收集时排除的目录（工作缓存 / 版本库，不属于交付物）
-EXCLUDED_DIRS = {"sources", ".git", "__pycache__"}
+# 递归收集时排除的目录（版本库与 Python 缓存，不属于交付物）
+# 注意：角色交付目录须为纯净目录（10 个设定文件 + assets/），素材缓存等本地工作产物一律放在角色目录之外，
+# 因此本脚本不承担“按名排除工作目录”的职责；收录到的任何文件都会进入站点数据。
+EXCLUDED_DIRS = {".git", "__pycache__"}
 
 # ---------------------------------------------------------------
 # 展示元数据配置（数据与代码分离：改名/加角色只改这张表）
@@ -90,11 +99,22 @@ CHARS = [
             "en-US": ["Absolute Protection", "Pure Heart", "Flame Contrast"],
         },
     },
+    {
+        "slug": "cyrene",
+        "dir": os.path.join("char", "cyrene"),
+        "name": "昔涟",
+        "alias": "CYRENE",
+        "origin": {"zh-CN": "《崩坏：星穹铁道》官方设定", "en-US": "Honkai: Star Rail Official"},
+        "tags": {
+            "zh-CN": ["以爱为原动力", "把代价说成微不足道", "轻快外壳下的千年守候"],
+            "en-US": ["Love as Prime Mover", "Never Counting the Cost", "Cheerful Shell, Millennial Wait"],
+        },
+    },
 ]
 
 
 def collect_files(rel_dir):
-    """递归收集目录内全部文件，返回 [{name, content}]，name 为相对路径（正斜杠）。"""
+    """递归收集目录内全部文本文件，返回 [{name, lines}]，name 为相对路径（正斜杠）。"""
     files = []
     base = os.path.join(ROOT, rel_dir)
     for dirpath, dirnames, filenames in os.walk(base):
@@ -108,7 +128,8 @@ def collect_files(rel_dir):
                     content = f.read()
             except UnicodeDecodeError:
                 continue  # 非文本资源（图片等）不内联，仅跳过
-            files.append({"name": rel, "content": content})
+            # 正文按行拆分输出（见文件头「输出约定」第 2 条）
+            files.append({"name": rel, "lines": content.split("\n")})
     return files
 
 
@@ -138,15 +159,23 @@ def build():
         "chars": chars_out,
     }
 
-    payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
-    js = ("/* 由 build_data.py 自动生成，请勿手改；重新生成请运行: python build_data.py */\n"
-          "window.SITE_DATA = " + payload + ";\n")
+    # 可读输出：2 空格缩进 + 中文原文不转义（见文件头「输出约定」）
+    payload = json.dumps(data, ensure_ascii=False, indent=2, separators=(",", ": "))
+    # 防御：避免 "</script" 在被内联进 HTML 时截断脚本（JS 里 \/ 就等于 /，取值不变）
+    payload = payload.replace("</script", "<\\/script")
+
+    # 控制台仅输出英文摘要（cmd 禁止打印中文）
+    total_files = sum(len(s["files"]) for s in skills_out) + sum(len(c["files"]) for c in chars_out)
+    header = (
+        "/* 由 build_data.py 自动生成，请勿手改；重新生成请运行: python build_data.py */\n"
+        "/* 生成日 " + data["generatedAt"] + " · 构建器 " + str(len(skills_out)) + " 个 · 角色 " + str(len(chars_out)) + " 个 · 内联文件 " + str(total_files) + " 个 */\n"
+        "/* 结构：{ generatedAt, skills[], chars[] }；每项的 files[] 元素为 { name, lines[] }，全文 = lines.join(\"\\n\") */\n"
+    )
+    js = header + "window.SITE_DATA = " + payload + ";\n"
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(js)
 
-    # 控制台仅输出英文摘要（cmd 禁止打印中文）
-    total_files = sum(len(s["files"]) for s in skills_out) + sum(len(c["files"]) for c in chars_out)
     print("data.js generated ->", os.path.relpath(OUT, ROOT))
     print("skills: %d, chars: %d, files inlined: %d" % (len(skills_out), len(chars_out), total_files))
 

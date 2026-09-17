@@ -3,6 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 手机 UA 默认按 PC 布局渲染（响应式尚不完善，原因与待办见本地 MOBILE-TODO.local.md）。
+         切回自适应：页脚「显示模式」开关，或 URL 加 ?view=auto；强制 PC：?view=pc -->
+    <script>
+      (function () {
+        var KEY = 'charforge-view';
+        var ua = navigator.userAgent || '';
+        var isPhone = /iPhone|iPod|Windows Phone|BlackBerry|IEMobile|Opera Mini/i.test(ua) ||
+                      (/Android/i.test(ua) && /Mobile/i.test(ua));
+        var q = null;
+        try { q = new URLSearchParams(location.search).get('view'); } catch (e) { }
+        if (q === 'mobile') q = 'auto';
+        var saved = null;
+        try { saved = localStorage.getItem(KEY); } catch (e) { }
+        var mode = (q === 'pc' || q === 'auto') ? q
+                 : (saved === 'pc' || saved === 'auto' ? saved : (isPhone ? 'pc' : 'auto'));
+        try { localStorage.setItem(KEY, mode); } catch (e) { }
+
+        if (mode === 'pc') {
+          document.documentElement.classList.add('view-pc');
+          var meta = document.querySelector('meta[name="viewport"]');
+          /* 桌面视口：CSS 媒体查询按 1280px 计算（≥1024 断点），PC 样式生效；浏览器整页缩放以便查看 */
+          if (meta) meta.setAttribute('content', 'width=1280');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+          var btn = document.getElementById('viewToggle');
+          if (!btn) return;
+          var sync = function () {
+            var t = (window.I18N && window.I18N.t) ? window.I18N.t : function (k) { return k; };
+            btn.textContent = (mode === 'pc') ? t('footer.view.pc') : t('footer.view.auto');
+            btn.title = t('footer.view.hint');
+          };
+          sync();
+          /* 语言切换后按钮文案跟随 */
+          document.addEventListener('i18n:applied', sync);
+          btn.addEventListener('click', function () {
+            try { localStorage.setItem(KEY, mode === 'pc' ? 'auto' : 'pc'); } catch (e) { }
+            /* 丢掉 ?view= 参数，避免它一直覆盖用户的手动选择 */
+            location.replace(location.pathname + location.hash);
+          });
+        });
+      })();
+    </script>
     <title>CHAR//FORGE - 角色扮演 Skill 资源站</title>
 
     <!-- 站点图标：品牌 SVG favicon -->
@@ -398,6 +441,10 @@
                                 <div class="info-group">
                                     <span class="info-label" data-i18n="footer.lang.label"></span>
                                     <span class="info-value">zh-CN, en-US</span>
+                                </div>
+                                <div class="info-group">
+                                    <span class="info-label" data-i18n="footer.view.label"></span>
+                                    <button type="button" class="info-value info-link view-toggle" id="viewToggle"></button>
                                 </div>
                                 <div class="info-group">
                                     <span class="info-label" data-i18n="footer.dev.label"></span>

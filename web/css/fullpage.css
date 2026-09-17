@@ -596,6 +596,23 @@
     border-bottom-color: var(--color-accent);
 }
 
+/* 页脚「显示模式」开关：外观同 .info-link，但语义是按钮（点击在 PC / 自适应布局间切换并重载） */
+.view-toggle {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
+}
+
+.view-toggle:hover,
+.view-toggle:focus-visible {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
 .footer-bottom {
     padding-top: var(--space-lg);
     display: flex;

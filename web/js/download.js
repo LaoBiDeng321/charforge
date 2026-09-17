@@ -141,6 +141,9 @@
         if (file && Array.isArray(file.lines)) return file.lines.join('\n');
         return (file && file.content) || '';
     }
+    /* 暴露给 carousel.js（文件体积显示也需取正文）——本文件在 index.html 中先于 carousel.js 加载。
+       正文取用一律走这里，禁止各模块自行假设 data.js 的存储形态。 */
+    window.fileText = fileText;
     function saveBlob(blob, filename) {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');

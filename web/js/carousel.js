@@ -30,8 +30,14 @@
 
     function t(key) { return window.I18N ? window.I18N.t(key) : key; }
 
-    function formatSize(content) {
-        var kb = content.length / 1024;
+    /* 取正文：统一走 download.js 暴露的 fileText（它负责兼容 data.js 的 lines[] 与旧 content 两种形态） */
+    function textOf(file) {
+        if (window.fileText) return window.fileText(file);
+        return (file && file.content) || '';
+    }
+
+    function formatSize(text) {
+        var kb = text.length / 1024;
         return (kb >= 100 ? Math.round(kb) : kb.toFixed(1)) + ' KB';
     }
 
@@ -50,7 +56,7 @@
                         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
                     '</button>' +
                     '<span class="file-name">' + base + '</span>' +
-                    '<span class="file-size">' + formatSize(file.content) + '</span>' +
+                    '<span class="file-size">' + formatSize(textOf(file)) + '</span>' +
                 '</li>'
             );
         }).join('');

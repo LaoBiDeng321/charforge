@@ -40,6 +40,7 @@ web/
 python build_data.py
 ```
 
+- 角色目录名即 site slug，约定 `<角色名>-<作品英文名>`（例 `cyrene-honkai-star-rail`）——它会进下载路径与 ZIP 名，改名须同步 `build_data.py` 的 `slug`/`dir`
 - 新增角色：在 `char/<slug>/` 放入设定文件 → 重跑脚本 → 轮播与索引面板自动收录，无需改任何页面代码
 - Skill 增删文件（如 reference/ 下的新参考文档）：文件落盘后重跑脚本，页面文件清单与下载自动同步
 - `data.js` 为**可读输出**（2 空格缩进的多行 JSON，含全部文件全文），禁止手改；角色名/来源/标签的多语言键为 `zh-CN` / `en-US`（旧 `zh`/`en` 键在 carousel.js 中有回退兼容）

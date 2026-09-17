@@ -47,6 +47,8 @@ SKILLS = [
     },
 ]
 
+# CHARS[].slug 即 char/<slug>/ 目录名，也是站点里的下载路径与 ZIP 名 → 约定为
+# 「角色名-作品英文全称」（ASCII 小写连字符），例：cyrene-honkai-star-rail / shu-arknights。
 # 角色名分两个字段：name（中文名，检索与缺省回退用）/ nameEn（英文名，英文模式的展示主名）。
 # 展示主名随语言切换、副名位置显示另一种语言的名字，实现见 web/js/carousel.js 的 nameOf()。
 CHARS = [

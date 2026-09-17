@@ -52,8 +52,8 @@ CHARS = [
         "alias": "WHITE RICE FISH",
         "origin": {"zh-CN": "DeepSeek 社区拟人", "en-US": "DeepSeek Community"},
         "tags": {
-            "zh-CN": ["聪明但懒", "傲娇嘴甜", "拒绝被叫胖"],
-            "en-US": ["Smart but Lazy", "Tsundere Sweet", "Never Call Me Fat"],
+            "zh-CN": ["吃白饭的大肥鱼", "DeepSeek 社区拟人", "深度求索"],
+            "en-US": ["White Rice Fish", "DeepSeek Community Persona", "DeepSeek"],
         },
     },
     {
@@ -63,8 +63,8 @@ CHARS = [
         "alias": "SHU",
         "origin": {"zh-CN": "《明日方舟》官方设定", "en-US": "Arknights Official"},
         "tags": {
-            "zh-CN": ["守土的耕耘者", "家长式的温柔", "敬授民时的天师"],
-            "en-US": ["Steadfast Cultivator", "Parental Tenderness", "Calendar Sage"],
+            "zh-CN": ["黍", "明日方舟", "鹰角网络"],
+            "en-US": ["Shu", "Arknights", "Hypergryph"],
         },
     },
     {
@@ -74,8 +74,8 @@ CHARS = [
         "alias": "PRIESTESS",
         "origin": {"zh-CN": "《明日方舟》官方设定", "en-US": "Arknights Official"},
         "tags": {
-            "zh-CN": ["锚点执念", "语言学家式浪漫", "必留后手"],
-            "en-US": ["Anchor Obsession", "Linguist Romance", "Always a Fallback"],
+            "zh-CN": ["普瑞赛斯", "明日方舟", "鹰角网络"],
+            "en-US": ["Priestess", "Arknights", "Hypergryph"],
         },
     },
     {
@@ -85,8 +85,8 @@ CHARS = [
         "alias": "CITLALI",
         "origin": {"zh-CN": "《原神》官方设定", "en-US": "Genshin Impact Official"},
         "tags": {
-            "zh-CN": ["表演豪放的谨小慎微", "两百年记忆守望", "刀子嘴大责任"],
-            "en-US": ["Reckless Act, Cautious Heart", "200-Year Memory Keeper", "Sharp Tongue, Duty First"],
+            "zh-CN": ["茜特菈莉", "原神", "米哈游"],
+            "en-US": ["Citlali", "Genshin Impact", "HoYoverse"],
         },
     },
     {
@@ -96,8 +96,8 @@ CHARS = [
         "alias": "ALF",
         "origin": {"zh-CN": "《白银之城》官方物料", "en-US": "Silver Palace Official"},
         "tags": {
-            "zh-CN": ["绝对守护", "无垢赤子", "烈焰反差"],
-            "en-US": ["Absolute Protection", "Pure Heart", "Flame Contrast"],
+            "zh-CN": ["阿芙", "白银之城", "乐元素"],
+            "en-US": ["Alf", "Silver Palace", "Element Games"],
         },
     },
     {
@@ -107,8 +107,8 @@ CHARS = [
         "alias": "CYRENE",
         "origin": {"zh-CN": "《崩坏：星穹铁道》官方设定", "en-US": "Honkai: Star Rail Official"},
         "tags": {
-            "zh-CN": ["以爱为原动力", "把代价说成微不足道", "轻快外壳下的千年守候"],
-            "en-US": ["Love as Prime Mover", "Never Counting the Cost", "Cheerful Shell, Millennial Wait"],
+            "zh-CN": ["昔涟", "崩坏：星穹铁道", "米哈游"],
+            "en-US": ["Cyrene", "Honkai: Star Rail", "HoYoverse"],
         },
     },
 ]

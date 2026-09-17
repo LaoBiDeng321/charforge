@@ -3,3 +3,13 @@
 [build]
   command = "python3 build_data.py"
   publish = "."
+
+# 显式覆盖各部署上下文，避免 Netlify UI / 旧站点设置仍指向 web/
+[context.production]
+  publish = "."
+
+[context.deploy-preview]
+  publish = "."
+
+[context.branch-deploy]
+  publish = "."

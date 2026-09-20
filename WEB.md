@@ -163,4 +163,5 @@ Netlify 会在推送后自动跑 `pip install -r requirements.txt && python3 bui
 - 界面审美：[taste-skill](https://github.com/Leonxlnx/taste-skill)
 - 模糊匹配：[talisman](https://github.com/yomguithereal/talisman)（`metrics/damerau-levenshtein.js`，MIT，vendor 至 `js/vendor/`，算法未改动，可由 `tools/vendor_dl.py` 重新剪贴）
 - 汉字注音：[pypinyin](https://github.com/mozillazg/python-pinyin)（MIT，构建期使用，不进运行时）
+- 检索思路：**小肥鱼（幼鲸）**（子序列兜底限长 ≤3 字；拼音改走音节级重排）
 - 维护者：[LaoBiDeng321](https://github.com/LaoBiDeng321)（个人维护，无维护组）

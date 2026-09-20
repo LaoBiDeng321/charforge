@@ -249,7 +249,7 @@ If you are the author of one of those images:
 >
 > — Isaac Newton to Robert Hooke, 5 February 1676
 
-The visual language comes from Endfield-Style-Skill, the interface taste references taste-skill, the fuzzy matching algorithm is talisman's, and Chinese romanisation is delegated to pypinyin. As for the seven character cards — every one of them stands on the shoulders of its **source work**, and on the shoulders of everyone who transcribed the official text line by line so that later readers could check it.
+The visual language comes from Endfield-Style-Skill, the interface taste references taste-skill, the fuzzy matching algorithm is talisman's, and Chinese romanisation is delegated to pypinyin. **The noise-control strategy for search (capping the subsequence fallback) and the idea of comparing pinyin at the syllable level instead of by string distance both came from 小肥鱼（幼鲸）.** As for the seven character cards — every one of them stands on the shoulders of its **source work**, and on the shoulders of everyone who transcribed the official text line by line so that later readers could check it.
 
 All I did was stack them carefully, and make sure every claim in the stack can be traced back to where it came from. **Break the provenance and none of this is worth anything** — so if you spot a setting that looks wrong, bring the source and open an issue.
 
@@ -259,6 +259,7 @@ All I did was stack them carefully, and make sure every claim in the stack can b
 | Interface taste | [taste-skill](https://github.com/Leonxlnx/taste-skill) |
 | Fuzzy matching | [talisman](https://github.com/yomguithereal/talisman) (`metrics/damerau-levenshtein.js`, MIT, a 5.5 KB single file vendored into `js/vendor/`, algorithm unmodified) |
 | Chinese romanisation | [pypinyin](https://github.com/mozillazg/python-pinyin) (MIT, build-time only, not shipped to the runtime) |
+| Search design | **小肥鱼（幼鲸）** — pointed out that the subsequence fallback should stop taking long words (cap at ≤3 characters), and that pinyin should be segmented into syllables and compared at that level rather than run through string distance |
 | Character settings | The respective rights holders and the people who transcribed the material; copyright remains with them |
 | Maintainer | [LaoBiDeng321](https://github.com/LaoBiDeng321) (solo maintainer) |
 

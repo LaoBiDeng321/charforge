@@ -248,7 +248,7 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 >
 > —— 艾萨克·牛顿致胡克，1676 年 2 月 5 日
 
-视觉语言来自终末地风格 SKILL，界面审美参考 taste-skill，模糊匹配算法取自 talisman，汉字注音交给 pypinyin；至于那七张角色卡——它们全部站在各自**原作**的肩膀上，站在每一个把官方文本一字一句记下来、可供后人查证的人的肩膀上。
+视觉语言来自终末地风格 SKILL，界面审美参考 taste-skill，模糊匹配算法取自 talisman，汉字注音交给 pypinyin；**检索的收噪声策略（子序列兜底限长）与音节级重排，来自小肥鱼（幼鲸）的建议**；至于那七张角色卡——它们全部站在各自**原作**的肩膀上，站在每一个把官方文本一字一句记下来、可供后人查证的人的肩膀上。
 
 我做的事情只有两件：把它们摞稳，以及保证摞起来的每一条都能追回原处。**溯源断了，这套东西就不值钱了**——所以发现哪条设定有出入，请带着出处来提 Issue。
 
@@ -258,6 +258,7 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 | 界面审美 | [taste-skill](https://github.com/Leonxlnx/taste-skill) |
 | 模糊匹配 | [talisman](https://github.com/yomguithereal/talisman)（`metrics/damerau-levenshtein.js`，MIT，5.5KB 单文件 vendor 至 `js/vendor/`，算法未改动） |
 | 汉字注音 | [pypinyin](https://github.com/mozillazg/python-pinyin)（MIT，构建期使用，不进运行时） |
+| 检索思路 | **小肥鱼（幼鲸）**：指出子序列兜底应对长词收手（限 ≤3 字），以及拼音应当先切音节再比、而不是拿字符串距离硬算 |
 | 角色设定 | 各原作版权方与素材整理者；版权归各原作版权方所有 |
 | 维护者 | [LaoBiDeng321](https://github.com/LaoBiDeng321)（个人维护） |
 

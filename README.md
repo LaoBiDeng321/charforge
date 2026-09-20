@@ -1,5 +1,7 @@
 <div align="center">
 
+[中文](README.md) · [English](README.en.md)
+
 # CHAR//FORGE
 
 **把任意角色锻造成可直接开拍的 AI 人设卡**
@@ -8,8 +10,8 @@
 
 [![License](https://img.shields.io/badge/License-MIT-fbbf24?style=flat-square&labelColor=161713)](LICENSE)
 [![维护者](https://img.shields.io/badge/维护者-LaoBiDeng321-f5f5f0?style=flat-square&labelColor=161713)](https://github.com/LaoBiDeng321)
-[![构建器](https://img.shields.io/badge/构建器-2-8ce99a?style=flat-square&labelColor=161713)](#-两个构建器)
-[![角色](https://img.shields.io/badge/角色-7-f59e0b?style=flat-square&labelColor=161713)](#-角色一览)
+[![构建器](https://img.shields.io/badge/构建器-2-8ce99a?style=flat-square&labelColor=161713)](#两个构建器)
+[![角色](https://img.shields.io/badge/角色-7-f59e0b?style=flat-square&labelColor=161713)](#角色一览)
 [![在线预览](https://img.shields.io/badge/在线预览-Netlify-00b7d4?style=flat-square&labelColor=161713)](https://lbd-charforge.netlify.app/)
 
 </div>
@@ -82,8 +84,8 @@ flowchart LR
 | 吃白饭的大肥鱼 | [char/white-rice-fish-deepseek](char/white-rice-fish-deepseek/prompt.md) | DeepSeek 社区拟人 | 10 |
 | 黍 | [char/shu-arknights](char/shu-arknights/prompt.md) | 明日方舟 | 10 |
 | 茜特菈莉 | [char/citlali-genshin-impact](char/citlali-genshin-impact/prompt.md) | 原神 | 10 |
-| Priestess | [char/priestess-arknights](char/priestess-arknights/prompt.md) | 明日方舟 | 10 |
-| Alf | [char/alf-silver-palace](char/alf-silver-palace/prompt.md) | 白银之城 | 10 |
+| 普瑞赛斯 | [char/priestess-arknights](char/priestess-arknights/prompt.md) | 明日方舟 | 10 |
+| 阿芙 | [char/alf-silver-palace](char/alf-silver-palace/prompt.md) | 白银之城 | 10 |
 | 昔涟 | [char/cyrene-honkai-star-rail](char/cyrene-honkai-star-rail/prompt.md) | 崩坏：星穹铁道 | 10（三阶段档位） |
 | 佩丽卡 | [char/perlica-arknights-endfield](char/perlica-arknights-endfield/prompt.md) | 明日方舟：终末地 | 10 |
 
@@ -218,12 +220,21 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 
 ## 署名
 
-| | |
+> 「如果我看得更远，那是因为我站在巨人的肩膀上。」
+>
+> —— 艾萨克·牛顿致胡克，1676 年 2 月 5 日
+
+视觉语言来自终末地风格 SKILL，界面审美参考 taste-skill，模糊匹配算法取自 talisman，汉字注音交给 pypinyin；至于那七张角色卡——它们全部站在各自**原作**的肩膀上，站在每一个把官方文本一字一句记下来、可供后人查证的人的肩膀上。
+
+我做的事情只有两件：把它们摞稳，以及保证摞起来的每一条都能追回原处。**溯源断了，这套东西就不值钱了**——所以发现哪条设定有出入，请带着出处来提 Issue。
+
+| 用在哪 | 站在谁肩上 |
 |---|---|
 | 视觉语言 | [Endfield-Style-Skill（终末地风格 SKILL）](https://github.com/LaoBiDeng321/Endfield-Style-Skill) |
-| 界面审美参考 | [taste-skill](https://github.com/Leonxlnx/taste-skill) |
-| 模糊匹配算法 | [talisman](https://github.com/yomguithereal/talisman)（`metrics/damerau-levenshtein.js`，MIT，5.5KB 单文件 vendor 至 `js/vendor/`，算法未改动） |
+| 界面审美 | [taste-skill](https://github.com/Leonxlnx/taste-skill) |
+| 模糊匹配 | [talisman](https://github.com/yomguithereal/talisman)（`metrics/damerau-levenshtein.js`，MIT，5.5KB 单文件 vendor 至 `js/vendor/`，算法未改动） |
 | 汉字注音 | [pypinyin](https://github.com/mozillazg/python-pinyin)（MIT，构建期使用，不进运行时） |
+| 角色设定 | 各原作版权方与素材整理者；版权归各原作版权方所有 |
 | 维护者 | [LaoBiDeng321](https://github.com/LaoBiDeng321)（个人维护） |
 
 ---

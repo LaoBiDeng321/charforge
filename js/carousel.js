@@ -277,7 +277,16 @@
         var py = expandKeys([char.pinyin || ''], []);
         expandKeys([c.pinyin || '', w.pinyin || ''], py);
 
-        return { keys: keys, py: py };
+        /* 音节表：构建期由 pypinyin 逐字切好下发（含多音字 reading 覆盖），
+           前端不需要自带音节词典。名称 / 公司 / 作品合并成一个池子，
+           保留重复次数——DFS 靠"每个位置只能用一次"来表达次数约束。 */
+        var syl = [];
+        [char.pinyinSyllables, c.pinyinSyllables, w.pinyinSyllables].forEach(function (arr) {
+            if (Object.prototype.toString.call(arr) !== '[object Array]') return;
+            arr.forEach(function (s) { if (s) syl.push(String(s).toLowerCase()); });
+        });
+
+        return { keys: keys, py: py, syl: syl };
     }
 
     /** 分面显示名：随语言切换，缺英文时回退中文 */
@@ -532,9 +541,14 @@
         return scored;
     }
 
-    /** 子序列候选：按「跨度紧 → 展示顺序」排，只取最紧的若干条 */
+    /** 子序列候选：按「跨度紧 → 展示顺序」排，只取最紧的若干条。
+     *
+     *  **只对短查询开放（≤3 字）**：子序列是很弱的约束——查询越长，
+     *  「碰巧是某个串的子序列」的概率越大，长词走这条路基本等于随机捞结果。
+     *  实际需要它的场景全是短的：跳字缩写（吃肥鱼 / 佩卡）、首字母尾片段（fy / lk）。
+     *  超过 3 字直接不参与，噪声立刻收住。 */
     function subseqCandidates(q) {
-        if (q.length < 2) return [];
+        if (q.length < 2 || q.length > 3) return [];
         var scored = [];
         indexItems.forEach(function (item) {
             var span = bestSubseq(item, q);
@@ -597,6 +611,45 @@
         return indexItems.filter(function (item) { return tokenHit(item, compact); });
     }
 
+    /** 第二阶段之一：音节级重排匹配。
+     *
+     *  把查询按「本条目的音节表」切分——顺序任意、每个音节最多用它在表中出现的次数，
+     *  不要求用完表里所有音节（用户常常只敲名字的尾部）。
+     *
+     *  为什么不用字符串距离：字符级的距离对音节换位完全无感——
+     *  "dayufei" 与 "dafeiyu" 在字符级要 4 步，在音节级只是 da / fei / yu 换了个顺序。
+     *  音节级是精确约束（必须整段切完、且音节都来自本条目），所以能直接进结果列表，
+     *  不会像模糊匹配那样误伤。
+     *
+     *  要求至少切出 2 个音节：单个音节（"da"、"yu"）会命中一大片。
+     */
+    function syllableReorderHit(q, syllables) {
+        if (!syllables.length) return false;
+        var used = [];
+        for (var i = 0; i < syllables.length; i++) used.push(false);
+
+        function walk(pos, count) {
+            if (pos === q.length) return count >= 2;
+            for (var i = 0; i < syllables.length; i++) {
+                if (used[i]) continue;
+                var s = syllables[i];
+                if (!s || q.indexOf(s, pos) !== pos) continue;
+                used[i] = true;
+                if (walk(pos + s.length, count + 1)) { used[i] = false; return true; }
+                used[i] = false;
+            }
+            return false;
+        }
+        return walk(0, 0);
+    }
+
+    function stageSyllables(raw) {
+        var q = normalizeKey(raw);          /* 顺带吃掉 "da yu fei" / "da-yu-fei" 里的分隔符 */
+        if (!q || !/^[a-z]+$/.test(q)) return null;
+        var hits = indexItems.filter(function (item) { return syllableReorderHit(q, item.syl); });
+        return hits.length ? hits : null;
+    }
+
     /** 统一过滤入口：搜索词 AND 公司 AND 作品 */
     function applyFilter() {
         var raw = (indexQuery || '').trim().toLowerCase();
@@ -607,8 +660,12 @@
             var compact = stageCompact(raw);
             if (compact && compact.length) matched = compact;
         }
+        if (!matched.length) {
+            var syl = stageSyllables(raw);
+            if (syl && syl.length) matched = syl;
+        }
 
-        /* 列表结果：只由两个确定性阶段决定 */
+        /* 列表结果：只由确定性阶段决定（前缀 / 片段 / 压缩重试 / 音节重排） */
         var matchedFlags = {};
         matched.forEach(function (item) { matchedFlags[item.index] = true; });
 
@@ -653,7 +710,7 @@
             var s = searchOf(char);
             return {
                 root: btn, char: char, index: index,
-                keys: s.keys, py: s.py,
+                keys: s.keys, py: s.py, syl: s.syl,
                 cid: companyIdOf(char), wid: workIdOf(char)
             };
         });

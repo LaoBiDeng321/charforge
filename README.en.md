@@ -135,13 +135,15 @@ A character's full roleplay entry point is its `SKILL.md` (run rules) plus `prom
 > | Pass | Covers | Examples |
 > |---|---|---|
 > | 1 · exact · prefix · **fragment** · tokenised | Chinese name, English name, full pinyin and initials, work, company, origin, tags. Chinese matches as an **any-length substring**, so typing only the tail works | `佩丽卡` `peilika` `plk` `perlica` `ys` `方舟` `starrail` `肥鱼` `丽卡` `特菈莉` `终末地` |
-> | 2 · separator-stripped retry | Spaced or hyphenated pinyin | `pei li ka` `pei-li-ka` |
-> | 3 · fallback candidates (**only ever offered as "did you mean", never mixed into the result list**) | **Damerau-Levenshtein** for typos / dropped / transposed / homophone / traditional characters; when that yields nothing, **subsequence** matching for skipped-character abbreviations and initial tails | DL: `pelica` `prelica` `佩莉卡` `佩麗卡` `崩壞：星穹鐵道`<br>Subsequence: `吃肥鱼` `佩卡` `普赛斯` `fy` `lk` |
+> | 2 · normalisation retries (**into the result list**) | **a. separator stripping** for spaced or hyphenated pinyin; **b. syllable-level reordering** — segment against this entry's syllable list in any order, which handles "I remembered the syllables but got the order wrong" | a: `pei li ka` `pei-li-ka`<br>b: `dayufei` `yufei` `peika` `lali` |
+> | 3 · fallback candidates (**only ever offered as "did you mean", never mixed into the result list**) | **Damerau-Levenshtein** for typos / dropped / transposed / homophone / traditional characters; when that yields nothing, **subsequence** matching for skipped-character abbreviations and initial tails (**≤3 characters only**) | DL: `pelica` `prelica` `佩莉卡` `佩麗卡` `崩壞：星穹鐵道`<br>Subsequence: `吃肥鱼` `佩卡` `fy` `lk` |
 >
-> **Thresholds and safety rails**: DL adapts to query length (none at ≤2 chars / distance 1 at 3–5 / distance 2 at ≥6), and both fallbacks fire only when passes 1 and 2 return nothing. So `zzz` matches nothing, and `ys` is never swallowed by an initial string like `lys`.
+> **Why syllable-level beats string distance**: character-level distance is completely blind to syllable transposition — `dayufei` vs `dafeiyu` costs 4 steps at the character level, but at the syllable level it is just da / fei / yu in a different order. The syllable list is generated at build time by pypinyin, character by character (the heteronym `reading` override applies here too), so the front end needs no syllable dictionary of its own; a match requires the query to be **segmented completely, using only syllables from that entry**, which is a precise constraint — hence it can feed the result list without false hits.
+>
+> **Thresholds and safety rails**: DL adapts to query length (none at ≤2 chars / distance 1 at 3–5 / distance 2 at ≥6); **subsequence matching is open only to queries of ≤3 characters** (the longer the query, the likelier it is to be "accidentally a subsequence" of something, so long words on that path amount to pulling results at random); both fallbacks fire only when passes 1 and 2 return nothing. So `zzz` matches nothing, and `ys` is never swallowed by an initial string like `lys`.
 > Matches always keep the display order; there is no relevance re-ranking.
 >
-> **Known boundary** (beyond substring and subsequence, needing an out-of-order skip): `大白鱼` (大…**白**…鱼 — 白 precedes 大) does not match, while `吃肥鱼` and `大肥鱼` do. Short substrings are relaxed to ≥2 characters on full-pinyin fields (`yu` → White Rice Fish), but **not on initial strings**, otherwise `ys` would be wrongly matched by `lys`.
+> **Known boundary**: the "**out-of-order skip**" that neither substring nor subsequence covers — `大白鱼` (大…**白**…鱼 — 白 comes before 大) does not match, while `吃肥鱼` and `大肥鱼` do. Short substrings are relaxed to ≥2 characters on full-pinyin fields (`yu` → White Rice Fish), but **not on initial strings**, otherwise `ys` would be wrongly matched by `lys`.
 
 ## Quick start
 

@@ -236,11 +236,15 @@ def cjk_count(s):
 
 
 def to_pinyin(text, reading=None):
-    """返回 (全拼, 首字母)。
+    """返回 (全拼, 首字母, 音节表)。
 
     reading：人工覆盖，**空格分隔逐字读音**（如 "xi te la li"）。仅在库判错读音时使用。
     覆盖值做音节数校验——个数必须等于原文汉字数，否则直接报错，
     避免静默产出错误的首字母（首字母是从音节首字母拼出来的）。
+
+    音节表下发给前端做「音节级重排匹配」：把 dayufei 和 da-fei-yu 按音节比，
+    而不是按字符串距离比（字符级距离对音节换位完全无感）。第三方库的逐字结果
+    本身就是音节切分，覆盖值也天然是空格分隔的——两边都不需要额外的音节词典。
     """
     if reading:
         units = [letters_only(u) for u in re.split(r"[\s\-_/]+", reading.strip())]
@@ -251,31 +255,35 @@ def to_pinyin(text, reading=None):
         if n and len(units) != n:
             raise ValueError(
                 "reading 音节数(%d) 与 %r 的汉字数(%d) 不一致：%r" % (len(units), text, n, reading))
-        return "".join(units), "".join(u[0] for u in units)
+        return "".join(units), "".join(u[0] for u in units), units
 
-    full = letters_only("".join(lazy_pinyin(text)))
+    units = [letters_only(u) for u in lazy_pinyin(text)]
+    units = [u for u in units if u]
+    full = "".join(units)
     ini = letters_only("".join(lazy_pinyin(text, style=Style.FIRST_LETTER)))
     if not full:
         raise ValueError("无法为 %r 生成拼音" % (text,))
-    return full, ini
+    return full, ini, units
 
 
 def attach_pinyin(entry, meta):
-    """给角色条目及其 company / work 挂上 pinyin / pinyinInitials；并下发中文排序键。
+    """给角色条目及其 company / work 挂上拼音三件套；并下发中文排序键。
 
+    拼音三件套 = pinyin（全拼）/ pinyinInitials（首字母）/ pinyinSyllables（音节表）。
     排序键交给前端已有的 char.sort[lang] 机制，这样中文排序不再依赖浏览器对
     zh 的 collation（ICU 构造失败会静默退化成码点序），跨引擎结果一致。
     """
-    full, ini = to_pinyin(meta["name"], meta.get("reading"))
+    full, ini, units = to_pinyin(meta["name"], meta.get("reading"))
     entry["pinyin"], entry["pinyinInitials"] = full, ini
+    entry["pinyinSyllables"] = units
     entry.setdefault("sort", {})["zh-CN"] = full
 
     for key in ("company", "work"):
         obj = meta.get(key)
         if not obj:
             continue
-        full, ini = to_pinyin(obj.get("zh-CN") or "", obj.get("reading"))
-        obj["pinyin"], obj["pinyinInitials"] = full, ini
+        full, ini, units = to_pinyin(obj.get("zh-CN") or "", obj.get("reading"))
+        obj["pinyin"], obj["pinyinInitials"], obj["pinyinSyllables"] = full, ini, units
         obj.pop("reading", None)
 
 

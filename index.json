@@ -154,17 +154,32 @@
         "zh-CN": "乐元素",
         "en-US": "Element Games",
         "pinyin": "leyuansu",
-        "pinyinInitials": "lys"
+        "pinyinInitials": "lys",
+        "pinyinSyllables": [
+          "le",
+          "yuan",
+          "su"
+        ]
       },
       "work": {
         "id": "silver-palace",
         "zh-CN": "白银之城",
         "en-US": "Silver Palace",
         "pinyin": "baiyinzhicheng",
-        "pinyinInitials": "byzc"
+        "pinyinInitials": "byzc",
+        "pinyinSyllables": [
+          "bai",
+          "yin",
+          "zhi",
+          "cheng"
+        ]
       },
       "pinyin": "afu",
       "pinyinInitials": "af",
+      "pinyinSyllables": [
+        "a",
+        "fu"
+      ],
       "sort": {
         "zh-CN": "afu"
       },
@@ -281,17 +296,32 @@
         "zh-CN": "米哈游",
         "en-US": "HoYoverse",
         "pinyin": "mihayou",
-        "pinyinInitials": "mhy"
+        "pinyinInitials": "mhy",
+        "pinyinSyllables": [
+          "mi",
+          "ha",
+          "you"
+        ]
       },
       "work": {
         "id": "genshin-impact",
         "zh-CN": "原神",
         "en-US": "Genshin Impact",
         "pinyin": "yuanshen",
-        "pinyinInitials": "ys"
+        "pinyinInitials": "ys",
+        "pinyinSyllables": [
+          "yuan",
+          "shen"
+        ]
       },
       "pinyin": "xitelali",
       "pinyinInitials": "xtll",
+      "pinyinSyllables": [
+        "xi",
+        "te",
+        "la",
+        "li"
+      ],
       "sort": {
         "zh-CN": "xitelali"
       },
@@ -432,17 +462,34 @@
         "zh-CN": "米哈游",
         "en-US": "HoYoverse",
         "pinyin": "mihayou",
-        "pinyinInitials": "mhy"
+        "pinyinInitials": "mhy",
+        "pinyinSyllables": [
+          "mi",
+          "ha",
+          "you"
+        ]
       },
       "work": {
         "id": "honkai-star-rail",
         "zh-CN": "崩坏：星穹铁道",
         "en-US": "Honkai: Star Rail",
         "pinyin": "benghuaixingqiongtiedao",
-        "pinyinInitials": "bhxqtd"
+        "pinyinInitials": "bhxqtd",
+        "pinyinSyllables": [
+          "beng",
+          "huai",
+          "xing",
+          "qiong",
+          "tie",
+          "dao"
+        ]
       },
       "pinyin": "xilian",
       "pinyinInitials": "xl",
+      "pinyinSyllables": [
+        "xi",
+        "lian"
+      ],
       "sort": {
         "zh-CN": "xilian"
       },
@@ -553,17 +600,37 @@
         "zh-CN": "鹰角网络",
         "en-US": "Hypergryph",
         "pinyin": "yingjiaowangluo",
-        "pinyinInitials": "yjwl"
+        "pinyinInitials": "yjwl",
+        "pinyinSyllables": [
+          "ying",
+          "jiao",
+          "wang",
+          "luo"
+        ]
       },
       "work": {
         "id": "arknights-endfield",
         "zh-CN": "明日方舟：终末地",
         "en-US": "Arknights: Endfield",
         "pinyin": "mingrifangzhouzhongmodi",
-        "pinyinInitials": "mrfzzmd"
+        "pinyinInitials": "mrfzzmd",
+        "pinyinSyllables": [
+          "ming",
+          "ri",
+          "fang",
+          "zhou",
+          "zhong",
+          "mo",
+          "di"
+        ]
       },
       "pinyin": "peilika",
       "pinyinInitials": "plk",
+      "pinyinSyllables": [
+        "pei",
+        "li",
+        "ka"
+      ],
       "sort": {
         "zh-CN": "peilika"
       },
@@ -680,17 +747,35 @@
         "zh-CN": "鹰角网络",
         "en-US": "Hypergryph",
         "pinyin": "yingjiaowangluo",
-        "pinyinInitials": "yjwl"
+        "pinyinInitials": "yjwl",
+        "pinyinSyllables": [
+          "ying",
+          "jiao",
+          "wang",
+          "luo"
+        ]
       },
       "work": {
         "id": "arknights",
         "zh-CN": "明日方舟",
         "en-US": "Arknights",
         "pinyin": "mingrifangzhou",
-        "pinyinInitials": "mrfz"
+        "pinyinInitials": "mrfz",
+        "pinyinSyllables": [
+          "ming",
+          "ri",
+          "fang",
+          "zhou"
+        ]
       },
       "pinyin": "puruisaisi",
       "pinyinInitials": "prss",
+      "pinyinSyllables": [
+        "pu",
+        "rui",
+        "sai",
+        "si"
+      ],
       "sort": {
         "zh-CN": "puruisaisi"
       },
@@ -819,17 +904,32 @@
         "zh-CN": "鹰角网络",
         "en-US": "Hypergryph",
         "pinyin": "yingjiaowangluo",
-        "pinyinInitials": "yjwl"
+        "pinyinInitials": "yjwl",
+        "pinyinSyllables": [
+          "ying",
+          "jiao",
+          "wang",
+          "luo"
+        ]
       },
       "work": {
         "id": "arknights",
         "zh-CN": "明日方舟",
         "en-US": "Arknights",
         "pinyin": "mingrifangzhou",
-        "pinyinInitials": "mrfz"
+        "pinyinInitials": "mrfz",
+        "pinyinSyllables": [
+          "ming",
+          "ri",
+          "fang",
+          "zhou"
+        ]
       },
       "pinyin": "shu",
       "pinyinInitials": "s",
+      "pinyinSyllables": [
+        "shu"
+      ],
       "sort": {
         "zh-CN": "shu"
       },
@@ -940,10 +1040,25 @@
         "zh-CN": "深度求索",
         "en-US": "DeepSeek",
         "pinyin": "shenduqiusuo",
-        "pinyinInitials": "sdqs"
+        "pinyinInitials": "sdqs",
+        "pinyinSyllables": [
+          "shen",
+          "du",
+          "qiu",
+          "suo"
+        ]
       },
       "pinyin": "chibaifandedafeiyu",
       "pinyinInitials": "cbfddfy",
+      "pinyinSyllables": [
+        "chi",
+        "bai",
+        "fan",
+        "de",
+        "da",
+        "fei",
+        "yu"
+      ],
       "sort": {
         "zh-CN": "chibaifandedafeiyu"
       },

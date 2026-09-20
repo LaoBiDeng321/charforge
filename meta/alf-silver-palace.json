@@ -1,0 +1,31 @@
+{
+  "name": "阿芙",
+  "alias": "ALF",
+  "nameEn": "Alf",
+  "company": {
+    "id": "element-games",
+    "zh-CN": "乐元素",
+    "en-US": "Element Games"
+  },
+  "work": {
+    "id": "silver-palace",
+    "zh-CN": "白银之城",
+    "en-US": "Silver Palace"
+  },
+  "origin": {
+    "zh-CN": "《白银之城》官方物料",
+    "en-US": "Silver Palace Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "阿芙",
+      "白银之城",
+      "乐元素"
+    ],
+    "en-US": [
+      "Alf",
+      "Silver Palace",
+      "Element Games"
+    ]
+  }
+}

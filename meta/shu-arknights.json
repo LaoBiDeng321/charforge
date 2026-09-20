@@ -1,0 +1,31 @@
+{
+  "name": "黍",
+  "alias": "SHU",
+  "nameEn": "Shu",
+  "company": {
+    "id": "hypergryph",
+    "zh-CN": "鹰角网络",
+    "en-US": "Hypergryph"
+  },
+  "work": {
+    "id": "arknights",
+    "zh-CN": "明日方舟",
+    "en-US": "Arknights"
+  },
+  "origin": {
+    "zh-CN": "《明日方舟》官方设定",
+    "en-US": "Arknights Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "黍",
+      "明日方舟",
+      "鹰角网络"
+    ],
+    "en-US": [
+      "Shu",
+      "Arknights",
+      "Hypergryph"
+    ]
+  }
+}

@@ -61,8 +61,12 @@
     var chars = [];              // 当前语言下的展示顺序（cards / dots / indexItems 共用）
     var cards = [];              // { root, slug, refs }
     var dots = [];
-    var indexItems = [];         // 索引面板条目 { root, char }
+    var indexItems = [];         // 索引面板条目 { root, char, index, keys, cid, wid }
     var indexOpen = false;
+    var indexQuery = '';         // 搜索框当前词
+    var activeCompany = null;    // 两级定位索引：选中的公司 id（null = 全部）
+    var activeWork = null;       // 两级定位索引：选中的作品 id（null = 该公司全部）
+    var facets = { order: [], map: {} };   // 公司 → 作品 两级结构，由 chars 归纳
     var current = 0;
     var total = 0;
     var timer = null;
@@ -212,11 +216,425 @@
 
     /* ---------- 角色索引面板（数量增长时的检索入口） ---------- */
 
-    /** 取多语言对象的所有取值（兼容 legacy zh/en 键），用于跨语言检索 */
+    /** 取多语言对象的所有取值（兼容 legacy zh/en 键），用于跨语言检索。
+     *  注意：值是数组时（tags 就是这种结构）必须**摊平成独立条目**，
+     *  不能 String() 成 "a,b,c" ——那会拼出一个大长串，
+     *  让子串/子序列匹配跨越本不相邻的字段乱命中。 */
     function localeVals(val) {
         if (!val) return [];
         if (typeof val === 'string') return [val];
-        return Object.keys(val).map(function (k) { return String(val[k]); });
+        if (Object.prototype.toString.call(val) === '[object Array]') {
+            return val.filter(Boolean).map(String);
+        }
+        var out = [];
+        Object.keys(val).forEach(function (k) {
+            var v = val[k];
+            if (!v) return;
+            if (Object.prototype.toString.call(v) === '[object Array]') {
+                out = out.concat(v.filter(Boolean).map(String));
+            } else {
+                out.push(String(v));
+            }
+        });
+        return out;
+    }
+
+    /** 字段归一化：字段内去空格与分隔符（使 "starrail" 能命中 "Honkai: Star Rail"） */
+    function normalizeKey(s) {
+        return String(s == null ? '' : s).toLowerCase().replace(/[\s:：·・\-_/]+/g, '');
+    }
+
+    /** 把一组字段整理成「原始 + 归一化」两份候选串 */
+    function expandKeys(fields, into) {
+        fields.forEach(function (f) {
+            if (!f) return;
+            var raw = String(f).toLowerCase();
+            if (into.indexOf(raw) === -1) into.push(raw);
+            var n = normalizeKey(f);
+            if (n && into.indexOf(n) === -1) into.push(n);
+        });
+        return into;
+    }
+
+    /** 检索素材，分两组：
+     *  keys —— 通用字段（名称/来源/标签/首字母…）：前缀任意，拉丁子串需 ≥3 位
+     *  py   —— 纯全拼字段：拉丁子串放宽到 ≥2 位
+     *
+     *  为什么要分开：全拼串里的短子串是「一个音节的一部分」（"fy" 命中 dafeiyu），
+     *  语义清晰；首字母串里的短子串是「跨两个字声母的偶然相邻」（"ys" 命中 lys），
+     *  只会制造误匹配——所以只放宽全拼，不动首字母。
+     *  字段逐个归一化而不是拼成一个大串，避免相邻字段拼出假匹配（如 乐元素/lys 拼出 "ys"）。 */
+    function searchOf(char) {
+        var c = char.company || {};
+        var w = char.work || {};
+        var keys = expandKeys([char.slug, char.name, char.nameEn || '', char.alias || '',
+                               char.pinyinInitials || ''], []);
+        expandKeys(localeVals(char.origin), keys);
+        expandKeys(localeVals(char.tags), keys);
+        expandKeys([c['zh-CN'] || '', c['en-US'] || '', c.pinyinInitials || '',
+                    w['zh-CN'] || '', w['en-US'] || '', w.pinyinInitials || ''], keys);
+
+        var py = expandKeys([char.pinyin || ''], []);
+        expandKeys([c.pinyin || '', w.pinyin || ''], py);
+
+        return { keys: keys, py: py };
+    }
+
+    /** 分面显示名：随语言切换，缺英文时回退中文 */
+    function facetLabel(obj) {
+        if (!obj) return '';
+        var zh = obj['zh-CN'] || obj.zh || '';
+        var en = obj['en-US'] || obj.en || '';
+        return ((locale() === 'en-US' ? (en || zh) : (zh || en)) || obj.id || '');
+    }
+
+    function companyIdOf(char) {
+        var c = char.company;
+        return c ? (c.id || facetLabel(c)) : '';
+    }
+
+    function workIdOf(char) {
+        var w = char.work;
+        return w ? (w.id || facetLabel(w)) : '';
+    }
+
+    /* 单个词的命中规则：
+       - 前缀命中：任意长度（"plk" → 首字母、"pei" → peilika）
+       - 子串命中：中文任意长度（"肥鱼" 应命中 "吃白饭的大肥鱼"）；
+         拉丁字母默认需 ≥3 位（否则 "ys" 会被 "lys" 这类首字母串吃出误匹配），
+         但**全拼字段**放宽到 ≥2 位（"fy" 应命中 dafeiyu）。 */
+    var CJK_RE = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/;
+
+    /** 在一组候选串里找一个词：前缀任意长度；子串按 minSubstring 设门槛（中文恒为 1） */
+    function hitIn(keys, tok, minSubstring) {
+        if (!keys.length || !tok) return false;
+        var min = CJK_RE.test(tok) ? 1 : minSubstring;
+        for (var i = 0; i < keys.length; i++) {
+            var at = keys[i].indexOf(tok);
+            if (at === 0) return true;
+            if (at > 0 && tok.length >= min) return true;
+        }
+        return false;
+    }
+
+    function tokenHit(item, tok) {
+        return hitIn(item.keys, tok, 3) || hitIn(item.py, tok, 2);
+    }
+
+    /** 关键词匹配：按空白切词后 AND */
+    function matchesTokens(item, tokens) {
+        for (var i = 0; i < tokens.length; i++) {
+            if (!tokenHit(item, tokens[i])) return false;
+        }
+        return true;
+    }
+
+    /** 定位范围：一级=公司，二级=公司下的作品。两级都为 null 时不限 */
+    function inScope(char) {
+        if (activeCompany && companyIdOf(char) !== activeCompany) return false;
+        if (activeWork && workIdOf(char) !== activeWork) return false;
+        return true;
+    }
+
+    /** 从角色列表归纳出「公司 → 作品」两级结构（作品缺省的角色只挂在公司下） */
+    function buildFacets() {
+        var order = [];
+        var map = {};
+        chars.forEach(function (char) {
+            var cid = companyIdOf(char);
+            if (!cid) return;
+            if (!map[cid]) {
+                map[cid] = { meta: char.company, works: [], workMap: {}, total: 0 };
+                order.push(cid);
+            }
+            map[cid].total++;
+            var wid = workIdOf(char);
+            if (!wid) return;
+            if (!map[cid].workMap[wid]) {
+                map[cid].workMap[wid] = { meta: char.work, total: 0 };
+                map[cid].works.push(wid);
+            }
+            map[cid].workMap[wid].total++;
+        });
+        var coll = collatorFor(locale());
+        order.sort(function (a, b) { return compareLabel(coll, facetLabel(map[a].meta), facetLabel(map[b].meta)); });
+        facets = { order: order, map: map };
+    }
+
+    function compareLabel(coll, a, b) {
+        if (coll) return coll.compare(a, b);
+        return a < b ? -1 : (a > b ? 1 : 0);
+    }
+
+    function makeChip(label, count, opts) {
+        opts = opts || {};
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'char-facet-chip'
+            + (opts.active ? ' is-active' : '')
+            + (count === 0 ? ' is-empty' : '');
+        btn.setAttribute('aria-pressed', opts.active ? 'true' : 'false');
+        var name = document.createElement('span');
+        name.className = 'char-facet-name';
+        name.textContent = label;
+        var num = document.createElement('span');
+        num.className = 'char-facet-count';
+        num.textContent = count;
+        btn.appendChild(name);
+        btn.appendChild(num);
+        if (opts.onClick) btn.addEventListener('click', opts.onClick);
+        return btn;
+    }
+
+    /** 重绘两级分面；计数跟随搜索词实时变化，便于"边搜边定位" */
+    /** 分面计数直接读 matchedFlags（由 applyFilter 传入），与列表结果同源 */
+    function renderFacets(matchedFlags) {
+        var companyBox = document.getElementById('charIndexCompanyChips');
+        if (!companyBox) return;
+        var coll = collatorFor(locale());
+        matchedFlags = matchedFlags || {};
+
+        var matchCount = {};
+        var grand = 0;
+        indexItems.forEach(function (item) {
+            if (!matchedFlags[item.index]) return;
+            grand++;
+            if (item.cid) matchCount[item.cid] = (matchCount[item.cid] || 0) + 1;
+        });
+
+        companyBox.innerHTML = '';
+        companyBox.appendChild(makeChip(t('chars.facetAll'), grand, {
+            active: !activeCompany,
+            onClick: function () { selectCompany(null); }
+        }));
+        facets.order.forEach(function (cid) {
+            companyBox.appendChild(makeChip(facetLabel(facets.map[cid].meta), matchCount[cid] || 0, {
+                active: activeCompany === cid,
+                onClick: function () { selectCompany(cid); }
+            }));
+        });
+
+        /* 二级栏：只在当前公司有作品时出现（单层公司的深度即到此为止） */
+        var workFacet = document.getElementById('charIndexWorkFacet');
+        var workBox = document.getElementById('charIndexWorkChips');
+        if (!workFacet || !workBox) return;
+        var group = activeCompany ? facets.map[activeCompany] : null;
+        if (!group || !group.works.length) {
+            workFacet.hidden = true;
+            workBox.innerHTML = '';
+            return;
+        }
+        workFacet.hidden = false;
+        workBox.innerHTML = '';
+
+        var byWork = {};
+        var inCompany = 0;
+        indexItems.forEach(function (item) {
+            if (item.cid !== activeCompany || !matchedFlags[item.index]) return;
+            inCompany++;
+            if (item.wid) byWork[item.wid] = (byWork[item.wid] || 0) + 1;
+        });
+
+        workBox.appendChild(makeChip(t('chars.facetAll'), inCompany, {
+            active: !activeWork,
+            onClick: function () { selectWork(null); }
+        }));
+        group.works.slice()
+            .sort(function (a, b) {
+                return compareLabel(coll, facetLabel(group.workMap[a].meta), facetLabel(group.workMap[b].meta));
+            })
+            .forEach(function (wid) {
+                workBox.appendChild(makeChip(facetLabel(group.workMap[wid].meta), byWork[wid] || 0, {
+                    active: activeWork === wid,
+                    onClick: function () { selectWork(wid); }
+                }));
+            });
+    }
+
+    function selectCompany(cid) {
+        activeCompany = cid;
+        activeWork = null;   /* 换公司时二级归位，避免带着上一个公司的作品筛选 */
+        applyFilter();
+    }
+
+    function selectWork(wid) {
+        activeWork = wid;
+        applyFilter();
+    }
+
+    function currentTokens() {
+        var q = (indexQuery || '').trim().toLowerCase();
+        return q ? q.split(/\s+/) : [];
+    }
+
+    /* ---------- 模糊兜底（Damerau-Levenshtein） ----------
+       分工：精确/前缀/子串/分词负责「列表结果」；只有在前两个阶段全部零命中时，
+       DL 才出来给候选，且**只作为提示**、不直接替换结果集——否则 1~2 字查询
+       （"阿"、"p"）距离 1 会把半个库捞上来。算法见 js/vendor/damerau-levenshtein.js */
+
+    /** 允许的最大编辑距离：短串不放行，否则噪声失控（长度 2 时错一个字就是错一半） */
+    function maxDistanceFor(len) {
+        if (len <= 2) return 0;
+        if (len <= 5) return 1;
+        return 2;
+    }
+
+    function dl() {
+        return (window.DamerauLevenshtein && window.DamerauLevenshtein.limited) || null;
+    }
+
+    /** 子序列跨度：查询的字面按序出现在候选串里时，返回「多余跨度」（0 = 完全连续）。
+     *  不是子序列返回 -1。
+     *  这条兜底专治两类子串匹配覆盖不了的输入：
+     *    · 跳字缩写 —— "吃肥鱼" ⊂ "吃白饭的大肥鱼"、"大白鱼" 同理
+     *    · 首字母尾片段 —— "fy" ⊂ "cbfddfy"（而首字母串不能放宽子串门槛，
+     *      否则 "ys" 会被 "lys" 吃掉；子序列天然区分得开）
+     *  只在精确阶段零命中时参与，所以 "ys" 这类已有正确命中的查询不受影响。 */
+    function subseqSpan(key, q) {
+        var qi = 0, first = -1, last = -1;
+        for (var i = 0; i < key.length && qi < q.length; i++) {
+            if (key.charAt(i) === q.charAt(qi)) {
+                if (first < 0) first = i;
+                last = i;
+                qi++;
+            }
+        }
+        if (qi < q.length) return -1;
+        return last - first + 1 - q.length;
+    }
+
+    function bestSubseq(item, q) {
+        var all = item.keys.concat(item.py);
+        var best = -1;
+        for (var i = 0; i < all.length; i++) {
+            var s = subseqSpan(all[i], q);
+            if (s >= 0 && (best < 0 || s < best)) best = s;
+        }
+        return best;
+    }
+
+    /** 编辑距离候选 */
+    function dlCandidates(q) {
+        var limited = dl();
+        var max = maxDistanceFor(q.length);
+        if (!limited || max <= 0) return [];
+        var scored = [];
+        indexItems.forEach(function (item) {
+            var best = Infinity;
+            var all = item.keys.concat(item.py);
+            for (var i = 0; i < all.length; i++) {
+                var d = limited(max, q, all[i]);
+                if (d < best) best = d;
+                if (best === 0) break;
+            }
+            if (best <= max) scored.push({ item: item, d: best, span: 0 });
+        });
+        return scored;
+    }
+
+    /** 子序列候选：按「跨度紧 → 展示顺序」排，只取最紧的若干条 */
+    function subseqCandidates(q) {
+        if (q.length < 2) return [];
+        var scored = [];
+        indexItems.forEach(function (item) {
+            var span = bestSubseq(item, q);
+            if (span >= 0) scored.push({ item: item, d: 99, span: span });
+        });
+        scored.sort(function (a, b) {
+            return a.span - b.span || a.item.index - b.item.index;
+        });
+        return scored;
+    }
+
+    /** 模糊兜底候选：先编辑距离（精度高），零候选时再用子序列（召回广） */
+    function fuzzyCandidates(query, limit) {
+        var q = query.toLowerCase();
+        var out = dlCandidates(q);
+        if (!out.length) out = subseqCandidates(q);
+        return out.slice(0, limit || 3);
+    }
+
+    /** 渲染「你是不是想找」候选；点一下把名字填进搜索框 */
+    function renderFuzzy(cands) {
+        var box = document.getElementById('charIndexFuzzy');
+        var chips = document.getElementById('charIndexFuzzyChips');
+        if (!box || !chips) return;
+        if (!cands || !cands.length) {
+            box.hidden = true;
+            chips.innerHTML = '';
+            return;
+        }
+        chips.innerHTML = '';
+        cands.forEach(function (c) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'char-fuzzy-chip';
+            btn.textContent = nameOf(c.item.char);
+            btn.addEventListener('click', function () {
+                var search = document.getElementById('charIndexSearch');
+                if (search) search.value = nameOf(c.item.char);
+                filterIndex(nameOf(c.item.char));
+                if (search) search.focus();
+            });
+            chips.appendChild(btn);
+        });
+        box.hidden = false;
+    }
+
+    /** 第一阶段：分词 AND 命中（含前缀/子串/跨语言） */
+    function stageTokens(tokens) {
+        return indexItems.filter(function (item) { return matchesTokens(item, tokens); });
+    }
+
+    /** 第二阶段：把整句压成一个整体再试（"pei li ka"→"peilika"、"pei-li-ka"→"peilika"）。
+     *  只在第一阶段零命中时启用，因此不会影响 "ys" 这类已有的正确命中。 */
+    function stageCompact(raw) {
+        var compact = normalizeKey(raw);
+        if (!compact) return null;
+        var tokens = raw.split(/\s+/);
+        /* 查询里本来就带分隔符，或本身就是多词，压缩才有意义 */
+        if (tokens.length < 2 && compact === raw) return null;
+        return indexItems.filter(function (item) { return tokenHit(item, compact); });
+    }
+
+    /** 统一过滤入口：搜索词 AND 公司 AND 作品 */
+    function applyFilter() {
+        var raw = (indexQuery || '').trim().toLowerCase();
+        var tokens = currentTokens();
+
+        var matched = stageTokens(tokens);
+        if (!matched.length) {
+            var compact = stageCompact(raw);
+            if (compact && compact.length) matched = compact;
+        }
+
+        /* 列表结果：只由两个确定性阶段决定 */
+        var matchedFlags = {};
+        matched.forEach(function (item) { matchedFlags[item.index] = true; });
+
+        var visible = 0;
+        indexItems.forEach(function (item) {
+            var show = !!matchedFlags[item.index] && inScope(item.char);
+            item.root.hidden = !show;
+            if (show) visible++;
+        });
+
+        /* 只在「搜索词本身零命中」时给模糊候选；若只是被公司/作品范围筛掉，
+           提示没有意义（点了也还是被范围挡住），此时只显示空态。 */
+        if (!matched.length && raw) renderFuzzy(fuzzyCandidates(raw));
+        else renderFuzzy(null);
+
+        renderFacets(matchedFlags);
+        var empty = document.getElementById('charIndexEmpty');
+        if (empty) empty.hidden = visible > 0;
+        /* 空态时收掉网格，否则 flex:1 会把「无匹配 / 你是不是想找」压到面板最底部 */
+        var panel = document.getElementById('charIndex');
+        if (panel) panel.classList.toggle('is-empty', visible === 0);
+    }
+
+    function filterIndex(query) {
+        indexQuery = query || '';
+        applyFilter();
     }
 
     function buildIndexGrid() {
@@ -232,8 +650,14 @@
                 closeIndex();
             });
             grid.appendChild(btn);
-            return { root: btn, char: char, index: index };
+            var s = searchOf(char);
+            return {
+                root: btn, char: char, index: index,
+                keys: s.keys, py: s.py,
+                cid: companyIdOf(char), wid: workIdOf(char)
+            };
         });
+        buildFacets();
         renderIndexTexts();
     }
 
@@ -253,23 +677,7 @@
                 '<span class="char-index-count">' + char.files.length + 'F</span>';
         });
         updateIndexActive();
-    }
-
-    /** 检索过滤：名称 / 来源 / 标签 / slug，跨语言匹配 */
-    function filterIndex(query) {
-        var q = (query || '').trim().toLowerCase();
-        var visible = 0;
-        indexItems.forEach(function (item) {
-            var char = item.char;
-            var hay = [char.slug, char.name, char.nameEn || '']
-                .concat(localeVals(char.origin), localeVals(char.tags))
-                .join(' ').toLowerCase();
-            var match = !q || hay.indexOf(q) !== -1;
-            item.root.hidden = !match;
-            if (match) visible++;
-        });
-        var empty = document.getElementById('charIndexEmpty');
-        if (empty) empty.hidden = visible > 0;
+        applyFilter();
     }
 
     function updateIndexActive() {
@@ -285,11 +693,15 @@
         panel.hidden = false;
         document.getElementById('charIndexBtn').setAttribute('aria-expanded', 'true');
         stopTimer();
+        /* 每次打开回到干净状态：清搜索词、清两级定位 */
+        activeCompany = null;
+        activeWork = null;
+        indexQuery = '';
         renderIndexTexts();
         var search = document.getElementById('charIndexSearch');
         if (search) {
             search.value = '';
-            filterIndex('');
+            applyFilter();
             search.focus();
         }
     }

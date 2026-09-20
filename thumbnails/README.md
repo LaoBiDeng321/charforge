@@ -21,5 +21,6 @@ thumbnails/<slug>/
 - thumbnails/citlali-genshin-impact/
 - thumbnails/alf-silver-palace/
 - thumbnails/cyrene-honkai-star-rail/
+- thumbnails/perlica-arknights-endfield/
 
 没有图片时前端显示占位块，不影响角色卡渲染。

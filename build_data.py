@@ -24,6 +24,7 @@ build_data.py —— 资源站数据/分发包构建脚本
 import hashlib
 import json
 import os
+import re
 import shutil
 import zipfile
 from datetime import date
@@ -55,82 +56,48 @@ SKILLS = [
     },
 ]
 
-CHARS = [
-    {
-        "slug": "white-rice-fish-deepseek",
-        "dir": "char/white-rice-fish-deepseek",
-        "name": "吃白饭的大肥鱼",
-        "alias": "WHITE RICE FISH",
-        "nameEn": "White Rice Fish",
-        "origin": {"zh-CN": "DeepSeek 社区拟人", "en-US": "DeepSeek Community"},
-        "tags": {
-            "zh-CN": ["吃白饭的大肥鱼", "DeepSeek 社区拟人", "深度求索"],
-            "en-US": ["White Rice Fish", "DeepSeek Community Persona", "DeepSeek"],
-        },
-    },
-    {
-        "slug": "shu-arknights",
-        "dir": "char/shu-arknights",
-        "name": "黍",
-        "alias": "SHU",
-        "nameEn": "Shu",
-        "origin": {"zh-CN": "《明日方舟》官方设定", "en-US": "Arknights Official"},
-        "tags": {
-            "zh-CN": ["黍", "明日方舟", "鹰角网络"],
-            "en-US": ["Shu", "Arknights", "Hypergryph"],
-        },
-    },
-    {
-        "slug": "priestess-arknights",
-        "dir": "char/priestess-arknights",
-        "name": "普瑞赛斯",
-        "alias": "PRIESTESS",
-        "nameEn": "Priestess",
-        "origin": {"zh-CN": "《明日方舟》官方设定", "en-US": "Arknights Official"},
-        "tags": {
-            "zh-CN": ["普瑞赛斯", "明日方舟", "鹰角网络"],
-            "en-US": ["Priestess", "Arknights", "Hypergryph"],
-        },
-    },
-    {
-        "slug": "citlali-genshin-impact",
-        "dir": "char/citlali-genshin-impact",
-        "name": "茜特菈莉",
-        "alias": "CITLALI",
-        "nameEn": "Citlali",
-        "origin": {"zh-CN": "《原神》官方设定", "en-US": "Genshin Impact Official"},
-        "tags": {
-            "zh-CN": ["茜特菈莉", "原神", "米哈游"],
-            "en-US": ["Citlali", "Genshin Impact", "HoYoverse"],
-        },
-        # 排序覆盖键：前端按语言排序，多音字在此钉死正确读音
-        "sort": {"zh-CN": "xitelali"},
-    },
-    {
-        "slug": "alf-silver-palace",
-        "dir": "char/alf-silver-palace",
-        "name": "阿芙",
-        "alias": "ALF",
-        "nameEn": "Alf",
-        "origin": {"zh-CN": "《白银之城》官方物料", "en-US": "Silver Palace Official"},
-        "tags": {
-            "zh-CN": ["阿芙", "白银之城", "乐元素"],
-            "en-US": ["Alf", "Silver Palace", "Element Games"],
-        },
-    },
-    {
-        "slug": "cyrene-honkai-star-rail",
-        "dir": "char/cyrene-honkai-star-rail",
-        "name": "昔涟",
-        "alias": "CYRENE",
-        "nameEn": "Cyrene",
-        "origin": {"zh-CN": "《崩坏：星穹铁道》官方设定", "en-US": "Honkai: Star Rail Official"},
-        "tags": {
-            "zh-CN": ["昔涟", "崩坏：星穹铁道", "米哈游"],
-            "en-US": ["Cyrene", "Honkai: Star Rail", "HoYoverse"],
-        },
-    },
-]
+# ---------------------------------------------------------------
+# 角色元数据：每个角色一个 meta/<slug>.json，这里只做目录扫描。
+#
+# 为什么不再写成一个 CHARS 大表：加一个角色就要动同一个文件，角色一多，
+# 「读一遍 build_data.py 才能加人」的成本会随角色数线性上涨（上下文 + 冲突）。
+# 拆成一人一文件后，加角色只需新建 meta/<slug>.json + char/<slug>/ 目录，
+# 两者同名，slug 由文件名决定（目录名也由它推出，无需重复填写）。
+# ---------------------------------------------------------------
+
+META_DIR = "meta"
+
+
+def load_chars():
+    """扫描 meta/*.json，返回 build_entry 需要的 meta 列表（按文件名排序，保证产物可复现）。
+
+    meta 里只需写展示字段：name / alias / nameEn / reading / company / work / origin / tags。
+    slug 取文件名（去 .json），dir 取 char/<slug>，两者都不用在 meta 里重复写。
+    """
+    base = os.path.join(ROOT, META_DIR)
+    if not os.path.isdir(base):
+        return []
+    out = []
+    for fn in sorted(os.listdir(base)):
+        if not fn.endswith(".json"):
+            continue
+        slug = fn[:-5]
+        path = os.path.join(base, fn)
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                meta = json.load(f)
+        except ValueError as exc:
+            raise SystemExit("meta/%s 不是合法 JSON：%s" % (fn, exc))
+        if not meta.get("name"):
+            raise SystemExit("meta/%s 缺少必要字段 name" % fn)
+        meta["slug"] = slug
+        meta["dir"] = "char/" + slug
+        if not os.path.isdir(os.path.join(ROOT, *meta["dir"].split("/"))):
+            raise SystemExit("meta/%s 对应的交付目录 %s/ 不存在" % (fn, meta["dir"]))
+        out.append(meta)
+    return out
+
+
 
 BOM = b"\xef\xbb\xbf"
 
@@ -211,6 +178,76 @@ def build_archive(kind, rel_dir, slug, files):
     }
 
 
+# ---------------------------------------------------------------
+# 汉字 → 拼音（构建期自动推导，替代人工维护 pinyin 字段）
+#
+# 依赖 pypinyin（MIT），**硬依赖**：未安装直接报错，不静默降级——
+# 否则改了角色名却沿用上一次的拼音，会悄悄产出错的检索键。
+# 多音字由 pypinyin 自动判定；库判错时在对应条目里写 "reading" 覆盖（全站目前仅一处）。
+# ---------------------------------------------------------------
+
+try:
+    from pypinyin import lazy_pinyin, Style
+except ImportError as exc:                                   # pragma: no cover
+    raise SystemExit(
+        "构建需要 pypinyin（把汉字名转成拼音检索键）。"
+        "请先执行： pip install -r requirements.txt"
+        "（只做本地预览 python -m http.server 不需要装任何东西）"
+    ) from exc
+
+
+def letters_only(s):
+    return "".join(ch for ch in s.lower() if "a" <= ch <= "z")
+
+
+def cjk_count(s):
+    return sum(1 for ch in s if "一" <= ch <= "鿿")
+
+
+def to_pinyin(text, reading=None):
+    """返回 (全拼, 首字母)。
+
+    reading：人工覆盖，**空格分隔逐字读音**（如 "xi te la li"）。仅在库判错读音时使用。
+    覆盖值做音节数校验——个数必须等于原文汉字数，否则直接报错，
+    避免静默产出错误的首字母（首字母是从音节首字母拼出来的）。
+    """
+    if reading:
+        units = [letters_only(u) for u in re.split(r"[\s\-_/]+", reading.strip())]
+        units = [u for u in units if u]
+        if not units:
+            raise ValueError("reading 为空：%r" % (reading,))
+        n = cjk_count(text)
+        if n and len(units) != n:
+            raise ValueError(
+                "reading 音节数(%d) 与 %r 的汉字数(%d) 不一致：%r" % (len(units), text, n, reading))
+        return "".join(units), "".join(u[0] for u in units)
+
+    full = letters_only("".join(lazy_pinyin(text)))
+    ini = letters_only("".join(lazy_pinyin(text, style=Style.FIRST_LETTER)))
+    if not full:
+        raise ValueError("无法为 %r 生成拼音" % (text,))
+    return full, ini
+
+
+def attach_pinyin(entry, meta):
+    """给角色条目及其 company / work 挂上 pinyin / pinyinInitials；并下发中文排序键。
+
+    排序键交给前端已有的 char.sort[lang] 机制，这样中文排序不再依赖浏览器对
+    zh 的 collation（ICU 构造失败会静默退化成码点序），跨引擎结果一致。
+    """
+    full, ini = to_pinyin(meta["name"], meta.get("reading"))
+    entry["pinyin"], entry["pinyinInitials"] = full, ini
+    entry.setdefault("sort", {})["zh-CN"] = full
+
+    for key in ("company", "work"):
+        obj = meta.get(key)
+        if not obj:
+            continue
+        full, ini = to_pinyin(obj.get("zh-CN") or "", obj.get("reading"))
+        obj["pinyin"], obj["pinyinInitials"] = full, ini
+        obj.pop("reading", None)
+
+
 def build_entry(meta, kind):
     files = collect_files(meta["dir"])
     archive = build_archive(kind, meta["dir"], meta["slug"], files)
@@ -220,14 +257,52 @@ def build_entry(meta, kind):
         "files": files,
         "archive": archive,
     }
-    for key in ("nameEn", "alias", "origin", "tags", "sort"):
+    for key in ("nameEn", "alias", "origin", "tags", "sort", "company", "work"):
         if meta.get(key):
             entry[key] = meta[key]
     if kind == "char":
+        attach_pinyin(entry, meta)
         thumb = find_thumbnail(meta["slug"])
         if thumb:
             entry["thumbnail"] = thumb
     return entry
+
+
+ASSET_REF_RE = re.compile(
+    r'(?P<attr>\b(?:href|src)=")(?P<path>(?:js|css)/[^"?]+\.(?:js|css))(?:\?v=[0-9a-fA-F]+)?"'
+)
+
+
+def stamp_assets():
+    """给 index.html 里的 js/css 引用打上内容哈希（?v=<sha256 前 8 位>）。
+
+    为什么要做：静态资源原本没有任何版本标识，浏览器（尤其本地 python -m http.server
+    这种不发强缓存头的环境）会按启发式规则复用旧副本，出现"HTML 已更新、脚本还是旧的"
+    的错配——表现为界面元素在、但渲染逻辑和文案缺失。内容哈希让文件一变 URL 就变。
+    本函数可重复执行：已带 ?v= 的引用会被原地改写，不会叠加。
+    """
+    page = os.path.join(ROOT, "index.html")
+    if not os.path.isfile(page):
+        return 0
+    with open(page, "r", encoding="utf-8", newline="") as f:
+        src = f.read()
+
+    changed = [0]
+
+    def repl(m):
+        rel = m.group("path")
+        full = os.path.join(ROOT, *rel.split("/"))
+        digest = sha256_file(full)[:8] if os.path.isfile(full) else "00000000"
+        out = "%s%s?v=%s\"" % (m.group("attr"), rel, digest)
+        if out != m.group(0):
+            changed[0] += 1
+        return out
+
+    out = ASSET_REF_RE.sub(repl, src)
+    if out != src:
+        with open(page, "w", encoding="utf-8", newline="") as f:
+            f.write(out)
+    return changed[0]
 
 
 def build():
@@ -235,7 +310,9 @@ def build():
         shutil.rmtree(DOWNLOADS)
 
     skills_out = [build_entry(meta, "skills") for meta in SKILLS]
-    chars_out = [build_entry(meta, "char") for meta in CHARS]
+    chars_out = [build_entry(meta, "char") for meta in load_chars()]
+
+    stamped = stamp_assets()
 
     data = {
         "generatedAt": date.today().isoformat(),
@@ -251,6 +328,7 @@ def build():
     total_zip_bytes = sum(s["archive"]["size"] for s in skills_out) + sum(c["archive"]["size"] for c in chars_out)
     print("index.json generated ->", os.path.relpath(OUT, ROOT))
     print("downloads generated ->", os.path.relpath(DOWNLOADS, ROOT))
+    print("index.html asset stamps updated ->", stamped)
     print("skills: %d, chars: %d, files: %d, zip bytes: %d" % (
         len(skills_out), len(chars_out), total_files, total_zip_bytes
     ))

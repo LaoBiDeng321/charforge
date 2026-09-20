@@ -1,7 +1,8 @@
 # Netlify 部署配置：站点已提升到仓库根目录，发布根 = "."
 # 构建时由 build_data.py 生成 index.json 与 downloads/*.zip（含图片）。
+# pypinyin 是构建期硬依赖（代码见 requirements.txt）；本地预览站点不需要它。
 [build]
-  command = "python3 build_data.py"
+  command = "pip install -r requirements.txt && python3 build_data.py"
   publish = "."
 
 # 显式覆盖各部署上下文，避免 Netlify UI / 旧站点设置仍指向 web/

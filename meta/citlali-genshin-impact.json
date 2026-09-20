@@ -1,0 +1,32 @@
+{
+  "name": "茜特菈莉",
+  "alias": "CITLALI",
+  "nameEn": "Citlali",
+  "reading": "xi te la li",
+  "company": {
+    "id": "hoyoverse",
+    "zh-CN": "米哈游",
+    "en-US": "HoYoverse"
+  },
+  "work": {
+    "id": "genshin-impact",
+    "zh-CN": "原神",
+    "en-US": "Genshin Impact"
+  },
+  "origin": {
+    "zh-CN": "《原神》官方设定",
+    "en-US": "Genshin Impact Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "茜特菈莉",
+      "原神",
+      "米哈游"
+    ],
+    "en-US": [
+      "Citlali",
+      "Genshin Impact",
+      "HoYoverse"
+    ]
+  }
+}

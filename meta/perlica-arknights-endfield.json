@@ -1,0 +1,31 @@
+{
+  "name": "佩丽卡",
+  "alias": "PERLICA",
+  "nameEn": "Perlica",
+  "company": {
+    "id": "hypergryph",
+    "zh-CN": "鹰角网络",
+    "en-US": "Hypergryph"
+  },
+  "work": {
+    "id": "arknights-endfield",
+    "zh-CN": "明日方舟：终末地",
+    "en-US": "Arknights: Endfield"
+  },
+  "origin": {
+    "zh-CN": "《明日方舟：终末地》官方设定",
+    "en-US": "Arknights: Endfield Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "佩丽卡",
+      "明日方舟：终末地",
+      "鹰角网络"
+    ],
+    "en-US": [
+      "Perlica",
+      "Arknights: Endfield",
+      "Hypergryph"
+    ]
+  }
+}

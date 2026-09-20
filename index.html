@@ -52,12 +52,12 @@
     <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
 
     <!-- 样式表 -->
-    <link rel="stylesheet" href="css/design-system.css">
-    <link rel="stylesheet" href="css/loader.css">
-    <link rel="stylesheet" href="css/fullpage.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/carousel.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/design-system.css?v=8fd0928c">
+    <link rel="stylesheet" href="css/loader.css?v=95f2758f">
+    <link rel="stylesheet" href="css/fullpage.css?v=96c0c62c">
+    <link rel="stylesheet" href="css/components.css?v=1ec02138">
+    <link rel="stylesheet" href="css/carousel.css?v=84dc478b">
+    <link rel="stylesheet" href="css/responsive.css?v=fdaacc52">
 </head>
 <body>
     <!-- 启动加载遮罩：左缘竖向加载条 0→100 → 居中 Loading… 扫光 → 遮罩左→右滑场 → 主体渐显 -->
@@ -360,8 +360,28 @@
                                 </button>
                             </div>
                             <input type="text" class="char-index-search" id="charIndexSearch" autocomplete="off" spellcheck="false">
+
+                            <!-- 两级定位索引：一级公司、二级作品。
+                                 只点一级 = 该公司全部角色；再点二级 = 该公司该作品的角色。
+                                 二级栏仅在该公司定义了作品时出现（单层公司不显示）。 -->
+                            <div class="char-index-locate" id="charIndexLocate">
+                                <div class="char-index-facet">
+                                    <span class="char-index-facet-label" data-i18n="chars.facetCompany"></span>
+                                    <div class="char-index-chips" id="charIndexCompanyChips" role="group"></div>
+                                </div>
+                                <div class="char-index-facet" id="charIndexWorkFacet" hidden>
+                                    <span class="char-index-facet-label" data-i18n="chars.facetWork"></span>
+                                    <div class="char-index-chips" id="charIndexWorkChips" role="group"></div>
+                                </div>
+                            </div>
+
                             <div class="char-index-grid" id="charIndexGrid" data-scrollable></div>
                             <p class="char-index-empty" id="charIndexEmpty" hidden></p>
+                            <!-- 模糊兜底提示：精确/拼音都零命中时，用 Damerau-Levenshtein 给候选 -->
+                            <div class="char-index-fuzzy" id="charIndexFuzzy" hidden>
+                                <span class="char-index-fuzzy-label" data-i18n="chars.fuzzyHint"></span>
+                                <div class="char-index-fuzzy-chips" id="charIndexFuzzyChips"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -473,15 +493,17 @@
         </section>
     </div>
 
-    <!-- JavaScript（顺序：i18n → 配置 → 数据加载 → 下载工具 → 轮播 → 加载动画 → 全屏滚动 → 主逻辑） -->
-    <script src="js/i18n.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/data-loader.js"></script>
-    <script src="js/download.js"></script>
-    <script src="js/agent-install.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/loader.js"></script>
-    <script src="js/fullpage.js"></script>
-    <script src="js/main.js"></script>
+    <!-- JavaScript（顺序：i18n → 配置 → 数据加载 → 下载工具 → 模糊算法 → 轮播 → 加载动画 → 全屏滚动 → 主逻辑）
+         vendor/damerau-levenshtein.js 为第三方算法（talisman · MIT），须在 carousel.js 之前加载 -->
+    <script src="js/i18n.js?v=06cd1c2a"></script>
+    <script src="js/config.js?v=78769a21"></script>
+    <script src="js/data-loader.js?v=7115b875"></script>
+    <script src="js/download.js?v=9ed6dad7"></script>
+    <script src="js/agent-install.js?v=3272c7d4"></script>
+    <script src="js/vendor/damerau-levenshtein.js?v=fa3b84b6"></script>
+    <script src="js/carousel.js?v=cf0ebdae"></script>
+    <script src="js/loader.js?v=4e8bfb54"></script>
+    <script src="js/fullpage.js?v=4733a431"></script>
+    <script src="js/main.js?v=d5135e70"></script>
 </body>
 </html>

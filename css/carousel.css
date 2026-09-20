@@ -522,6 +522,106 @@
     color: var(--color-text-muted);
 }
 
+/* 两级定位索引：一级公司、二级作品。
+   只点一级 = 该公司全部角色；再点二级 = 该公司该作品的角色。 */
+.char-index-locate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--color-border-strong);
+}
+
+.char-index-facet {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+}
+
+.char-index-facet[hidden] {
+    display: none;
+}
+
+.char-index-facet-label {
+    flex: 0 0 auto;
+    min-width: 3.4em;
+    padding-top: 3px;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.16em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}
+
+.char-index-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+/* 分面芯片：直角 + 等宽计数，选中态用强调色实底（与顶栏 CN|EN 同语言） */
+.char-facet-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px var(--space-xs);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+}
+
+.char-facet-chip:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-border-strong);
+}
+
+.char-facet-chip.is-empty:not(.is-active) {
+    opacity: 0.34;
+}
+
+.char-facet-chip.is-active {
+    color: #101110;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.char-facet-count {
+    font-variant-numeric: tabular-nums;
+    opacity: 0.72;
+}
+
+.char-facet-chip.is-active .char-facet-count {
+    opacity: 0.85;
+}
+
+/* 窄屏：标签转为上方独立一行，避免芯片被挤成竖排 */
+@media (max-width: 768px) {
+    .char-index-locate {
+        padding: var(--space-xs);
+    }
+
+    .char-index-facet {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .char-index-facet-label {
+        min-width: 0;
+        padding-top: 0;
+    }
+}
+
+/* 空态：网格让位，让空提示与模糊候选紧贴分面行，不被 flex:1 推到面板底部 */
+.char-index.is-empty .char-index-grid {
+    flex: 0 0 auto;
+}
+
 /* 条目网格：自适应列数，任意数量角色都能承载 */
 .char-index-grid {
     flex: 1;
@@ -612,6 +712,52 @@
 
 .char-index-empty[hidden] {
     display: none;
+}
+
+/* 模糊兜底提示：精确/拼音零命中时出现，点候选即填入搜索框（不直接替换结果集） */
+.char-index-fuzzy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-accent-subtle, rgba(255, 245, 0, 0.08));
+}
+
+.char-index-fuzzy[hidden] {
+    display: none;
+}
+
+.char-index-fuzzy-label {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+}
+
+.char-index-fuzzy-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.char-fuzzy-chip {
+    padding: 2px var(--space-xs);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background: transparent;
+    border: 1px dashed var(--color-border-strong);
+    cursor: pointer;
+    transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.char-fuzzy-chip:hover {
+    color: #101110;
+    background: var(--color-accent);
+    border-style: solid;
+    border-color: var(--color-accent);
 }
 
 /* 刻度密排：角色多时缩点缩距，仍保持单行 */

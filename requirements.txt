@@ -1,0 +1,5 @@
+# 构建期依赖 —— 只在重新生成 index.json / downloads 时需要
+# （把汉字名自动转成拼音检索键；不装则 build_data.py 直接报错）
+#
+# 只做本地预览（python -m http.server）不需要安装任何东西。
+pypinyin>=0.49

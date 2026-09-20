@@ -1,0 +1,26 @@
+{
+  "name": "吃白饭的大肥鱼",
+  "alias": "WHITE RICE FISH",
+  "nameEn": "White Rice Fish",
+  "company": {
+    "id": "deepseek",
+    "zh-CN": "深度求索",
+    "en-US": "DeepSeek"
+  },
+  "origin": {
+    "zh-CN": "DeepSeek 社区拟人",
+    "en-US": "DeepSeek Community"
+  },
+  "tags": {
+    "zh-CN": [
+      "吃白饭的大肥鱼",
+      "DeepSeek 社区拟人",
+      "深度求索"
+    ],
+    "en-US": [
+      "White Rice Fish",
+      "DeepSeek Community Persona",
+      "DeepSeek"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "昔涟",
+  "alias": "CYRENE",
+  "nameEn": "Cyrene",
+  "company": {
+    "id": "hoyoverse",
+    "zh-CN": "米哈游",
+    "en-US": "HoYoverse"
+  },
+  "work": {
+    "id": "honkai-star-rail",
+    "zh-CN": "崩坏：星穹铁道",
+    "en-US": "Honkai: Star Rail"
+  },
+  "origin": {
+    "zh-CN": "《崩坏：星穹铁道》官方设定",
+    "en-US": "Honkai: Star Rail Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "昔涟",
+      "崩坏：星穹铁道",
+      "米哈游"
+    ],
+    "en-US": [
+      "Cyrene",
+      "Honkai: Star Rail",
+      "HoYoverse"
+    ]
+  }
+}

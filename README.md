@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-fbbf24?style=flat-square&labelColor=161713)](LICENSE)
 [![维护者](https://img.shields.io/badge/维护者-LaoBiDeng321-f5f5f0?style=flat-square&labelColor=161713)](https://github.com/LaoBiDeng321)
 [![构建器](https://img.shields.io/badge/构建器-2-8ce99a?style=flat-square&labelColor=161713)](#-两个构建器)
-[![角色](https://img.shields.io/badge/角色-6-f59e0b?style=flat-square&labelColor=161713)](#-角色一览)
+[![角色](https://img.shields.io/badge/角色-7-f59e0b?style=flat-square&labelColor=161713)](#-角色一览)
 [![在线预览](https://img.shields.io/badge/在线预览-Netlify-00b7d4?style=flat-square&labelColor=161713)](https://lbd-charforge.netlify.app/)
 
 </div>
@@ -85,11 +85,61 @@ flowchart LR
 | Priestess | [char/priestess-arknights](char/priestess-arknights/prompt.md) | 明日方舟 | 10 |
 | Alf | [char/alf-silver-palace](char/alf-silver-palace/prompt.md) | 白银之城 | 10 |
 | 昔涟 | [char/cyrene-honkai-star-rail](char/cyrene-honkai-star-rail/prompt.md) | 崩坏：星穹铁道 | 10（三阶段档位） |
+| 佩丽卡 | [char/perlica-arknights-endfield](char/perlica-arknights-endfield/prompt.md) | 明日方舟：终末地 | 10 |
 
 每个角色的完整扮演入口是其目录下的 `SKILL.md`（运行规则）+ `prompt.md`（人格快照）。
 
 > [!NOTE]
 > 角色卡缩略图放在 `thumbnails/<slug>/cover.*`（推荐方形图）；`build_data.py` 会自动写入 `index.json` 的 `thumbnail` 字段，前端角色卡左侧显示。
+
+> [!IMPORTANT]
+> **新增角色 = 建两个同名目录 + 一个文件，不用改任何代码：**
+>
+> ```text
+> char/<slug>/          ← 交付目录（10 个设定文件 + assets/，保持纯净）
+> meta/<slug>.json      ← 展示元数据（同名的 JSON）
+> thumbnails/<slug>/    ← 方形缩略图（可选）
+> ```
+>
+> `build_data.py` 只做**目录扫描**（`meta/*.json`），slug 取文件名、交付目录取 `char/<slug>`，两者都不用在 JSON 里重复写。
+>
+> 为什么要拆成"一人一文件"：原先所有角色挤在 `build_data.py` 的一个 `CHARS` 大表里，**加一个人就要动同一个文件**——角色一多，光是"读一遍才能加人"的上下文成本和改冲突都会随人数线性上涨。拆开后加角色只需要看那一个新文件。
+>
+> `meta/<slug>.json` 里只需写展示字段：
+>
+> | 字段 | 作用 |
+> |---|---|
+> | `name` / `alias` / `nameEn` | 主名、英文别名、英文名 |
+> | `company` | 定位索引一级（公司），含 `id` / `zh-CN` / `en-US` |
+> | `work` | 定位索引二级（作品），结构同 `company`。**省略即为"单层"**，该公司下不出现二级栏 |
+> | `origin` / `tags` | 来源与标签，含 `zh-CN` / `en-US` |
+> | `reading` | **仅多音字需要**，见下 |
+>
+> `pinyin` / `pinyinInitials` / 中文排序键全部由构建期**自动推导**（`pypinyin`，MIT），中英名 + 作品 + 公司名都覆盖，**不需要人工维护**——人工填过一轮，`普瑞赛斯` 就填成了 `puruisaishi`（正确是 `puruisaisi`）。
+>
+> **唯一的例外是库判错读音的多音字**，此时加 `reading`，用**空格分隔逐字读音**：
+>
+> ```json
+> { "name": "茜特菈莉", "reading": "xi te la li" }
+> ```
+>
+> pypinyin 默认把「茜」判为 qiàn；音节数必须等于汉字数，否则构建直接报错。全站目前只有这一处，**其余角色一律不用写 `reading`。**
+>
+> ⚠️ `meta/` 与 `char/` 平级、在交付目录之外——这是刻意的：`char/<slug>/` 必须保持纯净（只有 10 个设定文件 + `assets/`），元数据放进去会被 `collect_files()` 扫进 ZIP 和站点数据。
+
+> [!TIP]
+> **角色索引支持：中文 / 全拼 / 首字母 / 英文 / 片段 / 繁简互通 / 拼写容错。** 在中文与英文界面下都能搜到另一种语言。分三段生效：
+>
+> | 阶段 | 覆盖 | 例 |
+> |---|---|---|
+> | ① 精确·前缀·**片段**·分词 | 中文名、英文名、拼音全拼与首字母、作品、公司、来源、标签。中文是**任意长度子串**，所以只打后半段也能命中 | `佩丽卡` `peilika` `plk` `perlica` `ys` `方舟` `starrail` `肥鱼` `丽卡` `特菈莉` `终末地` |
+> | ② 去分隔符重试 | 分写或带连字符的拼音 | `pei li ka` `pei-li-ka` |
+> | ③ 兜底候选（**只出「你是不是想找」，不污染结果列表**）| 先 **Damerau-Levenshtein** 抓错字/漏字/换位/同音字/繁体；零候选时再用**子序列**抓跳字缩写与首字母尾片段 | DL：`pelica` `prelica` `佩莉卡` `佩麗卡` `崩壞：星穹鐵道`<br>子序列：`吃肥鱼` `佩卡` `普赛斯` `fy` `lk` |
+>
+> **阈值与安全边界**：DL 按查询长度自适应（≤2 字不放行 / 3–5 字允许距离 1 / ≥6 字允许距离 2）；两条兜底都只在①②零命中时触发。所以 `zzz` 什么都不命中，`ys` 也不会被 `lys` 这类首字母串吃掉。
+> 每次命中都保留展示顺序，不做相关性重排。
+>
+> **已知边界**（子串 + 子序列覆盖不到，需要"逆序跳字"）：`大白鱼`（大…**白**…鱼，白在大之前）搜不到；`吃肥鱼`、`大肥鱼` 都可以。全拼字段的短子串放宽到 ≥2 位（`yu`→大肥鱼），但**首字母串不放宽**，否则 `ys` 会被 `lys` 误命中。
 
 ## 快速开始
 
@@ -98,7 +148,7 @@ flowchart LR
 git clone https://github.com/LaoBiDeng321/charforge.git
 cd charforge
 
-# 本地预览展示站（无需依赖安装；站点已扁平化到仓库根）
+# 本地预览展示站（只起静态服务，不装任何依赖；站点已扁平化到仓库根）
 python -m http.server 8765
 # 浏览器访问 http://localhost:8765
 ```
@@ -108,12 +158,13 @@ python -m http.server 8765
 
 ```bash
 # 在仓库根目录运行
+pip install -r requirements.txt   # 构建依赖：pypinyin（汉字转拼音，MIT）
 python build_data.py
 ```
 
-脚本只依赖 Python 标准库，无第三方包。它会生成：
+它会生成：
 
-- `index.json`：站点与 Agent 共用的资源索引（元数据、文件清单、sha256、下载地址、角色缩略图）；
+- `index.json`：站点与 Agent 共用的资源索引（元数据、文件清单、sha256、下载地址、角色缩略图、定位索引与拼音检索键）；
 - `downloads/skills/<slug>.zip`、`downloads/char/<slug>.zip`：包含 Markdown 与 `assets/` 图片的静态 ZIP；
 - `thumbnails/<slug>/` 下的方形图会被写入 `index.json` 的 `thumbnail` 字段。
 
@@ -171,6 +222,8 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 |---|---|
 | 视觉语言 | [Endfield-Style-Skill（终末地风格 SKILL）](https://github.com/LaoBiDeng321/Endfield-Style-Skill) |
 | 界面审美参考 | [taste-skill](https://github.com/Leonxlnx/taste-skill) |
+| 模糊匹配算法 | [talisman](https://github.com/yomguithereal/talisman)（`metrics/damerau-levenshtein.js`，MIT，5.5KB 单文件 vendor 至 `js/vendor/`，算法未改动） |
+| 汉字注音 | [pypinyin](https://github.com/mozillazg/python-pinyin)（MIT，构建期使用，不进运行时） |
 | 维护者 | [LaoBiDeng321](https://github.com/LaoBiDeng321)（个人维护） |
 
 ---

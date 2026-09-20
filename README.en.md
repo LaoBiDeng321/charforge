@@ -18,7 +18,7 @@ Search · Verify · Adjudicate · 10 files delivered
 
 ---
 
-**Contents** · [What is this](#what-is-this) · [Workflow](#workflow) · [Two builders](#two-builders) · [The 10-file system](#the-10-file-system) · [Character cards](#character-cards) · [Quick start](#quick-start) · [Self-hosting the showcase site](#self-hosting-the-showcase-site) · [FAQ](#faq) · [Credits](#credits)
+**Contents** · [What is this](#what-is-this) · [Workflow](#workflow) · [Two builders](#two-builders) · [The 10-file system](#the-10-file-system) · [Character cards](#character-cards) · [Quick start](#quick-start) · [Self-hosting the showcase site](#self-hosting-the-showcase-site) · [FAQ](#faq) · [Disclaimer](#disclaimer) · [Credits](#credits)
 
 ---
 
@@ -218,6 +218,23 @@ No. `world.md` is "the worldview through that character's eyes" — a world laye
 The builders and the site code are MIT-licensed. Copyright in the character material belongs to the respective rights holders — please credit the source, and use it for community roleplay and learning only.
 
 </details>
+
+## Disclaimer
+
+**Setting material**: the content of the seven character cards is drawn from each work's official text (main story / art books / official announcements), and copyright belongs to the respective rights holders. This repo only organises it, labels it and keeps it traceable — it claims no rights over the material.
+
+**Images**: card key art comes from official channels, though **a few were supplied manually by a user with the original retrieval link unrecorded** (noted in each character's `assets/README.md`); the **character thumbnails under `thumbnails/` were collected from community sources**, and for several of them **the original author could not be identified** while preparing this repo.
+
+If you are the author of one of those images:
+
+- **Credit** — open an issue with a link to your work, and the source and your name will be added;
+- **Removal** — open an issue and it will be taken down as soon as it is seen, **no reason required**.
+
+**This is a gap in my record-keeping, not an absence of provenance.** The current state of each image is listed in [`thumbnails/README.md`](thumbnails/README.md).
+
+**Generated content**: AI roleplay output does not represent any official stance of the original works, and users bear full responsibility for anything produced with it.
+
+**Intended use**: all resources are for learning, research and personal entertainment only — reselling or commercial use is prohibited.
 
 ## Credits
 

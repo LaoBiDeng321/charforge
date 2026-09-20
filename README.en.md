@@ -226,6 +226,15 @@ The builders and the site code are MIT-licensed. Copyright in the character mate
 
 </details>
 
+<details>
+<summary>Why does the site show a desktop layout on my phone? Does focusing the search box zoom the page?</summary>
+
+The site is desktop-first, so phones default to **PC view** (viewport pinned to `width=1280` and scaled to fit); without `localStorage` (private mode, etc.) the choice is decided from the UA on the spot. To switch back to responsive, use the display-mode toggle in the footer or open `?view=auto` (force PC with `?view=pc`).
+
+The search-box focus zoom is handled: in PC view the page is scaled to ~0.3×, so focusing an input inside the shrunken panel would make the browser zoom in, which used to combine badly with the full-page scroll. On touch devices the search panel now **fills the screen and undoes the page scaling**, so no font inflation is needed and focus no longer zooms. See [WEB.md → 手机端与 PC 视图](WEB.md#手机端与-pc-视图) (Chinese).
+
+</details>
+
 ## Disclaimer
 
 **Setting material**: the content of the seven character cards is drawn from each work's official text (main story / art books / official announcements), and copyright belongs to the respective rights holders. This repo only organises it, labels it and keeps it traceable — it claims no rights over the material.

@@ -71,8 +71,10 @@ class FullPage {
     }
     
     bindEvents() {
-        // 加载动画期间锁定所有输入
-        const inputLocked = () => document.body.classList.contains('is-loading');
+        // 整屏切换锁：加载动画期间，以及角色索引面板打开时。
+        // 索引面板是覆盖在轮播区上的检索浮层，面板内的滑动/按键不该触发翻页。
+        const navLocked = () => document.body.classList.contains('is-loading') ||
+                                document.body.classList.contains('is-index-open');
 
         // 内部滚动区判定：事件目标位于 [data-scrollable] 内且该方向仍可滚动时，
         // 放行给内部滚动（如轮播卡的文件列表），不触发整屏切换
@@ -91,11 +93,12 @@ class FullPage {
             const wheelThreshold = 50;
 
             window.addEventListener('wheel', (e) => {
-                if (inputLocked()) {
-                    e.preventDefault();
+                // 内部滚动区优先放行：索引面板打开时，条目网格仍要能用滚轮滚动
+                if (isInnerScroll(e.target, e.deltaY)) {
                     return;
                 }
-                if (isInnerScroll(e.target, e.deltaY)) {
+                if (navLocked()) {
+                    e.preventDefault();
                     return;
                 }
                 if (this.isScrolling) {
@@ -127,7 +130,10 @@ class FullPage {
         // 键盘事件
         if (this.options.keyboard) {
             window.addEventListener('keydown', (e) => {
-                if (inputLocked() || this.isScrolling) return;
+                // 表单控件内打字不翻页（否则搜索框里按 ↑/↓ 会把整屏翻走）
+                const el = e.target;
+                if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName || ''))) return;
+                if (navLocked() || this.isScrolling) return;
                 
                 switch(e.key) {
                     case 'ArrowDown':
@@ -161,7 +167,7 @@ class FullPage {
             }, { passive: true });
             
             window.addEventListener('touchend', (e) => {
-                if (inputLocked() || this.isScrolling) return;
+                if (navLocked() || this.isScrolling) return;
                 if (touchTarget && touchTarget.closest && touchTarget.closest('[data-scrollable]')) {
                     touchTarget = null;
                     return;

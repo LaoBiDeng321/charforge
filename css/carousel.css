@@ -457,6 +457,8 @@
     backdrop-filter: blur(var(--blur-md, 12px));
     -webkit-backdrop-filter: blur(var(--blur-md, 12px));
     border: 1px solid var(--color-border-strong);
+    /* 触屏：面板内禁用双击缩放，避免检索时误触把整页放大 */
+    touch-action: manipulation;
 }
 
 .char-index[hidden] {
@@ -520,6 +522,43 @@
 
 .char-index-search::placeholder {
     color: var(--color-text-muted);
+}
+
+/* 触屏 + PC 视图：检索面板的「设备比例」处理。
+   聚焦是否自动放大，判定依据是**缩放后的有效字号**（阈值约 16pt）而不是 CSS 字号。
+   PC 视图（viewport width=1280）整页被缩到约 0.3 倍，面板里 14px 的输入框实际只剩 ~5pt：
+   要么挡不住放大，要么得把字号写到 60px（真机上都试过，观感很难看）。
+   做法见 carousel.js 的 enterPanelOverlay()：打开时把面板临时挂到 body 下铺满整屏，
+   这里用 zoom 反向抵消整页缩放 —— 面板内部就回到设备真实尺寸，
+   字号不用放大、也不会再触发聚焦放大，整块面板还顺带变成了移动端全屏检索。
+   --panel-zoom 由 index.html 按「布局宽 / 设备宽」算出（自适应模式下为 1）。 */
+
+/* 触屏：输入框回到正常移动端字号（>16pt 就不触发聚焦缩放）；自适应模式下也走这条。
+   桌面不命中，仍用 --font-size-sm 的原始观感。 */
+@media (pointer: coarse), (hover: none) {
+    .char-index-search {
+        font-size: 17px;
+        /* 双击不缩放 */
+        touch-action: manipulation;
+    }
+}
+
+/* 全屏化面板。不套媒体查询：class 由 carousel.js 的 enterPanelOverlay() 加/去，
+   只有「真触屏 + view-pc」才会出现，这里再套一层媒体查询反而让规则没法离线验收。 */
+.char-index.is-device-scale {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    z-index: var(--z-modal, 400);
+    zoom: var(--panel-zoom, 1);
+    width: calc(100vw / var(--panel-zoom, 1));
+    height: calc(100vh / var(--panel-zoom, 1));
+    /* 铺满后底下是整页内容：换不透明底色，并关掉毛玻璃（全屏模糊在移动端太贵） */
+    background: var(--color-bg-primary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 /* 两级定位索引：一级公司、二级作品。

@@ -143,6 +143,10 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* 禁止 Safari 的自动字号膨胀：否则移动端（尤其 PC 视图整页被缩小时）
+       控件字号可能被浏览器改写，既不可预期，也会干扰下面 16px 的聚焦防缩放阈值 */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     /* 横向溢出兜底 */
     max-width: 100vw;
     overflow-x: hidden;

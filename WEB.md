@@ -123,6 +123,30 @@ Netlify 会在推送后自动跑 `pip install -r requirements.txt && python3 bui
 - **角色缩略图**：`build_data.py` 扫描 `thumbnails/<slug>/`，优先取 `cover.*` / `thumbnail.*`，把 URL 写入 `index.json` 的 `thumbnail` 字段；没有图片时前端显示 `NO IMG` 占位块。
 - **角色图片**：`char/<slug>/assets/` 直接位于站点根，ZIP 与 Agent 下载都指向同一份源文件，不再单独维护 `web/assets`。
 
+## 手机端与 PC 视图
+
+站点是**桌面优先**设计（全屏滚动 + 多栏布局），移动端尚未做正式响应式改造。目前的策略是**手机默认走 PC 视图**兜住可用性：
+
+| 项 | 值 |
+|---|---|
+| 判定 | `index.html` 头部内联脚本：手机 UA（iPhone / iPod / Windows Phone / BlackBerry / IEMobile / Opera Mini，或 Android 且含 Mobile；平板不触发）→ `pc`，其余 → `auto` |
+| 生效方式 | `pc`：viewport 改为 `width=1280`，`<html>` 加 `.view-pc`，媒体查询按 1280px 计算（走 >1024 的 PC 分支），浏览器整页缩放显示 |
+| 切换 | 页脚「显示模式」开关；或 URL 加 `?view=pc` / `?view=auto`（`?view=mobile` 视作 `auto`） |
+| 记忆 | `localStorage['charforge-view']`；桌面与平板默认 `auto`（不影响原行为），无 `localStorage` 时按 UA 现场判定 |
+
+### 检索面板的手机全屏化
+
+PC 视图把整页缩到约 0.3 倍，而「输入框聚焦是否自动放大」判定的是**缩放后的有效字号**（阈值约 16pt）：14px 的检索框实际只剩 ~5pt，必然被浏览器放大，再叠加原来的整屏滚动就很容易误操作。只把字号写大挡不住（要 ~60px 才够），观感也崩。
+
+所以改为**只对检索面板**还原设备比例：
+
+1. 打开面板时若「触屏 + `.view-pc`」，`carousel.js` 把 `#charIndex` 临时移入 `document.body` 并加 `is-device-scale`。必须搬出全屏滚动容器——容器上有 `transform`，不搬的话 `position: fixed` 会退化成 `absolute`。
+2. `carousel.css` 用 `zoom: var(--panel-zoom)` 配 `width/height: calc(100vw|100vh / var(--panel-zoom))` 反向抵消整页缩放：面板铺满整屏，内部字号与间距回到设备真实尺寸，检索框用正常移动端字号（17px）即可，不再触发聚焦放大。
+3. `--panel-zoom = 布局宽 / 设备宽`，由 `index.html` 在 load / `resize` / `orientationchange` 时同步；自适应模式下恒为 `1`，面板保持原卡片形态。
+4. 关闭时还原 DOM 位置与 class；桌面与自适应模式完全不进这套逻辑（检索框仍 14px）。
+
+已知取舍：面板内部沿用桌面端间距 token，在 390pt 宽的屏上留白偏大；面板里的 `@media (max-width: 768px)` 也不会命中（布局视口仍是 1280）。真响应式改造仍是后续事项。
+
 ## 角色索引：定位与检索
 
 索引面板位于「角色库」分区，结构为「搜索框 → 两级定位索引 → 角色卡网格」。

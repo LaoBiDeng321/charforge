@@ -743,11 +743,87 @@
         });
     }
 
+    /** 触屏判定：PC 视图模式下面板会整块搬到 body 下做全屏化，桌面保持原有行为。 */
+    function isCoarsePointer() {
+        try {
+            return !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+        } catch (e) {
+            return false;
+        }
+    }
+
+    /* PC 视图 + 触屏：检索面板全屏化（样式见 css/carousel.css 的 .is-device-scale）。
+       PC 视图把整页缩到约 0.3 倍，聚焦却又按缩放后的有效字号判定，
+       把输入框字号补到 60px 才挡得住放大——很难看。改成把面板临时挂到 body 下铺满整屏，
+       由 CSS 用 zoom 反向抵消整页缩放：面板内部回到设备真实尺寸，
+       字号不用放大也不会触发聚焦放大。自适应模式整页没被缩小，保持原卡片面板即可。 */
+    var panelHomeParent = null;
+    var panelHomeNext = null;
+
+    function needsPanelOverlay() {
+        return isCoarsePointer() && document.documentElement.classList.contains('view-pc');
+    }
+
+    function enterPanelOverlay(panel) {
+        if (!panel || !needsPanelOverlay() || panel.classList.contains('is-device-scale')) return;
+        panelHomeParent = panel.parentNode;
+        panelHomeNext = panel.nextSibling;
+        document.body.appendChild(panel);
+        panel.classList.add('is-device-scale');
+    }
+
+    function exitPanelOverlay(panel) {
+        if (!panel || !panel.classList.contains('is-device-scale')) return;
+        panel.classList.remove('is-device-scale');
+        if (panelHomeParent) {
+            panelHomeParent.insertBefore(panel, panelHomeNext);
+            panelHomeParent = null;
+            panelHomeNext = null;
+        }
+    }
+
+    /** 搜索框聚焦后把它摆进可视视口：
+     *  键盘会把 visualViewport 压小，默认的自动滚动有时让输入框贴着键盘下沿或停在屏幕外；
+     *  这里只在真的被遮住时补一次 scrollIntoView，避免每次聚焦都抖一下。 */
+    function keepSearchInView(input) {
+        if (!isCoarsePointer()) return;
+
+        var reposition = function () {
+            if (document.activeElement !== input) return;
+            var vv = window.visualViewport;
+            var rect = input.getBoundingClientRect();
+            var top = vv ? vv.offsetTop : 0;
+            var height = vv ? vv.height : window.innerHeight;
+            var pad = 16;
+            if (rect.top >= top + pad && rect.bottom <= top + height - pad) return;
+            try {
+                input.scrollIntoView({ block: 'center', behavior: 'smooth' });
+            } catch (e) {
+                input.scrollIntoView();
+            }
+        };
+
+        /* 键盘动画约 300ms，等它稳定后再判断；visualViewport 可用时以它为准再补一次 */
+        setTimeout(reposition, 320);
+        if (window.visualViewport) {
+            var vv = window.visualViewport;
+            var onResize = function () {
+                vv.removeEventListener('resize', onResize);
+                setTimeout(reposition, 60);
+            };
+            vv.addEventListener('resize', onResize);
+        }
+    }
+
     function openIndex() {
         var panel = document.getElementById('charIndex');
         if (!panel) return;
         indexOpen = true;
         panel.hidden = false;
+        /* PC 视图 + 触屏：整块面板全屏化（搬到 body 下 + zoom 抵消整页缩放） */
+        enterPanelOverlay(panel);
+        /* 锁定整屏切换：面板内滑动/按键不应翻页（fullpage.js 监听这个 class） */
+        document.body.classList.add('is-index-open');
         document.getElementById('charIndexBtn').setAttribute('aria-expanded', 'true');
         stopTimer();
         /* 每次打开回到干净状态：清搜索词、清两级定位 */
@@ -767,7 +843,10 @@
         if (!indexOpen) return;
         indexOpen = false;
         var panel = document.getElementById('charIndex');
+        /* 先归位再隐藏，避免在 body 下留着全屏面板闪一帧 */
+        exitPanelOverlay(panel);
         if (panel) panel.hidden = true;
+        document.body.classList.remove('is-index-open');
         document.getElementById('charIndexBtn').setAttribute('aria-expanded', 'false');
         if (playing) startTimer();
     }
@@ -872,9 +951,12 @@
             else openIndex();
         });
         document.getElementById('charIndexClose').addEventListener('click', closeIndex);
-        document.getElementById('charIndexSearch').addEventListener('input', function (e) {
+        var searchInput = document.getElementById('charIndexSearch');
+        searchInput.addEventListener('input', function (e) {
             filterIndex(e.target.value);
         });
+        /* 触屏聚焦后保证输入框在可视视口里（键盘弹出场景） */
+        searchInput.addEventListener('focus', function () { keepSearchInView(searchInput); });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && indexOpen) closeIndex();
         });

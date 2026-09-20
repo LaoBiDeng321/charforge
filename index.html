@@ -27,6 +27,33 @@
           if (meta) meta.setAttribute('content', 'width=1280');
         }
 
+        /* 设备比例补偿（只给检索面板用）。
+           为什么要：PC 视图把 viewport 设成 width=1280，手机浏览器把整页缩到约 0.3 倍。
+           而「聚焦是否自动放大」是按缩放后的**有效字号**判定的（阈值约 16pt）——
+           面板里 14px 的输入框实际只剩 ~5pt：要么挡不住放大，要么把 CSS 字号写到 60px 才够
+           （两种都在真机上验过，都很难看）。这里只算出缩放倍数，由 carousel.js 把检索面板
+           临时铺满整屏、carousel.css 用 zoom 反向抵消整页缩放，让面板内部回到设备真实尺寸：
+           字号不用放大，也不会再触发聚焦放大。
+           --panel-zoom = 布局宽 / 设备宽（自适应模式下为 1，等于不缩放）。 */
+        var syncPanelZoom = function () {
+          var layoutW = document.documentElement.clientWidth || window.innerWidth || 0;
+          var sw = (window.screen && window.screen.width) || 0;
+          var sh = (window.screen && window.screen.height) || 0;
+          if (!layoutW || !sw || !sh) return;
+          /* orientation 媒体查询按（被等比缩放的）布局视口算，能正确反映设备朝向 */
+          var landscape = !!(window.matchMedia && window.matchMedia('(orientation: landscape)').matches);
+          /* screen.width/height 在不同系统上可能是「自然方向」或「当前方向」，两种取法都能得到设备宽度 */
+          var deviceW = landscape ? Math.max(sw, sh) : Math.min(sw, sh);
+          var scale = Math.min(1, deviceW / layoutW);
+          /* 兜底：比例异常时（拿不到真实设备宽）宁可不缩放，也别写出非法 calc */
+          if (!isFinite(scale) || scale <= 0) return;
+          document.documentElement.style.setProperty('--panel-zoom', String(Math.min(8, 1 / scale)));
+        };
+        syncPanelZoom();
+        document.addEventListener('DOMContentLoaded', syncPanelZoom);
+        window.addEventListener('resize', syncPanelZoom);
+        window.addEventListener('orientationchange', syncPanelZoom);
+
         document.addEventListener('DOMContentLoaded', function () {
           var btn = document.getElementById('viewToggle');
           if (!btn) return;
@@ -52,11 +79,11 @@
     <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
 
     <!-- 样式表 -->
-    <link rel="stylesheet" href="css/design-system.css?v=7abd2d34">
+    <link rel="stylesheet" href="css/design-system.css?v=0968acc0">
     <link rel="stylesheet" href="css/loader.css?v=e5898435">
     <link rel="stylesheet" href="css/fullpage.css?v=e1e97cd2">
     <link rel="stylesheet" href="css/components.css?v=d66a46ba">
-    <link rel="stylesheet" href="css/carousel.css?v=898b1e15">
+    <link rel="stylesheet" href="css/carousel.css?v=e855bbcb">
     <link rel="stylesheet" href="css/responsive.css?v=6e24530e">
 </head>
 <body>
@@ -501,9 +528,9 @@
     <script src="js/download.js?v=9ed6dad7"></script>
     <script src="js/agent-install.js?v=3272c7d4"></script>
     <script src="js/vendor/damerau-levenshtein.js?v=fa3b84b6"></script>
-    <script src="js/carousel.js?v=cbb2b0e2"></script>
+    <script src="js/carousel.js?v=81060809"></script>
     <script src="js/loader.js?v=9f3274b8"></script>
-    <script src="js/fullpage.js?v=02647900"></script>
+    <script src="js/fullpage.js?v=bee0b750"></script>
     <script src="js/main.js?v=91f92fd9"></script>
 </body>
 </html>

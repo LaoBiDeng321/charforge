@@ -99,6 +99,9 @@ def load_chars():
 
 
 
+# ZIP 条目固定时间戳（1980-01-01），保证构建产物可复现
+ZIP_EPOCH = (1980, 1, 1, 0, 0, 0)
+
 BOM = b"\xef\xbb\xbf"
 
 
@@ -115,7 +118,8 @@ def collect_files(rel_dir):
     files = []
     base = os.path.join(ROOT, *rel_dir.split("/"))
     for dirpath, dirnames, filenames in os.walk(base):
-        dirnames[:] = [d for d in dirnames if d not in EXCLUDED_DIRS]
+        # 目录名也排序：os.walk 的下钻顺序依赖文件系统，不排会让文件清单顺序漂移
+        dirnames[:] = sorted(d for d in dirnames if d not in EXCLUDED_DIRS)
         for fn in sorted(filenames):
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, base).replace("\\", "/")
@@ -157,7 +161,13 @@ def archive_paths(kind, slug):
 
 
 def build_archive(kind, rel_dir, slug, files):
-    """把条目目录下全部文件打包为 <slug>/<相对路径> 的 ZIP。"""
+    """把条目目录下全部文件打包为 <slug>/<相对路径> 的 ZIP。
+
+    条目时间戳与权限位**固定**，保证构建产物可复现：
+    zf.writestr(名字字符串, 数据) 会拿「当前时间」当条目时间，
+    于是每次构建 ZIP 字节都不同，index.json 里的 sha256 跟着抖，
+    每次跑一遍 build_data.py 都会产生无意义的 diff。
+    """
     rel_zip, full_zip = archive_paths(kind, slug)
     os.makedirs(os.path.dirname(full_zip), exist_ok=True)
 
@@ -169,7 +179,10 @@ def build_archive(kind, rel_dir, slug, files):
             # 与旧下载行为一致：Markdown 写入 UTF-8 BOM，避免旧版 Windows 编辑器乱码
             if item["name"].lower().endswith(".md"):
                 data = BOM + data
-            zf.writestr(slug + "/" + item["name"], data)
+            info = zipfile.ZipInfo(slug + "/" + item["name"], date_time=ZIP_EPOCH)
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16      # 固定权限位，免受 umask / 平台默认值影响
+            zf.writestr(info, data)
 
     return {
         "url": rel_zip,

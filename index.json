@@ -21,7 +21,7 @@
       "archive": {
         "url": "downloads/skills/character-profile-builder.zip",
         "size": 15688,
-        "sha256": "15150bb56acf52b1526750ed973d709d86ae7444dabc8f85c96da03aa6c89bff"
+        "sha256": "6c0c63381f7dac7d74e8d64aa5e3d8a37999e2af70c5db179e83baa45d6b4d2d"
       }
     },
     {
@@ -44,7 +44,7 @@
       "archive": {
         "url": "downloads/skills/original-character-builder.zip",
         "size": 11237,
-        "sha256": "7ac4ec7643ec5966e666e479fccec8f93f2f4288685dbe818bbbcc27ccda270b"
+        "sha256": "11766bd097eb2e6bb31a2bccc5ec40327c08b67093220b50e6b5e1f774e425f9"
       }
     }
   ],
@@ -129,7 +129,7 @@
       "archive": {
         "url": "downloads/char/alf-silver-palace.zip",
         "size": 250956,
-        "sha256": "1597b61f32ff1f22c4d2f0fabd450d0ee97dc20b3696811c92f3774bbc4e94fc"
+        "sha256": "ec0161473c29a88038c6849ee7ac377fe403932938b0b312cc40030ecef2ed78"
       },
       "nameEn": "Alf",
       "alias": "ALF",
@@ -256,7 +256,7 @@
       "archive": {
         "url": "downloads/char/citlali-genshin-impact.zip",
         "size": 17073725,
-        "sha256": "cee1824c7920a4bfb5b55fc6138fa4023e012dd19bd8d74279cc0b7f9a09c2c8"
+        "sha256": "b250add356dec9c4aad10a6cc14598298c276776d8fde11d8352803758f7c76e"
       },
       "nameEn": "Citlali",
       "alias": "CITLALI",
@@ -407,7 +407,7 @@
       "archive": {
         "url": "downloads/char/cyrene-honkai-star-rail.zip",
         "size": 4745817,
-        "sha256": "2ca16140298f4abc234a1d31113005ddfb93bab5bf40a8daeacfe654fa65a4ca"
+        "sha256": "7ef071e019ebb4943c56f9f8c8297eb78603e6c03f9d51f82315d29a6a67ebf4"
       },
       "nameEn": "Cyrene",
       "alias": "CYRENE",
@@ -528,7 +528,7 @@
       "archive": {
         "url": "downloads/char/perlica-arknights-endfield.zip",
         "size": 379118,
-        "sha256": "03b6c83835d0de8b32e3c5ba0e8ef8f641f5b006ff8f709fb12c4f1d68c50255"
+        "sha256": "c7c6ce5445e15f5ec6c2bb4bd10e6827269d0461a847f3520678cb893eb504de"
       },
       "nameEn": "Perlica",
       "alias": "PERLICA",
@@ -655,7 +655,7 @@
       "archive": {
         "url": "downloads/char/priestess-arknights.zip",
         "size": 2707725,
-        "sha256": "8c4157cc92043342dc171f3c9e8113a7a0197c797fe22209a338782b011cbed9"
+        "sha256": "cabc98a10e985204840cbdc9e43b2223822072e08dd4c0c2be995eddfaa1990a"
       },
       "nameEn": "Priestess",
       "alias": "PRIESTESS",
@@ -794,7 +794,7 @@
       "archive": {
         "url": "downloads/char/shu-arknights.zip",
         "size": 23838774,
-        "sha256": "bebe98f068d878a132dcdf9348282a1c345d66872debd6a43dd9897c9495b696"
+        "sha256": "9d50386f5e611b4ca3ac56ffbc90ec6c09bbb7760aa2847727282633c4800b6d"
       },
       "nameEn": "Shu",
       "alias": "SHU",
@@ -915,7 +915,7 @@
       "archive": {
         "url": "downloads/char/white-rice-fish-deepseek.zip",
         "size": 149537,
-        "sha256": "53c24b1b819d2204a256bfc91506bf5afd9917344bab7264e221e5745d6c63d2"
+        "sha256": "12d304c96fb3678f53b64803ff4eb9a11f1a3c72cb7bdbdb997032e85f92cd0f"
       },
       "nameEn": "White Rice Fish",
       "alias": "WHITE RICE FISH",

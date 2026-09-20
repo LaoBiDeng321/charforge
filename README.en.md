@@ -169,7 +169,12 @@ It generates:
 
 - `index.json` — the resource index shared by the site and by agents (metadata, file manifest, sha256, download URLs, card thumbnails, locator index and pinyin search keys);
 - `downloads/skills/<slug>.zip`, `downloads/char/<slug>.zip` — static ZIPs containing the Markdown and the `assets/` images;
-- square images under `thumbnails/<slug>/` are written into the `thumbnail` field of `index.json`.
+- square images under `thumbnails/<slug>/` are written into the `thumbnail` field of `index.json`;
+- the `?v=` content hashes on the `js/` and `css/` references in `index.html`, plus its **two version numbers** (boot screen and footer) — the version is stamped as `VER YY.MM.DD` using the build date.
+
+> [!NOTE]
+> **The version number needs no manual maintenance.** It is date-based, and the build day *is* the release day, so `build_data.py` stamps it directly; forgetting it can no longer leave it stranded on an old date (which is exactly how it had been stuck on `26.09.14`).
+> You can still set it by hand — edit `VER xx.xx.xx` in `index.html` to whatever you want, **then** run the build. The script only rewrites it when the date differs, and rebuilding on the same day is byte-identical.
 
 At runtime the front end does `fetch('index.json')` and no longer uses an inlined `data.js`. `downloads/` is a build artefact and is excluded via `.gitignore`; Netlify generates it during its build, so run the script once before previewing locally.
 

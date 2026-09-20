@@ -168,7 +168,12 @@ python build_data.py
 
 - `index.json`：站点与 Agent 共用的资源索引（元数据、文件清单、sha256、下载地址、角色缩略图、定位索引与拼音检索键）；
 - `downloads/skills/<slug>.zip`、`downloads/char/<slug>.zip`：包含 Markdown 与 `assets/` 图片的静态 ZIP；
-- `thumbnails/<slug>/` 下的方形图会被写入 `index.json` 的 `thumbnail` 字段。
+- `thumbnails/<slug>/` 下的方形图会被写入 `index.json` 的 `thumbnail` 字段；
+- `index.html` 里 `js/`、`css/` 引用的 `?v=` 内容哈希，以及**两处版本号**（开屏 + 页脚）——版本号按下发版当天日期写成 `VER YY.MM.DD`。
+
+> [!NOTE]
+> **版本号不需要手工维护。** 它是日期制的，构建当天就是发版日，`build_data.py` 直接盖戳；忘了改也不会滞留在旧日期（这正是它先前停在 `26.09.14` 的原因）。
+> 想手工指定也可以——先把 `index.html` 里的 `VER xx.xx.xx` 改成你要的值，**再**跑构建；脚本只在日期不一致时才改写，同一天重复构建结果完全一致。
 
 前端运行时 `fetch('index.json')`，不再使用内联 `data.js`。`downloads/` 是构建产物，已在 `.gitignore` 中排除；Netlify 构建会自动生成，本地预览前请先执行一次脚本。
 

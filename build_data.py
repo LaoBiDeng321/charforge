@@ -336,6 +336,30 @@ def stamp_assets():
     return changed[0]
 
 
+VERSION_RE = re.compile(r"VER \d{2}\.\d{2}\.\d{2}")
+
+
+def stamp_version():
+    """把 index.html 里的版本号改写成构建当天日期（VER YY.MM.DD）。
+
+    版本号是日期制的（开屏与页脚各一处），原先靠手工维护——结果一路停在
+    26.09.14，中间加了角色、改了检索都没人动它。日期制版本本来就没有需要
+    人工决定的信息：构建当天就是发版日，直接盖戳即可，顺手抹掉一步容易忘的
+    手工操作。同一份源码在同一天重复构建，结果仍完全一致（可复现性不受影响）。
+    """
+    page = os.path.join(ROOT, "index.html")
+    if not os.path.isfile(page):
+        return 0
+    with open(page, "r", encoding="utf-8", newline="") as f:
+        src = f.read()
+    out, count = VERSION_RE.subn(date.today().strftime("VER %y.%m.%d"), src)
+    if out != src:
+        with open(page, "w", encoding="utf-8", newline="") as f:
+            f.write(out)
+        return count, True
+    return count, False
+
+
 def build():
     if os.path.isdir(DOWNLOADS):
         shutil.rmtree(DOWNLOADS)
@@ -344,6 +368,7 @@ def build():
     chars_out = [build_entry(meta, "char") for meta in load_chars()]
 
     stamped = stamp_assets()
+    versioned = stamp_version()
 
     data = {
         "generatedAt": date.today().isoformat(),
@@ -360,6 +385,9 @@ def build():
     print("index.json generated ->", os.path.relpath(OUT, ROOT))
     print("downloads generated ->", os.path.relpath(DOWNLOADS, ROOT))
     print("index.html asset stamps updated ->", stamped)
+    print("index.html version stamp -> %s（命中 %d 处%s）" % (
+        date.today().strftime("VER %y.%m.%d"), versioned[0],
+        "，已更新" if versioned[1] else "，无需更新"))
     print("skills: %d, chars: %d, files: %d, zip bytes: %d" % (
         len(skills_out), len(chars_out), total_files, total_zip_bytes
     ))

@@ -113,6 +113,22 @@ def sha256_file(path):
     return h.hexdigest()
 
 
+CRLF = b"\r\n"
+
+
+def sha256_text_lf(path):
+    """文本资源取哈希前先把行尾归一化成 LF。
+
+    为什么要归一化：`core.autocrlf` 会把检出到工作区的文本文件转成 CRLF，
+    而「哪些文件被转过」取决于检出历史——同一份仓库在不同平台 / 不同机器上
+    算出的原始字节哈希并不一致。若直接按原始字节取哈希，index.html 里的
+    ?v= 戳会随平台漂移，产物反复 churn（index.json 的 ZIP sha256 同理）。
+    归一化后，LF 与 CRLF 的工作副本得到同一个戳。
+    """
+    with open(path, "rb") as f:
+        return hashlib.sha256(f.read().replace(CRLF, b"\n")).hexdigest()
+
+
 def collect_files(rel_dir):
     """递归收集目录内全部文件（含图片），返回 [{name, size, sha256, url}]。"""
     files = []
@@ -177,8 +193,10 @@ def build_archive(kind, rel_dir, slug, files):
             with open(full, "rb") as f:
                 data = f.read()
             # 与旧下载行为一致：Markdown 写入 UTF-8 BOM，避免旧版 Windows 编辑器乱码
+            # 同时把行尾统一成 LF —— 否则 core.autocrlf 会让同一份卡在不同平台上
+            # 打出字节不同的 ZIP，archive.sha256 跟着漂移
             if item["name"].lower().endswith(".md"):
-                data = BOM + data
+                data = BOM + data.replace(CRLF, b"\n")
             info = zipfile.ZipInfo(slug + "/" + item["name"], date_time=ZIP_EPOCH)
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o644 << 16      # 固定权限位，免受 umask / 平台默认值影响
@@ -305,7 +323,7 @@ def stamp_assets():
     def repl(m):
         rel = m.group("path")
         full = os.path.join(ROOT, *rel.split("/"))
-        digest = sha256_file(full)[:8] if os.path.isfile(full) else "00000000"
+        digest = sha256_text_lf(full)[:8] if os.path.isfile(full) else "00000000"
         out = "%s%s?v=%s\"" % (m.group("attr"), rel, digest)
         if out != m.group(0):
             changed[0] += 1

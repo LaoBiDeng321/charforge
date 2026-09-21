@@ -497,7 +497,7 @@
     },
     {
       "slug": "march-7th-honkai-star-rail",
-      "name": "三月七",
+      "name": "三月七（含长夜月）",
       "files": [
         {
           "name": "SKILL.md",
@@ -631,7 +631,7 @@
         "size": 12701378,
         "sha256": "e13c1cd1adf069c9223dc07bfe0d8e62be255901c1c8ec763f21eff8ccafef9c"
       },
-      "nameEn": "March 7th",
+      "nameEn": "March 7th (Evernight)",
       "alias": "MARCH 7TH / EVERNIGHT",
       "origin": {
         "zh-CN": "《崩坏：星穹铁道》官方设定",
@@ -678,15 +678,19 @@
           "dao"
         ]
       },
-      "pinyin": "sanyueqi",
-      "pinyinInitials": "syq",
+      "pinyin": "sanyueqihanchangyeyue",
+      "pinyinInitials": "syqhcyy",
       "pinyinSyllables": [
         "san",
         "yue",
-        "qi"
+        "qi",
+        "han",
+        "chang",
+        "ye",
+        "yue"
       ],
       "sort": {
-        "zh-CN": "sanyueqi"
+        "zh-CN": "sanyueqihanchangyeyue"
       },
       "thumbnail": "thumbnails/march-7th-honkai-star-rail/cover.png"
     },

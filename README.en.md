@@ -11,7 +11,7 @@ Search · Verify · Adjudicate · 10 files delivered
 [![License](https://img.shields.io/badge/License-MIT-fbbf24?style=flat-square&labelColor=161713)](LICENSE)
 [![Maintainer](https://img.shields.io/badge/Maintainer-LaoBiDeng321-f5f5f0?style=flat-square&labelColor=161713)](https://github.com/LaoBiDeng321)
 [![Builders](https://img.shields.io/badge/Builders-2-8ce99a?style=flat-square&labelColor=161713)](#two-builders)
-[![Characters](https://img.shields.io/badge/Characters-7-f59e0b?style=flat-square&labelColor=161713)](#character-cards)
+[![Characters](https://img.shields.io/badge/Characters-8-f59e0b?style=flat-square&labelColor=161713)](#character-cards)
 [![Live preview](https://img.shields.io/badge/Live_preview-Netlify-00b7d4?style=flat-square&labelColor=161713)](https://lbd-charforge.netlify.app/)
 
 </div>
@@ -88,6 +88,7 @@ Both builders share the same 10-file framework (defined in [reference/templates.
 | Alf | [char/alf-silver-palace](char/alf-silver-palace/prompt.md) | Silver Palace | 10 |
 | Cyrene | [char/cyrene-honkai-star-rail](char/cyrene-honkai-star-rail/prompt.md) | Honkai: Star Rail | 10 (three-form tiers) |
 | Perlica | [char/perlica-arknights-endfield](char/perlica-arknights-endfield/prompt.md) | Arknights: Endfield | 10 |
+| March 7th (incl. Evernight) | [char/march-7th-honkai-star-rail](char/march-7th-honkai-star-rail/prompt.md) | Honkai: Star Rail | 10 (three forms) |
 
 A character's full roleplay entry point is its `SKILL.md` (run rules) plus `prompt.md` (personality snapshot).
 
@@ -237,7 +238,7 @@ The search-box focus zoom is handled: in PC view the page is scaled to ~0.3×, s
 
 ## Disclaimer
 
-**Setting material**: the content of the seven character cards is drawn from each work's official text (main story / art books / official announcements), and copyright belongs to the respective rights holders. This repo only organises it, labels it and keeps it traceable — it claims no rights over the material.
+**Setting material**: the content of the eight character cards is drawn from each work's official text (main story / art books / official announcements), and copyright belongs to the respective rights holders. This repo only organises it, labels it and keeps it traceable — it claims no rights over the material.
 
 **Images**: card key art comes from official channels, though **a few were supplied manually by a user with the original retrieval link unrecorded** (noted in each character's `assets/README.md`); the **character thumbnails under `thumbnails/` were collected from community sources**, and for several of them **the original author could not be identified** while preparing this repo.
 
@@ -258,7 +259,7 @@ If you are the author of one of those images:
 >
 > — Isaac Newton to Robert Hooke, 5 February 1676
 
-The visual language comes from Endfield-Style-Skill, the interface taste references taste-skill, the fuzzy matching algorithm is talisman's, and Chinese romanisation is delegated to pypinyin. **The noise-control strategy for search (capping the subsequence fallback) and the idea of comparing pinyin at the syllable level instead of by string distance both came from 小肥鱼（幼鲸）.** As for the seven character cards — every one of them stands on the shoulders of its **source work**, and on the shoulders of everyone who transcribed the official text line by line so that later readers could check it.
+The visual language comes from Endfield-Style-Skill, the interface taste references taste-skill, the fuzzy matching algorithm is talisman's, and Chinese romanisation is delegated to pypinyin. **The noise-control strategy for search (capping the subsequence fallback) and the idea of comparing pinyin at the syllable level instead of by string distance both came from 小肥鱼（幼鲸）.** As for the eight character cards — every one of them stands on the shoulders of its **source work**, and on the shoulders of everyone who transcribed the official text line by line so that later readers could check it.
 
 All I did was stack them carefully, and make sure every claim in the stack can be traced back to where it came from. **Break the provenance and none of this is worth anything** — so if you spot a setting that looks wrong, bring the source and open an issue.
 

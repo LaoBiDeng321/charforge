@@ -24,7 +24,7 @@
 
             'hero.kicker': 'CHARACTER SKILL REPOSITORY // 基于搜索 · agent 必须包含搜索功能',
             'hero.subtitle': '角色工坊 · 扮演 Skill 资源站',
-            'hero.description': '两个角色设定构建器 × 七张成品角色卡。全部以 Markdown 设定文件交付，即下即用，可自由修改与分享。',
+            'hero.description': '两个角色设定构建器 × 八张成品角色卡。全部以 Markdown 设定文件交付，即下即用，可自由修改与分享。',
             'hero.stats.skills': '构建器',
             'hero.stats.chars': '角色卡',
             'hero.stats.files': '设定文件',
@@ -148,7 +148,7 @@
 
             'hero.kicker': 'CHARACTER SKILL REPOSITORY // SEARCH-BASED · AGENTS MUST INCLUDE SEARCH',
             'hero.subtitle': 'CHAR WORKSHOP · ROLEPLAY SKILL HUB',
-            'hero.description': 'Two profile builders × seven ready-to-run character cards. Everything ships as Markdown setting files — download, tweak and share freely.',
+            'hero.description': 'Two profile builders × eight ready-to-run character cards. Everything ships as Markdown setting files — download, tweak and share freely.',
             'hero.stats.skills': 'SKILL PACKS',
             'hero.stats.chars': 'CHAR CARDS',
             'hero.stats.files': 'SETTING FILES',

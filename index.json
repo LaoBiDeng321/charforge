@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20",
+  "generatedAt": "2026-09-21",
   "skills": [
     {
       "slug": "character-profile-builder",
@@ -494,6 +494,201 @@
         "zh-CN": "xilian"
       },
       "thumbnail": "thumbnails/cyrene-honkai-star-rail/cover.png"
+    },
+    {
+      "slug": "march-7th-honkai-star-rail",
+      "name": "三月七",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 8766,
+          "sha256": "b47cb7d83799148aa9a2ceb3c7074fb7dd76d7b16f883b79578ebf24921a591f",
+          "url": "char/march-7th-honkai-star-rail/SKILL.md"
+        },
+        {
+          "name": "behavior.md",
+          "size": 8881,
+          "sha256": "6ae14974b08517c7b7a8bba7682db187b883c0b056caa66a2c3044835a21e287",
+          "url": "char/march-7th-honkai-star-rail/behavior.md"
+        },
+        {
+          "name": "conflicts.md",
+          "size": 8140,
+          "sha256": "c2da71ef6772037770aeacd0891feb400753c7ffcd6b5fc9ba9c9fba4f4b8719",
+          "url": "char/march-7th-honkai-star-rail/conflicts.md"
+        },
+        {
+          "name": "interaction.md",
+          "size": 21921,
+          "sha256": "3d710ef0be86aee6bc9322ae2526565b50b53c6a1373e1032fed04c022badfb3",
+          "url": "char/march-7th-honkai-star-rail/interaction.md"
+        },
+        {
+          "name": "memory.md",
+          "size": 10861,
+          "sha256": "2a2006c37b521bc0b3f3a006af9756357f17e59b9decfb219daf2532ade01ce7",
+          "url": "char/march-7th-honkai-star-rail/memory.md"
+        },
+        {
+          "name": "personality.md",
+          "size": 13998,
+          "sha256": "a04ed1dce295eee8c002f67e03dc44d7aa1fff3de7cdaab782652ae6cece8a98",
+          "url": "char/march-7th-honkai-star-rail/personality.md"
+        },
+        {
+          "name": "profile.md",
+          "size": 8684,
+          "sha256": "630ce3f21f9c33b28ec86b67c5b7a56dee6302c91649c7ec248381e446b61561",
+          "url": "char/march-7th-honkai-star-rail/profile.md"
+        },
+        {
+          "name": "prompt.md",
+          "size": 7158,
+          "sha256": "c326e2ba90742ad397b0cc0792a4398aa4377ca5e292028b18e44809845a960b",
+          "url": "char/march-7th-honkai-star-rail/prompt.md"
+        },
+        {
+          "name": "relations.md",
+          "size": 12079,
+          "sha256": "c5bd6cd6b61e3e043fc1c9bce2112763f0f74e0c6a9cf92de568e5c8fee40edf",
+          "url": "char/march-7th-honkai-star-rail/relations.md"
+        },
+        {
+          "name": "world.md",
+          "size": 7441,
+          "sha256": "d6869deb391fe39b85218ec01b10fbd49a61e71b1e23638e678a497d89f0159e",
+          "url": "char/march-7th-honkai-star-rail/world.md"
+        },
+        {
+          "name": "assets/01-全身立绘-三月七-存护.png",
+          "size": 4751331,
+          "sha256": "3228ea7b6d946bb74d980c930ce3e2ca3d4205814c6e4f150c7ef9b5d016faa4",
+          "url": "char/march-7th-honkai-star-rail/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%AD%98%E6%8A%A4.png"
+        },
+        {
+          "name": "assets/02-全身立绘-三月七-巡猎.png",
+          "size": 2941283,
+          "sha256": "f751ec645593c11ae21b981207c9cf4ba887cc0a7287f4a5f0611f0bc634f9f8",
+          "url": "char/march-7th-honkai-star-rail/assets/02-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%B7%A1%E7%8C%8E.png"
+        },
+        {
+          "name": "assets/03-全身立绘-长夜月.png",
+          "size": 433557,
+          "sha256": "c6dad516e4100b30d04a1c0e72e765b8fbcae0397f5ce017c9780b633d0c7ebe",
+          "url": "char/march-7th-honkai-star-rail/assets/03-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E9%95%BF%E5%A4%9C%E6%9C%88.png"
+        },
+        {
+          "name": "assets/04-官方卡片-翁法罗斯英雄纪-长夜月.png",
+          "size": 984256,
+          "sha256": "7e215aff0591aa2f0d0948488ac02e9e364056baa5970dab27b5e36a1e3de435",
+          "url": "char/march-7th-honkai-star-rail/assets/04-%E5%AE%98%E6%96%B9%E5%8D%A1%E7%89%87-%E7%BF%81%E6%B3%95%E7%BD%97%E6%96%AF%E8%8B%B1%E9%9B%84%E7%BA%AA-%E9%95%BF%E5%A4%9C%E6%9C%88.png"
+        },
+        {
+          "name": "assets/05-官方卡片立绘-长夜月.png",
+          "size": 1033699,
+          "sha256": "61841e320de7ffe08a5fded08b71b74e115ee7b33e6761c990fdc925c15812b1",
+          "url": "char/march-7th-honkai-star-rail/assets/05-%E5%AE%98%E6%96%B9%E5%8D%A1%E7%89%87%E7%AB%8B%E7%BB%98-%E9%95%BF%E5%A4%9C%E6%9C%88.png"
+        },
+        {
+          "name": "assets/06-光锥-余生的第一天.png",
+          "size": 715181,
+          "sha256": "e1c82db5c84276629cc6bb3859769cfd4c2acee47ed84e3a18c81b519b736ad4",
+          "url": "char/march-7th-honkai-star-rail/assets/06-%E5%85%89%E9%94%A5-%E4%BD%99%E7%94%9F%E7%9A%84%E7%AC%AC%E4%B8%80%E5%A4%A9.png"
+        },
+        {
+          "name": "assets/07-光锥-芳华待灼.jpg",
+          "size": 217142,
+          "sha256": "e7c2d0786dbc9cc1e81e82b99fa59d0a480caa756306ef9fd605105a1d84a1f0",
+          "url": "char/march-7th-honkai-star-rail/assets/07-%E5%85%89%E9%94%A5-%E8%8A%B3%E5%8D%8E%E5%BE%85%E7%81%BC.jpg"
+        },
+        {
+          "name": "assets/08-光锥-致长夜的星光.png",
+          "size": 709689,
+          "sha256": "bf5c9de5f02e46675862f493d42c2d04f0bd22495a76f0b042670293815d12bf",
+          "url": "char/march-7th-honkai-star-rail/assets/08-%E5%85%89%E9%94%A5-%E8%87%B4%E9%95%BF%E5%A4%9C%E7%9A%84%E6%98%9F%E5%85%89.png"
+        },
+        {
+          "name": "assets/09-时装-三月七-冬去煦至.png",
+          "size": 430192,
+          "sha256": "7cc30c8a5de04dba4f55f2c080005e8cd022d72fdfb355751bbba9391e108f40",
+          "url": "char/march-7th-honkai-star-rail/assets/09-%E6%97%B6%E8%A3%85-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%86%AC%E5%8E%BB%E7%85%A6%E8%87%B3.png"
+        },
+        {
+          "name": "assets/10-头像-三月七.png",
+          "size": 471987,
+          "sha256": "970784761feda49525ddc34fb92285a9175968ffbc4697b426cb1214cfde4261",
+          "url": "char/march-7th-honkai-star-rail/assets/10-%E5%A4%B4%E5%83%8F-%E4%B8%89%E6%9C%88%E4%B8%83.png"
+        },
+        {
+          "name": "assets/README.md",
+          "size": 4893,
+          "sha256": "8079d53a9bdb218f8dfb3bd3f700745865aeed45371a8c9d9f732709de256543",
+          "url": "char/march-7th-honkai-star-rail/assets/README.md"
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/march-7th-honkai-star-rail.zip",
+        "size": 12701378,
+        "sha256": "e13c1cd1adf069c9223dc07bfe0d8e62be255901c1c8ec763f21eff8ccafef9c"
+      },
+      "nameEn": "March 7th",
+      "alias": "MARCH 7TH / EVERNIGHT",
+      "origin": {
+        "zh-CN": "《崩坏：星穹铁道》官方设定",
+        "en-US": "Honkai: Star Rail Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "三月七",
+          "长夜月",
+          "崩坏：星穹铁道",
+          "米哈游"
+        ],
+        "en-US": [
+          "March 7th",
+          "Evernight",
+          "Honkai: Star Rail",
+          "HoYoverse"
+        ]
+      },
+      "company": {
+        "id": "hoyoverse",
+        "zh-CN": "米哈游",
+        "en-US": "HoYoverse",
+        "pinyin": "mihayou",
+        "pinyinInitials": "mhy",
+        "pinyinSyllables": [
+          "mi",
+          "ha",
+          "you"
+        ]
+      },
+      "work": {
+        "id": "honkai-star-rail",
+        "zh-CN": "崩坏：星穹铁道",
+        "en-US": "Honkai: Star Rail",
+        "pinyin": "benghuaixingqiongtiedao",
+        "pinyinInitials": "bhxqtd",
+        "pinyinSyllables": [
+          "beng",
+          "huai",
+          "xing",
+          "qiong",
+          "tie",
+          "dao"
+        ]
+      },
+      "pinyin": "sanyueqi",
+      "pinyinInitials": "syq",
+      "pinyinSyllables": [
+        "san",
+        "yue",
+        "qi"
+      ],
+      "sort": {
+        "zh-CN": "sanyueqi"
+      },
+      "thumbnail": "thumbnails/march-7th-honkai-star-rail/cover.png"
     },
     {
       "slug": "perlica-arknights-endfield",

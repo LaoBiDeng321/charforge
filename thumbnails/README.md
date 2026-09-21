@@ -19,7 +19,7 @@ thumbnails/<slug>/
 
 ## ⚠️ 来源说明与下架政策
 
-**本目录下的图片不是官方立绘，而是从社区采集的图片**（多为 Q 版头像 / 表情包风格），用于构成站点角色卡左侧的封面。
+**本目录下的图片多数是从社区采集的 Q 版头像 / 表情包**，用于构成站点角色卡左侧的封面；其中 `march-7th-honkai-star-rail/cover.png` 由用户说明为**官方表情包**（具体套组未记录），属于本目录的例外记录。
 
 整理时有若干图片**未能追溯到原作者**——这是记录疏漏，不是「没有来源」。**若你是其中任一张的作者：**
 
@@ -41,5 +41,6 @@ thumbnails/<slug>/
 | 阿芙 | [`alf-silver-palace/cover.jpg`](alf-silver-palace/cover.jpg) | 未记录 | ⚠️ 待补 |
 | 昔涟 | [`cyrene-honkai-star-rail/cover.png`](cyrene-honkai-star-rail/cover.png) | 未记录 | ⚠️ 待补 |
 | 佩丽卡 | [`perlica-arknights-endfield/cover.png`](perlica-arknights-endfield/cover.png) | 未记录 | ⚠️ 待补 |
+| 三月七（含长夜月） | [`march-7th-honkai-star-rail/cover.png`](march-7th-honkai-star-rail/cover.png) | 用户说明为**官方表情包**；具体套组未记录 | ✅ 官方表情包，套组待补 |
 
-> 该表在仓库历史里是「先上线、后补齐」的状态：所有图片都是随角色卡一起加入的，采集时没有同步记录出处。已逐一确认的事实是——**它们都不是官方立绘**，因此不适用于 `char/<slug>/assets/README.md` 里那套官方渠道溯源规范。
+> 该表在仓库历史里是「先上线、后补齐」的状态：多数图片都是随角色卡一起加入的，采集时没有同步记录出处。已逐一确认的事实是——**它们都不是官方角色立绘（key art）**，因此不适用于 `char/<slug>/assets/README.md` 里那套官方渠道溯源规范。

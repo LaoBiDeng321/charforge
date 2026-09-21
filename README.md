@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/badge/License-MIT-fbbf24?style=flat-square&labelColor=161713)](LICENSE)
 [![维护者](https://img.shields.io/badge/维护者-LaoBiDeng321-f5f5f0?style=flat-square&labelColor=161713)](https://github.com/LaoBiDeng321)
 [![构建器](https://img.shields.io/badge/构建器-2-8ce99a?style=flat-square&labelColor=161713)](#两个构建器)
-[![角色](https://img.shields.io/badge/角色-7-f59e0b?style=flat-square&labelColor=161713)](#角色一览)
+[![角色](https://img.shields.io/badge/角色-8-f59e0b?style=flat-square&labelColor=161713)](#角色一览)
 [![在线预览](https://img.shields.io/badge/在线预览-Netlify-00b7d4?style=flat-square&labelColor=161713)](https://lbd-charforge.netlify.app/)
 
 </div>
@@ -88,6 +88,7 @@ flowchart LR
 | 阿芙 | [char/alf-silver-palace](char/alf-silver-palace/prompt.md) | 白银之城 | 10 |
 | 昔涟 | [char/cyrene-honkai-star-rail](char/cyrene-honkai-star-rail/prompt.md) | 崩坏：星穹铁道 | 10（三阶段档位） |
 | 佩丽卡 | [char/perlica-arknights-endfield](char/perlica-arknights-endfield/prompt.md) | 明日方舟：终末地 | 10 |
+| 三月七（含长夜月） | [char/march-7th-honkai-star-rail](char/march-7th-honkai-star-rail/prompt.md) | 崩坏：星穹铁道 | 10（三档显形） |
 
 每个角色的完整扮演入口是其目录下的 `SKILL.md`（运行规则）+ `prompt.md`（人格快照）。
 
@@ -236,7 +237,7 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 
 ## 免责声明
 
-**设定素材**：七张角色卡的设定内容取自各自原作的官方文本（正剧 / 设定集 / 官网公告），版权归各原作版权方所有。本仓库只做整理、标注与可追溯化，不对素材主张任何权利。
+**设定素材**：八张角色卡的设定内容取自各自原作的官方文本（正剧 / 设定集 / 官网公告），版权归各原作版权方所有。本仓库只做整理、标注与可追溯化，不对素材主张任何权利。
 
 **图片**：卡片立绘取自官方渠道，**个别由使用者手动投放、原获取链接未记录**（各角色 `assets/README.md` 有标注）；**`thumbnails/` 下的角色缩略图采集自社区**，整理时有若干**未能找到原作者**。
 
@@ -257,7 +258,7 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 >
 > —— 艾萨克·牛顿致胡克，1676 年 2 月 5 日
 
-视觉语言来自终末地风格 SKILL，界面审美参考 taste-skill，模糊匹配算法取自 talisman，汉字注音交给 pypinyin；**检索的收噪声策略（子序列兜底限长）与音节级重排，来自小肥鱼（幼鲸）的建议**；至于那七张角色卡——它们全部站在各自**原作**的肩膀上，站在每一个把官方文本一字一句记下来、可供后人查证的人的肩膀上。
+视觉语言来自终末地风格 SKILL，界面审美参考 taste-skill，模糊匹配算法取自 talisman，汉字注音交给 pypinyin；**检索的收噪声策略（子序列兜底限长）与音节级重排，来自小肥鱼（幼鲸）的建议**；至于那八张角色卡——它们全部站在各自**原作**的肩膀上，站在每一个把官方文本一字一句记下来、可供后人查证的人的肩膀上。
 
 我做的事情只有两件：把它们摞稳，以及保证摞起来的每一条都能追回原处。**溯源断了，这套东西就不值钱了**——所以发现哪条设定有出入，请带着出处来提 Issue。
 

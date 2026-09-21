@@ -1,0 +1,33 @@
+{
+  "name": "三月七",
+  "alias": "MARCH 7TH / EVERNIGHT",
+  "nameEn": "March 7th",
+  "company": {
+    "id": "hoyoverse",
+    "zh-CN": "米哈游",
+    "en-US": "HoYoverse"
+  },
+  "work": {
+    "id": "honkai-star-rail",
+    "zh-CN": "崩坏：星穹铁道",
+    "en-US": "Honkai: Star Rail"
+  },
+  "origin": {
+    "zh-CN": "《崩坏：星穹铁道》官方设定",
+    "en-US": "Honkai: Star Rail Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "三月七",
+      "长夜月",
+      "崩坏：星穹铁道",
+      "米哈游"
+    ],
+    "en-US": [
+      "March 7th",
+      "Evernight",
+      "Honkai: Star Rail",
+      "HoYoverse"
+    ]
+  }
+}

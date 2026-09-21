@@ -593,3 +593,24 @@
     color: var(--color-text-secondary);
     line-height: var(--line-height-relaxed);
 }
+
+/* Token 预估说明：声明卡下方的信息条，不占用第 4 张卡位 */
+.declaration-token-note {
+    display: flex;
+    gap: var(--space-md);
+    width: 100%;
+    margin: calc(-1 * var(--space-lg)) 0 var(--space-2xl);
+    padding: var(--space-md);
+    border-left: 2px solid var(--color-signal-cyan);
+    background: var(--color-info-bg);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-relaxed);
+}
+
+.declaration-token-note strong {
+    flex: 0 0 auto;
+    color: var(--color-text-primary);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}

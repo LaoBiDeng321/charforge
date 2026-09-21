@@ -34,9 +34,9 @@ thumbnails/<slug>/
 
 | 角色 | 文件 | 出处 / 作者 | 状态 |
 |---|---|---|---|
-| 吃白饭的大肥鱼 | [`white-rice-fish-deepseek/cover.jpg`](white-rice-fish-deepseek/cover.jpg) | 未记录 | ⚠️ 待补 |
+| 吃白饭的大肥鱼 | [`white-rice-fish-deepseek/cover.png`](white-rice-fish-deepseek/cover.png) | 未记录 | ⚠️ 待补 |
 | 黍 | [`shu-arknights/cover.png`](shu-arknights/cover.png) | 未记录 | ⚠️ 待补 |
-| 普瑞赛斯 | [`priestess-arknights/cover.jpg`](priestess-arknights/cover.jpg) | 未记录 | ⚠️ 待补 |
+| 普瑞赛斯 | [`priestess-arknights/cover.png`](priestess-arknights/cover.png) | 未记录 | ⚠️ 待补 |
 | 茜特菈莉 | [`citlali-genshin-impact/cover.png`](citlali-genshin-impact/cover.png) | 未记录 | ⚠️ 待补 |
 | 阿芙 | [`alf-silver-palace/cover.jpg`](alf-silver-palace/cover.jpg) | 未记录 | ⚠️ 待补 |
 | 昔涟 | [`cyrene-honkai-star-rail/cover.png`](cyrene-honkai-star-rail/cover.png) | 未记录 | ⚠️ 待补 |

@@ -18,11 +18,17 @@ build_data.py —— 资源站数据/分发包构建脚本
   3. index.json 中角色条目的 thumbnail 字段
      来自根目录 thumbnails/<slug>/ 下的方形图片；没有图片时不写入。
 
+  4. index.json 中每个条目的 tokenEstimate 与每个文件的 tokens 字段
+     以 DeepSeek 为例：文本用官方 deepseek_v4_tokenizer.zip 逐文件计数；
+     图片用 Pillow 读取宽高，套用逆向自 DeepSeek 官方图片计算器的 v4.1 尺寸公式。
+     该值是输入侧预估值，不是接口最终 usage；不同模型 / 版本的分词与图片换算都可能不同。
+
 用法：python build_data.py
 """
 
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -36,9 +42,33 @@ DOWNLOADS = os.path.join(ROOT, "downloads")
 THUMBNAILS = os.path.join(ROOT, "thumbnails")
 
 IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif")
+# 参与 Token 预估的文本扩展名。角色卡目前是 .md，留出常见纯文本格式，
+# 以便以后把 reference/ 或说明文件也算进去。
+TEXT_EXTS = (".md", ".markdown", ".txt", ".json", ".yaml", ".yml", ".csv", ".toml", ".ini")
+# DeepSeek 官方 tokenizer 压缩包（来自 docs 的 deepseek_v4_tokenizer.zip）。
+TOKENIZER_ZIP = os.path.join(ROOT, "tools", "deepseek_v4_tokenizer.zip")
+TOKENIZER_ENTRY = "deepseek_v4_tokenizer/tokenizer.json"
 
 # 递归收集时排除的目录（版本库与 Python 缓存，不属于交付物）
 EXCLUDED_DIRS = {".git", "__pycache__"}
+
+# Token 预估依赖：文本用 DeepSeek 官方 tokenizer；图片尺寸用 Pillow 读取。
+# 与 pypinyin 一样属于构建期硬依赖，缺了直接报错，不静默降级成粗略估算。
+try:
+    from tokenizers import Tokenizer
+except ImportError as exc:                                   # pragma: no cover
+    raise SystemExit(
+        "构建需要 tokenizers（读取 DeepSeek 官方 tokenizer.json）。"
+        "请先执行： pip install -r requirements.txt"
+    ) from exc
+
+try:
+    from PIL import Image
+except ImportError as exc:                                   # pragma: no cover
+    raise SystemExit(
+        "构建需要 Pillow（读取 assets 图片尺寸，用于图片 Token 预估）。"
+        "请先执行： pip install -r requirements.txt"
+    ) from exc
 
 # ---------------------------------------------------------------
 # 展示元数据配置（数据与代码分离：改名/加角色只改这张表）
@@ -129,8 +159,224 @@ def sha256_text_lf(path):
         return hashlib.sha256(f.read().replace(CRLF, b"\n")).hexdigest()
 
 
-def collect_files(rel_dir):
-    """递归收集目录内全部文件（含图片），返回 [{name, size, sha256, url}]。"""
+def file_kind(name):
+    """按扩展名区分 text / image / other，用于汇总 Token 预估。"""
+    lower = name.lower()
+    if lower.endswith(IMAGE_EXTS):
+        return "image"
+    if lower.endswith(TEXT_EXTS):
+        return "text"
+    return "other"
+
+
+def load_deepseek_tokenizer():
+    """读取 DeepSeek 官方 tokenizer.json。
+
+    官方文档提供的是 deepseek_v4_tokenizer.zip；这里直接读压缩包内文件，
+    不落盘解压，保持仓库目录干净。缺失时直接报错，避免静默产出无 Token 的索引。
+    """
+    if not os.path.isfile(TOKENIZER_ZIP):
+        raise SystemExit(
+            "缺少 DeepSeek 官方 tokenizer：%s\n"
+            "请从 https://api-docs.deepseek.com/zh-cn/quick_start/token_usage/ "
+            "下载 deepseek_v4_tokenizer.zip 并放到 tools/ 下。"
+            % os.path.relpath(TOKENIZER_ZIP, ROOT)
+        )
+    try:
+        with zipfile.ZipFile(TOKENIZER_ZIP) as zf:
+            raw = zf.read(TOKENIZER_ENTRY)
+    except (KeyError, zipfile.BadZipFile) as exc:
+        raise SystemExit("无法读取 %s 内的 %s：%s" % (
+            os.path.relpath(TOKENIZER_ZIP, ROOT), TOKENIZER_ENTRY, exc
+        )) from exc
+    try:
+        return Tokenizer.from_str(raw.decode("utf-8"))
+    except Exception as exc:
+        raise SystemExit("DeepSeek tokenizer.json 解析失败：%s" % exc) from exc
+
+
+def count_text_tokens(tokenizer, path):
+    """按官方 tokenizer 统计一个文本文件的 token 数。
+
+    这里没有拼接 chat template / system prompt，所以它代表「把文件原文喂给模型」
+    的输入 token 预估，不等于一次对话的最终消耗。
+    """
+    with open(path, "r", encoding="utf-8-sig", errors="replace") as f:
+        text = f.read()
+    # 与官方 deepseek_tokenizer.py 的 tokenizer.encode() 一致（该 tokenizer 配置
+    # add_bos_token / add_eos_token 均为 false，不会额外加特殊 token）。
+    return len(tokenizer.encode(text, add_special_tokens=False).ids)
+
+
+def image_size(path):
+    """用 Pillow 读取图片像素尺寸；图片 Token 公式只依赖宽高，不依赖完整解码。"""
+    with Image.open(path) as im:
+        return im.size
+
+
+def _floor_div(a, b):
+    return a // b
+
+
+def _ceil_div(a, b):
+    return (a + b - 1) // b
+
+
+def _trunc(value):
+    return math.trunc(value)
+
+
+class DeepSeekImageTokenizer:
+    """DeepSeek v4.1 图片 Token 预估公式。
+
+    逆向自 DeepSeek 官方文档站「图片 Token 计算器」的纯前端实现
+    （https://api-docs.deepseek.com/zh-cn/quick_start/token_usage/）。
+    这里只保留 v4.1 配置，并逐行对应原实现的取整 / 缩放 / 上限逻辑。
+    """
+
+    def __init__(self, patch_size, downsample_ratio, max_n_token, is_n_layout,
+                 compress_pad_to=None, max_wh_ratio=None, min_pixels=None):
+        self.patch_size = patch_size
+        self.downsample_ratio = downsample_ratio
+        self.max_n_token = max_n_token
+        self.is_n_layout = is_n_layout
+        self.compress_pad_to = compress_pad_to
+        self.max_wh_ratio = max_wh_ratio
+        self.min_pixels = min_pixels
+
+    @classmethod
+    def v41(cls):
+        # 官方计算器实际使用的是 v41 配置（1024 token 上限，最小 295936 像素）。
+        return cls(14, 3, 1024, False, None, None, 295936)
+
+    def worst_pad(self):
+        return self.compress_pad_to - 1 if self.is_n_layout and self.compress_pad_to is not None else 0
+
+    def actual_pad(self, value):
+        if not (self.is_n_layout and self.compress_pad_to is not None):
+            return 0
+        if value is None:
+            return self.compress_pad_to - 1
+        return (self.compress_pad_to - ((value + 1) % self.compress_pad_to)) % self.compress_pad_to
+
+    def calc_num_tokens(self, height, width):
+        tokens = height * (width + 1) + 2
+        if self.is_n_layout:
+            if height % 2 == 1:
+                tokens += width + 1
+            tokens += ((_ceil_div(height, 2) * (width + 1)) % 2) * 2
+        return tokens
+
+    def solve_resize_ratio(self, original_height, original_width, max_tokens):
+        ratio = original_height / original_width
+        fit_h = math.sqrt((max_tokens - 2) / ratio + 0.25) - 0.5
+        fit_w = fit_h * ratio
+
+        if fit_h < 1:
+            target_h = 1
+            target_w = _floor_div(max_tokens - 2, target_h + 1)
+            if self.is_n_layout and target_w % 2 == 1:
+                target_w -= 1
+            best_width = target_h * self.patch_size * self.downsample_ratio
+            best_height = target_w * self.patch_size * self.downsample_ratio
+        elif fit_w < (2 if self.is_n_layout else 1):
+            target_h = 2 if self.is_n_layout else 1
+            target_w = _floor_div(max_tokens - 2, target_h) - 1
+            if not target_w > 1:
+                raise ValueError("图片 Token 缩放参数无解")
+            best_width = target_w * self.patch_size * self.downsample_ratio
+            best_height = target_h * self.patch_size * self.downsample_ratio
+        else:
+            target_h = _trunc(fit_h)
+            target_w = _trunc(fit_w)
+            if self.is_n_layout and target_w % 2 == 1:
+                target_w -= 1
+            scale_h = (target_h * self.patch_size * self.downsample_ratio) / original_width
+            scale_w = (target_w * self.patch_size * self.downsample_ratio) / original_height
+            scale = min(scale_h, scale_w)
+            best_width = _trunc((original_width * scale) / self.patch_size) * self.patch_size
+            best_height = _trunc((original_height * scale) / self.patch_size) * self.patch_size
+
+        n_llm_h = _ceil_div(_floor_div(best_height, self.patch_size), self.downsample_ratio)
+        n_llm_w = _ceil_div(_floor_div(best_width, self.patch_size), self.downsample_ratio)
+        return {
+            "nLlmH": n_llm_h,
+            "nLlmW": n_llm_w,
+            "bestHeight": best_height,
+            "bestWidth": best_width,
+            "numTokens": self.calc_num_tokens(n_llm_h, n_llm_w),
+        }
+
+    def safe_resize(self, original_height, original_width, padded_height, padded_width):
+        n_llm_h = _ceil_div(_floor_div(padded_height, self.patch_size), self.downsample_ratio)
+        n_llm_w = _ceil_div(_floor_div(padded_width, self.patch_size), self.downsample_ratio)
+        num_tokens = self.calc_num_tokens(n_llm_h, n_llm_w)
+        worst_pad = self.worst_pad()
+        limit = self.max_n_token - worst_pad
+        result = {
+            "nLlmH": n_llm_h,
+            "nLlmW": n_llm_w,
+            "bestHeight": padded_height,
+            "bestWidth": padded_width,
+            "numTokens": num_tokens,
+        }
+        if result["numTokens"] > limit:
+            result = self.solve_resize_ratio(original_height, original_width, limit)
+            if self.is_n_layout:
+                budget = limit
+                while result["numTokens"] > limit:
+                    budget -= 1
+                    result = self.solve_resize_ratio(original_height, original_width, budget)
+            if not result["numTokens"] <= limit:
+                raise ValueError("图片 Token 缩放结果超过上限")
+        result["numTokens"] += worst_pad
+        return result
+
+    def calc_resize_inner(self, width, height, pad_arg):
+        if self.max_wh_ratio is not None and width > height * self.max_wh_ratio:
+            width = height * self.max_wh_ratio
+        pixels = width * height
+        if self.min_pixels is not None and 0 < pixels < self.min_pixels:
+            scale = math.sqrt(self.min_pixels / pixels)
+            width = _trunc(width * scale)
+            height = _trunc(height * scale)
+        padded_width = _ceil_div(width, self.patch_size) * self.patch_size
+        padded_height = _ceil_div(height, self.patch_size) * self.patch_size
+        worst_pad = self.worst_pad()
+        actual_pad = self.actual_pad(pad_arg)
+        result = self.safe_resize(height, width, padded_height, padded_width)
+        result["numTokens"] -= worst_pad - actual_pad
+        return result
+
+    def calc_resize(self, width, height, pad_arg=None):
+        result = self.calc_resize_inner(width, height, pad_arg)
+        for _ in range(1, 10):
+            next_result = self.calc_resize_inner(
+                result["bestWidth"], result["bestHeight"], pad_arg
+            )
+            if next_result == result:
+                return result
+            result = next_result
+        raise ValueError("图片 Token 尺寸迭代不收敛")
+
+    def calc_token_len(self, width, height, pad_arg=None):
+        return self.calc_resize(width, height, pad_arg)["numTokens"]
+
+
+_IMAGE_TOKENIZER = DeepSeekImageTokenizer.v41()
+
+
+def image_token_count(width, height):
+    """给定像素宽高，返回 DeepSeek 图片 Token 预估值。"""
+    return _IMAGE_TOKENIZER.calc_token_len(int(width), int(height))
+
+
+def collect_files(rel_dir, tokenizer):
+    """递归收集目录内全部文件（含图片），返回 [{name, size, sha256, url, ...}]。
+
+    文本文件附加 `tokens`（官方 tokenizer 精确计数）；图片附加 `width` / `height` /
+    `tokens`（官方图片 Token 公式，按像素尺寸估算）。
+    """
     files = []
     base = os.path.join(ROOT, *rel_dir.split("/"))
     for dirpath, dirnames, filenames in os.walk(base):
@@ -139,14 +385,23 @@ def collect_files(rel_dir):
         for fn in sorted(filenames):
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, base).replace("\\", "/")
-            files.append({
+            item = {
                 "name": rel,
                 "size": os.path.getsize(full),
                 "sha256": sha256_file(full),
                 # 站点根目录下的可访问 URL，如 char/shu-arknights/SKILL.md
                 # 中文图片名做 URL 编码，方便 Agent 脚本直接 curl / fetch
                 "url": quote(rel_dir + "/" + rel, safe="/"),
-            })
+            }
+            kind = file_kind(rel)
+            if kind == "text":
+                item["tokens"] = count_text_tokens(tokenizer, full)
+            elif kind == "image":
+                width, height = image_size(full)
+                item["width"] = width
+                item["height"] = height
+                item["tokens"] = image_token_count(width, height)
+            files.append(item)
     return files
 
 
@@ -167,7 +422,11 @@ def find_thumbnail(slug):
         return len(("cover", "thumbnail", "thumb", "square"))
 
     names.sort(key=lambda n: (rank(n), n.lower()))
-    return quote("thumbnails/%s/%s" % (slug, names[0]), safe="/")
+    rel = "thumbnails/%s/%s" % (slug, names[0])
+    full = os.path.join(ROOT, *rel.split("/"))
+    # 缩略图 URL 带内容 hash：图片替换后 URL 变化，浏览器不会继续复用旧缓存。
+    # 之前只替换同路径文件时，index.json 虽已更新，但浏览器仍可能拿旧图。
+    return quote(rel, safe="/") + "?v=" + sha256_file(full)[:8]
 
 
 def archive_paths(kind, slug):
@@ -287,14 +546,26 @@ def attach_pinyin(entry, meta):
         obj.pop("reading", None)
 
 
-def build_entry(meta, kind):
-    files = collect_files(meta["dir"])
+def build_entry(meta, kind, tokenizer):
+    files = collect_files(meta["dir"], tokenizer)
     archive = build_archive(kind, meta["dir"], meta["slug"], files)
+    text_tokens = sum(f.get("tokens", 0) for f in files if file_kind(f["name"]) == "text")
+    image_tokens = sum(f.get("tokens", 0) for f in files if file_kind(f["name"]) == "image")
     entry = {
         "slug": meta["slug"],
         "name": meta["name"],
         "files": files,
         "archive": archive,
+        # Token 预估值：以 DeepSeek 为例，文本 + assets 图片都算，覆盖整个交付包。
+        # 它是「文件原文进入模型」的输入侧估算，不含 system prompt / chat 模板，
+        # 也不代表接口最终 usage；不同模型 / 版本的结果可能不同，详见 README。
+        "tokenEstimate": {
+            "text": text_tokens,
+            "image": image_tokens,
+            "total": text_tokens + image_tokens,
+            "textFiles": sum(1 for f in files if file_kind(f["name"]) == "text"),
+            "imageFiles": sum(1 for f in files if file_kind(f["name"]) == "image"),
+        },
     }
     for key in ("nameEn", "alias", "origin", "tags", "sort", "company", "work"):
         if meta.get(key):
@@ -372,8 +643,9 @@ def build():
     if os.path.isdir(DOWNLOADS):
         shutil.rmtree(DOWNLOADS)
 
-    skills_out = [build_entry(meta, "skills") for meta in SKILLS]
-    chars_out = [build_entry(meta, "char") for meta in load_chars()]
+    tokenizer = load_deepseek_tokenizer()
+    skills_out = [build_entry(meta, "skills", tokenizer) for meta in SKILLS]
+    chars_out = [build_entry(meta, "char", tokenizer) for meta in load_chars()]
 
     stamped = stamp_assets()
     versioned = stamp_version()
@@ -389,6 +661,8 @@ def build():
         f.write("\n")
 
     total_files = sum(len(s["files"]) for s in skills_out) + sum(len(c["files"]) for c in chars_out)
+    total_tokens = sum(s["tokenEstimate"]["total"] for s in skills_out) + sum(
+        c["tokenEstimate"]["total"] for c in chars_out)
     total_zip_bytes = sum(s["archive"]["size"] for s in skills_out) + sum(c["archive"]["size"] for c in chars_out)
     print("index.json generated ->", os.path.relpath(OUT, ROOT))
     print("downloads generated ->", os.path.relpath(DOWNLOADS, ROOT))
@@ -396,8 +670,8 @@ def build():
     print("index.html version stamp -> %s（命中 %d 处%s）" % (
         date.today().strftime("VER %y.%m.%d"), versioned[0],
         "，已更新" if versioned[1] else "，无需更新"))
-    print("skills: %d, chars: %d, files: %d, zip bytes: %d" % (
-        len(skills_out), len(chars_out), total_files, total_zip_bytes
+    print("skills: %d, chars: %d, files: %d, token estimate: %d, zip bytes: %d" % (
+        len(skills_out), len(chars_out), total_files, total_tokens, total_zip_bytes
     ))
 
 

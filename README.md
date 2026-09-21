@@ -18,7 +18,7 @@
 
 ---
 
-**目录** · [这是什么](#这是什么) · [工作流程](#工作流程) · [两个构建器](#两个构建器) · [10 文件体系](#10-文件体系) · [角色一览](#角色一览) · [快速开始](#快速开始) · [自部署展示站](#自部署展示站) · [FAQ](#faq) · [免责声明](#免责声明) · [署名](#署名)
+**目录** · [这是什么](#这是什么) · [工作流程](#工作流程) · [两个构建器](#两个构建器) · [10 文件体系](#10-文件体系) · [Token 预估](#token-预估) · [角色一览](#角色一览) · [快速开始](#快速开始) · [自部署展示站](#自部署展示站) · [FAQ](#faq) · [免责声明](#免责声明) · [署名](#署名)
 
 ---
 
@@ -76,6 +76,36 @@ flowchart LR
 > [!NOTE]
 > **目录命名约定**：`char/<角色名>-<作品英文名>`（例：`cyrene-honkai-star-rail`、`shu-arknights`）。slug 会进下载路径与 ZIP 名，故统一用 ASCII 小写连字符；带上作品名可避免不同作品里的同名角色冲突。
 > **溯源缓存不入库**：构建期的素材缓存与裁定记录存放在仓库根的 `_溯源/<slug>/`，属本地工作目录（已列入 `.gitignore`），克隆本仓库不含该目录；如需做二创派生版本，请自行重新采集或向作者索取。
+
+## Token 预估
+
+站点在首页「设定文件」统计和各角色卡「FILES」之后显示一个 `≈ xK TOKENS` 预估值，用于帮助判断把角色卡喂给模型时的大致输入规模。**这是以 DeepSeek 为例的估算示例，不是最终使用消耗，也不代表你会使用 DeepSeek 模型。**
+
+> [!WARNING]
+> 不同公司、不同模型、甚至同一模型的不同版本，分词方式都可能不同。页面上的数字只提供量级参考；真实消耗请以你实际使用的模型返回的 `usage` 为准。
+
+### 计算口径（以 DeepSeek 为例）
+
+| 类型 | 方法 |
+|---|---|
+| 文本 | 使用 DeepSeek 官方 `deepseek_v4_tokenizer.zip` 中的 `tokenizer.json`，对交付目录下所有文本文件逐文件离线计数后求和 |
+| 图片 | 读取 `assets/` 下每张图片的实际像素宽高，套用 DeepSeek 官方文档站「图片 Token 计算器」的 v4.1 尺寸公式估算后求和；公式包含最小约 544×544 等效像素放大、1024 token 上限等官方缩放规则 |
+| 汇总 | 文本 + 图片 = `tokenEstimate.total`，写入 `index.json`；前端只做格式化展示，不在浏览器内跑 tokenizer |
+
+官方 tokenizer 压缩包放在 `tools/deepseek_v4_tokenizer.zip`，构建脚本直接读取压缩包内的 `tokenizer.json`，不额外解压。图片公式的常量和取整逻辑来自官方计算器的纯前端实现（`patch=14`、`downsample=3`、`max_n_token=1024`、`min_pixels=295936`），已逐项复刻到 `build_data.py`。
+
+### 计入范围
+
+`char/<slug>/` 或 `skills/<slug>/` 下所有扩展名属于文本格式（`.md`、`.txt` 等）的文件都会逐文件计数；`assets/` 下所有图片都会按尺寸估算图片 token。因此 `assets/README.md` 作为文本文件也会被计入——如果你只想看扮演设定本身的规模，可以从结果中减去它。
+
+### 为什么不是最终消耗
+
+- 不同模型 / 版本的分词不同：DeepSeek R1、DeepSeek V4 以及 GPT、Claude、Gemini 等都会给出不同 token 数；
+- 未包含 system prompt、对话历史、chat template、工具调用等请求侧内容；
+- 图片是否随请求发送、以什么 `detail` 级别发送，取决于使用者；
+- 最终请以对应模型接口返回结果的 `usage` 为准。
+
+参考：[DeepSeek Token 用量计算](https://api-docs.deepseek.com/zh-cn/quick_start/token_usage/) · [DeepSeek 图像理解 · Token 用量](https://api-docs.deepseek.com/zh-cn/guides/vision#token-usage)
 
 ## 角色一览
 
@@ -163,13 +193,13 @@ python -m http.server 8765
 
 ```bash
 # 在仓库根目录运行
-pip install -r requirements.txt   # 构建依赖：pypinyin（汉字转拼音，MIT）
+pip install -r requirements.txt   # pypinyin（拼音）、tokenizers（DeepSeek tokenizer）、Pillow（图片尺寸）
 python build_data.py
 ```
 
 它会生成：
 
-- `index.json`：站点与 Agent 共用的资源索引（元数据、文件清单、sha256、下载地址、角色缩略图、定位索引与拼音检索键）；
+- `index.json`：站点与 Agent 共用的资源索引（元数据、文件清单、sha256、下载地址、角色缩略图、定位索引、拼音检索键与 Token 预估）；
 - `downloads/skills/<slug>.zip`、`downloads/char/<slug>.zip`：包含 Markdown 与 `assets/` 图片的静态 ZIP；
 - `thumbnails/<slug>/` 下的方形图会被写入 `index.json` 的 `thumbnail` 字段；
 - `index.html` 里 `js/`、`css/` 引用的 `?v=` 内容哈希，以及**两处版本号**（开屏 + 页脚）——版本号按下发版当天日期写成 `VER YY.MM.DD`。
@@ -250,6 +280,8 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 
 **生成内容**：AI 扮演产出的内容不代表原作官方口径，由此产生的一切后果由使用者自行承担。
 
+**Token 预估**：站内显示的 Token 数字是**以 DeepSeek 为例的估算示例**，不是最终使用消耗，也不代表你会使用 DeepSeek 模型。不同公司、不同模型、甚至同一模型的不同版本，分词都可能不同；实际 token 数请以你所用模型返回的 `usage` 为准。
+
 **用途**：全部资源仅供学习研究与个人娱乐使用，禁止转售或商用。
 
 ## 署名
@@ -258,7 +290,7 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 >
 > —— 艾萨克·牛顿致胡克，1676 年 2 月 5 日
 
-视觉语言来自终末地风格 SKILL，界面审美参考 taste-skill，模糊匹配算法取自 talisman，汉字注音交给 pypinyin；**检索的收噪声策略（子序列兜底限长）与音节级重排，来自小肥鱼（幼鲸）的建议**；至于那八张角色卡——它们全部站在各自**原作**的肩膀上，站在每一个把官方文本一字一句记下来、可供后人查证的人的肩膀上。
+视觉语言来自终末地风格 SKILL，界面审美参考 taste-skill，模糊匹配算法取自 talisman，汉字注音交给 pypinyin，Token 预估以 DeepSeek 官方 tokenizer 与官方图片尺寸公式作为示例；**检索的收噪声策略（子序列兜底限长）与音节级重排，来自小肥鱼（幼鲸）的建议**；至于那八张角色卡——它们全部站在各自**原作**的肩膀上，站在每一个把官方文本一字一句记下来、可供后人查证的人的肩膀上。
 
 我做的事情只有两件：把它们摞稳，以及保证摞起来的每一条都能追回原处。**溯源断了，这套东西就不值钱了**——所以发现哪条设定有出入，请带着出处来提 Issue。
 
@@ -268,6 +300,7 @@ Fork 后想用自己的域名或独立部署？整个仓库根是纯静态站点
 | 界面审美 | [taste-skill](https://github.com/Leonxlnx/taste-skill) |
 | 模糊匹配 | [talisman](https://github.com/yomguithereal/talisman)（`metrics/damerau-levenshtein.js`，MIT，5.5KB 单文件 vendor 至 `js/vendor/`，算法未改动） |
 | 汉字注音 | [pypinyin](https://github.com/mozillazg/python-pinyin)（MIT，构建期使用，不进运行时） |
+| Token 预估 | [DeepSeek Token 用量计算](https://api-docs.deepseek.com/zh-cn/quick_start/token_usage/)（官方 `deepseek_v4_tokenizer.zip` 文本计数；图片尺寸公式逆向自该页纯前端计算器）与 [DeepSeek 图像理解 · Token 用量](https://api-docs.deepseek.com/zh-cn/guides/vision#token-usage)（缩放规则说明） |
 | 检索思路 | **小肥鱼（幼鲸）**：指出子序列兜底应对长词收手（限 ≤3 字），以及拼音应当先切音节再比、而不是拿字符串距离硬算 |
 | 角色设定 | 各原作版权方与素材整理者；版权归各原作版权方所有 |
 | 维护者 | [LaoBiDeng321](https://github.com/LaoBiDeng321)（个人维护） |

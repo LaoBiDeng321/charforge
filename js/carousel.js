@@ -108,6 +108,12 @@
             ? '<div class="char-thumb"><img src="' + char.thumbnail + '" alt="' + nameOf(char) + '" loading="lazy"></div>'
             : '<div class="char-thumb char-thumb-empty" aria-hidden="true"><span>NO IMG</span></div>';
 
+        /* Token 预估来自 index.json，前端只负责展示；title 在 applyLocale 中写入，
+           避免把说明文案拼进 HTML 时还要额外做属性转义。 */
+        var tokenLabel = (window.TokenEstimate && char.tokenEstimate)
+            ? window.TokenEstimate.label(char)
+            : '';
+
         card.innerHTML =
             '<div class="char-card-top">' +
                 thumbHtml +
@@ -124,6 +130,7 @@
             '<ul class="char-files" data-scrollable>' + filesHtml + '</ul>' +
             '<div class="char-card-foot">' +
                 '<span class="char-count">' + char.files.length + ' FILES</span>' +
+                (tokenLabel ? '<span class="char-count char-count-token">' + tokenLabel + '</span>' : '') +
                 '<button type="button" class="btn btn-secondary" data-copy-prompt="' + char.slug + '">' +
                     '<span></span>' +
                 '</button>' +
@@ -157,6 +164,9 @@
             });
             item.refs.dlText.textContent = t('dl.zip');
             if (item.refs.copyText) item.refs.copyText.textContent = t('install.copy');
+            if (item.refs.tokenText && window.TokenEstimate) {
+                item.refs.tokenText.textContent = window.TokenEstimate.label(char);
+            }
             if (item.refs.thumbImg) item.refs.thumbImg.alt = nameOf(char);
         });
         renderIndexTexts();
@@ -183,6 +193,7 @@
                     tags: card.querySelector('.char-tags'),
                     dlText: card.querySelector('[data-download-zip] span'),
                     copyText: card.querySelector('[data-copy-prompt] span'),
+                    tokenText: card.querySelector('.char-count-token'),
                     thumbImg: card.querySelector('.char-thumb img')
                 }
             };
@@ -727,11 +738,14 @@
         indexItems.forEach(function (item) {
             var char = item.char;
             var origin = char.origin ? (char.origin[locale()] || char.origin['zh-CN'] || char.origin.zh || '') : '';
+            var tokenText = (window.TokenEstimate && char.tokenEstimate)
+                ? ' · ~' + window.TokenEstimate.compact(char.tokenEstimate.total)
+                : '';
             item.root.innerHTML =
                 '<span class="char-index-no">' + String(item.index + 1).padStart(2, '0') + '</span>' +
                 '<span class="char-index-origin">' + origin + '</span>' +
                 '<span class="char-index-name">' + nameOf(char) + '</span>' +
-                '<span class="char-index-count">' + char.files.length + 'F</span>';
+                '<span class="char-index-count">' + char.files.length + 'F' + tokenText + '</span>';
         });
         updateIndexActive();
         applyFilter();
@@ -905,8 +919,26 @@
 
     /* ---------- 自动播放 ---------- */
 
+    /** 当前是否停留在角色库分区。
+     *
+     * 鼠标移出舞台、页面重新可见、关闭索引面板等事件都会调用 startTimer()；
+     * 如果这里只检查 playing/started，切到问答页后鼠标离开舞台或页面重新可见时
+     * 会把轮播定时器重新启动——角色卡已经滚出视口，setInterval 却仍在跑，
+     * 每 5 秒更新一次卡片状态并触发 560ms 过渡，造成无谓的渲染开销。
+     */
+    function isCarouselActive() {
+        var charsIndex = indexOfSection('chars');
+        if (charsIndex < 0) return false;
+        if (window.fullpage && typeof window.fullpage.getCurrentIndex === 'function') {
+            return window.fullpage.getCurrentIndex() === charsIndex;
+        }
+        var section = document.getElementById('chars');
+        return !!(section && section.classList.contains('is-active'));
+    }
+
     function startTimer() {
         if (!playing || !started || document.hidden) return;
+        if (indexOpen || !isCarouselActive()) return;
         stopTimer();
         timer = setInterval(next, AUTOPLAY_DELAY);
     }

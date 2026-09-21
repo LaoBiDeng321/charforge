@@ -5,7 +5,7 @@
 ## 运行
 
 ```bash
-pip install -r requirements.txt   # 构建依赖：pypinyin（汉字转拼音，MIT）
+pip install -r requirements.txt   # pypinyin + tokenizers + Pillow
 python build_data.py
 python -m http.server 8765
 # 访问 http://localhost:8765
@@ -13,7 +13,7 @@ python -m http.server 8765
 
 站点走 HTTP，前端通过 `fetch('index.json')` 获取资源索引，不再使用内联 `data.js`。本地预览前必须先运行 `build_data.py` 生成 `index.json` 与 `downloads/`。
 
-> `pypinyin` 是**构建期硬依赖**（缺了直接报错，不静默降级）。只做本地预览（`python -m http.server`）不需要装任何东西。
+> `pypinyin`、`tokenizers`、`Pillow` 都是**构建期硬依赖**（缺了直接报错，不静默降级）。只做本地预览（`python -m http.server`）不需要装任何东西。
 
 ## 目录结构
 
@@ -30,10 +30,12 @@ python -m http.server 8765
 ├── requirements.txt      # 构建期依赖
 ├── netlify.toml          # Netlify：pip install -r requirements.txt && python3 build_data.py，publish = "."
 ├── tools/
+│   ├── deepseek_v4_tokenizer.zip  # DeepSeek 官方 tokenizer（用于构建期文本 Token 计数）
 │   └── vendor_dl.py      # 从上游重新剪贴 js/vendor/ 里的算法，便于审计
 ├── js/
 │   ├── i18n.js           # 中英双语词条 + 语言切换
 │   ├── config.js         # 站点配置：页脚社交链接
+│   ├── tokens.js         # Token 预估的格式化与展示（数据由 index.json 预计算）
 │   ├── data-loader.js    # fetch('index.json') 并以 window.SITE_DATA 暴露
 │   ├── download.js       # 单文件直下 + ZIP 下载（优先静态 ZIP，缺失时浏览器现场打包）
 │   ├── agent-install.js  # 生成“复制给 Agent”的安装提示词
@@ -62,8 +64,9 @@ python build_data.py
 
 - `index.json`
   - 顶层：`generatedAt`、`skills[]`、`chars[]`；
-  - 每项：`slug`、`name`、`files[]`、`archive`，以及由 meta 透传或推导的展示字段；
-  - 每个文件：`name`、`size`、`sha256`、`url`（站点根相对路径）；
+  - 每项：`slug`、`name`、`files[]`、`archive`、`tokenEstimate`，以及由 meta 透传或推导的展示字段；
+  - 每个文件：`name`、`size`、`sha256`、`url`（站点根相对路径）；文本文件另有 `tokens`，图片另有 `width` / `height` / `tokens`；
+  - `tokenEstimate`：`text`、`image`、`total` 与 `textFiles` / `imageFiles` 计数；
   - `archive`：`url`、`size`、`sha256`，指向含图片的完整 ZIP。
 - `downloads/skills/<slug>.zip`
 - `downloads/char/<slug>.zip`
@@ -71,7 +74,7 @@ python build_data.py
 
 `downloads/` 与 `_溯源/` 是构建产物 / 本地目录，已加入 `.gitignore`；Netlify 构建时自动生成。`index.json` **需要提交**，供无构建步骤的静态托管与 Agent 读取。
 
-### 构建期自动派生 / 自动盖章的四件事
+### 构建期自动派生 / 自动盖章的五件事
 
 这些都不需要人工维护——它们原先都是手工步骤，而手工步骤必然会被忘掉（页脚版本号就曾一路停在 `26.09.14`）。
 
@@ -80,7 +83,8 @@ python build_data.py
 | **版本号** | 把 `index.html` 里两处 `VER YY.MM.DD`（开屏 + 页脚）改写成**构建当天日期**。日期制版本没有需要人工决定的信息，构建日即发版日。想手工指定：先改 `index.html` 再构建，脚本只在日期不一致时改写 |
 | **资源戳** | 给 `index.html` 的 `js/`、`css/` 引用补 `?v=<SHA256 前 8 位>`。文件一变 URL 就变，避免浏览器复用旧脚本（症状是「新 HTML + 旧 JS」：界面元素在、渲染逻辑与文案缺失） |
 | **拼音与排序键** | 从 meta 的中英名字、作品名、公司名推导 `pinyin` / `pinyinInitials`，并把中文排序键写入 `sort["zh-CN"]`。后者让中文排序不再依赖浏览器对 `zh` 的 collation（ICU 构造失败会静默退化成码点序） |
-| **字段校验** | meta 缺 `name`、JSON 不合法、`char/<slug>/` 不存在、`reading` 音节数与汉字数不符——一律直接报错，不产出半成品 |
+| **Token 预估** | 以 DeepSeek 为例：用 `tools/deepseek_v4_tokenizer.zip` 内官方 tokenizer 对文本逐文件计数；用 Pillow 读取 `assets/` 图片宽高，套用逆向自 DeepSeek 官方图片计算器的 v4.1 尺寸公式估算图片 token；汇总写入每项的 `tokenEstimate` 与每个文件的 `tokens`。不同模型 / 版本的分词可能不同，该值仅作示例参考 |
+| **字段校验** | meta 缺 `name`、JSON 不合法、`char/<slug>/` 不存在、`reading` 音节数与汉字数不符、官方 tokenizer 缺失、图片无法读取尺寸——一律直接报错，不产出半成品 |
 
 ### 产物的可复现性
 
@@ -119,7 +123,9 @@ Netlify 会在推送后自动跑 `pip install -r requirements.txt && python3 bui
   - `data-download-zip="<slug>"` → 优先使用 `entry.archive.url` 静态 ZIP；HEAD 不存在时由浏览器抓取全部文件（含图片）现场打包。
 - **数据加载**：`data-loader.js` 提供 `window.SiteData.load()`；`loader.js` 等待该 Promise 完成后才完成开屏；`main.js` 在数据就绪后渲染统计、文件表与角色轮播。
 - **全屏导航**：顶栏与右侧刻度统一走 `FullPage.goToSection()`；顶栏会 `preventDefault` 阻止默认锚点跳转，动画中再次点击会记录 `pendingIndex`，当前动画结束后补跳，避免卡在中间或跳到错误分区。
+- **自动轮播**：只在角色库分区为当前分区时运行。离开分区、打开索引面板、页面隐藏都会停止；`startTimer()` 启动前还会再次校验当前分区，避免鼠标移出舞台或页面重新可见时，把已经滚出视口的轮播重新唤醒。
 - **复制至 Agent 安装**：`agent-install.js` 根据 `index.json` 生成安装 Prompt；构建器面板与角色卡都有入口。
+- **Token 预估展示**：`tokens.js` 读取 `index.json` 的 `tokenEstimate`，在首页统计条、角色卡底部文件数之后与角色索引里显示 `≈ xK TOKENS`；不提供悬停明细。文案集中在 `i18n.js`，明确这是“以 DeepSeek 为例”的估算示例，其他模型/版本的实际消耗以各自返回的 `usage` 为准。
 - **角色缩略图**：`build_data.py` 扫描 `thumbnails/<slug>/`，优先取 `cover.*` / `thumbnail.*`，把 URL 写入 `index.json` 的 `thumbnail` 字段；没有图片时前端显示 `NO IMG` 占位块。
 - **角色图片**：`char/<slug>/assets/` 直接位于站点根，ZIP 与 Agent 下载都指向同一份源文件，不再单独维护 `web/assets`。
 
@@ -179,7 +185,7 @@ PC 视图把整页缩到约 0.3 倍，而「输入框聚焦是否自动放大」
 - 界面文案集中在 `js/i18n.js`（`data-i18n="key"`）。
 - 页脚社交链接在 `js/config.js` 的 `SITE_CONFIG.socials`。
 - Q&A 条目按 `qa.<n>.q/a` 渲染，循环上限见 `js/main.js`。
-- 页脚「资源用途 / 版权归属 / 免责声明」三张声明卡同样走 `declare.*` 词条，改动它们等于改动对外声明，请谨慎。
+- 页脚「资源用途 / 版权归属 / 免责声明」三张声明卡同样走 `declare.*` 词条；Token 预估声明走 `token.note.short` 与 `declare.tokens.*`，改动它们等于改动对外声明，请谨慎。
 
 ## 署名
 
@@ -187,5 +193,6 @@ PC 视图把整页缩到约 0.3 倍，而「输入框聚焦是否自动放大」
 - 界面审美：[taste-skill](https://github.com/Leonxlnx/taste-skill)
 - 模糊匹配：[talisman](https://github.com/yomguithereal/talisman)（`metrics/damerau-levenshtein.js`，MIT，vendor 至 `js/vendor/`，算法未改动，可由 `tools/vendor_dl.py` 重新剪贴）
 - 汉字注音：[pypinyin](https://github.com/mozillazg/python-pinyin)（MIT，构建期使用，不进运行时）
+- Token 预估：[DeepSeek Token 用量计算](https://api-docs.deepseek.com/zh-cn/quick_start/token_usage/)（官方 `deepseek_v4_tokenizer.zip`；图片尺寸公式逆向自该页纯前端计算器）与 [DeepSeek 图像理解](https://api-docs.deepseek.com/zh-cn/guides/vision#token-usage)（图片缩放规则）
 - 检索思路：**小肥鱼（幼鲸）**（子序列兜底限长 ≤3 字；拼音改走音节级重排）
 - 维护者：[LaoBiDeng321](https://github.com/LaoBiDeng321)（个人维护，无维护组）

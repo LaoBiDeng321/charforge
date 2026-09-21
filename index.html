@@ -81,10 +81,10 @@
     <!-- 样式表 -->
     <link rel="stylesheet" href="css/design-system.css?v=0968acc0">
     <link rel="stylesheet" href="css/loader.css?v=e5898435">
-    <link rel="stylesheet" href="css/fullpage.css?v=e1e97cd2">
-    <link rel="stylesheet" href="css/components.css?v=d66a46ba">
-    <link rel="stylesheet" href="css/carousel.css?v=e855bbcb">
-    <link rel="stylesheet" href="css/responsive.css?v=6e24530e">
+    <link rel="stylesheet" href="css/fullpage.css?v=8f77916f">
+    <link rel="stylesheet" href="css/components.css?v=602f9599">
+    <link rel="stylesheet" href="css/carousel.css?v=48385ead">
+    <link rel="stylesheet" href="css/responsive.css?v=92bc342d">
 </head>
 <body>
     <!-- 启动加载遮罩：左缘竖向加载条 0→100 → 居中 Loading… 扫光 → 遮罩左→右滑场 → 主体渐显 -->
@@ -109,7 +109,7 @@
                     <div class="loader-count"><span id="loaderCount">000</span><span class="loader-pct">%</span></div>
                     <div class="loader-status-row">
                         <span class="loader-status"><span data-i18n="loader.status"></span><span class="status-cursor"></span></span>
-                        <span class="loader-ver">VER 26.09.21</span>
+                        <span class="loader-ver">VER 26.09.22</span>
                     </div>
                     <div class="loader-track">
                         <div class="loader-track-fill"></div>
@@ -182,7 +182,12 @@
                             <span class="stat-value" id="statFiles">--</span>
                             <span class="stat-label" data-i18n="hero.stats.files"></span>
                         </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="statTokens">--</span>
+                            <span class="stat-label" data-i18n="hero.stats.tokens"></span>
+                        </div>
                     </div>
+                    <p class="hero-token-note" data-i18n="token.note.short"></p>
 
                     <div class="hero-cta animate-on-scroll" data-delay="5">
                         <button type="button" class="btn btn-primary" data-goto="2" data-i18n="hero.cta.chars"></button>
@@ -472,6 +477,10 @@
                             <p data-i18n="declare.disclaimer.body"></p>
                         </div>
                     </div>
+                    <p class="declaration-token-note animate-on-scroll" data-delay="6">
+                        <strong data-i18n="declare.tokens.title"></strong>
+                        <span data-i18n="declare.tokens.body"></span>
+                    </p>
 
                     <footer class="main-footer">
                         <div class="hazard-stripe" aria-hidden="true"></div>
@@ -505,7 +514,7 @@
                                 </div>
                                 <div class="info-group">
                                     <span class="info-label" data-i18n="footer.version.label"></span>
-                                    <span class="info-value">VER 26.09.21</span>
+                                    <span class="info-value">VER 26.09.22</span>
                                 </div>
                             </div>
                         </div>
@@ -520,17 +529,18 @@
         </section>
     </div>
 
-    <!-- JavaScript（顺序：i18n → 配置 → 数据加载 → 下载工具 → 模糊算法 → 轮播 → 加载动画 → 全屏滚动 → 主逻辑）
+    <!-- JavaScript（顺序：i18n → 配置 → Token 展示 → 数据加载 → 下载工具 → 模糊算法 → 轮播 → 加载动画 → 全屏滚动 → 主逻辑）
          vendor/damerau-levenshtein.js 为第三方算法（talisman · MIT），须在 carousel.js 之前加载 -->
-    <script src="js/i18n.js?v=5dffccdc"></script>
+    <script src="js/i18n.js?v=bbc04861"></script>
     <script src="js/config.js?v=d80b9142"></script>
+    <script src="js/tokens.js?v=6b89e825"></script>
     <script src="js/data-loader.js?v=7115b875"></script>
     <script src="js/download.js?v=9ed6dad7"></script>
-    <script src="js/agent-install.js?v=3272c7d4"></script>
+    <script src="js/agent-install.js?v=7c7b732d"></script>
     <script src="js/vendor/damerau-levenshtein.js?v=fa3b84b6"></script>
-    <script src="js/carousel.js?v=81060809"></script>
+    <script src="js/carousel.js?v=e1af2b8a"></script>
     <script src="js/loader.js?v=9f3274b8"></script>
     <script src="js/fullpage.js?v=bee0b750"></script>
-    <script src="js/main.js?v=91f92fd9"></script>
+    <script src="js/main.js?v=074fa3f4"></script>
 </body>
 </html>

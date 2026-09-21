@@ -28,6 +28,7 @@
             'hero.stats.skills': '构建器',
             'hero.stats.chars': '角色卡',
             'hero.stats.files': '设定文件',
+            'hero.stats.tokens': '预估 TOKENS',
             'hero.cta.chars': '浏览角色库',
             'hero.cta.skills': '查看构建器',
             'hero.scroll': '向下滚动',
@@ -42,6 +43,9 @@
             'install.copy': '复制至agent安装',
             'install.copied': '已复制',
             'install.copyFailed': '复制失败',
+
+            'token.unit': 'TOKENS',
+            'token.note.short': '以 DeepSeek 为例的预估值，仅供参考；不同模型与版本的分词不同，实际以对应模型返回的 usage 为准。',
 
             'skill.flow': '运行流程 // PIPELINE',
             'skill.files': '交付文件 // DELIVERABLES',
@@ -118,6 +122,8 @@
             'declare.copyright.body': '角色设定素材与官方立绘的版权归各自原作版权方所有。构建器与文档由 LaoBiDeng321 个人维护，转载请注明来源。',
             'declare.disclaimer.title': '免责声明',
             'declare.disclaimer.body': 'AI 扮演产出内容不代表原作官方口径，使用生成内容产生的一切后果由使用者自行承担。卡片缩略图采集自社区，部分未能追溯到原作者；若您是作者并希望署名或下架，请提 Issue，我们会尽快处理。',
+            'declare.tokens.title': 'Token 预估说明',
+            'declare.tokens.body': '页面中的 Token 数字是以 DeepSeek 的 tokenizer / 图片公式做的示例估算，不代表你将使用 DeepSeek 模型。不同公司、不同模型，甚至同一模型的不同版本，分词都可能不同；实际消耗请以对应模型返回的 usage 为准。',
             'footer.brandSub': '角色工坊 · CHARACTER WORKSHOP',
             'footer.res.label': '资源总数',
             'footer.style.label': '视觉语言',
@@ -152,6 +158,7 @@
             'hero.stats.skills': 'SKILL PACKS',
             'hero.stats.chars': 'CHAR CARDS',
             'hero.stats.files': 'SETTING FILES',
+            'hero.stats.tokens': 'EST. TOKENS',
             'hero.cta.chars': 'Browse Characters',
             'hero.cta.skills': 'View Builders',
             'hero.scroll': 'Scroll',
@@ -166,6 +173,9 @@
             'install.copy': 'Copy to Agent Install',
             'install.copied': 'Copied',
             'install.copyFailed': 'Copy failed',
+
+            'token.unit': 'TOKENS',
+            'token.note.short': 'Example estimate based on DeepSeek; tokenisation differs by model and version. Refer to the usage field returned by your model.',
 
             'skill.flow': 'PIPELINE',
             'skill.files': 'DELIVERABLES',
@@ -242,6 +252,8 @@
             'declare.copyright.body': 'Character materials and official key art belong to their respective rights holders. Builders and docs are maintained personally by LaoBiDeng321 — attribute the source when reuploading.',
             'declare.disclaimer.title': 'Disclaimer',
             'declare.disclaimer.body': 'AI roleplay output does not represent any official stance of the original works. Users bear full responsibility for generated content. Card thumbnails were collected from community sources and some could not be traced back to their authors — if you are one of them and want credit or removal, open an issue and we will handle it promptly.',
+            'declare.tokens.title': 'Token estimates',
+            'declare.tokens.body': 'Token figures on this page are example estimates based on DeepSeek’s tokenizer and image formula; they do not imply that you will use a DeepSeek model. Tokenisation differs across vendors, models, and even model versions. Always treat the usage field returned by your model as authoritative.',
             'footer.brandSub': 'CHARACTER WORKSHOP',
             'footer.res.label': 'Resources',
             'footer.style.label': 'Visual Language',

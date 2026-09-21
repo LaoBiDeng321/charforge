@@ -1,5 +1,8 @@
 # 构建期依赖 —— 只在重新生成 index.json / downloads 时需要
-# （把汉字名自动转成拼音检索键；不装则 build_data.py 直接报错）
+# （汉字名转拼音检索键、DeepSeek tokenizer 文本计数、图片尺寸读取；
+#  不装则 build_data.py 直接报错，不静默降级）
 #
 # 只做本地预览（python -m http.server）不需要安装任何东西。
 pypinyin>=0.49
+tokenizers>=0.20,<1
+Pillow>=10,<13

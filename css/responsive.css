@@ -223,6 +223,11 @@
         grid-template-columns: 1fr;
     }
 
+    .declaration-token-note {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
     /* Footer */
     #footer .fp-content {
         padding-top: 72px;

@@ -18,7 +18,7 @@ Search · Verify · Adjudicate · 10 files delivered
 
 ---
 
-**Contents** · [What is this](#what-is-this) · [Workflow](#workflow) · [Two builders](#two-builders) · [The 10-file system](#the-10-file-system) · [Character cards](#character-cards) · [Quick start](#quick-start) · [Self-hosting the showcase site](#self-hosting-the-showcase-site) · [FAQ](#faq) · [Disclaimer](#disclaimer) · [Credits](#credits)
+**Contents** · [What is this](#what-is-this) · [Workflow](#workflow) · [Two builders](#two-builders) · [The 10-file system](#the-10-file-system) · [Token estimates](#token-estimates) · [Character cards](#character-cards) · [Quick start](#quick-start) · [Self-hosting the showcase site](#self-hosting-the-showcase-site) · [FAQ](#faq) · [Disclaimer](#disclaimer) · [Credits](#credits)
 
 ---
 
@@ -76,6 +76,23 @@ Both builders share the same 10-file framework (defined in [reference/templates.
 > [!NOTE]
 > **Directory naming convention**: `char/<character>-<work-in-english>` (e.g. `cyrene-honkai-star-rail`, `shu-arknights`). The slug ends up in download paths and ZIP names, so it stays ASCII lowercase with hyphens; including the work avoids collisions between same-named characters from different works.
 > **Provenance caches are not committed**: build-time material caches and adjudication records live in `_溯源/<slug>/` at the repo root, a local working directory listed in `.gitignore`. A clone of this repo does not contain it; if you want to derive a fan version, collect the material yourself or ask the author.
+
+## Token estimates
+
+The site shows an estimated `≈ xK TOKENS` next to the setting-file total and each character card's `FILES` count. It is an **example estimate based on DeepSeek** for input-sizing reference — not the final billed usage, and it does not imply that you will use a DeepSeek model.
+
+> [!WARNING]
+> Tokenisation differs across vendors, models, and even model versions. The numbers are only a rough order-of-magnitude reference; always treat the `usage` field returned by the model you actually use as authoritative.
+
+| Type | Method (DeepSeek example) |
+|---|---|
+| Text | Counted offline with the official DeepSeek `deepseek_v4_tokenizer.zip` (`tools/deepseek_v4_tokenizer.zip`), file by file |
+| Images | Every image under `assets/` is measured with Pillow; its token count is estimated with the DeepSeek v4.1 image-token dimension formula reverse-engineered from the official docs calculator (minimum ~544×544 upscaling, 1024-token cap, etc.) |
+| Total | `text + image = tokenEstimate.total`, written to `index.json`; the front end only formats and displays it and does not run a tokenizer in the browser |
+
+All text files (including `assets/README.md`) and all images under `assets/` are counted. The estimate does **not** include system prompts, chat history, chat templates or tool calls, and actual usage also depends on the model and request. Always treat the API-returned `usage` as authoritative.
+
+See [DeepSeek Token & Token Usage](https://api-docs.deepseek.com/quick_start/token_usage/) and [DeepSeek Vision · Token Usage](https://api-docs.deepseek.com/guides/vision#token-usage).
 
 ## Character cards
 
@@ -164,13 +181,13 @@ python -m http.server 8765
 
 ```bash
 # Run from the repo root
-pip install -r requirements.txt   # build dependency: pypinyin (Chinese to pinyin, MIT)
+pip install -r requirements.txt   # pypinyin + tokenizers + Pillow
 python build_data.py
 ```
 
 It generates:
 
-- `index.json` — the resource index shared by the site and by agents (metadata, file manifest, sha256, download URLs, card thumbnails, locator index and pinyin search keys);
+- `index.json` — the resource index shared by the site and by agents (metadata, file manifest, sha256, download URLs, card thumbnails, locator index, pinyin search keys and token estimates);
 - `downloads/skills/<slug>.zip`, `downloads/char/<slug>.zip` — static ZIPs containing the Markdown and the `assets/` images;
 - square images under `thumbnails/<slug>/` are written into the `thumbnail` field of `index.json`;
 - the `?v=` content hashes on the `js/` and `css/` references in `index.html`, plus its **two version numbers** (boot screen and footer) — the version is stamped as `VER YY.MM.DD` using the build date.
@@ -251,6 +268,8 @@ If you are the author of one of those images:
 
 **Generated content**: AI roleplay output does not represent any official stance of the original works, and users bear full responsibility for anything produced with it.
 
+**Token estimates**: the `TOKENS` figures shown on the site are **example estimates based on DeepSeek**, not final usage, and they do not imply that you will use a DeepSeek model. Tokenisation differs across vendors, models and model versions — treat the `usage` field returned by the model you actually use as authoritative.
+
 **Intended use**: all resources are for learning, research and personal entertainment only — reselling or commercial use is prohibited.
 
 ## Credits
@@ -259,7 +278,7 @@ If you are the author of one of those images:
 >
 > — Isaac Newton to Robert Hooke, 5 February 1676
 
-The visual language comes from Endfield-Style-Skill, the interface taste references taste-skill, the fuzzy matching algorithm is talisman's, and Chinese romanisation is delegated to pypinyin. **The noise-control strategy for search (capping the subsequence fallback) and the idea of comparing pinyin at the syllable level instead of by string distance both came from 小肥鱼（幼鲸）.** As for the eight character cards — every one of them stands on the shoulders of its **source work**, and on the shoulders of everyone who transcribed the official text line by line so that later readers could check it.
+The visual language comes from Endfield-Style-Skill, the interface taste references taste-skill, the fuzzy matching algorithm is talisman's, Chinese romanisation is delegated to pypinyin, and token estimates use DeepSeek's official tokenizer and image-token dimension formula as an example. **The noise-control strategy for search (capping the subsequence fallback) and the idea of comparing pinyin at the syllable level instead of by string distance both came from 小肥鱼（幼鲸）.** As for the eight character cards — every one of them stands on the shoulders of its **source work**, and on the shoulders of everyone who transcribed the official text line by line so that later readers could check it.
 
 All I did was stack them carefully, and make sure every claim in the stack can be traced back to where it came from. **Break the provenance and none of this is worth anything** — so if you spot a setting that looks wrong, bring the source and open an issue.
 
@@ -269,6 +288,7 @@ All I did was stack them carefully, and make sure every claim in the stack can b
 | Interface taste | [taste-skill](https://github.com/Leonxlnx/taste-skill) |
 | Fuzzy matching | [talisman](https://github.com/yomguithereal/talisman) (`metrics/damerau-levenshtein.js`, MIT, a 5.5 KB single file vendored into `js/vendor/`, algorithm unmodified) |
 | Chinese romanisation | [pypinyin](https://github.com/mozillazg/python-pinyin) (MIT, build-time only, not shipped to the runtime) |
+| Token estimates | [DeepSeek Token & Token Usage](https://api-docs.deepseek.com/quick_start/token_usage/) (official `deepseek_v4_tokenizer.zip` for text; image dimension formula reverse-engineered from the same page's pure-front-end calculator) and [DeepSeek Vision · Token Usage](https://api-docs.deepseek.com/guides/vision#token-usage) (scaling rules) |
 | Search design | **小肥鱼（幼鲸）** — pointed out that the subsequence fallback should stop taking long words (cap at ≤3 characters), and that pinyin should be segmented into syllables and compared at that level rather than run through string distance |
 | Character settings | The respective rights holders and the people who transcribed the material; copyright remains with them |
 | Maintainer | [LaoBiDeng321](https://github.com/LaoBiDeng321) (solo maintainer) |

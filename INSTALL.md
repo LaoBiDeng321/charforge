@@ -9,17 +9,20 @@
 
 ## 构建产物
 
-运行：
+运行（首次需要构建依赖）：
 
 ```bash
+pip install -r requirements.txt
 python build_data.py
 ```
 
 会生成：
 
-- `index.json`：站点与 Agent 共用的索引，包含元数据、文件清单、文件 URL、sha256、ZIP 地址。
+- `index.json`：站点与 Agent 共用的索引，包含元数据、文件清单、文件 URL、sha256、ZIP 地址，以及 `tokenEstimate` / `tokens` 预估字段。
 - `downloads/skills/<slug>.zip`：构建器完整包。
 - `downloads/char/<slug>.zip`：角色完整包，包含 Markdown 与 `assets/` 图片。
+
+> Token 预估为**以 DeepSeek 为例**的输入侧估算示例，不代表你会使用 DeepSeek 模型，也不是接口最终消耗。不同公司、不同模型、不同版本的分词都可能不同；实际以对应模型返回的 `usage` 为准。详见 [README 的「Token 预估」](README.md#token-预估)。
 
 `downloads/` 是构建产物，已加入 `.gitignore`；Netlify 构建时会自动生成。本地预览前请先执行一次构建脚本，然后用：
 

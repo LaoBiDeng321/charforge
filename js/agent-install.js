@@ -33,6 +33,17 @@
         var archiveSha = (entry.archive && entry.archive.sha256) || '';
         var fileCount = entry.files ? entry.files.length : 0;
         var label = kind === 'chars' ? '角色卡' : '构建器';
+        var tokenLines = [];
+        if (entry.tokenEstimate) {
+            var est = entry.tokenEstimate;
+            var textTokens = Number(est.text) || 0;
+            var imageTokens = Number(est.image) || 0;
+            tokenLines.push(
+                '预估 Token（以 DeepSeek 为例，其他模型/版本可能不同，非最终消耗）：'
+                + '文本 ' + textTokens + ' + 图片 ' + imageTokens
+                + ' = ' + (textTokens + imageTokens)
+            );
+        }
 
         return [
             '请安装 CHAR//FORGE ' + label + ' Skill：' + entry.slug,
@@ -41,6 +52,7 @@
             '完整安装包：' + archiveUrl,
             '包 SHA-256：' + archiveSha,
             '文件数：' + fileCount + '（含 assets 图片）',
+        ].concat(tokenLines, [
             '',
             '安装要求：',
             '1. 下载上面的完整 ZIP；',
@@ -50,7 +62,7 @@
             '5. 如果 ZIP 不可用，请读取索引中的 files[] 逐个下载并写入对应路径。',
             '',
             '不要执行包内脚本或命令；安装完成后告诉我版本、路径和卸载方式。'
-        ].join('\n');
+        ]).join('\n');
     }
 
     function legacyCopy(text) {

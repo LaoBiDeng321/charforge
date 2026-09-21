@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21",
+  "generatedAt": "2026-09-22",
   "skills": [
     {
       "slug": "character-profile-builder",
@@ -9,19 +9,28 @@
           "name": "SKILL.md",
           "size": 27388,
           "sha256": "fbe63a88fb510424e7d091d570eedce19d978e06cc359f84adb098900d4d766f",
-          "url": "skills/character-profile-builder/SKILL.md"
+          "url": "skills/character-profile-builder/SKILL.md",
+          "tokens": 6821
         },
         {
           "name": "reference/templates.md",
           "size": 7760,
           "sha256": "6bce3f1756bc442f7c2f6fa2bfb344cbd555d73a490f5f4b3ab2cad1c84a0f5a",
-          "url": "skills/character-profile-builder/reference/templates.md"
+          "url": "skills/character-profile-builder/reference/templates.md",
+          "tokens": 1719
         }
       ],
       "archive": {
         "url": "downloads/skills/character-profile-builder.zip",
         "size": 15656,
         "sha256": "3ecf30d11d94dc03cfbb17259fec981664bd322cd67f63d5aee7980fc1ea8e83"
+      },
+      "tokenEstimate": {
+        "text": 8540,
+        "image": 0,
+        "total": 8540,
+        "textFiles": 2,
+        "imageFiles": 0
       }
     },
     {
@@ -32,19 +41,28 @@
           "name": "SKILL.md",
           "size": 16477,
           "sha256": "3e8ef4e1c040349759b9673b8ce61e324fbc20760d5a7120b71c53355a60ddd8",
-          "url": "skills/original-character-builder/SKILL.md"
+          "url": "skills/original-character-builder/SKILL.md",
+          "tokens": 3983
         },
         {
           "name": "reference/templates.md",
           "size": 7760,
           "sha256": "6bce3f1756bc442f7c2f6fa2bfb344cbd555d73a490f5f4b3ab2cad1c84a0f5a",
-          "url": "skills/original-character-builder/reference/templates.md"
+          "url": "skills/original-character-builder/reference/templates.md",
+          "tokens": 1719
         }
       ],
       "archive": {
         "url": "downloads/skills/original-character-builder.zip",
         "size": 11213,
         "sha256": "64f48d4d63c85ce8a53e3396acaed778a01add471355762ea41e4f495c02b787"
+      },
+      "tokenEstimate": {
+        "text": 5702,
+        "image": 0,
+        "total": 5702,
+        "textFiles": 2,
+        "imageFiles": 0
       }
     }
   ],
@@ -57,79 +75,100 @@
           "name": "SKILL.md",
           "size": 1594,
           "sha256": "223c272293a553765192e28632c6ed649967f3394fa58dfbce3426dd3521d5e7",
-          "url": "char/alf-silver-palace/SKILL.md"
+          "url": "char/alf-silver-palace/SKILL.md",
+          "tokens": 364
         },
         {
           "name": "behavior.md",
           "size": 4655,
           "sha256": "ff72891e3c352960b1fd96f62cf2a8beea5b864276e09fb81ce9c3a9f934b985",
-          "url": "char/alf-silver-palace/behavior.md"
+          "url": "char/alf-silver-palace/behavior.md",
+          "tokens": 1156
         },
         {
           "name": "conflicts.md",
           "size": 7086,
           "sha256": "8b891ab606828cc835fc32237db830907201f6b7ade36286f5db53b340e630b4",
-          "url": "char/alf-silver-palace/conflicts.md"
+          "url": "char/alf-silver-palace/conflicts.md",
+          "tokens": 1875
         },
         {
           "name": "interaction.md",
           "size": 3945,
           "sha256": "a4ad472ce33b9579d79de496d3fa8e53852c8adffe03753c624eaa838fde9b93",
-          "url": "char/alf-silver-palace/interaction.md"
+          "url": "char/alf-silver-palace/interaction.md",
+          "tokens": 1010
         },
         {
           "name": "memory.md",
           "size": 4943,
           "sha256": "5ea0b6e0e5b9d4735edb8859aae73c783fb02d764fc3ab0d7c4c258caf676da0",
-          "url": "char/alf-silver-palace/memory.md"
+          "url": "char/alf-silver-palace/memory.md",
+          "tokens": 1182
         },
         {
           "name": "personality.md",
           "size": 4448,
           "sha256": "06653fc1353402c733ece26cc946b5d10f4ce754674a8bfef2832d4f54c6589f",
-          "url": "char/alf-silver-palace/personality.md"
+          "url": "char/alf-silver-palace/personality.md",
+          "tokens": 1115
         },
         {
           "name": "profile.md",
           "size": 2306,
           "sha256": "a944e7166d4a49fe2f623bbb1d7a3a6c19cd5c8f54afecb7d190cfc57be058f1",
-          "url": "char/alf-silver-palace/profile.md"
+          "url": "char/alf-silver-palace/profile.md",
+          "tokens": 655
         },
         {
           "name": "prompt.md",
           "size": 2766,
           "sha256": "5b4d97beaeb0491dc756ae397f9741a5ab832a14333bad974b9c87e378fd2413",
-          "url": "char/alf-silver-palace/prompt.md"
+          "url": "char/alf-silver-palace/prompt.md",
+          "tokens": 697
         },
         {
           "name": "relations.md",
           "size": 3524,
           "sha256": "19d61db8df0e0dec2a5e9092b12ae32e27f564a1483553dd131e020dc5da9619",
-          "url": "char/alf-silver-palace/relations.md"
+          "url": "char/alf-silver-palace/relations.md",
+          "tokens": 850
         },
         {
           "name": "world.md",
           "size": 4655,
           "sha256": "fba5ffd91d669de9d973f325d3022db44dad952b88055e078dc1db53e7c1a45d",
-          "url": "char/alf-silver-palace/world.md"
+          "url": "char/alf-silver-palace/world.md",
+          "tokens": 1126
         },
         {
           "name": "assets/01-官方立绘.jpg",
           "size": 229899,
           "sha256": "3a337a2611ff20a6ae9bac1b4c922fbff1a7233564286f9ec5c823d69ec647f2",
-          "url": "char/alf-silver-palace/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98.jpg"
+          "url": "char/alf-silver-palace/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98.jpg",
+          "width": 850,
+          "height": 1700,
+          "tokens": 904
         },
         {
           "name": "assets/README.md",
           "size": 1703,
           "sha256": "8227266ba6a68fd4df2ecaed6948f9ec6f153629ec11d26140628d79f5b26fb2",
-          "url": "char/alf-silver-palace/assets/README.md"
+          "url": "char/alf-silver-palace/assets/README.md",
+          "tokens": 430
         }
       ],
       "archive": {
         "url": "downloads/char/alf-silver-palace.zip",
         "size": 250867,
         "sha256": "1275a09b5494f5cdad16b41718af7c69f6ce6dd825b9c3e8b4deca8b4f75dc7b"
+      },
+      "tokenEstimate": {
+        "text": 10460,
+        "image": 904,
+        "total": 11364,
+        "textFiles": 11,
+        "imageFiles": 1
       },
       "nameEn": "Alf",
       "alias": "ALF",
@@ -183,7 +222,7 @@
       "sort": {
         "zh-CN": "afu"
       },
-      "thumbnail": "thumbnails/alf-silver-palace/cover.jpg"
+      "thumbnail": "thumbnails/alf-silver-palace/cover.jpg?v=b0adfa55"
     },
     {
       "slug": "citlali-genshin-impact",
@@ -193,85 +232,109 @@
           "name": "SKILL.md",
           "size": 1032,
           "sha256": "28f5db95f791ff88e288e3fbf3c517d927753cd8f9d775bacc62656a28b1b87d",
-          "url": "char/citlali-genshin-impact/SKILL.md"
+          "url": "char/citlali-genshin-impact/SKILL.md",
+          "tokens": 251
         },
         {
           "name": "behavior.md",
           "size": 7175,
           "sha256": "d6ea7018a674c3e89e530ab3239c46584b8524999419c22a81600f15b076c7ed",
-          "url": "char/citlali-genshin-impact/behavior.md"
+          "url": "char/citlali-genshin-impact/behavior.md",
+          "tokens": 1897
         },
         {
           "name": "conflicts.md",
           "size": 3325,
           "sha256": "b413788fac024d56e612285750cdb1d3a2654635b1b948fc0fe3369ac06a941a",
-          "url": "char/citlali-genshin-impact/conflicts.md"
+          "url": "char/citlali-genshin-impact/conflicts.md",
+          "tokens": 978
         },
         {
           "name": "interaction.md",
           "size": 4692,
           "sha256": "a11f04620d130a3e59220b4028043f2ba6e17453cbcf52c75555ff43649fd56c",
-          "url": "char/citlali-genshin-impact/interaction.md"
+          "url": "char/citlali-genshin-impact/interaction.md",
+          "tokens": 1183
         },
         {
           "name": "memory.md",
           "size": 7535,
           "sha256": "05991f6613322a1b4fe07bb1bff5adf80cc7cdeb9314f81376f174e8765e538f",
-          "url": "char/citlali-genshin-impact/memory.md"
+          "url": "char/citlali-genshin-impact/memory.md",
+          "tokens": 1988
         },
         {
           "name": "personality.md",
           "size": 3650,
           "sha256": "6da747f4ad5cf5ccb115680826fccec71efa91558fc2998609bce10894327c50",
-          "url": "char/citlali-genshin-impact/personality.md"
+          "url": "char/citlali-genshin-impact/personality.md",
+          "tokens": 957
         },
         {
           "name": "profile.md",
           "size": 3621,
           "sha256": "e1e948622b58bbe9d4db694feaaf201e9e5a3e255b5003f19265b6c53916b5ba",
-          "url": "char/citlali-genshin-impact/profile.md"
+          "url": "char/citlali-genshin-impact/profile.md",
+          "tokens": 1022
         },
         {
           "name": "prompt.md",
           "size": 6855,
           "sha256": "20bd31d87475cb7190da65a3241e3c8fb56b6cc8ada0af788c118baee5ac15bb",
-          "url": "char/citlali-genshin-impact/prompt.md"
+          "url": "char/citlali-genshin-impact/prompt.md",
+          "tokens": 1700
         },
         {
           "name": "relations.md",
           "size": 4027,
           "sha256": "16379d079b79162ac09385ac62d231ce3d72a94fa14af4d85a3b07d87444bde4",
-          "url": "char/citlali-genshin-impact/relations.md"
+          "url": "char/citlali-genshin-impact/relations.md",
+          "tokens": 1095
         },
         {
           "name": "world.md",
           "size": 6806,
           "sha256": "09c40a7fbc9a6b897db68698d61c451fd0f8ca7433f8f91c44a2596d564849ed",
-          "url": "char/citlali-genshin-impact/world.md"
+          "url": "char/citlali-genshin-impact/world.md",
+          "tokens": 1862
         },
         {
           "name": "assets/01-官方立绘-白星黑曜.png",
           "size": 2554058,
           "sha256": "21e4bb2aa723a0d7334efbf8b3f9f4e97ff6a6417ded17df991f5f6a28de602f",
-          "url": "char/citlali-genshin-impact/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98-%E7%99%BD%E6%98%9F%E9%BB%91%E6%9B%9C.png"
+          "url": "char/citlali-genshin-impact/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98-%E7%99%BD%E6%98%9F%E9%BB%91%E6%9B%9C.png",
+          "width": 1500,
+          "height": 1500,
+          "tokens": 994
         },
         {
           "name": "assets/02-官方场景图-小憩.png",
           "size": 14828982,
           "sha256": "a774748ccadc76bee952cf37b787b4622e0bafd54dc44157f01ee85c24980750",
-          "url": "char/citlali-genshin-impact/assets/02-%E5%AE%98%E6%96%B9%E5%9C%BA%E6%99%AF%E5%9B%BE-%E5%B0%8F%E6%86%A9.png"
+          "url": "char/citlali-genshin-impact/assets/02-%E5%AE%98%E6%96%B9%E5%9C%BA%E6%99%AF%E5%9B%BE-%E5%B0%8F%E6%86%A9.png",
+          "width": 4000,
+          "height": 4218,
+          "tokens": 994
         },
         {
           "name": "assets/README.md",
           "size": 1855,
           "sha256": "5c39313cbbf900807e1d0b62e06b83667173636c68f7f9841a53572476517769",
-          "url": "char/citlali-genshin-impact/assets/README.md"
+          "url": "char/citlali-genshin-impact/assets/README.md",
+          "tokens": 484
         }
       ],
       "archive": {
         "url": "downloads/char/citlali-genshin-impact.zip",
         "size": 17073644,
         "sha256": "4f9909265aceb1fbd871a89e6779e0d8df6b0fe0ec26f104bee8c8b3ae288566"
+      },
+      "tokenEstimate": {
+        "text": 13417,
+        "image": 1988,
+        "total": 15405,
+        "textFiles": 11,
+        "imageFiles": 2
       },
       "nameEn": "Citlali",
       "alias": "CITLALI",
@@ -325,7 +388,7 @@
       "sort": {
         "zh-CN": "xitelali"
       },
-      "thumbnail": "thumbnails/citlali-genshin-impact/cover.png"
+      "thumbnail": "thumbnails/citlali-genshin-impact/cover.png?v=f0a0b1e7"
     },
     {
       "slug": "cyrene-honkai-star-rail",
@@ -335,109 +398,145 @@
           "name": "SKILL.md",
           "size": 8876,
           "sha256": "089a6a500a2b1812d6818d2cd7fc721af7d988f68e8128348754458e6a27d670",
-          "url": "char/cyrene-honkai-star-rail/SKILL.md"
+          "url": "char/cyrene-honkai-star-rail/SKILL.md",
+          "tokens": 2373
         },
         {
           "name": "behavior.md",
           "size": 8475,
           "sha256": "fc958599fca2c1af59e12c2c6120534c61a9580859b84d017fb6a85af54c50f0",
-          "url": "char/cyrene-honkai-star-rail/behavior.md"
+          "url": "char/cyrene-honkai-star-rail/behavior.md",
+          "tokens": 2204
         },
         {
           "name": "conflicts.md",
           "size": 12268,
           "sha256": "3c34916aa63cd0d1b1e20af53232535afee48b658ed9613a01d199d1de3a2e33",
-          "url": "char/cyrene-honkai-star-rail/conflicts.md"
+          "url": "char/cyrene-honkai-star-rail/conflicts.md",
+          "tokens": 3311
         },
         {
           "name": "interaction.md",
           "size": 16254,
           "sha256": "7abfd99439832977d3ef1af2c91752b86440d81af985bba1cec8acd634afbfa5",
-          "url": "char/cyrene-honkai-star-rail/interaction.md"
+          "url": "char/cyrene-honkai-star-rail/interaction.md",
+          "tokens": 4050
         },
         {
           "name": "memory.md",
           "size": 11263,
           "sha256": "cb9240ffd8b4cca76963291422eb382c4a8bb8191b8f0440c12751335edb0cf2",
-          "url": "char/cyrene-honkai-star-rail/memory.md"
+          "url": "char/cyrene-honkai-star-rail/memory.md",
+          "tokens": 3105
         },
         {
           "name": "personality.md",
           "size": 7182,
           "sha256": "145371e066c05690a808f060c916de51614f688515aacd607297a81c43b7cb07",
-          "url": "char/cyrene-honkai-star-rail/personality.md"
+          "url": "char/cyrene-honkai-star-rail/personality.md",
+          "tokens": 1831
         },
         {
           "name": "profile.md",
           "size": 9160,
           "sha256": "ac3256676a032153e68d2741411d8b5c01c6828ed42c8bc8b708613e4f182844",
-          "url": "char/cyrene-honkai-star-rail/profile.md"
+          "url": "char/cyrene-honkai-star-rail/profile.md",
+          "tokens": 2805
         },
         {
           "name": "prompt.md",
           "size": 7135,
           "sha256": "c4f4442f8f1fdc2ffb6fe239d163a0cf619dc96ae7fbb0c161a2c099e6f4c343",
-          "url": "char/cyrene-honkai-star-rail/prompt.md"
+          "url": "char/cyrene-honkai-star-rail/prompt.md",
+          "tokens": 1802
         },
         {
           "name": "relations.md",
           "size": 12954,
           "sha256": "a7974dbedbbe4b1a58cf44bb6279415b117d78042bae68e9f8fabbeaca7e62ef",
-          "url": "char/cyrene-honkai-star-rail/relations.md"
+          "url": "char/cyrene-honkai-star-rail/relations.md",
+          "tokens": 3288
         },
         {
           "name": "world.md",
           "size": 10121,
           "sha256": "d923653aaf2f9dce0495680f82fd0130ee94157d4245ed8b7bcc77d39dc75d08",
-          "url": "char/cyrene-honkai-star-rail/world.md"
+          "url": "char/cyrene-honkai-star-rail/world.md",
+          "tokens": 2694
         },
         {
           "name": "assets/01-全身立绘-完全体.webp",
           "size": 499390,
           "sha256": "c22306f158f269ff201e16e1210e87334142f98f08765016b8b9891cc37b9a1b",
-          "url": "char/cyrene-honkai-star-rail/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%AE%8C%E5%85%A8%E4%BD%93.webp"
+          "url": "char/cyrene-honkai-star-rail/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%AE%8C%E5%85%A8%E4%BD%93.webp",
+          "width": 2048,
+          "height": 2048,
+          "tokens": 994
         },
         {
           "name": "assets/02-全身立绘-少女形态.png",
           "size": 2171548,
           "sha256": "ad3d66a0bf122eb31974acd5bd877c5092007a951d389b11c241580d38be3465",
-          "url": "char/cyrene-honkai-star-rail/assets/02-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%B0%91%E5%A5%B3%E5%BD%A2%E6%80%81.png"
+          "url": "char/cyrene-honkai-star-rail/assets/02-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%B0%91%E5%A5%B3%E5%BD%A2%E6%80%81.png",
+          "width": 864,
+          "height": 1220,
+          "tokens": 662
         },
         {
           "name": "assets/03-全身立绘-迷迷.webp",
           "size": 154506,
           "sha256": "d6951faaa2b7b9f666a76c65b7b1ef894d97dcb1165356a12fb6841b38de46aa",
-          "url": "char/cyrene-honkai-star-rail/assets/03-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E8%BF%B7%E8%BF%B7.webp"
+          "url": "char/cyrene-honkai-star-rail/assets/03-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E8%BF%B7%E8%BF%B7.webp",
+          "width": 883,
+          "height": 1213,
+          "tokens": 669
         },
         {
           "name": "assets/04-形态-原初德谬歌-记忆的种子.png",
           "size": 281293,
           "sha256": "c980683d01d441a1895b6edd1006c23b6002a5e30883110960044f4a440f5516",
-          "url": "char/cyrene-honkai-star-rail/assets/04-%E5%BD%A2%E6%80%81-%E5%8E%9F%E5%88%9D%E5%BE%B7%E8%B0%AC%E6%AD%8C-%E8%AE%B0%E5%BF%86%E7%9A%84%E7%A7%8D%E5%AD%90.png"
+          "url": "char/cyrene-honkai-star-rail/assets/04-%E5%BD%A2%E6%80%81-%E5%8E%9F%E5%88%9D%E5%BE%B7%E8%B0%AC%E6%AD%8C-%E8%AE%B0%E5%BF%86%E7%9A%84%E7%A7%8D%E5%AD%90.png",
+          "width": 677,
+          "height": 763,
+          "tokens": 344
         },
         {
           "name": "assets/08-光锥-爱如此刻永恒-白纱造型.png",
           "size": 1463897,
           "sha256": "32f1f9957b0b579a8a1f5cbae5ca27370b0fb276afd374cb7b47dba29bb39c95",
-          "url": "char/cyrene-honkai-star-rail/assets/08-%E5%85%89%E9%94%A5-%E7%88%B1%E5%A6%82%E6%AD%A4%E5%88%BB%E6%B0%B8%E6%81%92-%E7%99%BD%E7%BA%B1%E9%80%A0%E5%9E%8B.png"
+          "url": "char/cyrene-honkai-star-rail/assets/08-%E5%85%89%E9%94%A5-%E7%88%B1%E5%A6%82%E6%AD%A4%E5%88%BB%E6%B0%B8%E6%81%92-%E7%99%BD%E7%BA%B1%E9%80%A0%E5%9E%8B.png",
+          "width": 864,
+          "height": 1220,
+          "tokens": 662
         },
         {
           "name": "assets/11-联动造型-安踏-跟我一起出发.jpg",
           "size": 144777,
           "sha256": "969c79780fae9217b289d2505c966f7ce7dc1042ab432f01c1c655bcd0b03901",
-          "url": "char/cyrene-honkai-star-rail/assets/11-%E8%81%94%E5%8A%A8%E9%80%A0%E5%9E%8B-%E5%AE%89%E8%B8%8F-%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%87%BA%E5%8F%91.jpg"
+          "url": "char/cyrene-honkai-star-rail/assets/11-%E8%81%94%E5%8A%A8%E9%80%A0%E5%9E%8B-%E5%AE%89%E8%B8%8F-%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%87%BA%E5%8F%91.jpg",
+          "width": 1067,
+          "height": 600,
+          "tokens": 407
         },
         {
           "name": "assets/README.md",
           "size": 6555,
           "sha256": "805206e198a9e77dd33f60caf8c87ba3b9b7e00d8fa1f87e3bd594b592c7ec32",
-          "url": "char/cyrene-honkai-star-rail/assets/README.md"
+          "url": "char/cyrene-honkai-star-rail/assets/README.md",
+          "tokens": 1829
         }
       ],
       "archive": {
         "url": "downloads/char/cyrene-honkai-star-rail.zip",
         "size": 4745788,
         "sha256": "373fc1f00247b89feb3c224fd756be50184364a8daa90183e74163f9b3f94d5a"
+      },
+      "tokenEstimate": {
+        "text": 29292,
+        "image": 3738,
+        "total": 33030,
+        "textFiles": 11,
+        "imageFiles": 6
       },
       "nameEn": "Cyrene",
       "alias": "CYRENE",
@@ -493,7 +592,7 @@
       "sort": {
         "zh-CN": "xilian"
       },
-      "thumbnail": "thumbnails/cyrene-honkai-star-rail/cover.png"
+      "thumbnail": "thumbnails/cyrene-honkai-star-rail/cover.png?v=9f8143fa"
     },
     {
       "slug": "march-7th-honkai-star-rail",
@@ -503,133 +602,181 @@
           "name": "SKILL.md",
           "size": 8766,
           "sha256": "b47cb7d83799148aa9a2ceb3c7074fb7dd76d7b16f883b79578ebf24921a591f",
-          "url": "char/march-7th-honkai-star-rail/SKILL.md"
+          "url": "char/march-7th-honkai-star-rail/SKILL.md",
+          "tokens": 2430
         },
         {
           "name": "behavior.md",
           "size": 8881,
           "sha256": "6ae14974b08517c7b7a8bba7682db187b883c0b056caa66a2c3044835a21e287",
-          "url": "char/march-7th-honkai-star-rail/behavior.md"
+          "url": "char/march-7th-honkai-star-rail/behavior.md",
+          "tokens": 2302
         },
         {
           "name": "conflicts.md",
           "size": 8140,
           "sha256": "c2da71ef6772037770aeacd0891feb400753c7ffcd6b5fc9ba9c9fba4f4b8719",
-          "url": "char/march-7th-honkai-star-rail/conflicts.md"
+          "url": "char/march-7th-honkai-star-rail/conflicts.md",
+          "tokens": 2039
         },
         {
           "name": "interaction.md",
           "size": 21921,
           "sha256": "3d710ef0be86aee6bc9322ae2526565b50b53c6a1373e1032fed04c022badfb3",
-          "url": "char/march-7th-honkai-star-rail/interaction.md"
+          "url": "char/march-7th-honkai-star-rail/interaction.md",
+          "tokens": 5994
         },
         {
           "name": "memory.md",
           "size": 10861,
           "sha256": "2a2006c37b521bc0b3f3a006af9756357f17e59b9decfb219daf2532ade01ce7",
-          "url": "char/march-7th-honkai-star-rail/memory.md"
+          "url": "char/march-7th-honkai-star-rail/memory.md",
+          "tokens": 2929
         },
         {
           "name": "personality.md",
           "size": 13998,
           "sha256": "a04ed1dce295eee8c002f67e03dc44d7aa1fff3de7cdaab782652ae6cece8a98",
-          "url": "char/march-7th-honkai-star-rail/personality.md"
+          "url": "char/march-7th-honkai-star-rail/personality.md",
+          "tokens": 3524
         },
         {
           "name": "profile.md",
           "size": 8684,
           "sha256": "630ce3f21f9c33b28ec86b67c5b7a56dee6302c91649c7ec248381e446b61561",
-          "url": "char/march-7th-honkai-star-rail/profile.md"
+          "url": "char/march-7th-honkai-star-rail/profile.md",
+          "tokens": 2585
         },
         {
           "name": "prompt.md",
           "size": 7158,
           "sha256": "c326e2ba90742ad397b0cc0792a4398aa4377ca5e292028b18e44809845a960b",
-          "url": "char/march-7th-honkai-star-rail/prompt.md"
+          "url": "char/march-7th-honkai-star-rail/prompt.md",
+          "tokens": 1833
         },
         {
           "name": "relations.md",
           "size": 12079,
           "sha256": "c5bd6cd6b61e3e043fc1c9bce2112763f0f74e0c6a9cf92de568e5c8fee40edf",
-          "url": "char/march-7th-honkai-star-rail/relations.md"
+          "url": "char/march-7th-honkai-star-rail/relations.md",
+          "tokens": 3036
         },
         {
           "name": "world.md",
           "size": 7441,
           "sha256": "d6869deb391fe39b85218ec01b10fbd49a61e71b1e23638e678a497d89f0159e",
-          "url": "char/march-7th-honkai-star-rail/world.md"
+          "url": "char/march-7th-honkai-star-rail/world.md",
+          "tokens": 1891
         },
         {
           "name": "assets/01-全身立绘-三月七-存护.png",
           "size": 4751331,
           "sha256": "3228ea7b6d946bb74d980c930ce3e2ca3d4205814c6e4f150c7ef9b5d016faa4",
-          "url": "char/march-7th-honkai-star-rail/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%AD%98%E6%8A%A4.png"
+          "url": "char/march-7th-honkai-star-rail/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%AD%98%E6%8A%A4.png",
+          "width": 2048,
+          "height": 2048,
+          "tokens": 994
         },
         {
           "name": "assets/02-全身立绘-三月七-巡猎.png",
           "size": 2941283,
           "sha256": "f751ec645593c11ae21b981207c9cf4ba887cc0a7287f4a5f0611f0bc634f9f8",
-          "url": "char/march-7th-honkai-star-rail/assets/02-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%B7%A1%E7%8C%8E.png"
+          "url": "char/march-7th-honkai-star-rail/assets/02-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%B7%A1%E7%8C%8E.png",
+          "width": 2048,
+          "height": 2048,
+          "tokens": 994
         },
         {
           "name": "assets/03-全身立绘-长夜月.png",
           "size": 433557,
           "sha256": "c6dad516e4100b30d04a1c0e72e765b8fbcae0397f5ce017c9780b633d0c7ebe",
-          "url": "char/march-7th-honkai-star-rail/assets/03-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E9%95%BF%E5%A4%9C%E6%9C%88.png"
+          "url": "char/march-7th-honkai-star-rail/assets/03-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E9%95%BF%E5%A4%9C%E6%9C%88.png",
+          "width": 600,
+          "height": 600,
+          "tokens": 242
         },
         {
           "name": "assets/04-官方卡片-翁法罗斯英雄纪-长夜月.png",
           "size": 984256,
           "sha256": "7e215aff0591aa2f0d0948488ac02e9e364056baa5970dab27b5e36a1e3de435",
-          "url": "char/march-7th-honkai-star-rail/assets/04-%E5%AE%98%E6%96%B9%E5%8D%A1%E7%89%87-%E7%BF%81%E6%B3%95%E7%BD%97%E6%96%AF%E8%8B%B1%E9%9B%84%E7%BA%AA-%E9%95%BF%E5%A4%9C%E6%9C%88.png"
+          "url": "char/march-7th-honkai-star-rail/assets/04-%E5%AE%98%E6%96%B9%E5%8D%A1%E7%89%87-%E7%BF%81%E6%B3%95%E7%BD%97%E6%96%AF%E8%8B%B1%E9%9B%84%E7%BA%AA-%E9%95%BF%E5%A4%9C%E6%9C%88.png",
+          "width": 600,
+          "height": 1056,
+          "tokens": 418
         },
         {
           "name": "assets/05-官方卡片立绘-长夜月.png",
           "size": 1033699,
           "sha256": "61841e320de7ffe08a5fded08b71b74e115ee7b33e6761c990fdc925c15812b1",
-          "url": "char/march-7th-honkai-star-rail/assets/05-%E5%AE%98%E6%96%B9%E5%8D%A1%E7%89%87%E7%AB%8B%E7%BB%98-%E9%95%BF%E5%A4%9C%E6%9C%88.png"
+          "url": "char/march-7th-honkai-star-rail/assets/05-%E5%AE%98%E6%96%B9%E5%8D%A1%E7%89%87%E7%AB%8B%E7%BB%98-%E9%95%BF%E5%A4%9C%E6%9C%88.png",
+          "width": 600,
+          "height": 977,
+          "tokens": 386
         },
         {
           "name": "assets/06-光锥-余生的第一天.png",
           "size": 715181,
           "sha256": "e1c82db5c84276629cc6bb3859769cfd4c2acee47ed84e3a18c81b519b736ad4",
-          "url": "char/march-7th-honkai-star-rail/assets/06-%E5%85%89%E9%94%A5-%E4%BD%99%E7%94%9F%E7%9A%84%E7%AC%AC%E4%B8%80%E5%A4%A9.png"
+          "url": "char/march-7th-honkai-star-rail/assets/06-%E5%85%89%E9%94%A5-%E4%BD%99%E7%94%9F%E7%9A%84%E7%AC%AC%E4%B8%80%E5%A4%A9.png",
+          "width": 600,
+          "height": 847,
+          "tokens": 338
         },
         {
           "name": "assets/07-光锥-芳华待灼.jpg",
           "size": 217142,
           "sha256": "e7c2d0786dbc9cc1e81e82b99fa59d0a480caa756306ef9fd605105a1d84a1f0",
-          "url": "char/march-7th-honkai-star-rail/assets/07-%E5%85%89%E9%94%A5-%E8%8A%B3%E5%8D%8E%E5%BE%85%E7%81%BC.jpg"
+          "url": "char/march-7th-honkai-star-rail/assets/07-%E5%85%89%E9%94%A5-%E8%8A%B3%E5%8D%8E%E5%BE%85%E7%81%BC.jpg",
+          "width": 600,
+          "height": 836,
+          "tokens": 322
         },
         {
           "name": "assets/08-光锥-致长夜的星光.png",
           "size": 709689,
           "sha256": "bf5c9de5f02e46675862f493d42c2d04f0bd22495a76f0b042670293815d12bf",
-          "url": "char/march-7th-honkai-star-rail/assets/08-%E5%85%89%E9%94%A5-%E8%87%B4%E9%95%BF%E5%A4%9C%E7%9A%84%E6%98%9F%E5%85%89.png"
+          "url": "char/march-7th-honkai-star-rail/assets/08-%E5%85%89%E9%94%A5-%E8%87%B4%E9%95%BF%E5%A4%9C%E7%9A%84%E6%98%9F%E5%85%89.png",
+          "width": 600,
+          "height": 847,
+          "tokens": 338
         },
         {
           "name": "assets/09-时装-三月七-冬去煦至.png",
           "size": 430192,
           "sha256": "7cc30c8a5de04dba4f55f2c080005e8cd022d72fdfb355751bbba9391e108f40",
-          "url": "char/march-7th-honkai-star-rail/assets/09-%E6%97%B6%E8%A3%85-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%86%AC%E5%8E%BB%E7%85%A6%E8%87%B3.png"
+          "url": "char/march-7th-honkai-star-rail/assets/09-%E6%97%B6%E8%A3%85-%E4%B8%89%E6%9C%88%E4%B8%83-%E5%86%AC%E5%8E%BB%E7%85%A6%E8%87%B3.png",
+          "width": 600,
+          "height": 600,
+          "tokens": 242
         },
         {
           "name": "assets/10-头像-三月七.png",
           "size": 471987,
           "sha256": "970784761feda49525ddc34fb92285a9175968ffbc4697b426cb1214cfde4261",
-          "url": "char/march-7th-honkai-star-rail/assets/10-%E5%A4%B4%E5%83%8F-%E4%B8%89%E6%9C%88%E4%B8%83.png"
+          "url": "char/march-7th-honkai-star-rail/assets/10-%E5%A4%B4%E5%83%8F-%E4%B8%89%E6%9C%88%E4%B8%83.png",
+          "width": 800,
+          "height": 800,
+          "tokens": 422
         },
         {
           "name": "assets/README.md",
           "size": 4893,
           "sha256": "8079d53a9bdb218f8dfb3bd3f700745865aeed45371a8c9d9f732709de256543",
-          "url": "char/march-7th-honkai-star-rail/assets/README.md"
+          "url": "char/march-7th-honkai-star-rail/assets/README.md",
+          "tokens": 1426
         }
       ],
       "archive": {
         "url": "downloads/char/march-7th-honkai-star-rail.zip",
         "size": 12701378,
         "sha256": "e13c1cd1adf069c9223dc07bfe0d8e62be255901c1c8ec763f21eff8ccafef9c"
+      },
+      "tokenEstimate": {
+        "text": 29989,
+        "image": 4696,
+        "total": 34685,
+        "textFiles": 11,
+        "imageFiles": 10
       },
       "nameEn": "March 7th (Evernight)",
       "alias": "MARCH 7TH / EVERNIGHT",
@@ -692,7 +839,7 @@
       "sort": {
         "zh-CN": "sanyueqihanchangyeyue"
       },
-      "thumbnail": "thumbnails/march-7th-honkai-star-rail/cover.png"
+      "thumbnail": "thumbnails/march-7th-honkai-star-rail/cover.png?v=97078476"
     },
     {
       "slug": "perlica-arknights-endfield",
@@ -702,79 +849,100 @@
           "name": "SKILL.md",
           "size": 6933,
           "sha256": "2ff41a059692588bf3b74d7c0da5e531ff688667b975a67faccdd501bb432b2e",
-          "url": "char/perlica-arknights-endfield/SKILL.md"
+          "url": "char/perlica-arknights-endfield/SKILL.md",
+          "tokens": 1741
         },
         {
           "name": "behavior.md",
           "size": 12109,
           "sha256": "87eea456f919301d557e03051b1e3368391f520c5abbcf8fcdcc0009fd38af76",
-          "url": "char/perlica-arknights-endfield/behavior.md"
+          "url": "char/perlica-arknights-endfield/behavior.md",
+          "tokens": 3051
         },
         {
           "name": "conflicts.md",
           "size": 10266,
           "sha256": "44ca9b8d784a85ae667271237f8f1bfbf425ba7bd71a1e4279bbd76000348e7a",
-          "url": "char/perlica-arknights-endfield/conflicts.md"
+          "url": "char/perlica-arknights-endfield/conflicts.md",
+          "tokens": 2706
         },
         {
           "name": "interaction.md",
           "size": 10369,
           "sha256": "5f960bc6e5ee9571f6379e72119b9d68e1461511d28adb4894359262b2d4ea84",
-          "url": "char/perlica-arknights-endfield/interaction.md"
+          "url": "char/perlica-arknights-endfield/interaction.md",
+          "tokens": 2824
         },
         {
           "name": "memory.md",
           "size": 10973,
           "sha256": "54d2d48d169764d7ce68e92576474d2ce9953c168880c2640f7b0dca6f340e4c",
-          "url": "char/perlica-arknights-endfield/memory.md"
+          "url": "char/perlica-arknights-endfield/memory.md",
+          "tokens": 2663
         },
         {
           "name": "personality.md",
           "size": 10066,
           "sha256": "65625ee408c37302193487efe80a54b8792763ed4fb90e4e22e0b99d9d3c7e0e",
-          "url": "char/perlica-arknights-endfield/personality.md"
+          "url": "char/perlica-arknights-endfield/personality.md",
+          "tokens": 2562
         },
         {
           "name": "profile.md",
           "size": 8169,
           "sha256": "068c0138fc4150d740710e1ace58a7220875b75d136c13ce66443f87b0e6d1e0",
-          "url": "char/perlica-arknights-endfield/profile.md"
+          "url": "char/perlica-arknights-endfield/profile.md",
+          "tokens": 2549
         },
         {
           "name": "prompt.md",
           "size": 9364,
           "sha256": "a96d8b5aeb5488c3ce7aae4056f3f4ae0da4424d671f8dd8b9542052e2b0bdc2",
-          "url": "char/perlica-arknights-endfield/prompt.md"
+          "url": "char/perlica-arknights-endfield/prompt.md",
+          "tokens": 2221
         },
         {
           "name": "relations.md",
           "size": 11138,
           "sha256": "91d770c546c578116b1f0d14bff5d4f0808f701a82143de909a0d279559cc112",
-          "url": "char/perlica-arknights-endfield/relations.md"
+          "url": "char/perlica-arknights-endfield/relations.md",
+          "tokens": 2755
         },
         {
           "name": "world.md",
           "size": 12812,
           "sha256": "513c4f6b2278c5ed4d90842d086951df6db56494c7e5656c54b4aa4bb7b8c435",
-          "url": "char/perlica-arknights-endfield/world.md"
+          "url": "char/perlica-arknights-endfield/world.md",
+          "tokens": 3419
         },
         {
           "name": "assets/01-官方立绘.webp",
           "size": 324408,
           "sha256": "eb922bce37df48a8cd59f7a2b3a96fadc64e98e875b0bf3dfbd24c8542e8b5e8",
-          "url": "char/perlica-arknights-endfield/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98.webp"
+          "url": "char/perlica-arknights-endfield/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98.webp",
+          "width": 1680,
+          "height": 1623,
+          "tokens": 962
         },
         {
           "name": "assets/README.md",
           "size": 5034,
           "sha256": "88436d90f83940dda5cf75b430956ce807965e762bf9302dc225ff5c107a6fea",
-          "url": "char/perlica-arknights-endfield/assets/README.md"
+          "url": "char/perlica-arknights-endfield/assets/README.md",
+          "tokens": 1359
         }
       ],
       "archive": {
         "url": "downloads/char/perlica-arknights-endfield.zip",
         "size": 379006,
         "sha256": "36a4046e601e86c284be4ee1a17207bcbf32a382677578ce0e2d7046af5232a6"
+      },
+      "tokenEstimate": {
+        "text": 27850,
+        "image": 962,
+        "total": 28812,
+        "textFiles": 11,
+        "imageFiles": 1
       },
       "nameEn": "Perlica",
       "alias": "PERLICA",
@@ -833,7 +1001,7 @@
       "sort": {
         "zh-CN": "peilika"
       },
-      "thumbnail": "thumbnails/perlica-arknights-endfield/cover.png"
+      "thumbnail": "thumbnails/perlica-arknights-endfield/cover.png?v=e4877c77"
     },
     {
       "slug": "priestess-arknights",
@@ -843,85 +1011,109 @@
           "name": "SKILL.md",
           "size": 5125,
           "sha256": "ca3fef397a7812fe3c9b16dfa4397e4663f9979d55d862c2e473bb4827fbb39f",
-          "url": "char/priestess-arknights/SKILL.md"
+          "url": "char/priestess-arknights/SKILL.md",
+          "tokens": 1235
         },
         {
           "name": "behavior.md",
           "size": 5428,
           "sha256": "6144bbcf847a49f9928ba7b310a7a51141a9c36a2991906912b4b7ecec59b9cc",
-          "url": "char/priestess-arknights/behavior.md"
+          "url": "char/priestess-arknights/behavior.md",
+          "tokens": 1323
         },
         {
           "name": "conflicts.md",
           "size": 6442,
           "sha256": "48e7f174cc707ca89ca955ec6c7079d382b4592bd709b9698f76ba1bfc14e3ca",
-          "url": "char/priestess-arknights/conflicts.md"
+          "url": "char/priestess-arknights/conflicts.md",
+          "tokens": 1710
         },
         {
           "name": "interaction.md",
           "size": 4143,
           "sha256": "d1e862b7c555874b82294ea675a80046f36e87c6f0ed74269f67e4bde3f44f3d",
-          "url": "char/priestess-arknights/interaction.md"
+          "url": "char/priestess-arknights/interaction.md",
+          "tokens": 1092
         },
         {
           "name": "memory.md",
           "size": 9884,
           "sha256": "09a15fa382b4dd1bb5cd6bc7c68689102810abf0ae380f5ffeb2dab4da932c9a",
-          "url": "char/priestess-arknights/memory.md"
+          "url": "char/priestess-arknights/memory.md",
+          "tokens": 2573
         },
         {
           "name": "personality.md",
           "size": 5441,
           "sha256": "aba22786d946cc5e7196f98c2a254d42d39fe259adfd70c7aba786d07f78e6f9",
-          "url": "char/priestess-arknights/personality.md"
+          "url": "char/priestess-arknights/personality.md",
+          "tokens": 1387
         },
         {
           "name": "profile.md",
           "size": 3815,
           "sha256": "7c66bfd2d90d3fe538150f5bda247a9ce33d850767285402f8fa82e96372e55a",
-          "url": "char/priestess-arknights/profile.md"
+          "url": "char/priestess-arknights/profile.md",
+          "tokens": 1113
         },
         {
           "name": "prompt.md",
           "size": 5080,
           "sha256": "8ea20b84d8bb807ddda1097a87280e2f29379a115343db63293d301547234cb5",
-          "url": "char/priestess-arknights/prompt.md"
+          "url": "char/priestess-arknights/prompt.md",
+          "tokens": 1185
         },
         {
           "name": "relations.md",
           "size": 6050,
           "sha256": "c6f2ef75f5e88eeb7241d5e4ef89f47856995860ac9b48ae68d239c0d31708d2",
-          "url": "char/priestess-arknights/relations.md"
+          "url": "char/priestess-arknights/relations.md",
+          "tokens": 1550
         },
         {
           "name": "world.md",
           "size": 6452,
           "sha256": "47349228701a612016a5028fe3f8c9d47aebe19b650fa2f5271f4f25e112e26b",
-          "url": "char/priestess-arknights/world.md"
+          "url": "char/priestess-arknights/world.md",
+          "tokens": 1731
         },
         {
           "name": "assets/60_i25.png",
           "size": 2473655,
           "sha256": "16e54d0c827a318027b323f94e75861ae8938ee74ee6e1a407b518cd33e5f7eb",
-          "url": "char/priestess-arknights/assets/60_i25.png"
+          "url": "char/priestess-arknights/assets/60_i25.png",
+          "width": 1600,
+          "height": 900,
+          "tokens": 882
         },
         {
           "name": "assets/README.md",
           "size": 4051,
           "sha256": "5270592f4c0905e8540800c356168c8e8cecd28b947cc582fa7f894f786b3c94",
-          "url": "char/priestess-arknights/assets/README.md"
+          "url": "char/priestess-arknights/assets/README.md",
+          "tokens": 1132
         },
         {
           "name": "assets/avg_npc_083.png",
           "size": 205955,
           "sha256": "f47429bf9d8f95cfd8f3b85015917c2fa1a472eb5ce4afe75a6deea0d9feb5c4",
-          "url": "char/priestess-arknights/assets/avg_npc_083.png"
+          "url": "char/priestess-arknights/assets/avg_npc_083.png",
+          "width": 1024,
+          "height": 1024,
+          "tokens": 652
         }
       ],
       "archive": {
         "url": "downloads/char/priestess-arknights.zip",
         "size": 2707636,
         "sha256": "80f86bedbf9ec28ff1925c55ad5f81016b1de0ac26f78554696a966465a14ba6"
+      },
+      "tokenEstimate": {
+        "text": 16031,
+        "image": 1534,
+        "total": 17565,
+        "textFiles": 11,
+        "imageFiles": 2
       },
       "nameEn": "Priestess",
       "alias": "PRIESTESS",
@@ -978,7 +1170,7 @@
       "sort": {
         "zh-CN": "puruisaisi"
       },
-      "thumbnail": "thumbnails/priestess-arknights/cover.jpg"
+      "thumbnail": "thumbnails/priestess-arknights/cover.png?v=49778d3d"
     },
     {
       "slug": "shu-arknights",
@@ -988,97 +1180,127 @@
           "name": "SKILL.md",
           "size": 3479,
           "sha256": "68d8183f3cfd6d7ac1827bb646e138fe4a56b7fb895e1416fb2907ac4e3de7d3",
-          "url": "char/shu-arknights/SKILL.md"
+          "url": "char/shu-arknights/SKILL.md",
+          "tokens": 877
         },
         {
           "name": "behavior.md",
           "size": 3703,
           "sha256": "8e54aaa9d495e743b8a27533b975cbf9f8f092f7464de1193215ebdd920b0373",
-          "url": "char/shu-arknights/behavior.md"
+          "url": "char/shu-arknights/behavior.md",
+          "tokens": 936
         },
         {
           "name": "conflicts.md",
           "size": 4214,
           "sha256": "e4a0f08b130e673d3a42088fa0a0903397e6d8f6cc09fed6d690fb7ac533165e",
-          "url": "char/shu-arknights/conflicts.md"
+          "url": "char/shu-arknights/conflicts.md",
+          "tokens": 1195
         },
         {
           "name": "interaction.md",
           "size": 3968,
           "sha256": "86a929384bea25add9d5ce2cf4a2c15bfcb14c3940d3033462b30f97d770a9f7",
-          "url": "char/shu-arknights/interaction.md"
+          "url": "char/shu-arknights/interaction.md",
+          "tokens": 1035
         },
         {
           "name": "memory.md",
           "size": 4311,
           "sha256": "12622c4c1fcaa37ecbe7b55a4baea2747a0239d481cff7c1515eccf0670ebad2",
-          "url": "char/shu-arknights/memory.md"
+          "url": "char/shu-arknights/memory.md",
+          "tokens": 1097
         },
         {
           "name": "personality.md",
           "size": 3237,
           "sha256": "e6f95eabc3d955457704ca0c0d218bd2f18847ab93cd8b3adc4498b6849291c5",
-          "url": "char/shu-arknights/personality.md"
+          "url": "char/shu-arknights/personality.md",
+          "tokens": 798
         },
         {
           "name": "profile.md",
           "size": 3736,
           "sha256": "71ac22f140ea532c45e6212372bc3cdb2ebbb198e63ebb87c4eba26c140898d8",
-          "url": "char/shu-arknights/profile.md"
+          "url": "char/shu-arknights/profile.md",
+          "tokens": 1189
         },
         {
           "name": "prompt.md",
           "size": 3523,
           "sha256": "455d410b3be4ce16731032707dd3b70ea4586ae972d65888e46876270b6b45f8",
-          "url": "char/shu-arknights/prompt.md"
+          "url": "char/shu-arknights/prompt.md",
+          "tokens": 889
         },
         {
           "name": "relations.md",
           "size": 4898,
           "sha256": "f84d868fc6bb4032e13c93d0cf8ec1d3b932e04c5f7e1d3f455b3fe7be50410e",
-          "url": "char/shu-arknights/relations.md"
+          "url": "char/shu-arknights/relations.md",
+          "tokens": 1304
         },
         {
           "name": "world.md",
           "size": 3565,
           "sha256": "f69d10be0fe8ea8c10ad335dcbb14285f04f972f0d0253c49187f0b8d9ef0e46",
-          "url": "char/shu-arknights/world.md"
+          "url": "char/shu-arknights/world.md",
+          "tokens": 991
         },
         {
           "name": "assets/README.md",
           "size": 4510,
           "sha256": "59cf721a75f05eecf87fdde308c4a323225e97d556a59bda21a96900141f0b32",
-          "url": "char/shu-arknights/assets/README.md"
+          "url": "char/shu-arknights/assets/README.md",
+          "tokens": 1312
         },
         {
           "name": "assets/明日方舟立绘_黍_1.png",
           "size": 1150202,
           "sha256": "b0e3d3b4b0321f9b212236d68efa2823275c4f9130f3191b0e1e2df0380dcbd7",
-          "url": "char/shu-arknights/assets/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F%E7%AB%8B%E7%BB%98_%E9%BB%8D_1.png"
+          "url": "char/shu-arknights/assets/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F%E7%AB%8B%E7%BB%98_%E9%BB%8D_1.png",
+          "width": 1464,
+          "height": 1464,
+          "tokens": 994
         },
         {
           "name": "assets/黍-春日宴-立绘-全图.jpg",
           "size": 636121,
           "sha256": "ec2b3945bbf07af6af24c98227b5a4e65c8df8a6cacbc7a2882d8b05e77432e8",
-          "url": "char/shu-arknights/assets/%E9%BB%8D-%E6%98%A5%E6%97%A5%E5%AE%B4-%E7%AB%8B%E7%BB%98-%E5%85%A8%E5%9B%BE.jpg"
+          "url": "char/shu-arknights/assets/%E9%BB%8D-%E6%98%A5%E6%97%A5%E5%AE%B4-%E7%AB%8B%E7%BB%98-%E5%85%A8%E5%9B%BE.jpg",
+          "width": 1920,
+          "height": 1080,
+          "tokens": 968
         },
         {
           "name": "assets/黍-春日宴-立绘.png",
           "size": 12008418,
           "sha256": "689e84cdc21ebd740dd0d5c626e652388d1c67b38de0050d68e322de8a2bbd5a",
-          "url": "char/shu-arknights/assets/%E9%BB%8D-%E6%98%A5%E6%97%A5%E5%AE%B4-%E7%AB%8B%E7%BB%98.png"
+          "url": "char/shu-arknights/assets/%E9%BB%8D-%E6%98%A5%E6%97%A5%E5%AE%B4-%E7%AB%8B%E7%BB%98.png",
+          "width": 3808,
+          "height": 3808,
+          "tokens": 994
         },
         {
           "name": "assets/黍-默认-立绘.png",
           "size": 10058063,
           "sha256": "6dd3be9df3e4265d3ffb48387eb2b2f83445978007ee1db44af5c07aef9456bb",
-          "url": "char/shu-arknights/assets/%E9%BB%8D-%E9%BB%98%E8%AE%A4-%E7%AB%8B%E7%BB%98.png"
+          "url": "char/shu-arknights/assets/%E9%BB%8D-%E9%BB%98%E8%AE%A4-%E7%AB%8B%E7%BB%98.png",
+          "width": 3000,
+          "height": 2989,
+          "tokens": 994
         }
       ],
       "archive": {
         "url": "downloads/char/shu-arknights.zip",
         "size": 23838688,
         "sha256": "655c8fde78195bd8573a8a69d4ae376b21d4550ec3df32e8a87f29c7415c7154"
+      },
+      "tokenEstimate": {
+        "text": 11623,
+        "image": 3950,
+        "total": 15573,
+        "textFiles": 11,
+        "imageFiles": 4
       },
       "nameEn": "Shu",
       "alias": "SHU",
@@ -1132,7 +1354,7 @@
       "sort": {
         "zh-CN": "shu"
       },
-      "thumbnail": "thumbnails/shu-arknights/cover.png"
+      "thumbnail": "thumbnails/shu-arknights/cover.png?v=b509544d"
     },
     {
       "slug": "white-rice-fish-deepseek",
@@ -1142,79 +1364,100 @@
           "name": "SKILL.md",
           "size": 4230,
           "sha256": "678fd9610143d1b5570671bdd38cee7bfdca100fb91f3b2ffb2ea24ed72950af",
-          "url": "char/white-rice-fish-deepseek/SKILL.md"
+          "url": "char/white-rice-fish-deepseek/SKILL.md",
+          "tokens": 1117
         },
         {
           "name": "behavior.md",
           "size": 4363,
           "sha256": "efb7e10b5405591eefcc11d54df0b6a0bd11943a25736de48bd2dfeab4271b0b",
-          "url": "char/white-rice-fish-deepseek/behavior.md"
+          "url": "char/white-rice-fish-deepseek/behavior.md",
+          "tokens": 1176
         },
         {
           "name": "conflicts.md",
           "size": 6192,
           "sha256": "b881fcda767a7f523cf5865d3970322ef3f4d9b49e016dcea3f5427a86460528",
-          "url": "char/white-rice-fish-deepseek/conflicts.md"
+          "url": "char/white-rice-fish-deepseek/conflicts.md",
+          "tokens": 1623
         },
         {
           "name": "interaction.md",
           "size": 3091,
           "sha256": "eb89469406d7cb81aee949561850f57620abf908a8e4301cfdaf6df4c2582a39",
-          "url": "char/white-rice-fish-deepseek/interaction.md"
+          "url": "char/white-rice-fish-deepseek/interaction.md",
+          "tokens": 771
         },
         {
           "name": "memory.md",
           "size": 5508,
           "sha256": "effc35672c873e0cea5a78b31a1d7fd6d3b4219479b04bf1b7fcbfd59c433e16",
-          "url": "char/white-rice-fish-deepseek/memory.md"
+          "url": "char/white-rice-fish-deepseek/memory.md",
+          "tokens": 1424
         },
         {
           "name": "personality.md",
           "size": 4341,
           "sha256": "71455e428ecb164fc76f3d5b79caf77226411457db958371013c7f3ee06d1d3a",
-          "url": "char/white-rice-fish-deepseek/personality.md"
+          "url": "char/white-rice-fish-deepseek/personality.md",
+          "tokens": 1127
         },
         {
           "name": "profile.md",
           "size": 2256,
           "sha256": "42049e9cacd19daa5c66f2ff647dab1876d2b17079a324343b71f8c2caa61948",
-          "url": "char/white-rice-fish-deepseek/profile.md"
+          "url": "char/white-rice-fish-deepseek/profile.md",
+          "tokens": 676
         },
         {
           "name": "prompt.md",
           "size": 4145,
           "sha256": "617d8a598b7fcc0aa97116b5d1767ad96d66780f0e6031df1c492236338acbc4",
-          "url": "char/white-rice-fish-deepseek/prompt.md"
+          "url": "char/white-rice-fish-deepseek/prompt.md",
+          "tokens": 1027
         },
         {
           "name": "relations.md",
           "size": 3490,
           "sha256": "3214988485641ebacbcb3a47853dd1e0966167886a3d4c046d9e48c98c89c5d4",
-          "url": "char/white-rice-fish-deepseek/relations.md"
+          "url": "char/white-rice-fish-deepseek/relations.md",
+          "tokens": 877
         },
         {
           "name": "world.md",
           "size": 4518,
           "sha256": "ee440c8e4ea1359acf3eff4a3b33ef15940f0453211e91daa3afbcb3b095f03f",
-          "url": "char/white-rice-fish-deepseek/world.md"
+          "url": "char/white-rice-fish-deepseek/world.md",
+          "tokens": 1186
         },
         {
           "name": "assets/01-全身立绘-女仆装.jpg",
           "size": 126725,
           "sha256": "895ef3143d274be03ede29c4dd51c37c5aeef96160e51ba45789f144353e06f4",
-          "url": "char/white-rice-fish-deepseek/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%A5%B3%E4%BB%86%E8%A3%85.jpg"
+          "url": "char/white-rice-fish-deepseek/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%A5%B3%E4%BB%86%E8%A3%85.jpg",
+          "width": 750,
+          "height": 1344,
+          "tokens": 610
         },
         {
           "name": "assets/README.md",
           "size": 2349,
           "sha256": "432094ff20154996c36149c3ad6fd0d989c9ee9c44418108b1a18a2c1151bb86",
-          "url": "char/white-rice-fish-deepseek/assets/README.md"
+          "url": "char/white-rice-fish-deepseek/assets/README.md",
+          "tokens": 631
         }
       ],
       "archive": {
         "url": "downloads/char/white-rice-fish-deepseek.zip",
         "size": 149446,
         "sha256": "a866b42ae37fa98c96afaae4e319387b37e70d4f8d3797874da3b5ca23fabb42"
+      },
+      "tokenEstimate": {
+        "text": 11635,
+        "image": 610,
+        "total": 12245,
+        "textFiles": 11,
+        "imageFiles": 1
       },
       "nameEn": "White Rice Fish",
       "alias": "WHITE RICE FISH",
@@ -1261,7 +1504,7 @@
       "sort": {
         "zh-CN": "chibaifandedafeiyu"
       },
-      "thumbnail": "thumbnails/white-rice-fish-deepseek/cover.jpg"
+      "thumbnail": "thumbnails/white-rice-fish-deepseek/cover.png?v=88a9a1fc"
     }
   ]
 }

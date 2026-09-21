@@ -297,6 +297,10 @@
     white-space: nowrap;
 }
 
+.char-count-token {
+    color: var(--color-signal-cyan);
+}
+
 .char-card-foot .btn {
     flex: 1 1 120px;
 }

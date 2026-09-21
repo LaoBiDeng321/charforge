@@ -100,6 +100,11 @@ function renderStats(data) {
         data.skills.reduce((sum, s) => sum + countSettingFiles(s), 0) +
         data.chars.reduce((sum, c) => sum + countSettingFiles(c), 0);
 
+    // Hero 的 Token 统计覆盖「构建器 + 角色卡」全部交付文件（含 assets 图片），
+    // 与「设定文件」口径不同，具体方法见 README 的「Token 预估」一节。
+    const allEntries = data.skills.concat(data.chars);
+    const tokenTotal = window.TokenEstimate ? window.TokenEstimate.entriesTotal(allEntries) : 0;
+
     const pad2 = (n) => String(n).padStart(2, '0');
     const set = (id, text) => {
         const el = document.getElementById(id);
@@ -109,6 +114,7 @@ function renderStats(data) {
     set('statSkills', pad2(skillCount));
     set('statChars', pad2(charCount));
     set('statFiles', String(fileCount));
+    set('statTokens', window.TokenEstimate ? window.TokenEstimate.compact(tokenTotal) : '--');
     set('footerRes', `${skillCount} SKILLS / ${charCount} CHARS`);
 }
 
@@ -146,7 +152,7 @@ function renderFileTables(data) {
 }
 
 /**
- * Q&A 列表：details 折叠项（默认第一项展开）
+ * Q&A 列表：details 折叠项（默认全部合上）
  */
 function renderQA() {
     const list = document.getElementById('qaList');
@@ -159,7 +165,7 @@ function renderQA() {
         if (q === 'qa.' + i + '.q') break; // 词条缺失即停止
         const no = String(i).padStart(2, '0');
         html +=
-            '<details class="qa-item animate-on-scroll"' + (i === 1 ? ' open' : '') + '>' +
+            '<details class="qa-item animate-on-scroll">' +
                 '<summary>' +
                     '<span class="qa-q">Q.' + no + '</span>' +
                     '<span class="qa-question">' + q + '</span>' +
@@ -263,13 +269,19 @@ function bindActions() {
 /**
  * 加载动画完成后触发首屏入场
  * 时序由 loader.js 派发的 loader:done 事件驱动
+ *
+ * 注意：不能写死第一屏。FullPage 初始化时会按 URL hash 直接进入对应分区
+ * （例如刷新在 #chars），而它在加载遮罩期间触发的 sectionChange 动画会被跳过；
+ * 如果这里只 reveal 第一屏，刷新在 #chars 时角色卡所在分区会一直 opacity:0，
+ * 看起来就是「角色卡全部消失」。
  */
 function initRevealAfterLoader() {
-    const firstSection = document.querySelector('.fp-section');
-
     const reveal = () => {
-        if (firstSection) {
-            animateSectionElements(firstSection);
+        const currentSection = window.fullpage
+            ? window.fullpage.getCurrentSection()
+            : document.querySelector('.fp-section');
+        if (currentSection) {
+            animateSectionElements(currentSection);
         }
         // 顶栏随入场淡入
         document.querySelector('.topbar')?.classList.add('is-visible');

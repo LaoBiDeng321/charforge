@@ -1,0 +1,368 @@
+{
+  "generatedBy": "tools/make_gallery.py",
+  "policy": {
+    "tile": {
+      "width": 360,
+      "height": 480,
+      "format": "webp",
+      "quality": 72,
+      "method": 4
+    },
+    "alphaCutoutThreshold": 0.02,
+    "plainBackground": {
+      "sample": 256,
+      "band": 0.05,
+      "tolerance": 14,
+      "minRatio": 0.9
+    },
+    "cutoutFill": 0.96,
+    "cutoutMarginBottom": 0.02,
+    "plateAnchorY": 0.35,
+    "plateMode": "feather",
+    "feather": {
+      "x": 0.16,
+      "y": 0.2
+    },
+    "matteModel": "isnet-anime",
+    "matteCacheTag": "isnet-anime|1024|v1"
+  },
+  "files": [
+    {
+      "out": "gallery/alf-silver-palace/01.webp",
+      "slug": "alf-silver-palace",
+      "source": "char/alf-silver-palace/assets/01-官方立绘.jpg",
+      "sourceSize": "850x1700",
+      "sourceSha256": "3a337a2611ff20a6",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.495,
+      "feathered": true,
+      "bytes": 30376
+    },
+    {
+      "out": "gallery/citlali-genshin-impact/01.webp",
+      "slug": "citlali-genshin-impact",
+      "source": "char/citlali-genshin-impact/assets/01-官方立绘-白星黑曜.png",
+      "sourceSize": "1500x1500",
+      "sourceSha256": "21e4bb2aa723a0d7",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.093,
+      "feathered": true,
+      "bytes": 32282
+    },
+    {
+      "out": "gallery/citlali-genshin-impact/02.webp",
+      "slug": "citlali-genshin-impact",
+      "source": "char/citlali-genshin-impact/assets/02-官方场景图-小憩.png",
+      "sourceSize": "4000x4218",
+      "sourceSha256": "a774748ccadc76be",
+      "alphaClearRatio": 0.514,
+      "mode": "cutout",
+      "plainRatio": 0.641,
+      "feathered": false,
+      "bytes": 34446
+    },
+    {
+      "out": "gallery/cyrene-honkai-star-rail/01.webp",
+      "slug": "cyrene-honkai-star-rail",
+      "source": "char/cyrene-honkai-star-rail/assets/01-全身立绘-完全体.webp",
+      "sourceSize": "2048x2048",
+      "sourceSha256": "c22306f158f269ff",
+      "alphaClearRatio": 0.606,
+      "mode": "cutout",
+      "plainRatio": 0.744,
+      "feathered": false,
+      "bytes": 38834
+    },
+    {
+      "out": "gallery/cyrene-honkai-star-rail/02.webp",
+      "slug": "cyrene-honkai-star-rail",
+      "source": "char/cyrene-honkai-star-rail/assets/02-全身立绘-少女形态.png",
+      "sourceSize": "864x1220",
+      "sourceSha256": "ad3d66a0bf122eb3",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.046,
+      "feathered": true,
+      "bytes": 35450
+    },
+    {
+      "out": "gallery/cyrene-honkai-star-rail/03.webp",
+      "slug": "cyrene-honkai-star-rail",
+      "source": "char/cyrene-honkai-star-rail/assets/03-全身立绘-迷迷.webp",
+      "sourceSize": "883x1213",
+      "sourceSha256": "d6951faaa2b7b9f6",
+      "alphaClearRatio": 0.515,
+      "mode": "cutout",
+      "plainRatio": 0.859,
+      "feathered": false,
+      "bytes": 33244
+    },
+    {
+      "out": "gallery/cyrene-honkai-star-rail/04.webp",
+      "slug": "cyrene-honkai-star-rail",
+      "source": "char/cyrene-honkai-star-rail/assets/04-形态-原初德谬歌-记忆的种子.png",
+      "sourceSize": "677x763",
+      "sourceSha256": "c980683d01d441a1",
+      "alphaClearRatio": 0.0,
+      "mode": "matte",
+      "plainRatio": 0.983,
+      "feathered": false,
+      "bytes": 24874,
+      "matteForeground": 0.289
+    },
+    {
+      "out": "gallery/cyrene-honkai-star-rail/05.webp",
+      "slug": "cyrene-honkai-star-rail",
+      "source": "char/cyrene-honkai-star-rail/assets/08-光锥-爱如此刻永恒-白纱造型.png",
+      "sourceSize": "864x1220",
+      "sourceSha256": "32f1f9957b0b579a",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.061,
+      "feathered": true,
+      "bytes": 23294
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/01.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/01-全身立绘-三月七-存护.png",
+      "sourceSize": "2048x2048",
+      "sourceSha256": "3228ea7b6d946bb7",
+      "alphaClearRatio": 0.56,
+      "mode": "cutout",
+      "plainRatio": 0.041,
+      "feathered": false,
+      "bytes": 51318
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/02.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/02-全身立绘-三月七-巡猎.png",
+      "sourceSize": "2048x2048",
+      "sourceSha256": "f751ec645593c11a",
+      "alphaClearRatio": 0.734,
+      "mode": "cutout",
+      "plainRatio": 0.302,
+      "feathered": false,
+      "bytes": 38452
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/03.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/03-全身立绘-长夜月.png",
+      "sourceSize": "600x600",
+      "sourceSha256": "c6dad516e4100b30",
+      "alphaClearRatio": 0.559,
+      "mode": "cutout",
+      "plainRatio": 0.893,
+      "feathered": false,
+      "bytes": 48896
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/04.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/04-官方卡片-翁法罗斯英雄纪-长夜月.png",
+      "sourceSize": "600x1056",
+      "sourceSha256": "7e215aff0591aa2f",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.132,
+      "feathered": true,
+      "bytes": 35248
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/05.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/05-官方卡片立绘-长夜月.png",
+      "sourceSize": "600x977",
+      "sourceSha256": "61841e320de7ffe0",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.053,
+      "feathered": true,
+      "bytes": 29732
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/06.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/06-光锥-余生的第一天.png",
+      "sourceSize": "600x847",
+      "sourceSha256": "e1c82db5c8427662",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.139,
+      "feathered": true,
+      "bytes": 33628
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/07.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/07-光锥-芳华待灼.jpg",
+      "sourceSize": "600x836",
+      "sourceSha256": "e7c2d0786dbc9cc1",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.049,
+      "feathered": true,
+      "bytes": 33432
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/08.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/08-光锥-致长夜的星光.png",
+      "sourceSize": "600x847",
+      "sourceSha256": "bf5c9de5f02e4667",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.075,
+      "feathered": true,
+      "bytes": 28730
+    },
+    {
+      "out": "gallery/march-7th-honkai-star-rail/09.webp",
+      "slug": "march-7th-honkai-star-rail",
+      "source": "char/march-7th-honkai-star-rail/assets/09-时装-三月七-冬去煦至.png",
+      "sourceSize": "600x600",
+      "sourceSha256": "7cc30c8a5de04dba",
+      "alphaClearRatio": 0.538,
+      "mode": "cutout",
+      "plainRatio": 0.927,
+      "feathered": false,
+      "bytes": 47794
+    },
+    {
+      "out": "gallery/perlica-arknights-endfield/01.webp",
+      "slug": "perlica-arknights-endfield",
+      "source": "char/perlica-arknights-endfield/assets/01-官方立绘.webp",
+      "sourceSize": "1680x1623",
+      "sourceSha256": "eb922bce37df48a8",
+      "alphaClearRatio": 0.531,
+      "mode": "cutout",
+      "plainRatio": 0.966,
+      "feathered": false,
+      "bytes": 35442
+    },
+    {
+      "out": "gallery/priestess-arknights/01.webp",
+      "slug": "priestess-arknights",
+      "source": "char/priestess-arknights/assets/60_i25.png",
+      "sourceSize": "1600x900",
+      "sourceSha256": "16e54d0c827a3180",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.175,
+      "feathered": true,
+      "bytes": 25340
+    },
+    {
+      "out": "gallery/priestess-arknights/02.webp",
+      "slug": "priestess-arknights",
+      "source": "char/priestess-arknights/assets/avg_npc_083.png",
+      "sourceSize": "1024x1024",
+      "sourceSha256": "f47429bf9d8f95cf",
+      "alphaClearRatio": 0.812,
+      "mode": "cutout",
+      "plainRatio": 0.995,
+      "feathered": false,
+      "bytes": 18988
+    },
+    {
+      "out": "gallery/shu-arknights/01.webp",
+      "slug": "shu-arknights",
+      "source": "char/shu-arknights/assets/明日方舟立绘_黍_1.png",
+      "sourceSize": "1464x1464",
+      "sourceSha256": "b0e3d3b4b0321f9b",
+      "alphaClearRatio": 0.679,
+      "mode": "cutout",
+      "plainRatio": 0.499,
+      "feathered": false,
+      "bytes": 27622
+    },
+    {
+      "out": "gallery/shu-arknights/02.webp",
+      "slug": "shu-arknights",
+      "source": "char/shu-arknights/assets/黍-春日宴-立绘-全图.jpg",
+      "sourceSize": "1920x1080",
+      "sourceSha256": "ec2b3945bbf07af6",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.002,
+      "feathered": true,
+      "bytes": 33250
+    },
+    {
+      "out": "gallery/shu-arknights/03.webp",
+      "slug": "shu-arknights",
+      "source": "char/shu-arknights/assets/黍-春日宴-立绘.png",
+      "sourceSize": "3808x3808",
+      "sourceSha256": "689e84cdc21ebd74",
+      "alphaClearRatio": 0.367,
+      "mode": "cutout",
+      "plainRatio": 0.673,
+      "feathered": false,
+      "bytes": 28642
+    },
+    {
+      "out": "gallery/shu-arknights/04.webp",
+      "slug": "shu-arknights",
+      "source": "char/shu-arknights/assets/黍-默认-立绘.png",
+      "sourceSize": "3000x2989",
+      "sourceSha256": "6dd3be9df3e4265d",
+      "alphaClearRatio": 0.318,
+      "mode": "cutout",
+      "plainRatio": 0.593,
+      "feathered": false,
+      "bytes": 49526
+    },
+    {
+      "out": "gallery/tachibana-sherry-manosaba/01.webp",
+      "slug": "tachibana-sherry-manosaba",
+      "source": "char/tachibana-sherry-manosaba/assets/01-全身立绘-正常.png",
+      "sourceSize": "1702x3948",
+      "sourceSha256": "2ca45a7a14f7f5bb",
+      "alphaClearRatio": 0.56,
+      "mode": "cutout",
+      "plainRatio": 0.946,
+      "feathered": false,
+      "bytes": 25428
+    },
+    {
+      "out": "gallery/white-rice-fish-deepseek/01.webp",
+      "slug": "white-rice-fish-deepseek",
+      "source": "char/white-rice-fish-deepseek/assets/01-全身立绘-女仆装.jpg",
+      "sourceSize": "750x1344",
+      "sourceSha256": "895ef3143d274be0",
+      "alphaClearRatio": 0.0,
+      "mode": "matte",
+      "plainRatio": 0.958,
+      "feathered": false,
+      "bytes": 28068,
+      "matteForeground": 0.497
+    }
+  ],
+  "excluded": [
+    {
+      "slug": "cyrene-honkai-star-rail",
+      "file": "11-联动造型-安踏-跟我一起出发.jpg",
+      "kind": "excluded",
+      "source": "char/cyrene-honkai-star-rail/assets/11-联动造型-安踏-跟我一起出发.jpg",
+      "reason": "实拍联动照片，横构图（1067×600）铺进 3:4 竖瓦片必须大幅裁切，用户评价「切的不太行」。它的价值在角色卡里，不适合当背景。"
+    },
+    {
+      "slug": "march-7th-honkai-star-rail",
+      "file": "10-头像-三月七.png",
+      "kind": "thumbnail",
+      "source": "char/march-7th-honkai-star-rail/assets/10-头像-三月七.png",
+      "reason": "与 thumbnails/march-7th-honkai-star-rail/ 里的缩略图逐字节相同——它本身就是缩略图/头像类，归属地是 thumbnails/，不进画廊图池（原图仍随角色卡下发）"
+    },
+    {
+      "slug": "tachibana-sherry-manosaba",
+      "file": "02-全身立绘-魔女化.png",
+      "kind": "excluded",
+      "source": "char/tachibana-sherry-manosaba/assets/02-全身立绘-魔女化.png",
+      "reason": "魔女化立绘有「鬼图」性质（面容与肢体惊悚向），用户点名不参与首屏展示。角色卡与下载包照旧保留这张。"
+    }
+  ]
+}

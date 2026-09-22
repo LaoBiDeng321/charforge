@@ -37,7 +37,7 @@
 
 - **不要手改 `index.json` 与 `downloads/`**——它们是 `build_data.py` 的生成物。`index.json` 必须提交，`downloads/` 不入库（Netlify 构建时现生成）。
 - **改生成物结构前先全量审计消费方**。历史事故（2026-09-17，旧 `data.js` 时代）：把 `content` 改成 `lines[]` 时只查了 `main.js` / `download.js`，漏了 `carousel.js` 里的字段访问 → `undefined.length` 抛错 → **线上角色卡全部不渲染、内容区全黑**。教训仍然有效：改 `index.json` 的字段结构时，先 `grep -rln "SITE_DATA" .` 逐个核对消费方，再动。
-- **改角色目录名（slug）时的同步清单**：① `git mv char/<旧> char/<新>`（保历史，git 识别为 R 而非删+增）② `meta/<旧>.json` 改名为 `meta/<新>.json` ③ `docs/CHARACTERS.md` 角色表的链接与路径 ④ 该卡 `SKILL.md` front-matter 的 `name` ⑤ 卡内对 `_溯源/<旧>/` 的引用 ⑥ `thumbnails/<旧>/` 改名 ⑦ 本地 `_溯源/<旧>/` 目录同步改名 ⑧ 重跑 `python build_data.py`。命名约定：`<角色名>-<作品英文名>`
+- **改角色目录名（slug）时的同步清单**：① `git mv char/<旧> char/<新>`（保历史，git 识别为 R 而非删+增）② `meta/<旧>.json` 改名为 `meta/<新>.json` ③ `docs/CHARACTERS.md` 角色表的链接与路径 ④ 该卡 `SKILL.md` front-matter 的 `name` ⑤ 卡内对 `_溯源/<旧>/` 的引用 ⑥ `thumbnails/<旧>/` 改名 ⑦ 本地 `_溯源/<旧>/` 目录同步改名 ⑧ 重跑 `python tools/make_gallery.py`（首屏画廊瓦片按新 slug 重建，**旧目录由脚本自动清掉**，不必手工 git mv）⑨ 重跑 `python build_data.py`。命名约定：`<角色名>-<作品英文名>`
   > 旧清单里的"改 `build_data.py` 里的 slug/dir"已作废——现在 slug 取 `meta/` 文件名、交付目录由它推出，**不用改代码**；`download.js` 注释示例也已不存在。
 - **Q&A 条目数量上限**硬编码在 `js/main.js` 的 `renderQA()` 循环里（当前 9），新增词条后需同步改数字。
 - 站内所有图标为内联 SVG（`js/config.js` 的 socials/icons 与各 JS 模板字符串）；`image/` 仅剩声明页三图标，无 favicon（属正常，浏览器标签显示默认图标）。

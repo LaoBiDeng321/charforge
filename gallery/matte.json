@@ -1,0 +1,8 @@
+{
+  "note": "抠图的**例外**清单。规则是自动的：背景明显纯色的素材才交给本机 isnet-anime 模型抠底（判据见 tools/make_gallery.py 的 plain_background：外圈 5% 的像素与其中位色相差 ≤14 的占比 ≥0.90）。这个文件只在自动判定与观感不一致时用来纠正，平时两个数组都是空的。",
+  "measured": "本仓库实测（gallery/manifest.json 每张瓦片的 plainRatio 有留档）：非纯色底 0.002~0.495（满幅插画 / 光锥 / 带框卡片 / 场景 / 实拍照片全在这一段），纯白底 0.958 / 0.983 —— 阈值 0.90 两侧余量都很大。",
+  "whyNotAll": "isnet-anime 是主体分割模型，只对「平底上的主体」有效。逐张试过：满幅插画它要么把整块背景一起留下（march 05/06/07/08、cyrene 02/08、alf 01），要么把主体抠没（march 04 前景只剩 7%、shu 春日宴全图剩 15%），实拍照片直接糊成一团（cyrene 11 安踏联动）。这些抠完比不抠更难看，所以走 plate 路径（整块裁切 + 四边羽化）。",
+  "usage": "python tools/make_gallery.py（要真跑抠图需 pip install rembg onnxruntime 与 %USERPROFILE%\\.u2net\\isnet-anime.onnx，见 docs/MODEL.md）",
+  "force": [],
+  "skip": []
+}

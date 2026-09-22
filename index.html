@@ -81,7 +81,7 @@
     <!-- 样式表 -->
     <link rel="stylesheet" href="css/design-system.css?v=0968acc0">
     <link rel="stylesheet" href="css/loader.css?v=e5898435">
-    <link rel="stylesheet" href="css/fullpage.css?v=2fa31cb8">
+    <link rel="stylesheet" href="css/fullpage.css?v=85d3840e">
     <link rel="stylesheet" href="css/components.css?v=299dbcdb">
     <link rel="stylesheet" href="css/carousel.css?v=5fa28220">
     <link rel="stylesheet" href="css/responsive.css?v=066595fc">
@@ -156,6 +156,13 @@
         <section class="fp-section" id="hero" data-anchor="hero">
             <div class="fp-bg">
                 <div class="hero-bg-texture"></div>
+                <!-- 首屏背景层：斜向滚动画廊（瓦片来自 char/<slug>/assets 的派生图，
+                     生成器 tools/make_gallery.py，图池来自 index.json 的 gallery 字段，
+                     铺列与滚动见 js/hero-gallery.js）。
+                     纯装饰：aria-hidden 不进无障碍树，CSS 里 pointer-events:none 不吃交互 -->
+                <div class="hero-gallery animate-on-scroll" aria-hidden="true">
+                    <div class="hero-gallery-tilt" id="heroGallery"></div>
+                </div>
                 <div class="hero-bg-glow"></div>
             </div>
             <div class="corner-ticks" aria-hidden="true"></div>
@@ -517,18 +524,19 @@
         </section>
     </div>
 
-    <!-- JavaScript（顺序：i18n → 配置 → Token 展示 → 数据加载 → 下载工具 → 模糊算法 → 轮播 → 加载动画 → 全屏滚动 → 主逻辑）
+    <!-- JavaScript（顺序：i18n → 配置 → Token 展示 → 数据加载 → 下载工具 → 模糊算法 → 轮播 → 背景画廊 → 加载动画 → 全屏滚动 → 主逻辑）
          vendor/damerau-levenshtein.js 为第三方算法（talisman · MIT），须在 carousel.js 之前加载 -->
     <script src="js/i18n.js?v=99c5c280"></script>
-    <script src="js/config.js?v=d80b9142"></script>
+    <script src="js/config.js?v=10e14446"></script>
     <script src="js/tokens.js?v=1d4bb970"></script>
     <script src="js/data-loader.js?v=7115b875"></script>
     <script src="js/download.js?v=eb0f31a6"></script>
     <script src="js/agent-install.js?v=7c7b732d"></script>
     <script src="js/vendor/damerau-levenshtein.js?v=fa3b84b6"></script>
     <script src="js/carousel.js?v=290b974e"></script>
+    <script src="js/hero-gallery.js?v=80ae1f59"></script>
     <script src="js/loader.js?v=9f3274b8"></script>
     <script src="js/fullpage.js?v=bee0b750"></script>
-    <script src="js/main.js?v=c981826e"></script>
+    <script src="js/main.js?v=0149941b"></script>
 </body>
 </html>

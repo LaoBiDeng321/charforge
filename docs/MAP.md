@@ -25,6 +25,7 @@
 │
 ├── meta/                 # 唯一可编辑源 · 角色展示元数据，一人一文件
 ├── thumbnails/           # 角色卡方形缩略图，按 <slug>/ 分目录
+├── gallery/              # 首屏背景画廊瓦片（char assets 的**派生**切片）· 生成器 tools/make_gallery.py
 │
 ├── docs/                 # 项目层文档（本目录）
 │   ├── README.md         #   文档索引
@@ -37,7 +38,7 @@
 ├── build_data.py         # 构建脚本（机制见其头部注释）
 ├── requirements.txt      # 构建期依赖
 ├── netlify.toml          # Netlify：pip install && python3 build_data.py，publish = "."
-├── tools/                # deepseek_v4_tokenizer.zip · vendor_dl.py
+├── tools/                # deepseek_v4_tokenizer.zip · make_gallery.py · vendor_dl.py
 ├── js/ css/ image/       # 前端资源（js/vendor/ 内为第三方算法，MIT，未改动）
 │
 ├── _溯源/                # 构建期素材缓存与裁定记录 · 不入库
@@ -53,5 +54,7 @@
 **2. 交付目录必须纯净。**
 `char/<slug>/` 内只放 10 个设定文件与 `assets/`。素材缓存、草稿、原始长文档一律放同级的 `_溯源/<slug>/`——构建脚本按 `<slug>` 整目录扫描，混进去会被一并发布。
 
-**3. 图片分两处。**
-立绘 → `char/<slug>/assets/`；**方形图 / Q 版 / 头像 / 表情包 → `thumbnails/<slug>/cover.*`**，不入 `assets/`。
+**3. 图片分三处。**
+立绘 → `char/<slug>/assets/`（**唯一可编辑源**，随 ZIP 下发）；**方形图 / Q 版 / 头像 / 表情包 → `thumbnails/<slug>/cover.*`**，不入 `assets/`；首屏背景画廊的瓦片 → `gallery/<slug>/`，它**不是源**、是 `char/<slug>/assets/` 的派生（`tools/make_gallery.py` 生成，别手改，见 [`../gallery/README.md`](../gallery/README.md)）。
+
+> 分界线靠内容哈希兜底：`assets/` 里若混进一张与 `thumbnails/<slug>/` **逐字节相同**的图（历史遗留：三月七的 `10-头像-三月七.png` 就是封面本身），画廊会**自动跳过**它，不必手写排除清单；原图仍随角色卡下发。

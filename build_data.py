@@ -23,7 +23,13 @@ build_data.py —— 资源站数据/分发包构建脚本
      图片用 Pillow 读取宽高，套用逆向自 DeepSeek 官方图片计算器的 v4.1 尺寸公式。
      该值是输入侧预估值，不是接口最终 usage；不同模型 / 版本的分词与图片换算都可能不同。
 
-  5. index.html 的两处盖章（原先都是手工步骤，而手工步骤必然会被忘掉——
+  5. index.json 顶层的 gallery 数组
+     首屏背景「斜向滚动画廊」的图池：扫描 gallery/<slug>/ 下的瓦片（3:4 WebP），
+     连同来源角色 slug 一起下发，前端 js/hero-gallery.js 直接铺成列。
+     瓦片**由 tools/make_gallery.py 从 char/<slug>/assets 派生**，本脚本只扫描，
+     不做任何图像处理——编码放进构建会让产物字节随 Pillow 版本漂移。
+
+  6. index.html 的两处盖章（原先都是手工步骤，而手工步骤必然会被忘掉——
      页脚版本号就曾一路停在 26.09.14）：
        · 版本号：两处 `VER YY.MM.DD` 改写成构建当天日期。日期制版本没有需要人工
          决定的信息，构建日即发版日；想手工指定就先改 index.html，脚本只在
@@ -75,6 +81,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "index.json")
 DOWNLOADS = os.path.join(ROOT, "downloads")
 THUMBNAILS = os.path.join(ROOT, "thumbnails")
+GALLERY = os.path.join(ROOT, "gallery")
 
 IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif")
 # 参与 Token 预估的文本扩展名。角色卡目前是 .md，留出常见纯文本格式，
@@ -555,6 +562,41 @@ def find_thumbnail(slug):
     return quote(rel, safe="/") + "?v=" + sha256_file(full)[:8]
 
 
+def collect_gallery():
+    """扫描 gallery/<slug>/ 下的首屏背景瓦片，返回扁平图池。
+
+    与 thumbnails/ 同一分工：图片是**一次生成、入库**的派生物（生成器
+    tools/make_gallery.py，规则见 gallery/README.md），构建期只做扫描与打戳。
+    把编码放进构建会让产物字节随 Pillow 版本漂移，index.json 跟着抖——
+    可复现性要求见本文件头部注释。
+
+    带 slug 是有用的：前端按 slug 分桶后再轮转取图，避免某个素材多的角色
+    （如三月七 10 张）在画廊里连成一片。顺序按 slug、文件名排，保证可复现。
+    """
+    if not os.path.isdir(GALLERY):
+        return []
+    out = []
+    for slug in sorted(os.listdir(GALLERY)):
+        base = os.path.join(GALLERY, slug)
+        if not os.path.isdir(base):
+            continue
+        # 跳过 .cache/ 这类衍生目录（生成器的本地抠图缓存，见 tools/make_gallery.py）：
+        # 目录名以点开头的一律不算角色目录，否则缓存里的中间图会被当成瓦片下发
+        if slug.startswith("."):
+            continue
+        for fn in sorted(os.listdir(base)):
+            if not fn.lower().endswith(IMAGE_EXTS):
+                continue
+            rel = "gallery/%s/%s" % (slug, fn)
+            full = os.path.join(ROOT, *rel.split("/"))
+            # 与缩略图同理：图片换掉后 URL 变化，浏览器不会继续复用旧瓦片
+            out.append({
+                "url": quote(rel, safe="/") + "?v=" + sha256_file(full)[:8],
+                "slug": slug,
+            })
+    return out
+
+
 def archive_paths(kind, slug):
     rel_zip = "downloads/%s/%s.zip" % (kind, slug)
     full_zip = os.path.join(ROOT, *rel_zip.split("/"))
@@ -779,6 +821,7 @@ def build():
 
     data = {
         "generatedAt": date.today().isoformat(),
+        "gallery": collect_gallery(),
         "skills": skills_out,
         "chars": chars_out,
     }
@@ -800,6 +843,7 @@ def build():
     print("skills: %d, chars: %d, files: %d, token estimate: %d, zip bytes: %d" % (
         len(skills_out), len(chars_out), total_files, total_tokens, total_zip_bytes
     ))
+    print("gallery tiles -> %d（缺失时跑 python tools/make_gallery.py）" % len(data["gallery"]))
 
 
 if __name__ == "__main__":

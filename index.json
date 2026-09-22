@@ -1,5 +1,111 @@
 {
   "generatedAt": "2026-09-22",
+  "gallery": [
+    {
+      "url": "gallery/alf-silver-palace/01.webp?v=bd499f51",
+      "slug": "alf-silver-palace"
+    },
+    {
+      "url": "gallery/citlali-genshin-impact/01.webp?v=edc8d1d9",
+      "slug": "citlali-genshin-impact"
+    },
+    {
+      "url": "gallery/citlali-genshin-impact/02.webp?v=5b8517d0",
+      "slug": "citlali-genshin-impact"
+    },
+    {
+      "url": "gallery/cyrene-honkai-star-rail/01.webp?v=7b907a5f",
+      "slug": "cyrene-honkai-star-rail"
+    },
+    {
+      "url": "gallery/cyrene-honkai-star-rail/02.webp?v=7ac7f330",
+      "slug": "cyrene-honkai-star-rail"
+    },
+    {
+      "url": "gallery/cyrene-honkai-star-rail/03.webp?v=7d222a33",
+      "slug": "cyrene-honkai-star-rail"
+    },
+    {
+      "url": "gallery/cyrene-honkai-star-rail/04.webp?v=a5b9a355",
+      "slug": "cyrene-honkai-star-rail"
+    },
+    {
+      "url": "gallery/cyrene-honkai-star-rail/05.webp?v=a538481a",
+      "slug": "cyrene-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/01.webp?v=4d97b021",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/02.webp?v=13d581e3",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/03.webp?v=8e7eea20",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/04.webp?v=ebe5624b",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/05.webp?v=442598b9",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/06.webp?v=5368c549",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/07.webp?v=fbdee5bf",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/08.webp?v=f102b92b",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/march-7th-honkai-star-rail/09.webp?v=6ef2db28",
+      "slug": "march-7th-honkai-star-rail"
+    },
+    {
+      "url": "gallery/perlica-arknights-endfield/01.webp?v=9fb7857b",
+      "slug": "perlica-arknights-endfield"
+    },
+    {
+      "url": "gallery/priestess-arknights/01.webp?v=90f2b11d",
+      "slug": "priestess-arknights"
+    },
+    {
+      "url": "gallery/priestess-arknights/02.webp?v=83422a0f",
+      "slug": "priestess-arknights"
+    },
+    {
+      "url": "gallery/shu-arknights/01.webp?v=4f9c0eca",
+      "slug": "shu-arknights"
+    },
+    {
+      "url": "gallery/shu-arknights/02.webp?v=30c775a3",
+      "slug": "shu-arknights"
+    },
+    {
+      "url": "gallery/shu-arknights/03.webp?v=62e660f3",
+      "slug": "shu-arknights"
+    },
+    {
+      "url": "gallery/shu-arknights/04.webp?v=c1f60405",
+      "slug": "shu-arknights"
+    },
+    {
+      "url": "gallery/tachibana-sherry-manosaba/01.webp?v=cfb3e15c",
+      "slug": "tachibana-sherry-manosaba"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/01.webp?v=acc40250",
+      "slug": "white-rice-fish-deepseek"
+    }
+  ],
   "skills": [
     {
       "slug": "character-profile-builder",

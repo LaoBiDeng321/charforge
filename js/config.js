@@ -1,9 +1,21 @@
 /**
- * SITE_CONFIG - 站点配置（页脚社交链接）
+ * SITE_CONFIG - 站点配置（页脚社交链接 / 首屏背景画廊参数）
  * socials：展示顺序即渲染顺序；label 用于 title / aria-label
  * icons：官方品牌 SVG path，fill="currentColor" 跟随主题染色，形态保持原始
+ * gallery：首屏背景「斜向滚动画廊」的观感参数（铺列逻辑见 js/hero-gallery.js）
  */
 window.SITE_CONFIG = {
+
+    /** 首屏背景画廊：图池来自 index.json 的 gallery 字段（char/<slug>/assets 的派生切片） */
+    gallery: {
+        cols: 12,          // 列数（列宽 = 画布宽 / 列数，画布宽见 css/fullpage.css）
+        gap: 14,           // 瓦片间距（px）：同时间隔列与循环接缝，两边务必同值
+        tiltDeg: -12,      // 倾斜角（度）。只在这里定值，CSS 与盖满视口的画布尺寸都用它
+        speed: 52,         // 基准流速（px/秒）；各列在此基础上 ±20% 确定性抖动
+        minDuration: 14,   // 单列循环时长上下限（秒）。上限别压太低：列很长时
+        maxDuration: 150   // （如手机 PC 视图那种超长视口）所有列会被同时夹到上限，
+                           // 各列的时长差被抹平，看起来就不"错落"了
+    },
 
     /** 社交链接（icon 对应下方 ICONS 键名） */
     socials: [

@@ -1,0 +1,19 @@
+{
+  "note": "首屏背景画廊的排除清单：列在这里的素材仍然属于角色卡（扮演用、随 ZIP 下发），只是不作为首屏背景展示。判断口径是观感，不是版权或可用性——素材本身没问题，只是不适合当背景。",
+  "usage": "由 tools/make_gallery.py 读取（见其头部注释）。加一条后重跑：python tools/make_gallery.py && python build_data.py",
+  "match": "slug + file（file 是 char/<slug>/assets/ 下的文件名，逐字节精确匹配）",
+  "exclude": [
+    {
+      "slug": "tachibana-sherry-manosaba",
+      "file": "02-全身立绘-魔女化.png",
+      "reason": "魔女化立绘有「鬼图」性质（面容与肢体惊悚向），用户点名不参与首屏展示。角色卡与下载包照旧保留这张。",
+      "since": "2026-09-22"
+    },
+    {
+      "slug": "cyrene-honkai-star-rail",
+      "file": "11-联动造型-安踏-跟我一起出发.jpg",
+      "reason": "实拍联动照片，横构图（1067×600）铺进 3:4 竖瓦片必须大幅裁切，用户评价「切的不太行」。它的价值在角色卡里，不适合当背景。",
+      "since": "2026-09-22"
+    }
+  ]
+}

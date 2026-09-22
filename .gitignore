@@ -22,6 +22,9 @@ DEPLOY.local.md
 # downloads/*.zip 由 Netlify build 或本地 `python build_data.py` 生成，不入库。
 downloads/
 
+# 首屏画廊生成器的本地缓存（抠图结果；口径与源图哈希做键，可随时删，不入库）
+gallery/.cache/
+
 # 本地图片优化镜像（未接入构建，避免误提交）
 web-assets.local/
 

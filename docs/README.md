@@ -56,5 +56,6 @@
 |---|---|
 | 构建期派生、tags 校验、共享文件校验、可复现性 | `build_data.py` 头部注释 |
 | 角色检索算法、手机端面板缩放 | `js/carousel.js` 头部注释 |
+| 首屏背景画廊的瓦片口径、铺列与无缝循环 | `tools/make_gallery.py` · `js/hero-gallery.js` 头部注释（先看 `gallery/README.md`） |
 | Token 预估口径 | `js/tokens.js` 头部注释 |
 | 前端行为速查 | [`QUICKSTART.md`](QUICKSTART.md) 末节 |

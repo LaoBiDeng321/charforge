@@ -20,12 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
     dataReady
         .then(() => {
             renderDynamic();
+            if (window.HeroGallery) window.HeroGallery.init();
             if (window.CharCarousel) window.CharCarousel.init();
         })
         .catch((err) => {
             console.error('站点数据加载失败：', err);
             window.SITE_DATA = { skills: [], chars: [] };
             renderDynamic();
+            if (window.HeroGallery) window.HeroGallery.init();
             if (window.CharCarousel) window.CharCarousel.init();
         });
 });

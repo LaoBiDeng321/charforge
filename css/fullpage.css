@@ -149,7 +149,7 @@
 }
 
 /* ------------------------------------------
-   Hero 背景：CSS 斜纹刻线纹理 + 环境光（无位图，加载轻）
+   Hero 背景 · 一：CSS 斜纹刻线纹理 + 环境光（无位图，加载轻）
    ------------------------------------------ */
 .hero-bg-texture {
     position: absolute;
@@ -169,6 +169,98 @@
     background:
         radial-gradient(ellipse 60% 45% at 18% 62%, rgba(255, 245, 0, 0.05) 0%, transparent 70%),
         radial-gradient(ellipse 50% 40% at 78% 24%, rgba(0, 229, 255, 0.04) 0%, transparent 70%);
+}
+
+/* ------------------------------------------
+   Hero 背景 · 二：斜向滚动画廊（位图背景层）
+
+   瓦片是 char/<slug>/assets/ 的派生切片（tools/make_gallery.py → gallery/，
+   统一 3:4 WebP），图池来自 index.json 的 gallery 字段，铺列见 js/hero-gallery.js。
+
+   三层结构，各管一件事，互不干扰：
+     .hero-gallery       视口大小的取景框：裁掉溢出 + 挂入场动画
+     .hero-gallery-tilt  旋转后铺满视口的大画布：竖向滚动因此呈斜向；宽高由
+                         js/hero-gallery.js 按实测视口算出并写成行内 px（下面是
+                         JS 未跑时的兜底：200% 与 145vmax 取大，够盖住任何长宽比），
+                         倾斜角也跟着写成 --hero-gallery-tilt（值来自 js/config.js）
+     .hero-gallery-col   一列：overflow:hidden 的窗口，列内两份分组做 -50% 无缝循环
+
+   本层是纯装饰：pointer-events:none（不吃点击/悬停），整体 16% 不透明度。
+   ------------------------------------------ */
+.hero-gallery {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    /* 这里**不要**加"让出文字区"的径向遮罩。加过一版：中心透明、向外显影，
+       结果外面有图、圈里没图，在近黑底上围出一块看得见的椭圆暗斑——
+       用户一眼就指出来了。可读性靠整体不透明度（见 .hero-gallery-tilt）就够：
+       画廊压到 16% 后，文字带实测亮度仍在 #16~#28，白字/黄按钮的对比度绰绰有余。 */
+}
+
+.hero-gallery-tilt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(200%, 145vmax);
+    height: max(200%, 145vmax);
+    transform: translate(-50%, -50%) rotate(var(--hero-gallery-tilt, -12deg));
+    display: flex;
+    gap: var(--hero-gallery-gap, 14px);
+    /* 整体压暗：退到"图纸底纹"的位置，不与信号黄强调色抢注意力 */
+    opacity: 0.16;
+}
+
+.hero-gallery-col {
+    position: relative;
+    flex: 1 1 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 两份分组做 -50% 位移 = 恰好一个分组的高度 → 无限循环处无缝 */
+.hero-gallery-col__inner {
+    display: flex;
+    flex-direction: column;
+    animation: hero-gallery-scroll var(--duration, 44s) linear infinite;
+    will-change: transform;
+}
+
+/* 隔列反向：相邻列一上一下，整片看上去是错落流动而不是整体平移 */
+.hero-gallery-col--down .hero-gallery-col__inner {
+    animation-direction: reverse;
+}
+
+@keyframes hero-gallery-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, -50%, 0); }
+}
+
+/* 分组不许被 flex 压缩：否则列高不足时瓦片会被挤扁，-50% 也就不再等于一个分组 */
+.hero-gallery-col__group {
+    flex: none;
+}
+
+/* 瓦片：切片本身就是 3:4，这里的 aspect-ratio + object-fit 只是兜底——
+   万一有人手放了一张比例不对的图进 gallery/，它会被裁切而不是压变形 */
+.hero-gallery-tile {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    margin-bottom: var(--hero-gallery-gap, 14px);
+    /* 去饱和 + 压暗放在**每张瓦片**上、而不是父层：父层加了 filter 后，
+       列滚动会让整个大图层每帧重新栅格化；落在瓦片上则只栅格化一次。 */
+    filter: grayscale(0.35) brightness(0.92);
+}
+
+/* 无障碍：减少动态效果时停住滚动（画廊仍在，只是不动） */
+@media (prefers-reduced-motion: reduce) {
+    .hero-gallery-col__inner {
+        animation: none;
+        will-change: auto;
+    }
 }
 
 /* Hero 内容：左对齐，靠近左侧竖排注记 */

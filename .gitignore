@@ -16,8 +16,7 @@ Desktop.ini
 # 本地 agent 工作区配置与私有文档（不入库）
 .trae/
 DEPLOY.local.md
-# 其他本地私有文档（存续记录 / 待办 / 调研），统一 *.local.md 不入库
-*.local.md
+# 若日后确需新增仅本机保留的文档，用 *.local.md 命名（docs/ 下三份运维文档已改为入库）
 
 # 构建产物：index.json 需要提交（Pages 无构建时可作为数据源）；
 # downloads/*.zip 由 Netlify build 或本地 `python build_data.py` 生成，不入库。
@@ -29,5 +28,12 @@ web-assets.local/
 # 本地溯源目录（保留一份素材缓存供溯源，不参与提交）
 _溯源/
 
+# 本地检查脚本（ZIP 自包含性、链接可达性等一次性校验）
+_*.py
+_*.mjs
+
 # 素材投放区（临时收图用，入库前先归入 char/<slug>/assets/）
 未分类的素材/
+
+# 记忆服务的项目层状态（会话产物，不入库）
+.dsh/

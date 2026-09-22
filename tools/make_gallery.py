@@ -44,7 +44,8 @@ make_gallery.py —— 首屏背景「斜向滚动画廊」的切片生成器
 
 **抠图规则是自动的**：背景明显纯色的素材才交给 isnet-anime（判据与阈值见
 plain_background）。少量例外写 `gallery/matte.json` 的 `force` / `skip`（判定与观感
-不一致时人工纠正）。抠图依赖属本机工具链，不是站点运行依赖；但一旦清单里有要抠的素材，
+不一致时人工纠正）——**这两份清单都算进口径指纹**，所以改完重跑就生效，不必加 --force。
+抠图依赖属本机工具链，不是站点运行依赖；但一旦清单里有要抠的素材，
 缺 rembg 就直接报错——**不静默降级成没抠的瓦片**，那等于悄悄丢产物。
 
 用法：
@@ -391,11 +392,15 @@ def is_thumbnail_duplicate(slug, path, digest):
     return digest in thumbnail_hashes(slug)
 
 
-def policy_fingerprint(matte_used):
+def policy_fingerprint(matte_used, matte_overrides=()):
     """当次归一化口径的指纹：写进 manifest，也用来判断"上一批瓦片还算不算数"。
 
     只放**影响输出**的参数。这份指纹一变，全部瓦片重做（因为无法保证哪张不受影响）；
     指纹没变 + 源图哈希没变 ⇒ 那张瓦片一定与上次逐字节相同，直接跳过即可。
+
+    `matte_overrides` 是 `gallery/matte.json` 里 force/skip 的键集合——它决定个别素材走
+    抠图还是 plate，**同样影响输出**，所以必须进指纹：否则改完清单重跑会被整批跳过，
+    "改完重跑即可"就只是文档里的空话（实测踩过：force 加了两条，重做 0 张）。
     """
     return {
         "tile": {"width": TILE_W, "height": TILE_H, "format": "webp",
@@ -412,6 +417,7 @@ def policy_fingerprint(matte_used):
         "feather": {"x": FEATHER_X, "y": FEATHER_Y},
         "matteModel": "isnet-anime" if matte_used else None,
         "matteCacheTag": MATTE_CACHE_TAG if matte_used else None,
+        "matteOverrides": sorted("%s/%s" % (s, f) for s, f in matte_overrides),
     }
 
 
@@ -523,7 +529,9 @@ def main():
     #   ③ 上次那张瓦片还在，且字节数与记录一致（手工改过就重做）
     # 这三条成立时，重做**必然**得到逐字节相同的结果——所以跳过不是"偷懒"，是等价变换。
     prev_matte_used = bool(prev_policy and prev_policy.get("matteModel"))
-    policy_same = prev_policy is not None and prev_policy == policy_fingerprint(prev_matte_used)
+    matte_overrides = force_matte | skip_matte
+    policy_same = prev_policy is not None and prev_policy == policy_fingerprint(
+        prev_matte_used, matte_overrides)
 
     # 编号要先定下来（按 slug、文件名的顺序），复用判断依赖编号
     todo = planned
@@ -654,7 +662,7 @@ def main():
                 "generatedBy": "tools/make_gallery.py",
                 # 口径指纹一并留档：这是"为什么每张瓦片长这样"的完整答案，
                 # 也是下一次判断"能不能直接跳过"的依据
-                "policy": policy_fingerprint(matte_used),
+                "policy": policy_fingerprint(matte_used, matte_overrides),
                 "files": records,
                 # 排除项一并留档：看 manifest 就能知道"图池为什么少了一张"，
                 # 不用去翻 exclude.json 或 git 历史

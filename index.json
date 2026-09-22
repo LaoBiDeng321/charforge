@@ -102,7 +102,71 @@
       "slug": "tachibana-sherry-manosaba"
     },
     {
-      "url": "gallery/white-rice-fish-deepseek/01.webp?v=acc40250",
+      "url": "gallery/white-rice-fish-deepseek/01.webp?v=9ea5f167",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/02.webp?v=27654c79",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/03.webp?v=14feecb9",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/04.webp?v=35eef020",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/05.webp?v=7908e5f9",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/06.webp?v=fccb0088",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/07.webp?v=96a39c87",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/08.webp?v=4bfbfd9f",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/09.webp?v=9a968111",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/10.webp?v=fa6e43f2",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/11.webp?v=5fe1b333",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/12.webp?v=c17a2bc0",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/13.webp?v=1515b68e",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/14.webp?v=3ea82612",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/15.webp?v=ddd68346",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/16.webp?v=bbf5274b",
+      "slug": "white-rice-fish-deepseek"
+    },
+    {
+      "url": "gallery/white-rice-fish-deepseek/17.webp?v=a0f1c970",
       "slug": "white-rice-fish-deepseek"
     }
   ],
@@ -120,10 +184,10 @@
         },
         {
           "name": "reference/details.md",
-          "size": 21937,
-          "sha256": "dccbcd0d92fe3345b27cfa2a3c8cebbbbdcc1356c8d66499ca3075bd8e11e102",
+          "size": 22593,
+          "sha256": "e74add6c8989098086c08b2310ba186a11a7acd6187f40ba85db8486f8b8d21c",
           "url": "skills/character-profile-builder/reference/details.md",
-          "tokens": 5584
+          "tokens": 5764
         },
         {
           "name": "reference/templates.md",
@@ -135,13 +199,13 @@
       ],
       "archive": {
         "url": "downloads/skills/character-profile-builder.zip",
-        "size": 19012,
-        "sha256": "74209346ef1bb3576d242744092e306e8a06a797c762e6676225cd960a9be4e7"
+        "size": 19317,
+        "sha256": "7dbfda633a60570200fe8c17c017f1b15c554da82fe21733a650f68fef4bb138"
       },
       "tokenEstimate": {
-        "text": 9584,
+        "text": 9764,
         "image": 0,
-        "total": 9584,
+        "total": 9764,
         "textFiles": 3,
         "imageFiles": 0
       }
@@ -159,10 +223,10 @@
         },
         {
           "name": "reference/reference.md",
-          "size": 17080,
-          "sha256": "025cb12aa77c10aa332362f0c2141eb948a6369a789cc3d70701b444d2780bb1",
+          "size": 17736,
+          "sha256": "2e41ea85a127bc414e933710f67fcda6bca3c67923a05178e38889ed25b2306a",
           "url": "skills/original-character-builder/reference/reference.md",
-          "tokens": 4244
+          "tokens": 4424
         },
         {
           "name": "reference/templates.md",
@@ -174,13 +238,13 @@
       ],
       "archive": {
         "url": "downloads/skills/original-character-builder.zip",
-        "size": 17025,
-        "sha256": "23919b34a67004eeaa0ad1b47110f6247a0286788f236f967138c4e7c92d2dc7"
+        "size": 17339,
+        "sha256": "8e6292ee9e19e7d3337f6b5f8def50ea88d5c9d96cf0506f6e815722f4741a86"
       },
       "tokenEstimate": {
-        "text": 8460,
+        "text": 8640,
         "image": 0,
-        "total": 8460,
+        "total": 8640,
         "textFiles": 3,
         "imageFiles": 0
       }
@@ -1652,24 +1716,24 @@
       "files": [
         {
           "name": "SKILL.md",
-          "size": 4230,
-          "sha256": "678fd9610143d1b5570671bdd38cee7bfdca100fb91f3b2ffb2ea24ed72950af",
+          "size": 5035,
+          "sha256": "a4569e4563566cc07e5d7d752d0acd96aa84f5865637867c225602764ef483b7",
           "url": "char/white-rice-fish-deepseek/SKILL.md",
-          "tokens": 1117
+          "tokens": 1342
         },
         {
           "name": "behavior.md",
-          "size": 4363,
-          "sha256": "efb7e10b5405591eefcc11d54df0b6a0bd11943a25736de48bd2dfeab4271b0b",
+          "size": 4670,
+          "sha256": "a595dc9cced4a99e66057d6d7a41fe773be8e556327c18959d00042a00d6a50d",
           "url": "char/white-rice-fish-deepseek/behavior.md",
-          "tokens": 1176
+          "tokens": 1256
         },
         {
           "name": "conflicts.md",
-          "size": 6192,
-          "sha256": "b881fcda767a7f523cf5865d3970322ef3f4d9b49e016dcea3f5427a86460528",
+          "size": 7828,
+          "sha256": "14a6168f39df447a56f3f72abc917c60aa88ef1d2b3fc4d0ce14211b4361058d",
           "url": "char/white-rice-fish-deepseek/conflicts.md",
-          "tokens": 1623
+          "tokens": 2043
         },
         {
           "name": "interaction.md",
@@ -1701,53 +1765,197 @@
         },
         {
           "name": "prompt.md",
-          "size": 4145,
-          "sha256": "617d8a598b7fcc0aa97116b5d1767ad96d66780f0e6031df1c492236338acbc4",
+          "size": 4873,
+          "sha256": "1dbf6dfb7de1a6f4db4b63b4e9508e6d1c32005f4282b2c1875630bfacbda18a",
           "url": "char/white-rice-fish-deepseek/prompt.md",
-          "tokens": 1027
+          "tokens": 1205
         },
         {
           "name": "relations.md",
-          "size": 3490,
-          "sha256": "3214988485641ebacbcb3a47853dd1e0966167886a3d4c046d9e48c98c89c5d4",
+          "size": 12401,
+          "sha256": "6885aedd88a7495254330a791b37ea57473c8ec3f262a1299559f0d2e15f175d",
           "url": "char/white-rice-fish-deepseek/relations.md",
-          "tokens": 877
+          "tokens": 3250
         },
         {
           "name": "world.md",
-          "size": 4518,
-          "sha256": "ee440c8e4ea1359acf3eff4a3b33ef15940f0453211e91daa3afbcb3b095f03f",
+          "size": 4879,
+          "sha256": "53cf9efbebf16723f6afb55fcba51c1183c905d7a0128e5bea9d079e72681d45",
           "url": "char/white-rice-fish-deepseek/world.md",
-          "tokens": 1186
+          "tokens": 1275
         },
         {
-          "name": "assets/01-全身立绘-女仆装.jpg",
-          "size": 126725,
-          "sha256": "895ef3143d274be03ede29c4dd51c37c5aeef96160e51ba45789f144353e06f4",
-          "url": "char/white-rice-fish-deepseek/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%A5%B3%E4%BB%86%E8%A3%85.jpg",
-          "width": 750,
-          "height": 1344,
-          "tokens": 610
+          "name": "assets/01-全身立绘-女仆装.webp",
+          "size": 129644,
+          "sha256": "823eebb160446dc57db1853f0814afe76141071092a175cd9b304e4954fee65b",
+          "url": "char/white-rice-fish-deepseek/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E5%A5%B3%E4%BB%86%E8%A3%85.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/02-同行参考-OpenAI白龙娘.webp",
+          "size": 168174,
+          "sha256": "8efa8e6328958f6ae2e9930100fe453e10247df131d412e4b0e4ca8c8cbf8f6a",
+          "url": "char/white-rice-fish-deepseek/assets/02-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-OpenAI%E7%99%BD%E9%BE%99%E5%A8%98.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/03-同行参考-Claude人类大小姐.webp",
+          "size": 181444,
+          "sha256": "4681b1af7333ada4c489c753bf1cfcd8a251705f3d2c654edb7368ace0e1e944",
+          "url": "char/white-rice-fish-deepseek/assets/03-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-Claude%E4%BA%BA%E7%B1%BB%E5%A4%A7%E5%B0%8F%E5%A7%90.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/04-同行参考-Claude神话版.webp",
+          "size": 150810,
+          "sha256": "fff36bd61f64c4cb4b1f7f84f89eeaadf44543faf74193b5760e3f1fb740a70b",
+          "url": "char/white-rice-fish-deepseek/assets/04-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-Claude%E7%A5%9E%E8%AF%9D%E7%89%88.webp",
+          "width": 576,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/05-同行参考-谷歌Gemini猫娘.webp",
+          "size": 162694,
+          "sha256": "2307da384d438ce344a8416bc0a781c69589a380c3aecaa8bd13baf9abc68227",
+          "url": "char/white-rice-fish-deepseek/assets/05-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E8%B0%B7%E6%AD%8CGemini%E7%8C%AB%E5%A8%98.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/06-同行参考-SpaceXAIGrok恶魔娘.webp",
+          "size": 170764,
+          "sha256": "36a3cb677f644c7e3b4967e29bfb85caf93ddc2bd3a2b4ae8b19a84924353e7f",
+          "url": "char/white-rice-fish-deepseek/assets/06-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-SpaceXAIGrok%E6%81%B6%E9%AD%94%E5%A8%98.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/07-同行参考-月之暗面Kimi研究员.webp",
+          "size": 178858,
+          "sha256": "2e31aced9b5c9eebc807c3a587c7d764ae476a409cf817cb450a00c55abbd000",
+          "url": "char/white-rice-fish-deepseek/assets/07-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E6%9C%88%E4%B9%8B%E6%9A%97%E9%9D%A2Kimi%E7%A0%94%E7%A9%B6%E5%91%98.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/08-同行参考-智谱GLM黑猫娘.webp",
+          "size": 140318,
+          "sha256": "3b726cfd48ab87bb0e27f5a356c39dccac8680662db9432d69c981d9b8845ebf",
+          "url": "char/white-rice-fish-deepseek/assets/08-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E6%99%BA%E8%B0%B1GLM%E9%BB%91%E7%8C%AB%E5%A8%98.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/09-同行参考-智谱GLM黑猫娘不藏耳.webp",
+          "size": 132842,
+          "sha256": "f37991c2e16bdd4532264f7f909b2ba435035d87ed745a6e33432cc1f98fbd94",
+          "url": "char/white-rice-fish-deepseek/assets/09-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E6%99%BA%E8%B0%B1GLM%E9%BB%91%E7%8C%AB%E5%A8%98%E4%B8%8D%E8%97%8F%E8%80%B3.webp",
+          "width": 576,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/10-同行参考-阿里千问蓝色大小姐.webp",
+          "size": 148552,
+          "sha256": "ccd21336fe9726a98475c4aca0beadd0bad1bebf971cc01c84d306f676211bc7",
+          "url": "char/white-rice-fish-deepseek/assets/10-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E9%98%BF%E9%87%8C%E5%8D%83%E9%97%AE%E8%93%9D%E8%89%B2%E5%A4%A7%E5%B0%8F%E5%A7%90.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/11-同行参考-百度文心一言病人.webp",
+          "size": 208244,
+          "sha256": "2bfb28e463b57fd256e2cb304e02a28bed9ff6fdac9312917dc635d4edbc0461",
+          "url": "char/white-rice-fish-deepseek/assets/11-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E7%99%BE%E5%BA%A6%E6%96%87%E5%BF%83%E4%B8%80%E8%A8%80%E7%97%85%E4%BA%BA.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/12-同行参考-腾讯混元古风大姐姐.webp",
+          "size": 122292,
+          "sha256": "26a1e76c59055c9f551df38f90b8d442e32a8b1fae2195636a8458a28e8726eb",
+          "url": "char/white-rice-fish-deepseek/assets/12-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E8%85%BE%E8%AE%AF%E6%B7%B7%E5%85%83%E5%8F%A4%E9%A3%8E%E5%A4%A7%E5%A7%90%E5%A7%90.webp",
+          "width": 576,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/13-同行参考-小米MiMo.webp",
+          "size": 86064,
+          "sha256": "17bd34f581132dad9909ad1c3d4d031d5396956751a11c524b269cd3574e3f1f",
+          "url": "char/white-rice-fish-deepseek/assets/13-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E5%B0%8F%E7%B1%B3MiMo.webp",
+          "width": 682,
+          "height": 1024,
+          "tokens": 452
+        },
+        {
+          "name": "assets/14-同行参考-字节Seed知心大姐姐.webp",
+          "size": 125272,
+          "sha256": "149b32fbb34750f88fb4cea77fa803da8822efb079e0a8ef4249de218b7c11c7",
+          "url": "char/white-rice-fish-deepseek/assets/14-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E5%AD%97%E8%8A%82Seed%E7%9F%A5%E5%BF%83%E5%A4%A7%E5%A7%90%E5%A7%90.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/15-同行参考-稀宇MiniMax海螺娘.webp",
+          "size": 126524,
+          "sha256": "2ae764ea1dc790d72f767f26cfd3333a8eed746e13d63bcc7b2a601f07682003",
+          "url": "char/white-rice-fish-deepseek/assets/15-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-%E7%A8%80%E5%AE%87MiniMax%E6%B5%B7%E8%9E%BA%E5%A8%98.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/16-同行参考-Mistral猫猫娘大小姐.webp",
+          "size": 193688,
+          "sha256": "b49d1c04d5b99a957840938fdd82889536be0b79c7830ee0146832a2a28ba6d4",
+          "url": "char/white-rice-fish-deepseek/assets/16-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-Mistral%E7%8C%AB%E7%8C%AB%E5%A8%98%E5%A4%A7%E5%B0%8F%E5%A7%90.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
+        },
+        {
+          "name": "assets/17-同行参考-Meta羊驼娘.webp",
+          "size": 92674,
+          "sha256": "d4b95204d529c53582a7c8f613cb2617ad369707233b7fa45b7a1f8e0b39d7ec",
+          "url": "char/white-rice-fish-deepseek/assets/17-%E5%90%8C%E8%A1%8C%E5%8F%82%E8%80%83-Meta%E7%BE%8A%E9%A9%BC%E5%A8%98.webp",
+          "width": 571,
+          "height": 1024,
+          "tokens": 377
         },
         {
           "name": "assets/README.md",
-          "size": 2089,
-          "sha256": "88ea4d34cf08765849478af42f21db149022b89ccb82a35bb4d5e6f64689f673",
+          "size": 8883,
+          "sha256": "ae8748c7fbf66a306013d9893f3f99d9393fdfb2caba89745f6ddd1b013bf8a0",
           "url": "char/white-rice-fish-deepseek/assets/README.md",
-          "tokens": 521
+          "tokens": 2475
         }
       ],
       "archive": {
         "url": "downloads/char/white-rice-fish-deepseek.zip",
-        "size": 149324,
-        "sha256": "a3da5752ed6dac565a7e2cbd974102081e317d39aae65014cec8cc83672b71e4"
+        "size": 2558401,
+        "sha256": "c5d13f5f5beeaff7c44d5b0c9e824b88750f4ad308cb7d7722550aeead392c37"
       },
       "tokenEstimate": {
-        "text": 11525,
-        "image": 610,
-        "total": 12135,
+        "text": 16844,
+        "image": 6484,
+        "total": 23328,
         "textFiles": 11,
-        "imageFiles": 1
+        "imageFiles": 17
       },
       "nameEn": "White Rice Fish",
       "alias": "WHITE RICE FISH",

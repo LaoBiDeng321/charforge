@@ -7,29 +7,36 @@
       "files": [
         {
           "name": "SKILL.md",
-          "size": 27388,
-          "sha256": "fbe63a88fb510424e7d091d570eedce19d978e06cc359f84adb098900d4d766f",
+          "size": 7412,
+          "sha256": "833180656d65c738ff8d43bd4185e53f9bb55be1fd89e270f78adac29eaa8378",
           "url": "skills/character-profile-builder/SKILL.md",
-          "tokens": 6821
+          "tokens": 2002
+        },
+        {
+          "name": "reference/details.md",
+          "size": 21937,
+          "sha256": "dccbcd0d92fe3345b27cfa2a3c8cebbbbdcc1356c8d66499ca3075bd8e11e102",
+          "url": "skills/character-profile-builder/reference/details.md",
+          "tokens": 5584
         },
         {
           "name": "reference/templates.md",
-          "size": 7760,
-          "sha256": "6bce3f1756bc442f7c2f6fa2bfb344cbd555d73a490f5f4b3ab2cad1c84a0f5a",
+          "size": 8914,
+          "sha256": "a454ab3f87906a1c9ac18a56120513b567ebc3f113d38b0f8db9aa1efbe883fc",
           "url": "skills/character-profile-builder/reference/templates.md",
-          "tokens": 1719
+          "tokens": 1998
         }
       ],
       "archive": {
         "url": "downloads/skills/character-profile-builder.zip",
-        "size": 15656,
-        "sha256": "3ecf30d11d94dc03cfbb17259fec981664bd322cd67f63d5aee7980fc1ea8e83"
+        "size": 19012,
+        "sha256": "74209346ef1bb3576d242744092e306e8a06a797c762e6676225cd960a9be4e7"
       },
       "tokenEstimate": {
-        "text": 8540,
+        "text": 9584,
         "image": 0,
-        "total": 8540,
-        "textFiles": 2,
+        "total": 9584,
+        "textFiles": 3,
         "imageFiles": 0
       }
     },
@@ -39,29 +46,36 @@
       "files": [
         {
           "name": "SKILL.md",
-          "size": 16477,
-          "sha256": "3e8ef4e1c040349759b9673b8ce61e324fbc20760d5a7120b71c53355a60ddd8",
+          "size": 8399,
+          "sha256": "6650f379831dfb0e979fe41ee13b745ce5792b438406e610bca5709df6679b8c",
           "url": "skills/original-character-builder/SKILL.md",
-          "tokens": 3983
+          "tokens": 2218
+        },
+        {
+          "name": "reference/reference.md",
+          "size": 17080,
+          "sha256": "025cb12aa77c10aa332362f0c2141eb948a6369a789cc3d70701b444d2780bb1",
+          "url": "skills/original-character-builder/reference/reference.md",
+          "tokens": 4244
         },
         {
           "name": "reference/templates.md",
-          "size": 7760,
-          "sha256": "6bce3f1756bc442f7c2f6fa2bfb344cbd555d73a490f5f4b3ab2cad1c84a0f5a",
+          "size": 8914,
+          "sha256": "a454ab3f87906a1c9ac18a56120513b567ebc3f113d38b0f8db9aa1efbe883fc",
           "url": "skills/original-character-builder/reference/templates.md",
-          "tokens": 1719
+          "tokens": 1998
         }
       ],
       "archive": {
         "url": "downloads/skills/original-character-builder.zip",
-        "size": 11213,
-        "sha256": "64f48d4d63c85ce8a53e3396acaed778a01add471355762ea41e4f495c02b787"
+        "size": 17025,
+        "sha256": "23919b34a67004eeaa0ad1b47110f6247a0286788f236f967138c4e7c92d2dc7"
       },
       "tokenEstimate": {
-        "text": 5702,
+        "text": 8460,
         "image": 0,
-        "total": 5702,
-        "textFiles": 2,
+        "total": 8460,
+        "textFiles": 3,
         "imageFiles": 0
       }
     }
@@ -152,21 +166,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 1703,
-          "sha256": "8227266ba6a68fd4df2ecaed6948f9ec6f153629ec11d26140628d79f5b26fb2",
+          "size": 2119,
+          "sha256": "6a5f9e812b11d4efa1b1cf59d400897214688ce88cb6f82f73a9f122c9ac231c",
           "url": "char/alf-silver-palace/assets/README.md",
-          "tokens": 430
+          "tokens": 531
         }
       ],
       "archive": {
         "url": "downloads/char/alf-silver-palace.zip",
-        "size": 250867,
-        "sha256": "1275a09b5494f5cdad16b41718af7c69f6ce6dd825b9c3e8b4deca8b4f75dc7b"
+        "size": 251190,
+        "sha256": "14eb06f96b6ddf36a527b5dacf80cc562011180170d69bdf3d93910f222d645a"
       },
       "tokenEstimate": {
-        "text": 10460,
+        "text": 10561,
         "image": 904,
-        "total": 11364,
+        "total": 11465,
         "textFiles": 11,
         "imageFiles": 1
       },
@@ -318,21 +332,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 1855,
-          "sha256": "5c39313cbbf900807e1d0b62e06b83667173636c68f7f9841a53572476517769",
+          "size": 2721,
+          "sha256": "63ba8d446699af819be464fd56852eb18a52e1c89b5c734cb85a10bda746c2cc",
           "url": "char/citlali-genshin-impact/assets/README.md",
-          "tokens": 484
+          "tokens": 707
         }
       ],
       "archive": {
         "url": "downloads/char/citlali-genshin-impact.zip",
-        "size": 17073644,
-        "sha256": "4f9909265aceb1fbd871a89e6779e0d8df6b0fe0ec26f104bee8c8b3ae288566"
+        "size": 17074191,
+        "sha256": "0220248336cac7f6c732d28b9ad0770b86df3f140eb2828eb529f6d17f1fa504"
       },
       "tokenEstimate": {
-        "text": 13417,
+        "text": 13640,
         "image": 1988,
-        "total": 15405,
+        "total": 15628,
         "textFiles": 11,
         "imageFiles": 2
       },
@@ -520,21 +534,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 6555,
-          "sha256": "805206e198a9e77dd33f60caf8c87ba3b9b7e00d8fa1f87e3bd594b592c7ec32",
+          "size": 4359,
+          "sha256": "e8be92277f6eacf01e60e0b9d6c9f4cc003d73cda859f907091c61d98cb3af99",
           "url": "char/cyrene-honkai-star-rail/assets/README.md",
-          "tokens": 1829
+          "tokens": 1171
         }
       ],
       "archive": {
         "url": "downloads/char/cyrene-honkai-star-rail.zip",
-        "size": 4745788,
-        "sha256": "373fc1f00247b89feb3c224fd756be50184364a8daa90183e74163f9b3f94d5a"
+        "size": 4744894,
+        "sha256": "78f02f56afed017cd2d4cf1d8e750421a037df2d2578f0c47a7e066511152fac"
       },
       "tokenEstimate": {
-        "text": 29292,
+        "text": 28634,
         "image": 3738,
-        "total": 33030,
+        "total": 32372,
         "textFiles": 11,
         "imageFiles": 6
       },
@@ -760,21 +774,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 4893,
-          "sha256": "8079d53a9bdb218f8dfb3bd3f700745865aeed45371a8c9d9f732709de256543",
+          "size": 5758,
+          "sha256": "ede5de25fb5d4f3c276c1024779a9d197d64e1ae7f39bb6347aab5d2ae667911",
           "url": "char/march-7th-honkai-star-rail/assets/README.md",
-          "tokens": 1426
+          "tokens": 1610
         }
       ],
       "archive": {
         "url": "downloads/char/march-7th-honkai-star-rail.zip",
-        "size": 12701378,
-        "sha256": "e13c1cd1adf069c9223dc07bfe0d8e62be255901c1c8ec763f21eff8ccafef9c"
+        "size": 12702106,
+        "sha256": "90daf5702b36b3642846803845bb65d6ae3b9133370131291674ff49d1aaf92c"
       },
       "tokenEstimate": {
-        "text": 29989,
+        "text": 30173,
         "image": 4696,
-        "total": 34685,
+        "total": 34869,
         "textFiles": 11,
         "imageFiles": 10
       },
@@ -926,21 +940,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 5034,
-          "sha256": "88436d90f83940dda5cf75b430956ce807965e762bf9302dc225ff5c107a6fea",
+          "size": 1995,
+          "sha256": "f74b05582f1417d15d2130a270034f9ae4504661c4d1a9a710416165fcc3626d",
           "url": "char/perlica-arknights-endfield/assets/README.md",
-          "tokens": 1359
+          "tokens": 498
         }
       ],
       "archive": {
         "url": "downloads/char/perlica-arknights-endfield.zip",
-        "size": 379006,
-        "sha256": "36a4046e601e86c284be4ee1a17207bcbf32a382677578ce0e2d7046af5232a6"
+        "size": 377586,
+        "sha256": "65ba5e311b221f8f42949bb158c1443b6d321929ba06df821396ed487b5dbf91"
       },
       "tokenEstimate": {
-        "text": 27850,
+        "text": 26989,
         "image": 962,
-        "total": 28812,
+        "total": 27951,
         "textFiles": 11,
         "imageFiles": 1
       },
@@ -1088,10 +1102,10 @@
         },
         {
           "name": "assets/README.md",
-          "size": 4051,
-          "sha256": "5270592f4c0905e8540800c356168c8e8cecd28b947cc582fa7f894f786b3c94",
+          "size": 2249,
+          "sha256": "13971df6ab762ee75432f2dbceae0309aeb4c1079ad5357f67926571f2381d5c",
           "url": "char/priestess-arknights/assets/README.md",
-          "tokens": 1132
+          "tokens": 592
         },
         {
           "name": "assets/avg_npc_083.png",
@@ -1105,13 +1119,13 @@
       ],
       "archive": {
         "url": "downloads/char/priestess-arknights.zip",
-        "size": 2707636,
-        "sha256": "80f86bedbf9ec28ff1925c55ad5f81016b1de0ac26f78554696a966465a14ba6"
+        "size": 2706842,
+        "sha256": "31751d4003968f0a89cecfc3f06c90e129f7da978198c12c1965758763f37f23"
       },
       "tokenEstimate": {
-        "text": 16031,
+        "text": 15491,
         "image": 1534,
-        "total": 17565,
+        "total": 17025,
         "textFiles": 11,
         "imageFiles": 2
       },
@@ -1248,10 +1262,10 @@
         },
         {
           "name": "assets/README.md",
-          "size": 4510,
-          "sha256": "59cf721a75f05eecf87fdde308c4a323225e97d556a59bda21a96900141f0b32",
+          "size": 3045,
+          "sha256": "94bc6eb7a414cb048fa329ab4de622bf31eb013e77e003932fc2102c86a82f3a",
           "url": "char/shu-arknights/assets/README.md",
-          "tokens": 1312
+          "tokens": 831
         },
         {
           "name": "assets/明日方舟立绘_黍_1.png",
@@ -1292,13 +1306,13 @@
       ],
       "archive": {
         "url": "downloads/char/shu-arknights.zip",
-        "size": 23838688,
-        "sha256": "655c8fde78195bd8573a8a69d4ae376b21d4550ec3df32e8a87f29c7415c7154"
+        "size": 23838106,
+        "sha256": "8a0a67a9510f0793c8ff7ea7929853a57e1bf466e84a2e3ea30decfa20a3d0a1"
       },
       "tokenEstimate": {
-        "text": 11623,
+        "text": 11142,
         "image": 3950,
-        "total": 15573,
+        "total": 15092,
         "textFiles": 11,
         "imageFiles": 4
       },
@@ -1355,6 +1369,176 @@
         "zh-CN": "shu"
       },
       "thumbnail": "thumbnails/shu-arknights/cover.png?v=b509544d"
+    },
+    {
+      "slug": "tachibana-sherry-manosaba",
+      "name": "橘雪莉",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 3820,
+          "sha256": "5c30ddf5b11a3d0fcb1e473aee657214170510dd2e86c55a15f8f84db5c9512c",
+          "url": "char/tachibana-sherry-manosaba/SKILL.md",
+          "tokens": 1057
+        },
+        {
+          "name": "behavior.md",
+          "size": 7449,
+          "sha256": "11b2102ea7c11267416ba5ed7c6225bb64e9736dd06fe0346d1aaeec7756952c",
+          "url": "char/tachibana-sherry-manosaba/behavior.md",
+          "tokens": 1764
+        },
+        {
+          "name": "conflicts.md",
+          "size": 8237,
+          "sha256": "7d0f9ab55ce8e91989a641cc7abe0d5f6cfa0444e3fbea168eda5350715a6db0",
+          "url": "char/tachibana-sherry-manosaba/conflicts.md",
+          "tokens": 2089
+        },
+        {
+          "name": "interaction.md",
+          "size": 8749,
+          "sha256": "a92d9adf0af66ce3ab579ac6726135c2ccd078c4a3c2fd092eb7ba4f404c7e02",
+          "url": "char/tachibana-sherry-manosaba/interaction.md",
+          "tokens": 2225
+        },
+        {
+          "name": "memory.md",
+          "size": 11045,
+          "sha256": "1ab71536e43dd10ded8bc6ea4e5e3089731782d090f56bccc4fa1fa50028149a",
+          "url": "char/tachibana-sherry-manosaba/memory.md",
+          "tokens": 2518
+        },
+        {
+          "name": "personality.md",
+          "size": 6187,
+          "sha256": "3792209723ac3ede93a0a30a3eb9f8000245dbe02f670197ee9fe1b704b17d0d",
+          "url": "char/tachibana-sherry-manosaba/personality.md",
+          "tokens": 1493
+        },
+        {
+          "name": "profile.md",
+          "size": 7140,
+          "sha256": "43089b3ec488a0827d15a4c002a37cf7ee43c93401d2e6bf85bcd9194346f955",
+          "url": "char/tachibana-sherry-manosaba/profile.md",
+          "tokens": 2265
+        },
+        {
+          "name": "prompt.md",
+          "size": 4143,
+          "sha256": "4754f177a6447181f148e7264c2a781804679aea6ea3055bdf87939c3081c82d",
+          "url": "char/tachibana-sherry-manosaba/prompt.md",
+          "tokens": 930
+        },
+        {
+          "name": "relations.md",
+          "size": 10420,
+          "sha256": "0888b2be436a4a875cc059cab11e43ac65b8092ac05f0baa3158e04f72ac1565",
+          "url": "char/tachibana-sherry-manosaba/relations.md",
+          "tokens": 2384
+        },
+        {
+          "name": "world.md",
+          "size": 6206,
+          "sha256": "f2af2204b981111121f18598cbe788380f961941ecf4607531e7870a505ed173",
+          "url": "char/tachibana-sherry-manosaba/world.md",
+          "tokens": 1575
+        },
+        {
+          "name": "assets/01-全身立绘-正常.png",
+          "size": 2669728,
+          "sha256": "2ca45a7a14f7f5bb6e499b5ad079c9fb76b80a376be158d2b3b8276a6a710e09",
+          "url": "char/tachibana-sherry-manosaba/assets/01-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E6%AD%A3%E5%B8%B8.png",
+          "width": 1702,
+          "height": 3948,
+          "tokens": 989
+        },
+        {
+          "name": "assets/02-全身立绘-魔女化.png",
+          "size": 2363993,
+          "sha256": "826b0369b49c6ccaa289f23bca7d52c24ab4970f9d93109e7d8b4849f6b75275",
+          "url": "char/tachibana-sherry-manosaba/assets/02-%E5%85%A8%E8%BA%AB%E7%AB%8B%E7%BB%98-%E9%AD%94%E5%A5%B3%E5%8C%96.png",
+          "width": 2560,
+          "height": 4029,
+          "tokens": 952
+        },
+        {
+          "name": "assets/README.md",
+          "size": 3252,
+          "sha256": "a5e39bebed8e097dd5ae063a9b89bd1500062850056c32d3a244b968f81db99f",
+          "url": "char/tachibana-sherry-manosaba/assets/README.md",
+          "tokens": 842
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/tachibana-sherry-manosaba.zip",
+        "size": 5017796,
+        "sha256": "8b83f78b4bc02024b334389588c6990a03fddf30f852d58847505febfb672177"
+      },
+      "tokenEstimate": {
+        "text": 19142,
+        "image": 1941,
+        "total": 21083,
+        "textFiles": 11,
+        "imageFiles": 2
+      },
+      "nameEn": "Sherry Tachibana",
+      "alias": "SHERRY",
+      "origin": {
+        "zh-CN": "《魔法少女的魔女审判》官方设定",
+        "en-US": "Magical Girl Witch Trials Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "橘雪莉",
+          "魔法少女的魔女审判",
+          "Acacia"
+        ],
+        "en-US": [
+          "Sherry Tachibana",
+          "Magical Girl Witch Trials",
+          "Acacia"
+        ]
+      },
+      "company": {
+        "id": "acacia",
+        "zh-CN": "Acacia",
+        "en-US": "Acacia",
+        "pinyin": "acacia",
+        "pinyinInitials": "acacia",
+        "pinyinSyllables": [
+          "acacia"
+        ]
+      },
+      "work": {
+        "id": "manosaba",
+        "zh-CN": "魔法少女的魔女审判",
+        "en-US": "Magical Girl Witch Trials",
+        "pinyin": "mofashaonvdemonvshenpan",
+        "pinyinInitials": "mfsndmnsp",
+        "pinyinSyllables": [
+          "mo",
+          "fa",
+          "shao",
+          "nv",
+          "de",
+          "mo",
+          "nv",
+          "shen",
+          "pan"
+        ]
+      },
+      "pinyin": "juxueli",
+      "pinyinInitials": "jxl",
+      "pinyinSyllables": [
+        "ju",
+        "xue",
+        "li"
+      ],
+      "sort": {
+        "zh-CN": "juxueli"
+      },
+      "thumbnail": "thumbnails/tachibana-sherry-manosaba/cover.webp?v=b9cb4e82"
     },
     {
       "slug": "white-rice-fish-deepseek",
@@ -1441,21 +1625,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 2349,
-          "sha256": "432094ff20154996c36149c3ad6fd0d989c9ee9c44418108b1a18a2c1151bb86",
+          "size": 2089,
+          "sha256": "88ea4d34cf08765849478af42f21db149022b89ccb82a35bb4d5e6f64689f673",
           "url": "char/white-rice-fish-deepseek/assets/README.md",
-          "tokens": 631
+          "tokens": 521
         }
       ],
       "archive": {
         "url": "downloads/char/white-rice-fish-deepseek.zip",
-        "size": 149446,
-        "sha256": "a866b42ae37fa98c96afaae4e319387b37e70d4f8d3797874da3b5ca23fabb42"
+        "size": 149324,
+        "sha256": "a3da5752ed6dac565a7e2cbd974102081e317d39aae65014cec8cc83672b71e4"
       },
       "tokenEstimate": {
-        "text": 11635,
+        "text": 11525,
         "image": 610,
-        "total": 12245,
+        "total": 12135,
         "textFiles": 11,
         "imageFiles": 1
       },

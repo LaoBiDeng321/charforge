@@ -1,0 +1,31 @@
+{
+  "name": "橘雪莉",
+  "alias": "SHERRY",
+  "nameEn": "Sherry Tachibana",
+  "company": {
+    "id": "acacia",
+    "zh-CN": "Acacia",
+    "en-US": "Acacia"
+  },
+  "work": {
+    "id": "manosaba",
+    "zh-CN": "魔法少女的魔女审判",
+    "en-US": "Magical Girl Witch Trials"
+  },
+  "origin": {
+    "zh-CN": "《魔法少女的魔女审判》官方设定",
+    "en-US": "Magical Girl Witch Trials Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "橘雪莉",
+      "魔法少女的魔女审判",
+      "Acacia"
+    ],
+    "en-US": [
+      "Sherry Tachibana",
+      "Magical Girl Witch Trials",
+      "Acacia"
+    ]
+  }
+}

@@ -119,15 +119,6 @@
         return null;
     }
 
-    function findFile(slug, fileName) {
-        var entry = findEntry(slug);
-        if (!entry) return null;
-        for (var i = 0; i < entry.files.length; i++) {
-            if (entry.files[i].name === fileName) return entry.files[i];
-        }
-        return null;
-    }
-
     function absoluteUrl(relOrAbs) {
         try {
             return new URL(relOrAbs, location.href).href;
@@ -189,17 +180,12 @@
        公开 API
        ------------------------------------------ */
     window.Downloader = {
-        /** 单文件下载，如 downloadFile('white-rice-fish-deepseek', 'prompt.md') */
-        downloadFile: function (slug, fileName) {
-            var file = findFile(slug, fileName);
-            if (!file) return false;
-            saveUrl(absoluteUrl(file.url), fileName.split('/').pop());
-            return true;
-        },
-
         /**
          * 整包 ZIP 下载。
          * 优先使用构建期生成的静态 ZIP（含图片）；不存在时在浏览器内现场打包。
+         *
+         * 站点不提供单文件下载——整包是唯一的分发粒度，免得用户拿到残缺的
+         * 一个文件却以为拿到了完整角色卡。
          */
         downloadZip: function (slug) {
             var entry = findEntry(slug);

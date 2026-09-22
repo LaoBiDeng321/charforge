@@ -100,11 +100,6 @@ function renderStats(data) {
         data.skills.reduce((sum, s) => sum + countSettingFiles(s), 0) +
         data.chars.reduce((sum, c) => sum + countSettingFiles(c), 0);
 
-    // Hero 的 Token 统计覆盖「构建器 + 角色卡」全部交付文件（含 assets 图片），
-    // 与「设定文件」口径不同，具体方法见 README 的「Token 预估」一节。
-    const allEntries = data.skills.concat(data.chars);
-    const tokenTotal = window.TokenEstimate ? window.TokenEstimate.entriesTotal(allEntries) : 0;
-
     const pad2 = (n) => String(n).padStart(2, '0');
     const set = (id, text) => {
         const el = document.getElementById(id);
@@ -114,7 +109,9 @@ function renderStats(data) {
     set('statSkills', pad2(skillCount));
     set('statChars', pad2(charCount));
     set('statFiles', String(fileCount));
-    set('statTokens', window.TokenEstimate ? window.TokenEstimate.compact(tokenTotal) : '--');
+    // 首屏不再显示 Token 总额：预估的粒度是「单个角色包」，把多个包加起来的
+    // 总数没有使用场景（没人会一次性把全站灌进模型），反而容易被误读成整站开销。
+    // 单个角色的预估仍显示在角色卡与角色索引里，见 tokens.js / carousel.js。
     set('footerRes', `${skillCount} SKILLS / ${charCount} CHARS`);
 }
 
@@ -136,15 +133,11 @@ function renderFileTables(data) {
         if (!entry) return;
 
         list.innerHTML = entry.files.map((file) => {
-            // 显示层只用文件名：下载保存的也是单个文件，不展示目录前缀
             const base = file.name.split('/').pop();
             return (
                 '<li class="file-row">' +
                     '<span class="file-name">' + base + '</span>' +
                     '<span class="file-role">' + window.I18N.t(roleKey(file.name)) + '</span>' +
-                    '<button type="button" class="file-dl" data-file-dl="' + slug + '/' + file.name + '" title="' + window.I18N.t('dl.file') + '" aria-label="' + base + '">' +
-                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
-                    '</button>' +
                 '</li>'
             );
         }).join('');
@@ -242,18 +235,6 @@ function bindActions() {
         const zipBtn = e.target.closest('[data-download-zip]');
         if (zipBtn && window.Downloader) {
             window.Downloader.downloadZip(zipBtn.dataset.downloadZip);
-            return;
-        }
-
-        // 单文件
-        const fileBtn = e.target.closest('[data-file-dl]');
-        if (fileBtn && window.Downloader) {
-            // 非当前轮播卡内的文件按钮不响应（邻卡仅为视觉预览）
-            const card = fileBtn.closest('.char-card');
-            if (card && !card.classList.contains('is-active')) return;
-            const ref = fileBtn.dataset.fileDl;
-            const sep = ref.indexOf('/');
-            window.Downloader.downloadFile(ref.slice(0, sep), ref.slice(sep + 1));
             return;
         }
 

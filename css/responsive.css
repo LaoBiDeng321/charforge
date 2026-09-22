@@ -98,10 +98,6 @@
         font-size: clamp(2.6rem, 15vw, 4rem);
     }
 
-    .hero-description {
-        margin-bottom: var(--space-lg);
-    }
-
     .hero-stats {
         gap: var(--space-xl);
         margin-bottom: var(--space-lg);

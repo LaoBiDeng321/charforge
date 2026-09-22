@@ -24,11 +24,9 @@
 
             'hero.kicker': 'CHARACTER SKILL REPOSITORY // 基于搜索 · agent 必须包含搜索功能',
             'hero.subtitle': '角色工坊 · 扮演 Skill 资源站',
-            'hero.description': '两个角色设定构建器 × 八张成品角色卡。全部以 Markdown 设定文件交付，即下即用，可自由修改与分享。',
             'hero.stats.skills': '构建器',
             'hero.stats.chars': '角色卡',
             'hero.stats.files': '设定文件',
-            'hero.stats.tokens': '预估 TOKENS',
             'hero.cta.chars': '浏览角色库',
             'hero.cta.skills': '查看构建器',
             'hero.scroll': '向下滚动',
@@ -37,15 +35,12 @@
             'hero.vertical': 'CHAR//FORGE // CHARACTER WORKSHOP',
 
             'dl.zip': '打包下载 ZIP',
-            'dl.skillmd': '仅下载 SKILL.md',
-            'dl.file': '下载此文件',
 
             'install.copy': '复制至agent安装',
             'install.copied': '已复制',
             'install.copyFailed': '复制失败',
 
             'token.unit': 'TOKENS',
-            'token.note.short': '以 DeepSeek 为例的预估值，仅供参考；不同模型与版本的分词不同，实际以对应模型返回的 usage 为准。',
 
             'skill.flow': '运行流程 // PIPELINE',
             'skill.files': '交付文件 // DELIVERABLES',
@@ -154,11 +149,9 @@
 
             'hero.kicker': 'CHARACTER SKILL REPOSITORY // SEARCH-BASED · AGENTS MUST INCLUDE SEARCH',
             'hero.subtitle': 'CHAR WORKSHOP · ROLEPLAY SKILL HUB',
-            'hero.description': 'Two profile builders × eight ready-to-run character cards. Everything ships as Markdown setting files — download, tweak and share freely.',
             'hero.stats.skills': 'SKILL PACKS',
             'hero.stats.chars': 'CHAR CARDS',
             'hero.stats.files': 'SETTING FILES',
-            'hero.stats.tokens': 'EST. TOKENS',
             'hero.cta.chars': 'Browse Characters',
             'hero.cta.skills': 'View Builders',
             'hero.scroll': 'Scroll',
@@ -167,15 +160,12 @@
             'hero.vertical': 'CHAR//FORGE // CHARACTER WORKSHOP',
 
             'dl.zip': 'Download ZIP',
-            'dl.skillmd': 'SKILL.md only',
-            'dl.file': 'Download this file',
 
             'install.copy': 'Copy to Agent Install',
             'install.copied': 'Copied',
             'install.copyFailed': 'Copy failed',
 
             'token.unit': 'TOKENS',
-            'token.note.short': 'Example estimate based on DeepSeek; tokenisation differs by model and version. Refer to the usage field returned by your model.',
 
             'skill.flow': 'PIPELINE',
             'skill.files': 'DELIVERABLES',

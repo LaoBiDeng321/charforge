@@ -1,11 +1,75 @@
 /**
- * CharCarousel - 角色卡环形轮播
+ * CharCarousel - 角色卡环形轮播 + 角色索引面板
  * 数据来源：window.SITE_DATA.chars（由 build_data.py 生成）
- * 行为：
+ *
+ * 轮播行为：
  *   1. 环形距离分类：0 → is-active / ±1 → is-near / ±2 → is-far / 其余 → is-hidden
  *   2. 自动播放（AUTO 可开关），交互后重置计时
  *   3. 手动切换：箭头 / 刻度跳转 / 邻卡点击
  *   4. 语言切换时仅更新文案节点，不打断当前索引
+ *
+ * ============================ 索引面板检索算法 ============================
+ * 结构：搜索框 → 两级定位索引（公司 → 作品）→ 角色卡网格。
+ * 三级定位索引两级各带实时计数与「全部」回退；二级栏仅在该公司定义了 work
+ * 时出现（单层公司不出现）。选中公司时二级自动归位，避免带着上一个公司的作品筛。
+ *
+ * 三段式检索（每段都保留展示顺序，不做相关性重排）：
+ *
+ *   ① 精确 / 前缀 / 片段 / 分词 —— hitIn()
+ *      覆盖：中文名、英文名、全拼与首字母、作品、公司、来源、标签。
+ *      中文按任意长度子串匹配（只打后半段也能命中）。
+ *
+ *   ②a 去分隔符重试 —— stageCompact()
+ *      治分写或带连字符的拼音：`pei li ka` / `pei-li-ka` → `peilika`。
+ *
+ *   ②b 音节级重排 —— stageSyllables() / syllableReorderHit()
+ *      按**本条目的音节表**切分查询：顺序任意、每个音节最多用它在表中出现的次数，
+ *      不要求用完表中所有音节（用户常只敲尾部）。治「音节记错顺序」：
+ *      `dayufei` → 大肥鱼（字符级距离要 4 步，判为不匹配；音节级只是换了顺序）。
+ *      音节表由构建期用 pypinyin 逐字切好下发为 pinyinSyllables（名称/公司/作品
+ *      各一份，多音字 reading 覆盖同样生效）——这也是它必须和 pinyin 同源的原因，
+ *      否则 `茜特菈莉` 会下发成 `qian-te-la-li`。前端不需要自带音节词典。
+ *
+ *   ③ 兜底候选 —— dlCandidates() / subseqCandidates()
+ *      先 Damerau-Levenshtein（错字/漏字/换位/同音字/繁体），零候选时再用子序列
+ *      （跳字缩写、首字母尾片段，**仅限 ≤3 字**）。
+ *      **只出「你是不是想找」候选，不进入结果列表**。
+ *
+ * ①②b 都是精确约束，所以能直接进结果列表；③ 是不可靠的近似匹配，只做候选提示。
+ *
+ * 三条安全边界：
+ *   · DL 按查询长度自适应阈值：≤2 字不放行 / 3–5 字距离 1 / ≥6 字距离 2。
+ *   · 子序列只对 ≤3 字开放 —— 查询越长，「碰巧是某串子序列」的概率越大，
+ *     长词走这条路等于随机捞结果。
+ *   · ③ 只在 ①② 零命中时触发 —— 所以 `zzz` 什么都不命中，`ys` 也不会被 `lys`
+ *     这类首字母串吃掉。
+ *
+ * 检索键分组（searchOf()）：
+ *   通用字段（名称/来源/标签/首字母）拉丁子串需 ≥3 位；纯全拼字段放宽到 ≥2 位
+ *   （`yu` → 大肥鱼）。分组原因是语义不同：全拼串里的短子串是「一个音节的一部分」，
+ *   首字母串里的短子串是「跨两个字声母的偶然相邻」（`ys` ⊂ `lys`），只会制造误匹配。
+ *
+ * localeVals() 遇到值是数组时（tags 就是这种结构）必须**摊平成独立条目**，不能
+ * String() 成 `a,b,c` —— 那会拼出一个大长串，让子串/子序列跨越本不相邻的字段乱命中。
+ *
+ * 手机端面板全屏化（--panel-zoom）：
+ *   PC 视图把整页缩到约 0.3 倍，而「输入框聚焦是否自动放大」判定的是**缩放后的
+ *   有效字号**（阈值约 16pt）：14px 的检索框实际只剩 ~5pt，必然被浏览器放大，
+ *   再叠加整屏滚动就很容易误操作。只把字号写大挡不住（要 ~60px 才够），观感也崩。
+ *   所以只对检索面板还原设备比例：
+ *     1. 打开面板时若「触屏 + .view-pc」，把 #charIndex 临时移入 document.body 并加
+ *        is-device-scale。必须搬出全屏滚动容器——容器上有 transform，不搬的话
+ *        position: fixed 会退化成 absolute。
+ *     2. carousel.css 用 zoom: var(--panel-zoom) 配
+ *        width/height: calc(100vw|100vh / var(--panel-zoom)) 反向抵消整页缩放：
+ *        面板铺满整屏，内部字号与间距回到设备真实尺寸，检索框用正常移动端字号
+ *        （17px）即可，不再触发聚焦放大。
+ *     3. --panel-zoom = 布局宽 / 设备宽，由 index.html 在 load / resize /
+ *        orientationchange 时同步；自适应模式下恒为 1，面板保持原卡片形态。
+ *     4. 关闭时还原 DOM 位置与 class；桌面与自适应模式完全不进这套逻辑。
+ *   已知取舍：面板内部沿用桌面端间距 token，在 390pt 宽的屏上留白偏大；面板里的
+ *   @media (max-width: 768px) 也不会命中（布局视口仍是 1280）。真响应式改造待办。
+ * ==========================================================================
  */
 
 (function () {
@@ -91,13 +155,10 @@
         card.dataset.slug = char.slug;
 
         var filesHtml = char.files.map(function (file) {
-            // 显示层只用文件名：下载保存的也是单个文件，不展示目录前缀
+            // 只展示文件名，不展示目录前缀；单文件下载入口已移除，只保留整包 ZIP
             var base = file.name.split('/').pop();
             return (
                 '<li class="char-file">' +
-                    '<button type="button" class="file-dl" data-file-dl="' + char.slug + '/' + file.name + '" aria-label="' + base + '" title="' + t('dl.file') + '">' +
-                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>' +
-                    '</button>' +
                     '<span class="file-name">' + base + '</span>' +
                     '<span class="file-size">' + formatSize(file.size) + '</span>' +
                 '</li>'

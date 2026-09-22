@@ -240,16 +240,6 @@
     letter-spacing: 0.35em;
 }
 
-.hero-description {
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-xl);
-    letter-spacing: 0.08em;
-    max-width: 640px;
-    line-height: var(--line-height-relaxed);
-}
-
 /* 资源统计条：等宽数字 + 顶边细线 */
 .hero-stats {
     display: flex;
@@ -282,17 +272,6 @@
     color: var(--color-text-muted);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-}
-
-/* Token 预估免责声明：首页统计条下方的一行小字 */
-.hero-token-note {
-    max-width: 680px;
-    margin: 0 0 var(--space-xl);
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-xs);
-    line-height: var(--line-height-normal);
-    color: var(--color-text-muted);
-    letter-spacing: 0.04em;
 }
 
 .hero-cta {

@@ -5,9 +5,18 @@
  * 文本 token 以 DeepSeek 官方 deepseek_v4_tokenizer 离线计数；
  * 图片 token 按逆向自 DeepSeek 官方文档站「图片 Token 计算器」的 v4.1 尺寸公式估算。
  *
+ * 计入范围：整个交付包 = 10 个设定文件 + assets/ 图片。**不含 system prompt 与
+ * chat 模板**，所以它是「文件原文进入模型」的输入侧估算，不是接口最终 usage。
+ *
  * 注意：这只是「以 DeepSeek 为例」的估算示例，不代表使用者会使用 DeepSeek 模型。
  * 不同公司、不同模型、甚至同一模型的不同版本，分词都可能不同；前端只负责格式化展示，
  * 真实消耗以对应模型返回的 usage 为准。
+ *
+ * 展示口径：
+ *   · **单个角色包**的预估显示在角色卡底部与角色索引里（`~ xK TOKENS`），不提供悬停明细。
+ *   · **不做全站合计**——预估的粒度就是「一个角色包」，把多个包加起来没有使用场景
+ *     （没人会一次性把全站灌进模型），只会被误读成整站开销。故不导出 `entriesTotal`。
+ *   · 文案集中在 i18n.js。
  */
 
 (function () {
@@ -22,15 +31,6 @@
 
     function entryTotal(entry) {
         return number(entry && entry.tokenEstimate && entry.tokenEstimate.total);
-    }
-
-    function entriesTotal(entries) {
-        if (!entries || !entries.length) return 0;
-        var sum = 0;
-        for (var i = 0; i < entries.length; i++) {
-            sum += entryTotal(entries[i]);
-        }
-        return sum;
     }
 
     /** 182921 -> "182.9K"；不足 1000 时原样显示 */
@@ -53,7 +53,6 @@
     }
 
     window.TokenEstimate = {
-        entriesTotal: entriesTotal,
         compact: compact,
         label: label
     };

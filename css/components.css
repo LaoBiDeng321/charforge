@@ -414,28 +414,6 @@
     white-space: nowrap;
 }
 
-.file-dl {
-    width: 24px;
-    height: 24px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-muted);
-    border: 1px solid transparent;
-    flex-shrink: 0;
-    transition: color var(--transition-base), border-color var(--transition-base);
-}
-
-.file-dl:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-}
-
-.file-dl svg {
-    width: 13px;
-    height: 13px;
-}
-
 .file-note {
     font-family: var(--font-family-mono);
     font-size: 10px;

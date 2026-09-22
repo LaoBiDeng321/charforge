@@ -23,6 +23,41 @@ build_data.py —— 资源站数据/分发包构建脚本
      图片用 Pillow 读取宽高，套用逆向自 DeepSeek 官方图片计算器的 v4.1 尺寸公式。
      该值是输入侧预估值，不是接口最终 usage；不同模型 / 版本的分词与图片换算都可能不同。
 
+  5. index.html 的两处盖章（原先都是手工步骤，而手工步骤必然会被忘掉——
+     页脚版本号就曾一路停在 26.09.14）：
+       · 版本号：两处 `VER YY.MM.DD` 改写成构建当天日期。日期制版本没有需要人工
+         决定的信息，构建日即发版日；想手工指定就先改 index.html，脚本只在
+         日期不一致时改写。
+       · 资源戳：给 js/ css/ 引用补 `?v=<sha256 前 8 位>`。文件一变 URL 就变，
+         避免浏览器复用旧脚本（症状是「新 HTML + 旧 JS」：界面元素在、逻辑与
+         文案缺失）。
+
+构建期自动派生 / 校验（都不需要人工维护）：
+
+  · 拼音与排序键 —— 从 meta 的中英名字、作品名、公司名推导 pinyin /
+    pinyinInitials，并把中文排序键写进 sort["zh-CN"]。后者让中文排序不再依赖
+    浏览器对 zh 的 collation（ICU 构造失败会静默退化成码点序）。
+  · 字段校验 —— meta 缺 name、JSON 不合法、char/<slug>/ 不存在、reading 音节数
+    与汉字数不符、官方 tokenizer 缺失、图片读不出尺寸：一律直接报错，不产半成品。
+  · tags 软校验（warn_extra_tags）—— tags 是固定格式「角色名 + 作品名 + 公司名」，
+    且直接进角色索引第①段的检索键。多塞关键词会改变搜索结果（搜「怪力」会冒出
+    某个角色），所以含角色特质时**只警告不中断**。身份串会拆括号与分隔符
+    （`三月七（含长夜月）` → `三月七` / `含长夜月` / 整体），让「异名可加」与
+    「不许加特质」两条规则同时成立。
+  · 共享文件一致性（check_shared_skill_files）—— 两个 builder 各带一份内容相同的
+    reference/templates.md（下载包必须自包含，见 reference/LAYERS.md §2.3）。
+    两份 sha256 不一致**直接中断构建**：重复可以接受，无声漂移不行。
+
+产物的可复现性（同一份源码同一天重复构建，index.json 与各 ZIP 的 sha256 完全一致）：
+
+  1. ZIP 条目时间戳固定为 1980-01-01 —— zipfile.writestr 传字符串名会取「当前
+     时间」当条目时间，于是每次构建 ZIP 字节都不同，index.json 里的 sha256 跟着抖。
+  2. ZIP 条目权限位固定 0o644，不受 umask / 平台默认值影响。
+  3. 取哈希前把行尾归一化为 LF，且 ZIP 内的 Markdown 也统一 LF（core.autocrlf 会让
+     「哪些文件是 CRLF」随检出历史漂移）。
+
+验证方式：连跑两次 `python build_data.py`，`git status` 应无输出。
+
 用法：python build_data.py
 """
 
@@ -98,11 +133,101 @@ SKILLS = [
 META_DIR = "meta"
 
 
+def check_shared_skill_files():
+    """校验两个 skill 包内内容必须一致的共享文件。
+
+    角色构建器是从站点**按目录打包下载**的（ZIP = `skills/<slug>/` 下全部文件），
+    用户拿到的是包本身、不是整个仓库。所以：
+      · 包内所有相对链接必须落在包内 —— 指向仓库根目录的链接在下载包里是死链；
+      · 两个 builder 需要同一份 `templates.md` 时，只能各自带一份、内容保持一致。
+
+    重复不可怕，**无声漂移**才可怕。所以这里直接比对，不一致就中断构建，
+    而不是留着两份慢慢长歪。
+    """
+    shared = "reference/templates.md"
+    skills_dir = os.path.join(ROOT, "skills")
+    if not os.path.isdir(skills_dir):
+        return
+    copies = []
+    for slug in sorted(os.listdir(skills_dir)):
+        path = os.path.join(skills_dir, slug, *shared.split("/"))
+        if os.path.isfile(path):
+            copies.append((slug, path))
+    if len(copies) < 2:
+        return
+    ref_slug, ref_path = copies[0]
+    ref_hash = sha256_file(ref_path)
+    for slug, path in copies[1:]:
+        if sha256_file(path) != ref_hash:
+            raise SystemExit(
+                "共享文件内容不一致，构建中止：\n"
+                "  skills/%s/%s\n"
+                "  skills/%s/%s\n"
+                "这两份是给各自的下载包用的（包必须自包含），内容必须逐字节相同。\n"
+                "请把其中一份的内容同步到另一份后重新构建。"
+                % (ref_slug, shared, slug, shared)
+            )
+
+
+def warn_extra_tags(fn, meta):
+    """tags 是统一格式：角色名 + 作品名 + 公司名，不加角色特质。
+
+    tags 直接进角色索引第①段的检索键，多塞关键词会改变搜索结果
+    （搜「怪力」会冒出某个角色），所以这里做一次软校验：只警告，不中断构建。
+
+    身份串的拆法：整串算一个候选，再拆出「括号内内容」与「去掉括号后的其余部分」，
+    并按 `/`、`、`、空白切词（`三月七（含长夜月）` → `三月七` / `含长夜月` / 整体）。
+    这样「异名可以加」与「不能加特质」两条规则能同时成立。
+    """
+    tags = meta.get("tags")
+    if not isinstance(tags, dict):
+        return
+
+    identity = []
+    for key in ("name", "nameEn", "alias"):
+        if meta.get(key):
+            identity.append(str(meta[key]))
+    for field in ("company", "work"):
+        block = meta.get(field)
+        if isinstance(block, dict):
+            for key in ("zh-CN", "en-US"):
+                if block.get(key):
+                    identity.append(str(block[key]))
+
+    expected = set()
+    for raw in identity:
+        raw = raw.strip().lower()
+        if not raw:
+            continue
+        expected.add(raw)
+        for inner in re.findall(r"[（(]([^）)]*)[）)]", raw):
+            if inner.strip():
+                expected.add(inner.strip())
+        stripped = re.sub(r"[（(][^）)]*[）)]", " ", raw)
+        for part in re.split(r"[/、,，\s]+", stripped):
+            if len(part.strip()) >= 2:
+                expected.add(part.strip())
+
+    for lang in sorted(tags.keys()):
+        values = tags[lang]
+        if not isinstance(values, list):
+            continue
+        for value in values:
+            if str(value).strip().lower() not in expected:
+                print(
+                    "  · 提示 meta/%s 的 tags[%s] 含非「角色名/作品名/公司名」条目：%r\n"
+                    "    tags 是统一格式（角色名 + 作品名 + 公司名），角色特质请写进 profile.md，\n"
+                    "    否则会被角色索引当成检索键（搜该词会命中该角色）。见 README「新增角色」。"
+                    % (fn, lang, value)
+                )
+
+
 def load_chars():
     """扫描 meta/*.json，返回 build_entry 需要的 meta 列表（按文件名排序，保证产物可复现）。
 
     meta 里只需写展示字段：name / alias / nameEn / reading / company / work / origin / tags。
     slug 取文件名（去 .json），dir 取 char/<slug>，两者都不用在 meta 里重复写。
+    tags 是统一格式：角色名 + 作品名 + 公司名（不加角色特质），见 warn_extra_tags。
     """
     base = os.path.join(ROOT, META_DIR)
     if not os.path.isdir(base):
@@ -120,6 +245,7 @@ def load_chars():
             raise SystemExit("meta/%s 不是合法 JSON：%s" % (fn, exc))
         if not meta.get("name"):
             raise SystemExit("meta/%s 缺少必要字段 name" % fn)
+        warn_extra_tags(fn, meta)
         meta["slug"] = slug
         meta["dir"] = "char/" + slug
         if not os.path.isdir(os.path.join(ROOT, *meta["dir"].split("/"))):
@@ -643,6 +769,7 @@ def build():
     if os.path.isdir(DOWNLOADS):
         shutil.rmtree(DOWNLOADS)
 
+    check_shared_skill_files()
     tokenizer = load_deepseek_tokenizer()
     skills_out = [build_entry(meta, "skills", tokenizer) for meta in SKILLS]
     chars_out = [build_entry(meta, "char", tokenizer) for meta in load_chars()]

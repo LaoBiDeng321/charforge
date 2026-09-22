@@ -123,7 +123,7 @@ python _verify_zips.py    # 解开每个 ZIP，按包内视角解析全部 .md �
 | 数据加载与开屏 | `js/data-loader.js` · `js/loader.js` |
 | 全屏滚动导航 | `js/fullpage.js` |
 | 角色轮播 · 索引检索算法 · 手机端面板缩放 | `js/carousel.js` 头部注释 |
-| 首屏背景「斜向滚动画廊」（列数 / 流速 / 无缝循环 / 压暗） | `js/hero-gallery.js` 头部注释 · 参数 `js/config.js` → `gallery` · 样式 `css/fullpage.css`「Hero 背景 · 二」· 瓦片生成 `tools/make_gallery.py` |
+| 首屏背景「斜向滚动画廊」（列数 / 流速 / 无缝循环 / 压暗 / 上下渐隐） | `js/hero-gallery.js` 头部注释 · 参数 `js/config.js` → `gallery` · 样式 `css/fullpage.css`「Hero 背景 · 二」· 瓦片生成 `tools/make_gallery.py` |
 | Token 预估展示（**仅单角色，不做全站合计**） | `js/tokens.js` 头部注释 · `build_data.py` 头部注释 |
 | 界面文案 / 配置 / 声明 | `js/i18n.js` · `js/config.js` |
 | 缩略图扫描与 `NO IMG` 占位 | `build_data.py` `find_thumbnail()` |
@@ -147,4 +147,5 @@ python _verify_zips.py    # 解开每个 ZIP，按包内视角解析全部 .md �
    - **纯装饰，不吃交互**：`pointer-events: none` + `aria-hidden="true"` + 瓦片 `alt=""`；不得拦点击、悬停或 Tab 焦点。
    - **不许往首屏加文字**：画廊不加标题、不加图注、不加"图源"小字（那属于声明区，见第 3 条）。
    - **可读性靠整体不透明度，不要加"让出文字区"的遮罩**：画廊压到 16% 后文字带背景实测只有 #1e~#34，白字/黄按钮对比度 12:1 以上。曾经加过一版以标题为中心的径向遮罩（中心透明、向外显影），结果外面有图、圈里没图，在近黑底上**围出一块看得见的椭圆暗斑**，用户一眼就指出来了——这类"局部让位"在近黑底上必然显形，别再加。改参数（`.hero-gallery-tilt` 的 `opacity`、瓦片 `filter`）后重新看一眼首屏。
+   - **例外（用户点名，2026-09-22）**：取景框上加了**上下渐隐**——`mask-image` 线性渐变，中间完整、往上下淡到透明（透明处露出底色，读起来就是"中间到上下、透明到黑"），stop 写在 `.hero-gallery` 里。它**不是**上面那种"让出文字区"的局部遮罩，是整体边缘淡出、不制造空洞；遮罩必须挂在不旋转的 `.hero-gallery`，挂 `.hero-gallery-tilt` 会跟着 -12° 歪。
    - **图池来自产物、不手改**：瓦片由 `tools/make_gallery.py` 从 `char/<slug>/assets/` 派生，规则与溯源见 [`../gallery/README.md`](../gallery/README.md)；观感上不适合当背景的素材走 `gallery/exclude.json`（**不动原图**）。

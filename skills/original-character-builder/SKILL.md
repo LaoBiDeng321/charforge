@@ -10,10 +10,10 @@ description: "通过与用户共创采集设定，构建原创角色扮演的10�
 > **本文件只写"做什么、按什么顺序、卡在哪"。** 信息源协议、文件分工细则、素材规则、自检清单见
 > [`reference/reference.md`](reference/reference.md)；文件归属边界与候选章节池见 [`reference/templates.md`](reference/templates.md)。
 >
-> **本 skill 自带 `templates.md`**（两个 builder 各一份、内容相同）：构建器是**按目录打包**下发的，包内必须自包含，所以共享内容只能各自带一份。新增规则请往 `reference.md` 写；改章节池要同时改两份（构建期会校验一致）。
+> **本 skill 自带 `templates.md`**（与 `SKILL.md`、`reference.md` 同包）：包内必须自包含，不引用包外内容。新增规则请往 `reference.md` 写；章节池调整在 `templates.md` 内进行。
 >
 > **维护约定**：改规则只动 `reference/reference.md`；主文件只在必要处加一行指路，**不要在两处各写一遍**。
-> 本层**只写"如何构建一个角色设定"**——站点 / 仓库 / 构建脚本 / 缩略图路径等部署实现属**项目层**，本包内不含该文档（在仓库根目录的 `docs/LAYERS.md`）。
+> 本层**只写"如何构建一个角色设定"**——站点 / 仓库 / 构建脚本 / 缩略图路径等部署实现属**项目层**，不在本包内。
 
 ## 与官方角色构建的本质区别
 

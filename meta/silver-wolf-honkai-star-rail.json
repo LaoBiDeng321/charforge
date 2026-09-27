@@ -1,0 +1,33 @@
+{
+  "name": "银狼（含银狼LV.999）",
+  "alias": "SILVER WOLF / LV.999",
+  "nameEn": "Silver Wolf (LV.999)",
+  "company": {
+    "id": "hoyoverse",
+    "zh-CN": "米哈游",
+    "en-US": "HoYoverse"
+  },
+  "work": {
+    "id": "honkai-star-rail",
+    "zh-CN": "崩坏：星穹铁道",
+    "en-US": "Honkai: Star Rail"
+  },
+  "origin": {
+    "zh-CN": "《崩坏：星穹铁道》官方设定",
+    "en-US": "Honkai: Star Rail Official"
+  },
+  "tags": {
+    "zh-CN": [
+      "银狼",
+      "银狼LV.999",
+      "崩坏：星穹铁道",
+      "米哈游"
+    ],
+    "en-US": [
+      "Silver Wolf",
+      "LV.999",
+      "Honkai: Star Rail",
+      "HoYoverse"
+    ]
+  }
+}

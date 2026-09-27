@@ -51,7 +51,7 @@ build_data.py —— 资源站数据/分发包构建脚本
     （`三月七（含长夜月）` → `三月七` / `含长夜月` / 整体），让「异名可加」与
     「不许加特质」两条规则同时成立。
   · 共享文件一致性（check_shared_skill_files）—— 两个 builder 各带一份内容相同的
-    reference/templates.md（下载包必须自包含，见 reference/LAYERS.md §2.3）。
+    reference/templates.md（下载包必须自包含，见 docs/LAYERS.md §2.3）。
     两份 sha256 不一致**直接中断构建**：重复可以接受，无声漂移不行。
 
 产物的可复现性（同一份源码同一天重复构建，index.json 与各 ZIP 的 sha256 完全一致）：

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22",
+  "generatedAt": "2026-09-28",
   "gallery": [
     {
       "url": "gallery/alf-silver-palace/01.webp?v=bd499f51",
@@ -98,6 +98,26 @@
       "slug": "shu-arknights"
     },
     {
+      "url": "gallery/silver-wolf-honkai-star-rail/01.webp?v=fa1746ba",
+      "slug": "silver-wolf-honkai-star-rail"
+    },
+    {
+      "url": "gallery/silver-wolf-honkai-star-rail/02.webp?v=81d26714",
+      "slug": "silver-wolf-honkai-star-rail"
+    },
+    {
+      "url": "gallery/silver-wolf-honkai-star-rail/03.webp?v=a0f6138d",
+      "slug": "silver-wolf-honkai-star-rail"
+    },
+    {
+      "url": "gallery/silver-wolf-honkai-star-rail/04.webp?v=d2eff6e2",
+      "slug": "silver-wolf-honkai-star-rail"
+    },
+    {
+      "url": "gallery/silver-wolf-honkai-star-rail/05.webp?v=7db56c21",
+      "slug": "silver-wolf-honkai-star-rail"
+    },
+    {
       "url": "gallery/tachibana-sherry-manosaba/01.webp?v=cfb3e15c",
       "slug": "tachibana-sherry-manosaba"
     },
@@ -177,35 +197,35 @@
       "files": [
         {
           "name": "SKILL.md",
-          "size": 7412,
-          "sha256": "833180656d65c738ff8d43bd4185e53f9bb55be1fd89e270f78adac29eaa8378",
+          "size": 7198,
+          "sha256": "edf1854514aafe7a4f603ced1026d95d56e9bd291428618da0683707c635d194",
           "url": "skills/character-profile-builder/SKILL.md",
-          "tokens": 2002
+          "tokens": 1961
         },
         {
           "name": "reference/details.md",
-          "size": 22593,
-          "sha256": "e74add6c8989098086c08b2310ba186a11a7acd6187f40ba85db8486f8b8d21c",
+          "size": 22345,
+          "sha256": "75ebf9df4106a66ae5e76d1c2264ae988407f1fb068519525194130a9d1d7063",
           "url": "skills/character-profile-builder/reference/details.md",
-          "tokens": 5764
+          "tokens": 5703
         },
         {
           "name": "reference/templates.md",
-          "size": 8914,
-          "sha256": "a454ab3f87906a1c9ac18a56120513b567ebc3f113d38b0f8db9aa1efbe883fc",
+          "size": 8593,
+          "sha256": "4b928d0bc76639d56b73d50b3f409371c6ea8b891794578d3375d75f0247bdf9",
           "url": "skills/character-profile-builder/reference/templates.md",
-          "tokens": 1998
+          "tokens": 1931
         }
       ],
       "archive": {
         "url": "downloads/skills/character-profile-builder.zip",
-        "size": 19317,
-        "sha256": "7dbfda633a60570200fe8c17c017f1b15c554da82fe21733a650f68fef4bb138"
+        "size": 18874,
+        "sha256": "62288b970be3779722aa674ce06685eb8309b3ac98e7303009f2fdb270208237"
       },
       "tokenEstimate": {
-        "text": 9764,
+        "text": 9595,
         "image": 0,
-        "total": 9764,
+        "total": 9595,
         "textFiles": 3,
         "imageFiles": 0
       }
@@ -216,35 +236,35 @@
       "files": [
         {
           "name": "SKILL.md",
-          "size": 8399,
-          "sha256": "6650f379831dfb0e979fe41ee13b745ce5792b438406e610bca5709df6679b8c",
+          "size": 8267,
+          "sha256": "47c8d691a480ca9f0a8ea90b8f917c22cdd7cd22a77be672679e7718023b9a0e",
           "url": "skills/original-character-builder/SKILL.md",
-          "tokens": 2218
+          "tokens": 2195
         },
         {
           "name": "reference/reference.md",
-          "size": 17736,
-          "sha256": "2e41ea85a127bc414e933710f67fcda6bca3c67923a05178e38889ed25b2306a",
+          "size": 17518,
+          "sha256": "13dd397375951bc11af42137eadb251bfd92808ed6fdb35248c1a6e53abda9f8",
           "url": "skills/original-character-builder/reference/reference.md",
-          "tokens": 4424
+          "tokens": 4369
         },
         {
           "name": "reference/templates.md",
-          "size": 8914,
-          "sha256": "a454ab3f87906a1c9ac18a56120513b567ebc3f113d38b0f8db9aa1efbe883fc",
+          "size": 8593,
+          "sha256": "4b928d0bc76639d56b73d50b3f409371c6ea8b891794578d3375d75f0247bdf9",
           "url": "skills/original-character-builder/reference/templates.md",
-          "tokens": 1998
+          "tokens": 1931
         }
       ],
       "archive": {
         "url": "downloads/skills/original-character-builder.zip",
-        "size": 17339,
-        "sha256": "8e6292ee9e19e7d3337f6b5f8def50ea88d5c9d96cf0506f6e815722f4741a86"
+        "size": 16929,
+        "sha256": "d6175ee13c9ff11006fd09901b5cfb8bb048dec4d1b1f49371679350f813bdd1"
       },
       "tokenEstimate": {
-        "text": 8640,
+        "text": 8495,
         "image": 0,
-        "total": 8640,
+        "total": 8495,
         "textFiles": 3,
         "imageFiles": 0
       }
@@ -1541,6 +1561,216 @@
       "thumbnail": "thumbnails/shu-arknights/cover.png?v=b509544d"
     },
     {
+      "slug": "silver-wolf-honkai-star-rail",
+      "name": "银狼（含银狼LV.999）",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 9361,
+          "sha256": "473deb2b1d67303fa6429fd91f4740d336f431e3f4c5f04f5e83c2b71edd9415",
+          "url": "char/silver-wolf-honkai-star-rail/SKILL.md",
+          "tokens": 2568
+        },
+        {
+          "name": "behavior.md",
+          "size": 7931,
+          "sha256": "e915413babd1e3b201f57616edbe7835f60157956cafbbd47f21ddb35f8fdcca",
+          "url": "char/silver-wolf-honkai-star-rail/behavior.md",
+          "tokens": 2154
+        },
+        {
+          "name": "conflicts.md",
+          "size": 7893,
+          "sha256": "3acb1bde91aa122e05eb2a4645100324c2499a38cca03d964d5014a80a18bd24",
+          "url": "char/silver-wolf-honkai-star-rail/conflicts.md",
+          "tokens": 2286
+        },
+        {
+          "name": "interaction.md",
+          "size": 6626,
+          "sha256": "3ab4e91f45fa7a03f2493a8288d0b621fdfc1cb5df886da7c4b3233dff806f72",
+          "url": "char/silver-wolf-honkai-star-rail/interaction.md",
+          "tokens": 1770
+        },
+        {
+          "name": "memory.md",
+          "size": 9544,
+          "sha256": "e166526562970e07bc3079b389d5dd8bc10634d4da42ba5907e6b6b1732fb87e",
+          "url": "char/silver-wolf-honkai-star-rail/memory.md",
+          "tokens": 2641
+        },
+        {
+          "name": "personality.md",
+          "size": 10973,
+          "sha256": "a11c3bc46774f1bccf72515a75a8c554c1380914de0e1833c2018e8eece47cb7",
+          "url": "char/silver-wolf-honkai-star-rail/personality.md",
+          "tokens": 2917
+        },
+        {
+          "name": "profile.md",
+          "size": 9338,
+          "sha256": "72747a6fbc3f3df2becf652ddcb5e2479e8a7eaacbf9e1c33a367240d9cbf7fe",
+          "url": "char/silver-wolf-honkai-star-rail/profile.md",
+          "tokens": 2695
+        },
+        {
+          "name": "prompt.md",
+          "size": 6654,
+          "sha256": "9ad7056d0c1e24751eab4e97f944d8e14a31802852714fb68858c169800c142d",
+          "url": "char/silver-wolf-honkai-star-rail/prompt.md",
+          "tokens": 1708
+        },
+        {
+          "name": "relations.md",
+          "size": 8738,
+          "sha256": "e1e60eec51b777f93dc62383b5875768d8bc0eb1fee81f5b83dda22071df6be0",
+          "url": "char/silver-wolf-honkai-star-rail/relations.md",
+          "tokens": 2267
+        },
+        {
+          "name": "world.md",
+          "size": 7822,
+          "sha256": "e1cf71dfaaf735fbfa4ac38223012e040ec3c03770fd6bdfccd5bfd58a6a671a",
+          "url": "char/silver-wolf-honkai-star-rail/world.md",
+          "tokens": 2019
+        },
+        {
+          "name": "assets/README.md",
+          "size": 4491,
+          "sha256": "cdd49b2058e52583b8ab882c8e82515caaff822a5565f4293b15441fac3e7c12",
+          "url": "char/silver-wolf-honkai-star-rail/assets/README.md",
+          "tokens": 1236
+        },
+        {
+          "name": "assets/三年之期已到恭迎狼尊归位.png",
+          "size": 1037768,
+          "sha256": "8985245a3a3b58a9aa1f2689df00128484b76f08fbba3d031641e3ac708e75d3",
+          "url": "char/silver-wolf-honkai-star-rail/assets/%E4%B8%89%E5%B9%B4%E4%B9%8B%E6%9C%9F%E5%B7%B2%E5%88%B0%E6%81%AD%E8%BF%8E%E7%8B%BC%E5%B0%8A%E5%BD%92%E4%BD%8D.png",
+          "width": 1067,
+          "height": 600,
+          "tokens": 407
+        },
+        {
+          "name": "assets/光锥立绘「新手任务开始前」.png",
+          "size": 709505,
+          "sha256": "0d3b75011b93cd14869b963e5930ea1971835e14bb0d8217ff52b4e1c62a46e8",
+          "url": "char/silver-wolf-honkai-star-rail/assets/%E5%85%89%E9%94%A5%E7%AB%8B%E7%BB%98%E3%80%8C%E6%96%B0%E6%89%8B%E4%BB%BB%E5%8A%A1%E5%BC%80%E5%A7%8B%E5%89%8D%E3%80%8D.png",
+          "width": 600,
+          "height": 847,
+          "tokens": 338
+        },
+        {
+          "name": "assets/光锥立绘「雨一直下」.png",
+          "size": 683139,
+          "sha256": "89fdb1f23e544de84f16ae2d408183e027f81a3aeb278ad9aee3d9c1e565bcc3",
+          "url": "char/silver-wolf-honkai-star-rail/assets/%E5%85%89%E9%94%A5%E7%AB%8B%E7%BB%98%E3%80%8C%E9%9B%A8%E4%B8%80%E7%9B%B4%E4%B8%8B%E3%80%8D.png",
+          "width": 600,
+          "height": 847,
+          "tokens": 338
+        },
+        {
+          "name": "assets/欢迎来到银河城.png",
+          "size": 979512,
+          "sha256": "0c4dd1ae36e25f7c6187ae7264d0114f67f02daa9fa0c85526a9da97f567cc89",
+          "url": "char/silver-wolf-honkai-star-rail/assets/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E9%93%B6%E6%B2%B3%E5%9F%8E.png",
+          "width": 600,
+          "height": 848,
+          "tokens": 338
+        },
+        {
+          "name": "assets/银狼LV999立绘.png",
+          "size": 445692,
+          "sha256": "ef5bc50f34ea12298df9bc67451f4a4e8e1f799b81ddc5a217d660e5cdb5fcc6",
+          "url": "char/silver-wolf-honkai-star-rail/assets/%E9%93%B6%E7%8B%BCLV999%E7%AB%8B%E7%BB%98.png",
+          "width": 600,
+          "height": 600,
+          "tokens": 242
+        },
+        {
+          "name": "assets/银狼立绘.png",
+          "size": 470594,
+          "sha256": "a4a874b07a36c449ea8eae528f1fb07c72e2fea1227494d54b520eafd3524c2c",
+          "url": "char/silver-wolf-honkai-star-rail/assets/%E9%93%B6%E7%8B%BC%E7%AB%8B%E7%BB%98.png",
+          "width": 600,
+          "height": 600,
+          "tokens": 242
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/silver-wolf-honkai-star-rail.zip",
+        "size": 4351036,
+        "sha256": "2b152e9e64a17b283c3689ffb92b310ab108ea9b088879dfc82109f474a53a62"
+      },
+      "tokenEstimate": {
+        "text": 24261,
+        "image": 1905,
+        "total": 26166,
+        "textFiles": 11,
+        "imageFiles": 6
+      },
+      "nameEn": "Silver Wolf (LV.999)",
+      "alias": "SILVER WOLF / LV.999",
+      "origin": {
+        "zh-CN": "《崩坏：星穹铁道》官方设定",
+        "en-US": "Honkai: Star Rail Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "银狼",
+          "银狼LV.999",
+          "崩坏：星穹铁道",
+          "米哈游"
+        ],
+        "en-US": [
+          "Silver Wolf",
+          "LV.999",
+          "Honkai: Star Rail",
+          "HoYoverse"
+        ]
+      },
+      "company": {
+        "id": "hoyoverse",
+        "zh-CN": "米哈游",
+        "en-US": "HoYoverse",
+        "pinyin": "mihayou",
+        "pinyinInitials": "mhy",
+        "pinyinSyllables": [
+          "mi",
+          "ha",
+          "you"
+        ]
+      },
+      "work": {
+        "id": "honkai-star-rail",
+        "zh-CN": "崩坏：星穹铁道",
+        "en-US": "Honkai: Star Rail",
+        "pinyin": "benghuaixingqiongtiedao",
+        "pinyinInitials": "bhxqtd",
+        "pinyinSyllables": [
+          "beng",
+          "huai",
+          "xing",
+          "qiong",
+          "tie",
+          "dao"
+        ]
+      },
+      "pinyin": "yinlanghanyinlanglv",
+      "pinyinInitials": "ylhyllv",
+      "pinyinSyllables": [
+        "yin",
+        "lang",
+        "han",
+        "yin",
+        "lang",
+        "lv"
+      ],
+      "sort": {
+        "zh-CN": "yinlanghanyinlanglv"
+      },
+      "thumbnail": "thumbnails/silver-wolf-honkai-star-rail/cover.png?v=8e85be1c"
+    },
+    {
       "slug": "tachibana-sherry-manosaba",
       "name": "橘雪莉",
       "files": [
@@ -1939,21 +2169,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 8883,
-          "sha256": "ae8748c7fbf66a306013d9893f3f99d9393fdfb2caba89745f6ddd1b013bf8a0",
+          "size": 8891,
+          "sha256": "4e3cfba91ef6dc173c434c71e2fefbdd59dc1ba0c46f9d49a0a6495c28676db9",
           "url": "char/white-rice-fish-deepseek/assets/README.md",
-          "tokens": 2475
+          "tokens": 2472
         }
       ],
       "archive": {
         "url": "downloads/char/white-rice-fish-deepseek.zip",
-        "size": 2558401,
-        "sha256": "c5d13f5f5beeaff7c44d5b0c9e824b88750f4ad308cb7d7722550aeead392c37"
+        "size": 2558400,
+        "sha256": "ff50de25cef2a96b2be552ff5395be81d5266c48355ad5e1debca04d357c4f58"
       },
       "tokenEstimate": {
-        "text": 16844,
+        "text": 16841,
         "image": 6484,
-        "total": 23328,
+        "total": 23325,
         "textFiles": 11,
         "imageFiles": 17
       },

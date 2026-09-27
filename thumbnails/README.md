@@ -42,5 +42,8 @@ thumbnails/<slug>/
 | 昔涟 | [`cyrene-honkai-star-rail/cover.png`](cyrene-honkai-star-rail/cover.png) | 未记录 | ⚠️ 待补 |
 | 佩丽卡 | [`perlica-arknights-endfield/cover.png`](perlica-arknights-endfield/cover.png) | 未记录 | ⚠️ 待补 |
 | 三月七（含长夜月） | [`march-7th-honkai-star-rail/cover.png`](march-7th-honkai-star-rail/cover.png) | 用户说明为**官方表情包**；具体套组未记录 | ✅ 官方表情包，套组待补 |
+| 银狼（含银狼LV.999） | [`silver-wolf-honkai-star-rail/cover.png`](silver-wolf-honkai-star-rail/cover.png) | 用户说明为**官方表情包**（「银狼LV999官方表情包」）；具体套组未记录 | ✅ 官方表情包，套组待补 |
+
+> `silver-wolf-honkai-star-rail/cover.png` 是 **144×144**，低于本目录建议的 512×512——它是用户提供的官方表情包原图，已自带透明底（无需抠图）。**不放大重采样**：放大会把表情包糊成一片，且不增加任何信息量。卡片位上它按原始像素渲染，够用。
 
 > 该表在仓库历史里是「先上线、后补齐」的状态：多数图片都是随角色卡一起加入的，采集时没有同步记录出处。已逐一确认的事实是——**它们都不是官方角色立绘（key art）**，因此不适用于 `char/<slug>/assets/README.md` 里那套官方渠道溯源规范。

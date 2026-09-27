@@ -11,6 +11,7 @@
 | 佩丽卡 | 明日方舟：终末地 | [`char/perlica-arknights-endfield/`](../char/perlica-arknights-endfield/prompt.md) | 10 |
 | 普瑞赛斯 | 明日方舟 | [`char/priestess-arknights/`](../char/priestess-arknights/prompt.md) | 10 |
 | 黍 | 明日方舟 | [`char/shu-arknights/`](../char/shu-arknights/prompt.md) | 10 |
+| 银狼（含银狼LV.999） | 崩坏：星穹铁道 | [`char/silver-wolf-honkai-star-rail/`](../char/silver-wolf-honkai-star-rail/prompt.md) | 10（银狼 / 银狼LV.999 双档） |
 | 橘雪莉 | 魔法少女的魔女审判 | [`char/tachibana-sherry-manosaba/`](../char/tachibana-sherry-manosaba/prompt.md) | 10（正常 / 魔女化两形态） |
 | 吃白饭的大肥鱼 | DeepSeek 社区拟人 | [`char/white-rice-fish-deepseek/`](../char/white-rice-fish-deepseek/prompt.md) | 10 |
 

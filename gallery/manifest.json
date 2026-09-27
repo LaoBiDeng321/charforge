@@ -318,6 +318,66 @@
       "bytes": 49526
     },
     {
+      "out": "gallery/silver-wolf-honkai-star-rail/01.webp",
+      "slug": "silver-wolf-honkai-star-rail",
+      "source": "char/silver-wolf-honkai-star-rail/assets/光锥立绘「新手任务开始前」.png",
+      "sourceSize": "600x847",
+      "sourceSha256": "0d3b75011b93cd14",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.052,
+      "feathered": true,
+      "bytes": 34360
+    },
+    {
+      "out": "gallery/silver-wolf-honkai-star-rail/02.webp",
+      "slug": "silver-wolf-honkai-star-rail",
+      "source": "char/silver-wolf-honkai-star-rail/assets/光锥立绘「雨一直下」.png",
+      "sourceSize": "600x847",
+      "sourceSha256": "89fdb1f23e544de8",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.025,
+      "feathered": true,
+      "bytes": 28470
+    },
+    {
+      "out": "gallery/silver-wolf-honkai-star-rail/03.webp",
+      "slug": "silver-wolf-honkai-star-rail",
+      "source": "char/silver-wolf-honkai-star-rail/assets/欢迎来到银河城.png",
+      "sourceSize": "600x848",
+      "sourceSha256": "0c4dd1ae36e25f7c",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.028,
+      "feathered": true,
+      "bytes": 35326
+    },
+    {
+      "out": "gallery/silver-wolf-honkai-star-rail/04.webp",
+      "slug": "silver-wolf-honkai-star-rail",
+      "source": "char/silver-wolf-honkai-star-rail/assets/银狼LV999立绘.png",
+      "sourceSize": "600x600",
+      "sourceSha256": "ef5bc50f34ea1229",
+      "alphaClearRatio": 0.578,
+      "mode": "cutout",
+      "plainRatio": 0.921,
+      "feathered": false,
+      "bytes": 47028
+    },
+    {
+      "out": "gallery/silver-wolf-honkai-star-rail/05.webp",
+      "slug": "silver-wolf-honkai-star-rail",
+      "source": "char/silver-wolf-honkai-star-rail/assets/银狼立绘.png",
+      "sourceSize": "600x600",
+      "sourceSha256": "a4a874b07a36c449",
+      "alphaClearRatio": 0.46,
+      "mode": "cutout",
+      "plainRatio": 0.97,
+      "feathered": false,
+      "bytes": 40658
+    },
+    {
       "out": "gallery/tachibana-sherry-manosaba/01.webp",
       "slug": "tachibana-sherry-manosaba",
       "source": "char/tachibana-sherry-manosaba/assets/01-全身立绘-正常.png",
@@ -548,6 +608,13 @@
       "kind": "thumbnail",
       "source": "char/march-7th-honkai-star-rail/assets/10-头像-三月七.png",
       "reason": "与 thumbnails/march-7th-honkai-star-rail/ 里的缩略图逐字节相同——它本身就是缩略图/头像类，归属地是 thumbnails/，不进画廊图池（原图仍随角色卡下发）"
+    },
+    {
+      "slug": "silver-wolf-honkai-star-rail",
+      "file": "三年之期已到恭迎狼尊归位.png",
+      "kind": "excluded",
+      "source": "char/silver-wolf-honkai-star-rail/assets/三年之期已到恭迎狼尊归位.png",
+      "reason": "横构图（1067×600）带官方排版文字的宣传图，与上一个 1067×600 条目同类：铺进 3:4 竖瓦片要大幅裁切，实测切完人物面部被切在画面左缘、右下角只剩半截官方文案（「该让…」），当背景读起来像一张被裁坏的广告。它的价值在角色卡里（B 档氛围参考），不适合当背景。"
     },
     {
       "slug": "tachibana-sherry-manosaba",

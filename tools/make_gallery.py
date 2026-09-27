@@ -528,6 +528,8 @@ def main():
     #   ② 源图内容哈希与上次记录相同
     #   ③ 上次那张瓦片还在，且字节数与记录一致（手工改过就重做）
     # 这三条成立时，重做**必然**得到逐字节相同的结果——所以跳过不是"偷懒"，是等价变换。
+    # 复用只沿用**实测值**；记录里的源图路径每次按当前文件刷新（改名不改内容也复用，
+    # 但溯源必须跟着文件名走，否则 manifest 会指着一个不存在的路径）。
     prev_matte_used = bool(prev_policy and prev_policy.get("matteModel"))
     matte_overrides = force_matte | skip_matte
     policy_same = prev_policy is not None and prev_policy == policy_fingerprint(
@@ -559,7 +561,14 @@ def main():
     session = None
 
     for item, rec in reuse:
-        records.append(rec)                       # 原样沿用上次的记录（含实测值）
+        # 原样沿用上次的实测值（含模式 / 纯色率 / 体积），但**路径字段按当前文件刷新**：
+        # 素材改名而内容不变时同样走复用，此时旧记录里的 source 还指着旧文件名——
+        # manifest 的用途是"据此回到源图"，留着旧路径就等于溯源断链。
+        rec = dict(rec)
+        rec["out"] = item["rel_out"]
+        rec["slug"] = item["slug"]
+        rec["source"] = os.path.relpath(item["src"], ROOT).replace("\\", "/")
+        records.append(rec)
         total_bytes += rec.get("bytes", 0)
         counts["reuse"] += 1
 

@@ -824,73 +824,73 @@
       "files": [
         {
           "name": "SKILL.md",
-          "size": 8887,
-          "sha256": "6be123b5a44db86532e7c0189012fd7c3486ef76158e6b1d71ffb8e73d509823",
+          "size": 8800,
+          "sha256": "c60553e552cf801fdf57da8372a8e1b0a9feef8ef98697ced5587f375cd7bce8",
           "url": "char/firefly-honkai-star-rail/SKILL.md",
-          "tokens": 2352
+          "tokens": 2324
         },
         {
           "name": "behavior.md",
-          "size": 56149,
-          "sha256": "d29367304c4fd5521a694345fb86d56de33016a1672277e31713d85ae35141fe",
+          "size": 55081,
+          "sha256": "6404d3b2bbf3017a156fd721b28854c3e116e1716ee03633494a53b82dc46508",
           "url": "char/firefly-honkai-star-rail/behavior.md",
-          "tokens": 14655
+          "tokens": 14363
         },
         {
           "name": "conflicts.md",
-          "size": 27029,
-          "sha256": "d926e4768140a17aa9b9b5f0731e271a36be3e49cf6b28b458315ae7b6368c12",
+          "size": 26840,
+          "sha256": "d965ec98d99199803733041ebad9a3776e344cd93123b504384e017070e90515",
           "url": "char/firefly-honkai-star-rail/conflicts.md",
-          "tokens": 8323
+          "tokens": 8289
         },
         {
           "name": "interaction.md",
-          "size": 46751,
-          "sha256": "fb3e87c3aceaa02c85afd7f7f7bccb97a8024ca1e4f826810fda78764b922837",
+          "size": 43726,
+          "sha256": "be88b5854dd2db89e27603da45109dab42167bf6e3d30d11b4c3db37c4c55ac8",
           "url": "char/firefly-honkai-star-rail/interaction.md",
-          "tokens": 13146
+          "tokens": 12179
         },
         {
           "name": "memory.md",
-          "size": 36197,
-          "sha256": "bb1f1e26d9728ba55eec83d4e0dba458e0c66f1ec6da88eb58b5b664d447ffe5",
+          "size": 35658,
+          "sha256": "fd3476ae146430099430623e816a8f279ee6b8f36cce73cb46b6333f1bc5d9af",
           "url": "char/firefly-honkai-star-rail/memory.md",
-          "tokens": 9270
+          "tokens": 9144
         },
         {
           "name": "personality.md",
-          "size": 31320,
-          "sha256": "2160542405999741a28f5a98f676f4f339617da71660acbb915716f19514fc3a",
+          "size": 30882,
+          "sha256": "ce596c72fd5658671a18ce8ca07c0c650f8e5d1b248bed5c1b05e40c8800f88a",
           "url": "char/firefly-honkai-star-rail/personality.md",
-          "tokens": 7942
+          "tokens": 7850
         },
         {
           "name": "profile.md",
-          "size": 24191,
-          "sha256": "995c5dc91610a80d94eaf91abb66f1656fe9f0feb38f0b4aa1eb6c73bf73ec28",
+          "size": 23871,
+          "sha256": "70bbc1f1ccdb738c15edc889c1b39d26773d3fd918d349480f954ab5159f3265",
           "url": "char/firefly-honkai-star-rail/profile.md",
-          "tokens": 7094
+          "tokens": 7027
         },
         {
           "name": "prompt.md",
-          "size": 8660,
-          "sha256": "ff4ad8addff00983cd708604fb120dff145b797eb296f6e2a27b569465e33bcc",
+          "size": 8633,
+          "sha256": "e64a50ab839be0caeda8550c74130d05577d05f6412bc38621eddd782060a729",
           "url": "char/firefly-honkai-star-rail/prompt.md",
-          "tokens": 2127
+          "tokens": 2120
         },
         {
           "name": "relations.md",
-          "size": 52023,
-          "sha256": "7c33af436e02c34ab9df7869c3ac6437c7231e05de2b166fbac0bc012f33586b",
+          "size": 51564,
+          "sha256": "c395168e12f3f68d60a391d5c6e025111fc162ee0b84dc17c56b3020d64ca1b8",
           "url": "char/firefly-honkai-star-rail/relations.md",
-          "tokens": 13784
+          "tokens": 13662
         },
         {
           "name": "world.md",
-          "size": 59399,
-          "sha256": "89629f86b465f2b25d3921658b33243835c433afbdcb0dc0f45f71611a70fc2a",
+          "size": 58950,
+          "sha256": "67f14f1acd922f8728576bb3da781f1a972ef1b9eb5857efb07979532881ceed",
           "url": "char/firefly-honkai-star-rail/world.md",
-          "tokens": 15767
+          "tokens": 15664
         },
         {
           "name": "assets/01-官方立绘-人形.png",
@@ -939,21 +939,21 @@
         },
         {
           "name": "assets/README.md",
-          "size": 5079,
-          "sha256": "e72125ba187c61c624e4590af4f10c789db5f67415b2d95a5ce8851bc4e31ca2",
+          "size": 4962,
+          "sha256": "2d2fdec1bdfccc25c7510716020a206debd1bdf2185e067bc7b7fbc319176e7b",
           "url": "char/firefly-honkai-star-rail/assets/README.md",
-          "tokens": 1316
+          "tokens": 1281
         }
       ],
       "archive": {
         "url": "downloads/char/firefly-honkai-star-rail.zip",
-        "size": 3901440,
-        "sha256": "a70b58e3f64349c06b49dfa986eff53d9ad40e22462a6112b4fbd8c894dd4cdc"
+        "size": 3898418,
+        "sha256": "452bcc1c1711b451299707a06429b4b1a730c9b80fd7f29ff28399470f06cc00"
       },
       "tokenEstimate": {
-        "text": 95776,
+        "text": 93903,
         "image": 2373,
-        "total": 98149,
+        "total": 96276,
         "textFiles": 11,
         "imageFiles": 5
       },

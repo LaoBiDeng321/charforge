@@ -348,25 +348,51 @@
     margin: 0 6px;
 }
 
-/* 刻度跳转：短横线，激活 32px 信号色 */
+/* 刻度跳转：环形滑动条——与卡片舞台同一套运动语言。
+   切换时整条刻度沿切换方向平移，新的激活刻度从侧边「追」到正中停住（尾部轻微回弹）。
+   视口宽度只由可见槽位数决定（上限见 carousel.js 的 MAX_DOT_SLOTS），
+   角色再多控制条宽度也不变；两侧缓冲槽被裁在视口外，滑动时从对侧补入，刻度流不断档。 */
 .char-dots {
+    --dot-w: 24px;
+    --dot-gap: 8px;
+    --dot-pitch: calc(var(--dot-w) + var(--dot-gap));
+    --dot-visible: 9;
+    position: relative;
+    width: calc(var(--dot-pitch) * var(--dot-visible) - var(--dot-gap));
+    max-width: 36vw;
+    overflow: hidden;
+}
+
+/* 角色数超出可见槽位时，两端渐隐提示这只是整条环形的一个窗口 */
+.char-dots.is-windowed {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+}
+
+/* 切换反馈：轨道滑动由 JS 控制（slideDots），这里只定义过渡曲线——
+   尾部 1.4 的过冲让激活刻度"追到正中"时带一点回弹，与卡片 560ms 过渡同一质感体系。 */
+.char-dots-track {
     display: flex;
-    gap: var(--space-sm);
+    gap: var(--dot-gap);
+    transition: transform 480ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    will-change: transform;
 }
 
 .char-dot {
     position: relative;
-    width: 32px;
+    flex-shrink: 0;
+    width: var(--dot-w);
     height: 20px;
 }
 
+/* 短横线从中心向两侧生长，激活时占满整格 */
 .char-dot::before {
     content: '';
     position: absolute;
     top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
     height: 3px;
     background: var(--color-border-strong);
     opacity: 0.6;
@@ -374,13 +400,13 @@
 }
 
 .char-dot:hover::before {
-    width: 26px;
+    width: 16px;
     opacity: 1;
     background: var(--color-text-secondary);
 }
 
 .char-dot.active::before {
-    width: 32px;
+    width: var(--dot-w);
     background: var(--color-accent);
     opacity: 1;
 }
@@ -799,23 +825,6 @@
     border-color: var(--color-accent);
 }
 
-/* 刻度密排：角色多时缩点缩距，仍保持单行 */
-.char-dots.is-dense {
-    gap: 4px;
-}
-
-.char-dots.is-dense .char-dot {
-    width: 20px;
-}
-
-.char-dots.is-dense .char-dot::before {
-    width: 12px;
-}
-
-.char-dots.is-dense .char-dot.active::before {
-    width: 18px;
-}
-
 .autoplay-dot {
     width: 7px;
     height: 7px;
@@ -837,6 +846,10 @@
 @media (prefers-reduced-motion: reduce) {
     .char-card {
         transition: opacity 200ms ease;
+    }
+
+    .char-dots-track {
+        transition: none;
     }
 
     .char-autoplay {

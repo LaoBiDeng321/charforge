@@ -76,7 +76,8 @@
     'use strict';
 
     var AUTOPLAY_DELAY = 5000;   // 自动轮播间隔
-    var COMPACT_DOTS = 12;       // 超过此数量刻度转为密排样式
+    var MAX_DOT_SLOTS = 9;       // 可见刻度槽位上限（与控制条宽度挂钩）
+    var DOT_BUFFER = 9;          // 轨道两侧缓冲槽数：决定单次滑动不露尽头的最大跨度
     var locale = function () { return (window.I18N && window.I18N.getLang()) || 'zh-CN'; };
 
     /* ---------- 展示排序：中文按拼音、英文按首字母 ---------- */
@@ -124,7 +125,10 @@
     var stage = null;
     var chars = [];              // 当前语言下的展示顺序（cards / dots / indexItems 共用）
     var cards = [];              // { root, slug, refs }
-    var dots = [];
+    var dots = [];               // 刻度槽位池：缓冲 + 可见 + 缓冲，内容在 classify 中重排
+    var dotFirst = 0;            // 首个可见槽在池中的下标
+    var dotCenter = 0;           // 激活刻度槽位在池中的下标（视口正中）
+    var dotAnchor = 0;           // 上次重排时的 current，用于算滑动方向与距离
     var indexItems = [];         // 索引面板条目 { root, char, index, keys, cid, wid }
     var indexOpen = false;
     var indexQuery = '';         // 搜索框当前词
@@ -261,24 +265,33 @@
         });
         total = cards.length;
 
-        /* 刻度指示器 */
+        /* 刻度指示器：槽位池 = 左缓冲 + 可见槽 + 右缓冲。
+           可见槽数 = min(total, MAX_DOT_SLOTS)，视口宽度只由它决定；
+           缓冲槽裁在视口外，滑动时从对侧补入，切换瞬间刻度流不断档。 */
         var dotsBox = document.getElementById('charDots');
-        dotsBox.innerHTML = '';
-        dots = chars.map(function (char, index) {
+        var track = document.getElementById('charDotsTrack');
+        track.innerHTML = '';
+        var slotCount = Math.min(total, MAX_DOT_SLOTS);
+        dotFirst = DOT_BUFFER;
+        dotCenter = dotFirst + Math.floor((slotCount - 1) / 2);
+        dotsBox.style.setProperty('--dot-visible', slotCount);
+        dotsBox.classList.toggle('is-windowed', total > slotCount);
+        dots = [];
+        for (var s = 0; s < slotCount + DOT_BUFFER * 2; s++) {
             var dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'char-dot';
-            dot.setAttribute('aria-label', nameOf(char));
-            dot.addEventListener('click', function () { goTo(index); });
-            dotsBox.appendChild(dot);
-            return dot;
-        });
+            if (s < dotFirst || s >= dotFirst + slotCount) {
+                /* 缓冲槽只服务滑动视觉，不进键盘与无障碍朗读路径 */
+                dot.tabIndex = -1;
+                dot.setAttribute('aria-hidden', 'true');
+            }
+            track.appendChild(dot);
+            dots.push(dot);
+        }
+        dotAnchor = current;
 
         document.getElementById('charTotal').textContent = String(total).padStart(2, '0');
-
-        /* 角色多时刻度密排，避免占满控制行 */
-        var dotsBox = document.getElementById('charDots');
-        dotsBox.classList.toggle('is-dense', total > COMPACT_DOTS);
 
         buildIndexGrid();
 
@@ -959,12 +972,46 @@
             card.style.cursor = d === 0 ? '' : 'pointer';
         });
 
-        /* 计数与刻度 */
+        /* 计数与刻度：先把每个槽位重排到新的环形映射（中心槽 = current），
+           再把整条轨道从"切换前的位置"平移回正中——视觉上就是刻度条跟着卡片
+           一起向左/向右流动，新的激活刻度最终追回正中停住。
+           跨度不超过缓冲深度时同样滑动（快速掠过中间刻度）；超出则直接锚定。 */
         document.getElementById('charCurrent').textContent = String(current + 1).padStart(2, '0');
-        dots.forEach(function (dot, index) {
-            dot.classList.toggle('active', index === current);
+        var delta = 0;
+        if (!instant) {
+            delta = current - dotAnchor;
+            if (delta > total / 2) delta -= total;
+            if (delta < -total / 2) delta += total;
+        }
+        dots.forEach(function (dot, slot) {
+            var idx = ((current + slot - dotCenter) % total + total) % total;
+            dot.dataset.idx = idx;
+            dot.classList.toggle('active', slot === dotCenter);
+            if (dot.getAttribute('aria-hidden') === 'true') return;
+            var name = nameOf(chars[idx]);
+            dot.setAttribute('aria-label', name);
+            dot.title = name;
         });
+        slideDots(delta, instant);
+        dotAnchor = current;
         updateIndexActive();
+    }
+
+    /** 轨道平移：先无过渡地摆到 base + delta*pitch（即切换前的视觉位置），
+     *  再开过渡回到 base，整条刻度便滑过 delta 个槽位后锚定。
+     *  pitch 实测自相邻两槽的 offsetLeft 差，避免与 CSS 尺寸常量对拷。 */
+    function slideDots(delta, instant) {
+        var track = document.getElementById('charDotsTrack');
+        if (!track || dots.length < 2) return;
+        var pitch = dots[1].offsetLeft - dots[0].offsetLeft;
+        var base = -dotFirst * pitch;
+        var slide = (!instant && Math.abs(delta) <= DOT_BUFFER) ? delta : 0;
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(' + (base + slide * pitch) + 'px)';
+        if (!slide) return;
+        void track.offsetWidth;
+        track.style.transition = '';
+        track.style.transform = 'translateX(' + base + 'px)';
     }
 
     /* ---------- 切换 ---------- */
@@ -1052,6 +1099,13 @@
         searchInput.addEventListener('focus', function () { keepSearchInView(searchInput); });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && indexOpen) closeIndex();
+        });
+
+        /* 刻度槽位是固定池，点击按槽位当前映射的角色跳转 */
+        document.getElementById('charDots').addEventListener('click', function (e) {
+            var el = e.target.closest('.char-dot');
+            if (!el || el.dataset.idx === undefined) return;
+            goTo(Number(el.dataset.idx));
         });
 
         /* 邻卡点击跳转 + 邻卡模糊视觉下禁用其内部交互 */

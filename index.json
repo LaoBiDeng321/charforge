@@ -224,28 +224,28 @@
         },
         {
           "name": "reference/details.md",
-          "size": 22345,
-          "sha256": "75ebf9df4106a66ae5e76d1c2264ae988407f1fb068519525194130a9d1d7063",
+          "size": 22685,
+          "sha256": "affbf999a19619d80902db0fa2f10828b7ec54fcd66a3df5264692328e49100c",
           "url": "skills/character-profile-builder/reference/details.md",
-          "tokens": 5703
+          "tokens": 5776
         },
         {
           "name": "reference/templates.md",
-          "size": 8593,
-          "sha256": "4b928d0bc76639d56b73d50b3f409371c6ea8b891794578d3375d75f0247bdf9",
+          "size": 8583,
+          "sha256": "62b6aa00f16ac3480bd67712f5b1ac8fd5d68140c7df2e86e55f13910aa08ab9",
           "url": "skills/character-profile-builder/reference/templates.md",
-          "tokens": 1931
+          "tokens": 1927
         }
       ],
       "archive": {
         "url": "downloads/skills/character-profile-builder.zip",
-        "size": 18874,
-        "sha256": "62288b970be3779722aa674ce06685eb8309b3ac98e7303009f2fdb270208237"
+        "size": 19022,
+        "sha256": "b0c41a9451a8a76077a91ee52a9838234c74277a4eeb13503307c0b9333238af"
       },
       "tokenEstimate": {
-        "text": 9595,
+        "text": 9664,
         "image": 0,
-        "total": 9595,
+        "total": 9664,
         "textFiles": 3,
         "imageFiles": 0
       }
@@ -256,35 +256,35 @@
       "files": [
         {
           "name": "SKILL.md",
-          "size": 8267,
-          "sha256": "47c8d691a480ca9f0a8ea90b8f917c22cdd7cd22a77be672679e7718023b9a0e",
+          "size": 8331,
+          "sha256": "8602588381664077e535a79f76999818e74f1fc83d33a3e1d950e60588b78bcb",
           "url": "skills/original-character-builder/SKILL.md",
-          "tokens": 2195
+          "tokens": 2209
         },
         {
           "name": "reference/reference.md",
-          "size": 17518,
-          "sha256": "13dd397375951bc11af42137eadb251bfd92808ed6fdb35248c1a6e53abda9f8",
+          "size": 17674,
+          "sha256": "07a4520d58311a28a77e44d877d2ca6546e25ba3c83edd3b8d7e37f18d9d8549",
           "url": "skills/original-character-builder/reference/reference.md",
-          "tokens": 4369
+          "tokens": 4404
         },
         {
           "name": "reference/templates.md",
-          "size": 8593,
-          "sha256": "4b928d0bc76639d56b73d50b3f409371c6ea8b891794578d3375d75f0247bdf9",
+          "size": 8583,
+          "sha256": "62b6aa00f16ac3480bd67712f5b1ac8fd5d68140c7df2e86e55f13910aa08ab9",
           "url": "skills/original-character-builder/reference/templates.md",
-          "tokens": 1931
+          "tokens": 1927
         }
       ],
       "archive": {
         "url": "downloads/skills/original-character-builder.zip",
-        "size": 16929,
-        "sha256": "d6175ee13c9ff11006fd09901b5cfb8bb048dec4d1b1f49371679350f813bdd1"
+        "size": 17021,
+        "sha256": "22d0ed7a4abfaddd9ee695ea5893434b431ebdb448cc4c081cc2feb4fe715220"
       },
       "tokenEstimate": {
-        "text": 8495,
+        "text": 8540,
         "image": 0,
-        "total": 8495,
+        "total": 8540,
         "textFiles": 3,
         "imageFiles": 0
       }

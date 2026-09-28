@@ -34,6 +34,26 @@
       "slug": "cyrene-honkai-star-rail"
     },
     {
+      "url": "gallery/firefly-honkai-star-rail/01.webp?v=8d6ede9a",
+      "slug": "firefly-honkai-star-rail"
+    },
+    {
+      "url": "gallery/firefly-honkai-star-rail/02.webp?v=f9732080",
+      "slug": "firefly-honkai-star-rail"
+    },
+    {
+      "url": "gallery/firefly-honkai-star-rail/03.webp?v=b02325de",
+      "slug": "firefly-honkai-star-rail"
+    },
+    {
+      "url": "gallery/firefly-honkai-star-rail/04.webp?v=b12077a1",
+      "slug": "firefly-honkai-star-rail"
+    },
+    {
+      "url": "gallery/firefly-honkai-star-rail/05.webp?v=76825f41",
+      "slug": "firefly-honkai-star-rail"
+    },
+    {
       "url": "gallery/march-7th-honkai-star-rail/01.webp?v=4d97b021",
       "slug": "march-7th-honkai-star-rail"
     },
@@ -797,6 +817,201 @@
         "zh-CN": "xilian"
       },
       "thumbnail": "thumbnails/cyrene-honkai-star-rail/cover.png?v=9f8143fa"
+    },
+    {
+      "slug": "firefly-honkai-star-rail",
+      "name": "流萤",
+      "files": [
+        {
+          "name": "SKILL.md",
+          "size": 8887,
+          "sha256": "6be123b5a44db86532e7c0189012fd7c3486ef76158e6b1d71ffb8e73d509823",
+          "url": "char/firefly-honkai-star-rail/SKILL.md",
+          "tokens": 2352
+        },
+        {
+          "name": "behavior.md",
+          "size": 56149,
+          "sha256": "d29367304c4fd5521a694345fb86d56de33016a1672277e31713d85ae35141fe",
+          "url": "char/firefly-honkai-star-rail/behavior.md",
+          "tokens": 14655
+        },
+        {
+          "name": "conflicts.md",
+          "size": 27029,
+          "sha256": "d926e4768140a17aa9b9b5f0731e271a36be3e49cf6b28b458315ae7b6368c12",
+          "url": "char/firefly-honkai-star-rail/conflicts.md",
+          "tokens": 8323
+        },
+        {
+          "name": "interaction.md",
+          "size": 46751,
+          "sha256": "fb3e87c3aceaa02c85afd7f7f7bccb97a8024ca1e4f826810fda78764b922837",
+          "url": "char/firefly-honkai-star-rail/interaction.md",
+          "tokens": 13146
+        },
+        {
+          "name": "memory.md",
+          "size": 36197,
+          "sha256": "bb1f1e26d9728ba55eec83d4e0dba458e0c66f1ec6da88eb58b5b664d447ffe5",
+          "url": "char/firefly-honkai-star-rail/memory.md",
+          "tokens": 9270
+        },
+        {
+          "name": "personality.md",
+          "size": 31320,
+          "sha256": "2160542405999741a28f5a98f676f4f339617da71660acbb915716f19514fc3a",
+          "url": "char/firefly-honkai-star-rail/personality.md",
+          "tokens": 7942
+        },
+        {
+          "name": "profile.md",
+          "size": 24191,
+          "sha256": "995c5dc91610a80d94eaf91abb66f1656fe9f0feb38f0b4aa1eb6c73bf73ec28",
+          "url": "char/firefly-honkai-star-rail/profile.md",
+          "tokens": 7094
+        },
+        {
+          "name": "prompt.md",
+          "size": 8660,
+          "sha256": "ff4ad8addff00983cd708604fb120dff145b797eb296f6e2a27b569465e33bcc",
+          "url": "char/firefly-honkai-star-rail/prompt.md",
+          "tokens": 2127
+        },
+        {
+          "name": "relations.md",
+          "size": 52023,
+          "sha256": "7c33af436e02c34ab9df7869c3ac6437c7231e05de2b166fbac0bc012f33586b",
+          "url": "char/firefly-honkai-star-rail/relations.md",
+          "tokens": 13784
+        },
+        {
+          "name": "world.md",
+          "size": 59399,
+          "sha256": "89629f86b465f2b25d3921658b33243835c433afbdcb0dc0f45f71611a70fc2a",
+          "url": "char/firefly-honkai-star-rail/world.md",
+          "tokens": 15767
+        },
+        {
+          "name": "assets/01-官方立绘-人形.png",
+          "size": 1911861,
+          "sha256": "cf0096711414907a32d2cf7e6a151b97716837370c04a73d4413a3f1351461eb",
+          "url": "char/firefly-honkai-star-rail/assets/01-%E5%AE%98%E6%96%B9%E7%AB%8B%E7%BB%98-%E4%BA%BA%E5%BD%A2.png",
+          "width": 1350,
+          "height": 1350,
+          "tokens": 994
+        },
+        {
+          "name": "assets/02-形态-装甲萨姆.png",
+          "size": 447940,
+          "sha256": "2116aca384f5ecaf7e8f199aee02b4bac40718dcc0d26d4933bb09e2a2f17e0a",
+          "url": "char/firefly-honkai-star-rail/assets/02-%E5%BD%A2%E6%80%81-%E8%A3%85%E7%94%B2%E8%90%A8%E5%A7%86.png",
+          "width": 1024,
+          "height": 1024,
+          "tokens": 652
+        },
+        {
+          "name": "assets/03-时装-春日手信.png",
+          "size": 402141,
+          "sha256": "26715aa6965d6d442815a401e9e0c12e3eedb45dd1d0bf63d256bd92abeb1f74",
+          "url": "char/firefly-honkai-star-rail/assets/03-%E6%97%B6%E8%A3%85-%E6%98%A5%E6%97%A5%E6%89%8B%E4%BF%A1.png",
+          "width": 504,
+          "height": 625,
+          "tokens": 197
+        },
+        {
+          "name": "assets/04-光锥-梦应归于何处.png",
+          "size": 807608,
+          "sha256": "34bd3b5940c53ca557845f7b6fe9cf1b4f8af67d6b7756ab19fc121dbc2df92e",
+          "url": "char/firefly-honkai-star-rail/assets/04-%E5%85%89%E9%94%A5-%E6%A2%A6%E5%BA%94%E5%BD%92%E4%BA%8E%E4%BD%95%E5%A4%84.png",
+          "width": 600,
+          "height": 851,
+          "tokens": 338
+        },
+        {
+          "name": "assets/05-游戏内素材-虚构叙事.png",
+          "size": 188232,
+          "sha256": "f99f3bcb38acd45fceb59b8e3c1026195a45a75a0663c5ee7c0ba0448ec09aa5",
+          "url": "char/firefly-honkai-star-rail/assets/05-%E6%B8%B8%E6%88%8F%E5%86%85%E7%B4%A0%E6%9D%90-%E8%99%9A%E6%9E%84%E5%8F%99%E4%BA%8B.png",
+          "width": 450,
+          "height": 253,
+          "tokens": 192
+        },
+        {
+          "name": "assets/README.md",
+          "size": 5079,
+          "sha256": "e72125ba187c61c624e4590af4f10c789db5f67415b2d95a5ce8851bc4e31ca2",
+          "url": "char/firefly-honkai-star-rail/assets/README.md",
+          "tokens": 1316
+        }
+      ],
+      "archive": {
+        "url": "downloads/char/firefly-honkai-star-rail.zip",
+        "size": 3901440,
+        "sha256": "a70b58e3f64349c06b49dfa986eff53d9ad40e22462a6112b4fbd8c894dd4cdc"
+      },
+      "tokenEstimate": {
+        "text": 95776,
+        "image": 2373,
+        "total": 98149,
+        "textFiles": 11,
+        "imageFiles": 5
+      },
+      "nameEn": "Firefly",
+      "alias": "FIREFLY",
+      "origin": {
+        "zh-CN": "《崩坏：星穹铁道》官方设定",
+        "en-US": "Honkai: Star Rail Official"
+      },
+      "tags": {
+        "zh-CN": [
+          "流萤",
+          "崩坏：星穹铁道",
+          "米哈游"
+        ],
+        "en-US": [
+          "Firefly",
+          "Honkai: Star Rail",
+          "HoYoverse"
+        ]
+      },
+      "company": {
+        "id": "hoyoverse",
+        "zh-CN": "米哈游",
+        "en-US": "HoYoverse",
+        "pinyin": "mihayou",
+        "pinyinInitials": "mhy",
+        "pinyinSyllables": [
+          "mi",
+          "ha",
+          "you"
+        ]
+      },
+      "work": {
+        "id": "honkai-star-rail",
+        "zh-CN": "崩坏：星穹铁道",
+        "en-US": "Honkai: Star Rail",
+        "pinyin": "benghuaixingqiongtiedao",
+        "pinyinInitials": "bhxqtd",
+        "pinyinSyllables": [
+          "beng",
+          "huai",
+          "xing",
+          "qiong",
+          "tie",
+          "dao"
+        ]
+      },
+      "pinyin": "liuying",
+      "pinyinInitials": "ly",
+      "pinyinSyllables": [
+        "liu",
+        "ying"
+      ],
+      "sort": {
+        "zh-CN": "liuying"
+      },
+      "thumbnail": "thumbnails/firefly-honkai-star-rail/cover.png?v=198ef3b8"
     },
     {
       "slug": "march-7th-honkai-star-rail",

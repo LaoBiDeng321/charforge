@@ -126,6 +126,66 @@
       "bytes": 23294
     },
     {
+      "out": "gallery/firefly-honkai-star-rail/01.webp",
+      "slug": "firefly-honkai-star-rail",
+      "source": "char/firefly-honkai-star-rail/assets/01-官方立绘-人形.png",
+      "sourceSize": "1350x1350",
+      "sourceSha256": "cf0096711414907a",
+      "alphaClearRatio": 0.667,
+      "mode": "cutout",
+      "plainRatio": 0.935,
+      "feathered": false,
+      "bytes": 51236
+    },
+    {
+      "out": "gallery/firefly-honkai-star-rail/02.webp",
+      "slug": "firefly-honkai-star-rail",
+      "source": "char/firefly-honkai-star-rail/assets/02-形态-装甲萨姆.png",
+      "sourceSize": "1024x1024",
+      "sourceSha256": "2116aca384f5ecaf",
+      "alphaClearRatio": 0.79,
+      "mode": "cutout",
+      "plainRatio": 0.981,
+      "feathered": false,
+      "bytes": 29188
+    },
+    {
+      "out": "gallery/firefly-honkai-star-rail/03.webp",
+      "slug": "firefly-honkai-star-rail",
+      "source": "char/firefly-honkai-star-rail/assets/03-时装-春日手信.png",
+      "sourceSize": "504x625",
+      "sourceSha256": "26715aa6965d6d44",
+      "alphaClearRatio": 0.613,
+      "mode": "cutout",
+      "plainRatio": 0.899,
+      "feathered": false,
+      "bytes": 81090
+    },
+    {
+      "out": "gallery/firefly-honkai-star-rail/04.webp",
+      "slug": "firefly-honkai-star-rail",
+      "source": "char/firefly-honkai-star-rail/assets/04-光锥-梦应归于何处.png",
+      "sourceSize": "600x851",
+      "sourceSha256": "34bd3b5940c53ca5",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.143,
+      "feathered": true,
+      "bytes": 26220
+    },
+    {
+      "out": "gallery/firefly-honkai-star-rail/05.webp",
+      "slug": "firefly-honkai-star-rail",
+      "source": "char/firefly-honkai-star-rail/assets/05-游戏内素材-虚构叙事.png",
+      "sourceSize": "450x253",
+      "sourceSha256": "f99f3bcb38acd45f",
+      "alphaClearRatio": 0.0,
+      "mode": "plate",
+      "plainRatio": 0.408,
+      "feathered": true,
+      "bytes": 20302
+    },
+    {
       "out": "gallery/march-7th-honkai-star-rail/01.webp",
       "slug": "march-7th-honkai-star-rail",
       "source": "char/march-7th-honkai-star-rail/assets/01-全身立绘-三月七-存护.png",

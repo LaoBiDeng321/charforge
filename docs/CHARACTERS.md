@@ -12,6 +12,7 @@
 | 普瑞赛斯 | 明日方舟 | [`char/priestess-arknights/`](../char/priestess-arknights/prompt.md) | 10 |
 | 黍 | 明日方舟 | [`char/shu-arknights/`](../char/shu-arknights/prompt.md) | 10 |
 | 银狼（含银狼LV.999） | 崩坏：星穹铁道 | [`char/silver-wolf-honkai-star-rail/`](../char/silver-wolf-honkai-star-rail/prompt.md) | 10（银狼 / 银狼LV.999 双档） |
+| 流萤（含装甲「萨姆」） | 崩坏：星穹铁道 | [`char/firefly-honkai-star-rail/`](../char/firefly-honkai-star-rail/prompt.md) | 10（人形 / 装甲 / 完全燃烧 三档） |
 | 橘雪莉 | 魔法少女的魔女审判 | [`char/tachibana-sherry-manosaba/`](../char/tachibana-sherry-manosaba/prompt.md) | 10（正常 / 魔女化两形态） |
 | 吃白饭的大肥鱼 | DeepSeek 社区拟人 | [`char/white-rice-fish-deepseek/`](../char/white-rice-fish-deepseek/prompt.md) | 10 |
 
